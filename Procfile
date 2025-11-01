@@ -1,1 +1,1 @@
-release: php artisan migrate --force
+web: bash start.sh
