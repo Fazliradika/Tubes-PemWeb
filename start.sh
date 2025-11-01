@@ -3,5 +3,15 @@
 # Run migrations
 php artisan migrate --force
 
-# Start PHP built-in server
-php -S 0.0.0.0:${PORT:-8000} -t public/
+# Clear all caches
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+
+# Optimize for production
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+echo "Laravel is ready!"
