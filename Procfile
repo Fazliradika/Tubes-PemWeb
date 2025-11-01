@@ -1,1 +1,1 @@
-web: php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan cache:clear && php artisan event:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+web: php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan cache:clear && php artisan event:clear && php artisan migrate --force && php artisan db:seed --class=UserSeeder --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
