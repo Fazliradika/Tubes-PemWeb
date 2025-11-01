@@ -9,6 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Lightweight health endpoint for platform checks (no DB access)
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok']);
+});
+
 // Admin Dashboard & Reports Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
