@@ -35,7 +35,8 @@ RUN composer install --no-interaction --no-dev --prefer-dist
 RUN sed -ri 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#' /etc/apache2/sites-available/000-default.conf \
     && sed -ri 's#<VirtualHost \*:80>#<VirtualHost *:80>#' /etc/apache2/sites-available/000-default.conf \
     && printf "<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n    Options Indexes FollowSymLinks\n</Directory>\n" > /etc/apache2/conf-available/laravel.conf \
-    && a2enconf laravel
+    && a2enconf laravel \
+    && echo "ServerName tubes-pemweb-production.up.railway.app" >> /etc/apache2/apache2.conf
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
