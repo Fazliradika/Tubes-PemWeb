@@ -10,8 +10,9 @@ echo "DB_CONNECTION: ${DB_CONNECTION:-not-set}"
 echo "DB_HOST: ${DB_HOST:-not-set}"
 echo "=========================================="
 
-# Ensure correct permissions (especially when running in fresh containers)
+# Ensure correct permissions and create necessary directories
 echo "Setting storage permissions..."
+mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs || true
 chown -R www-data:www-data storage bootstrap/cache || true
 chmod -R 775 storage bootstrap/cache || true
 

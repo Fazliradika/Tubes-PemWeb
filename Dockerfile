@@ -38,10 +38,14 @@ RUN sed -ri 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#' /e
     && a2enconf laravel \
     && echo "ServerName tubes-pemweb-production.up.railway.app" >> /etc/apache2/apache2.conf
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+# Create session directory and set permissions
+RUN mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/storage/logs \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Use a start script to run migrations, caches, and then launch Apache on the PORT provided by Railway
 COPY start.sh /usr/local/bin/start.sh
