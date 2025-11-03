@@ -34,14 +34,14 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone' => ['nullable', 'string', 'max:20'],
-            'role' => ['required', 'in:pasien,dokter'],
+            'role' => ['required', 'in:patient,doctor'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role ?? 'pasien',
+            'role' => $request->role ?? 'patient',
             'phone' => $request->phone,
         ]);
 
