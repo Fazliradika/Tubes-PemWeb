@@ -29,36 +29,46 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'role' => ['required', 'in:patient,doctor'],
-        ]);
+        try {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'phone' => ['nullable', 'string', 'max:20'],
+                'role' => ['required', 'in:patient,doctor'],
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role ?? 'patient',
-            'phone' => $request->phone,
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role ?? 'patient',
+                'phone' => $request->phone,
+                'email_verified_at' => now(), // Auto-verify email on registration
+            ]);
 
-        event(new Registered($user));
+            event(new Registered($user));
 
-        Auth::login($user);
+            Auth::login($user);
 
-        // Redirect based on user role
-        if ($user->role === 'admin') {
-            return redirect()->intended(route('admin.dashboard'));
-        } elseif ($user->role === 'doctor') {
-            return redirect()->intended(route('doctor.dashboard'));
-        } elseif ($user->role === 'patient') {
-            return redirect()->intended(route('patient.dashboard'));
+            // Redirect based on user role
+            if ($user->role === 'admin') {
+                return redirect()->intended(route('admin.dashboard'));
+            } elseif ($user->role === 'doctor') {
+                return redirect()->intended(route('doctor.dashboard'));
+            } elseif ($user->role === 'patient') {
+                return redirect()->intended(route('patient.dashboard'));
+            }
+
+            // Default fallback
+            return redirect(route('dashboard', absolute: false));
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Log::error('Registration failed: ' . $e->getMessage());
+            
+            return back()->withErrors([
+                'email' => 'Terjadi kesalahan saat registrasi. Silakan coba lagi.'
+            ])->withInput();
         }
-
-        // Default fallback
-        return redirect(route('dashboard', absolute: false));
     }
 }
