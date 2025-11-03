@@ -62,18 +62,18 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if user is dokter
+     * Check if user is doctor
      */
-    public function isDokter(): bool
+    public function isDoctor(): bool
     {
-        return $this->role === 'dokter';
+        return $this->role === 'doctor';
     }
 
     /**
-     * Check if user is pasien
+     * Check if user is patient
      */
-    public function isPasien(): bool
+    public function isPatient(): bool
     {
-        return $this->role === 'pasien';
+        return $this->role === 'patient';
     }
 }
