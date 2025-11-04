@@ -44,7 +44,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::create($category);
+            Category::updateOrCreate(
+                ['slug' => $category['slug']], // Find by slug
+                $category
+            );
         }
 
         // Create Products
@@ -223,7 +226,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create($product);
+            Product::updateOrCreate(
+                ['slug' => $product['slug']], // Find by slug
+                $product
+            );
         }
     }
 }

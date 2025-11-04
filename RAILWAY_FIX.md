@@ -60,11 +60,26 @@ Copy hasilnya (contoh: `base64:xxxxxxxxxxxxx`) dan paste ke Railway variables.
 2. Scroll ke "Custom Start Command"
 3. Masukkan command:
    ```bash
-   php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT
+   php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
    ```
 4. Save dan Redeploy
 
-**Cara 2: Via Local ke Railway MySQL**
+**IMPORTANT:** Seeder TIDAK dijalankan otomatis untuk menghindari duplicate data!
+
+**Cara Manual Run Seeder (ONLY ONCE):**
+
+Jika database kosong dan perlu data dummy, run seeder manual:
+
+**Option A: Via Railway One-time Command**
+1. Railway Dashboard → Service → Settings
+2. Temporary change start command to:
+   ```bash
+   php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT
+   ```
+3. Deploy sekali
+4. Kembalikan start command ke normal (tanpa db:seed)
+
+**Option B: Via Local ke Railway MySQL**
 
 ```bash
 # Set Railway MySQL credentials di .env
@@ -74,10 +89,11 @@ DB_DATABASE=railway
 DB_USERNAME=root
 DB_PASSWORD=your-railway-password
 
-# Run migrations from local
-php artisan migrate --force
+# Run seeder from local (ONLY ONCE!)
 php artisan db:seed --force
 ```
+
+**NOTE:** Seeder sekarang menggunakan `updateOrCreate` jadi aman untuk dijalankan berulang kali tanpa error duplicate!
 
 ### 4️⃣ Verify Database
 

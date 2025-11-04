@@ -23,17 +23,19 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($admins as $admin) {
-            User::create([
-                'name' => $admin['name'],
-                'email' => $admin['email'],
-                'password' => Hash::make($admin['password']),
-                'role' => 'admin',
-                'email_verified_at' => now(),
-                'created_at' => now()->subDays(rand(200, 365)),
-                'updated_at' => now()->subDays(rand(0, 10)),
-            ]);
+            User::updateOrCreate(
+                ['email' => $admin['email']], // Find by email
+                [
+                    'name' => $admin['name'],
+                    'password' => Hash::make($admin['password']),
+                    'role' => 'admin',
+                    'email_verified_at' => now(),
+                    'created_at' => now()->subDays(rand(200, 365)),
+                    'updated_at' => now()->subDays(rand(0, 10)),
+                ]
+            );
         }
-        $this->command->info('✅ Created ' . count($admins) . ' admins');
+        $this->command->info('✅ Created/Updated ' . count($admins) . ' admins');
 
         // Create Doctor Users with varied registration dates
         $doctors = [
@@ -57,17 +59,19 @@ class UserSeeder extends Seeder
         foreach ($doctors as $index => $doctor) {
             // Distribute doctor registration across 6 months
             $daysAgo = rand(30, 180);
-            User::create([
-                'name' => $doctor['name'],
-                'email' => $doctor['email'],
-                'password' => Hash::make('password'),
-                'role' => 'doctor',
-                'email_verified_at' => now()->subDays($daysAgo),
-                'created_at' => now()->subDays($daysAgo),
-                'updated_at' => now()->subDays(rand(0, 30)),
-            ]);
+            User::updateOrCreate(
+                ['email' => $doctor['email']], // Find by email
+                [
+                    'name' => $doctor['name'],
+                    'password' => Hash::make('password'),
+                    'role' => 'doctor',
+                    'email_verified_at' => now()->subDays($daysAgo),
+                    'created_at' => now()->subDays($daysAgo),
+                    'updated_at' => now()->subDays(rand(0, 30)),
+                ]
+            );
         }
-        $this->command->info('✅ Created ' . count($doctors) . ' doctors');
+        $this->command->info('✅ Created/Updated ' . count($doctors) . ' doctors');
 
         // Create Patient Users with realistic distribution
         $patientNames = [
@@ -95,18 +99,21 @@ class UserSeeder extends Seeder
         foreach ($patientNames as $index => $name) {
             // More patients registered recently (last 6 months)
             $daysAgo = $this->getRealisticRegistrationDate($index, count($patientNames));
+            $email = strtolower(str_replace(' ', '.', $name)) . '@example.com';
             
-            User::create([
-                'name' => $name,
-                'email' => strtolower(str_replace(' ', '.', $name)) . '@example.com',
-                'password' => Hash::make('password'),
-                'role' => 'patient',
-                'email_verified_at' => now()->subDays($daysAgo),
-                'created_at' => now()->subDays($daysAgo),
-                'updated_at' => now()->subDays(rand(0, min($daysAgo, 30))),
-            ]);
+            User::updateOrCreate(
+                ['email' => $email], // Find by email
+                [
+                    'name' => $name,
+                    'password' => Hash::make('password'),
+                    'role' => 'patient',
+                    'email_verified_at' => now()->subDays($daysAgo),
+                    'created_at' => now()->subDays($daysAgo),
+                    'updated_at' => now()->subDays(rand(0, min($daysAgo, 30))),
+                ]
+            );
         }
-        $this->command->info('✅ Created ' . count($patientNames) . ' patients');
+        $this->command->info('✅ Created/Updated ' . count($patientNames) . ' patients');
 
         // Summary
         $this->command->info('');
