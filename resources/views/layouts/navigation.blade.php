@@ -15,6 +15,27 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    <!-- E-Commerce Links -->
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                        <i class="fas fa-shopping-bag mr-1"></i>{{ __('Belanja') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
+                        <i class="fas fa-shopping-cart mr-1"></i>{{ __('Keranjang') }}
+                    </x-nav-link>
+                    
+                    @auth
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                        <i class="fas fa-receipt mr-1"></i>{{ __('Pesanan') }}
+                    </x-nav-link>
+                    @endauth
+                    
+                    @if(auth()->check() && auth()->user()->isAdmin())
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                        <i class="fas fa-tasks mr-1"></i>{{ __('Kelola Pesanan') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +91,27 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            
+            <!-- E-Commerce Links Mobile -->
+            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                <i class="fas fa-shopping-bag mr-2"></i>{{ __('Belanja') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
+                <i class="fas fa-shopping-cart mr-2"></i>{{ __('Keranjang') }}
+            </x-responsive-nav-link>
+            
+            @auth
+            <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                <i class="fas fa-receipt mr-2"></i>{{ __('Pesanan') }}
+            </x-responsive-nav-link>
+            @endauth
+            
+            @if(auth()->check() && auth()->user()->isAdmin())
+            <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                <i class="fas fa-tasks mr-2"></i>{{ __('Kelola Pesanan') }}
+            </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
