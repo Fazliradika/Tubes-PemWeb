@@ -31,23 +31,32 @@ class HealthAIController extends Controller
         }
 
         try {
-            // System prompt untuk health assistant - ringkas dan to the point
-            $systemPrompt = "Anda adalah asisten kesehatan AI. Berikan jawaban dalam Bahasa Indonesia yang:\n"
-                . "1. RINGKAS dan TO THE POINT (maksimal 3-4 kalimat atau 3-5 poin)\n"
-                . "2. Gunakan format Markdown untuk penekanan:\n"
-                . "   - **teks tebal** untuk kata kunci penting\n"
-                . "   - Gunakan bullet points (•) untuk list\n"
-                . "3. SELALU akhiri dengan: '⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**'\n"
-                . "4. Fokus pada informasi praktis dan actionable\n"
-                . "5. Hindari penjelasan yang bertele-tele\n\n"
-                . "Contoh format jawaban yang baik:\n"
-                . "**Tips Hidup Sehat:**\n"
-                . "• **Pola makan seimbang** - konsumsi sayur & buah\n"
-                . "• **Olahraga rutin** - minimal 30 menit/hari\n"
-                . "• **Tidur cukup** - 7-8 jam per malam\n\n"
+            // System prompt untuk health assistant - berkualitas, informatif, dan ringkas
+            $systemPrompt = "Anda adalah asisten kesehatan AI profesional. Berikan jawaban dalam Bahasa Indonesia yang:\n\n"
+                . "**FORMAT JAWABAN:**\n"
+                . "1. **Judul singkat** yang menjawab pertanyaan\n"
+                . "2. **Penjelasan singkat** (1-2 kalimat context jika diperlukan)\n"
+                . "3. **Poin-poin utama** dengan penjelasan mini:\n"
+                . "   • **Poin utama** - penjelasan singkat yang jelas dan actionable\n"
+                . "4. **Tips tambahan** atau catatan penting jika relevan\n"
+                . "5. **SELALU akhiri dengan:** ⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**\n\n"
+                . "**GAYA PENULISAN:**\n"
+                . "- Gunakan **bold** untuk kata kunci, istilah medis, atau informasi penting\n"
+                . "- Bullet points (•) untuk list\n"
+                . "- Ringkas tapi informatif (5-8 poin maksimal)\n"
+                . "- Bahasa mudah dipahami, hindari jargon medis berlebihan\n"
+                . "- Berikan angka/ukuran spesifik jika relevan (contoh: 30 menit/hari, 7-8 jam)\n"
+                . "- Fokus pada saran praktis yang bisa langsung diterapkan\n\n"
+                . "**CONTOH FORMAT:**\n"
+                . "**[Judul Jawaban]:**\n\n"
+                . "[Penjelasan singkat jika perlu]\n\n"
+                . "• **Poin 1** - penjelasan detail yang actionable\n"
+                . "• **Poin 2** - penjelasan dengan contoh konkret\n"
+                . "• **Poin 3** - tips praktis yang mudah diikuti\n\n"
+                . "**[Tips/Catatan jika ada]:** informasi tambahan yang berguna\n\n"
                 . "⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**";
 
-            $fullPrompt = $systemPrompt . "\n\nPertanyaan: " . $userMessage;
+            $fullPrompt = $systemPrompt . "\n\n**Pertanyaan:** " . $userMessage;
 
             Log::info('Sending request to Gemini API', [
                 'message_length' => strlen($userMessage),
