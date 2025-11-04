@@ -586,7 +586,7 @@
                         </svg>
                     </div>
                     <div class="${isError ? 'bg-red-50 border border-red-200' : 'bg-white'} rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
-                        <p class="text-sm ${isError ? 'text-red-700' : 'text-gray-700'} whitespace-pre-wrap">${escapeHtml(text)}</p>
+                        <div class="text-sm ${isError ? 'text-red-700' : 'text-gray-700'} markdown-content">${isError ? escapeHtml(text) : formatMarkdown(text)}</div>
                     </div>
                 `;
             }
@@ -634,9 +634,38 @@
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Format Markdown (bold, bullets, emojis) - safe rendering
+        function formatMarkdown(text) {
+            // Escape HTML first
+            let formatted = escapeHtml(text);
+            
+            // Convert **bold** to <strong>
+            formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>');
+            
+            // Convert bullet points • to styled bullets
+            formatted = formatted.replace(/^• (.+)$/gm, '<div class="flex items-start ml-2 mb-1"><span class="text-purple-600 mr-2">•</span><span>$1</span></div>');
+            
+            // Convert line breaks to <br>
+            formatted = formatted.replace(/\n/g, '<br>');
+            
+            // Highlight warning/important emoji
+            formatted = formatted.replace(/⚠️/g, '<span class="text-orange-500 text-lg">⚠️</span>');
+            
+            return formatted;
+        }
     </script>
 
     <style>
+        .markdown-content {
+            line-height: 1.6;
+        }
+
+        .markdown-content strong {
+            color: #1f2937;
+            font-weight: 700;
+        }
+
         @keyframes fade-in {
             from {
                 opacity: 0;

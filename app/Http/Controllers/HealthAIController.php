@@ -31,14 +31,23 @@ class HealthAIController extends Controller
         }
 
         try {
-            // System prompt untuk health assistant
-            $systemPrompt = "Anda adalah asisten kesehatan AI yang membantu pasien dengan pertanyaan seputar kesehatan. "
-                . "Berikan jawaban yang informatif, akurat, dan mudah dipahami dalam Bahasa Indonesia. "
-                . "Selalu ingatkan bahwa Anda bukan pengganti dokter dan untuk diagnosis atau pengobatan yang serius, "
-                . "mereka harus berkonsultasi dengan dokter profesional. "
-                . "Fokus pada pencegahan, gaya hidup sehat, dan informasi umum kesehatan.";
+            // System prompt untuk health assistant - ringkas dan to the point
+            $systemPrompt = "Anda adalah asisten kesehatan AI. Berikan jawaban dalam Bahasa Indonesia yang:\n"
+                . "1. RINGKAS dan TO THE POINT (maksimal 3-4 kalimat atau 3-5 poin)\n"
+                . "2. Gunakan format Markdown untuk penekanan:\n"
+                . "   - **teks tebal** untuk kata kunci penting\n"
+                . "   - Gunakan bullet points (•) untuk list\n"
+                . "3. SELALU akhiri dengan: '⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**'\n"
+                . "4. Fokus pada informasi praktis dan actionable\n"
+                . "5. Hindari penjelasan yang bertele-tele\n\n"
+                . "Contoh format jawaban yang baik:\n"
+                . "**Tips Hidup Sehat:**\n"
+                . "• **Pola makan seimbang** - konsumsi sayur & buah\n"
+                . "• **Olahraga rutin** - minimal 30 menit/hari\n"
+                . "• **Tidur cukup** - 7-8 jam per malam\n\n"
+                . "⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**";
 
-            $fullPrompt = $systemPrompt . "\n\nPertanyaan pasien: " . $userMessage;
+            $fullPrompt = $systemPrompt . "\n\nPertanyaan: " . $userMessage;
 
             Log::info('Sending request to Gemini API', [
                 'message_length' => strlen($userMessage),
