@@ -4,9 +4,11 @@
 
 ### 🔍 Penyebab Umum:
 1. Database migrations belum dijalankan
-2. Environment variables tidak terset dengan benar
-3. APP_KEY tidak di-generate
-4. Permission storage folder
+2. Migration schema tidak match dengan code
+3. Environment variables tidak terset dengan benar
+4. APP_KEY tidak di-generate
+5. Column 'role' data truncated (enum value tidak match)
+6. Permission storage folder
 
 ---
 
@@ -157,6 +159,52 @@ web: php artisan config:clear && php artisan migrate --force && php artisan db:s
 2. Verify environment variables di service
 3. Pastikan format: `DB_HOST=${MYSQLHOST}` bukan hardcoded
 4. Redeploy service
+
+### Error: "Base table or view not found: 1146 Table 'railway.users' doesn't exist"
+
+**Penyebab:** Migration belum dijalankan
+
+**Solusi:**
+```bash
+php artisan migrate --force
+```
+
+Atau tambahkan di start command:
+```bash
+php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+```
+
+### Error: "SQLSTATE[01000]: Warning: 1265 Data truncated for column 'role'"
+
+**Penyebab:** Migration schema lama (gender: laki-laki/perempuan) tidak match dengan code baru (male/female/other)
+
+**Solusi: Rebuild Database (Railway)**
+
+**⚠️ WARNING: This will DELETE all data!**
+
+1. **Via Railway Variables** - Temporary change start command:
+   ```bash
+   php artisan migrate:fresh --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT
+   ```
+
+2. **Via Local to Railway MySQL:**
+   ```bash
+   # Set Railway credentials in .env
+   DB_HOST=containers-us-west-xxx.railway.app
+   DB_PORT=6789
+   DB_DATABASE=railway
+   DB_USERNAME=root
+   DB_PASSWORD=your-password
+   
+   # Run from local
+   php artisan migrate:fresh --force
+   php artisan db:seed --force
+   ```
+
+3. **After successful rebuild**, change start command back to:
+   ```bash
+   php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+   ```
 
 ### Error: "Base table or view not found: 1146 Table 'railway.users' doesn't exist"
 
