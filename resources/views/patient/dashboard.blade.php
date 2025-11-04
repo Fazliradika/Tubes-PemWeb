@@ -311,8 +311,8 @@
                         <!-- Article 6 -->
                         <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1559388372-d01ad0cd0bce?w=400&h=250&fit=crop" 
-                                     alt="Sleep" 
+                                <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400&h=250&fit=crop" 
+                                     alt="Beauty Sleep Skincare" 
                                      class="w-full h-48 object-cover">
                                 <span class="absolute top-3 left-3 bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
                                     Kecantikan
