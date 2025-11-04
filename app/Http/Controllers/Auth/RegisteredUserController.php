@@ -30,7 +30,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            $request->validate([
+            // Validate input
+            $validated = $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -38,12 +39,13 @@ class RegisteredUserController extends Controller
                 'role' => ['required', 'in:patient,doctor'],
             ]);
 
+            // Create user with only fillable fields
             $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role' => $request->role ?? 'patient',
-                'phone' => $request->phone,
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
+                'role' => $validated['role'] ?? 'patient',
+                'phone' => $validated['phone'] ?? null,
                 'email_verified_at' => now(), // Auto-verify email on registration
             ]);
 
@@ -53,22 +55,30 @@ class RegisteredUserController extends Controller
 
             // Redirect based on user role
             if ($user->role === 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
+                return redirect()->route('admin.dashboard');
             } elseif ($user->role === 'doctor') {
-                return redirect()->intended(route('doctor.dashboard'));
+                return redirect()->route('doctor.dashboard');
             } elseif ($user->role === 'patient') {
-                return redirect()->intended(route('patient.dashboard'));
+                return redirect()->route('patient.dashboard');
             }
 
             // Default fallback
-            return redirect(route('dashboard', absolute: false));
+            return redirect()->route('dashboard');
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Re-throw validation exceptions
+            throw $e;
+            
         } catch (\Exception $e) {
             // Log the error for debugging
-            \Log::error('Registration failed: ' . $e->getMessage());
+            \Log::error('Registration failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             
             return back()->withErrors([
-                'email' => 'Terjadi kesalahan saat registrasi. Silakan coba lagi.'
-            ])->withInput();
+                'registration' => 'Terjadi kesalahan saat registrasi: ' . $e->getMessage()
+            ])->withInput($request->except('password', 'password_confirmation'));
         }
     }
 }
