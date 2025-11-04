@@ -362,4 +362,287 @@
             </div>
         </div>
     </div>
+
+    <!-- AI Health Assistant - Floating Button -->
+    <button id="aiChatToggle" class="fixed bottom-6 right-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full p-4 shadow-2xl hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300 z-40 group">
+        <svg class="w-7 h-7 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-pink-500"></span>
+        </span>
+    </button>
+
+    <!-- AI Chat Sidebar -->
+    <div id="aiChatSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/20 rounded-full p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">AI Health Assistant</h3>
+                    <p class="text-xs text-purple-100">Tanya seputar kesehatan Anda</p>
+                </div>
+            </div>
+            <button id="aiChatClose" class="text-white hover:bg-white/20 rounded-full p-2 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+            <!-- Welcome Message -->
+            <div class="flex items-start space-x-2">
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
+                    <p class="text-sm text-gray-700">
+                        👋 Halo! Saya AI Health Assistant. Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. 
+                        Silakan tanyakan apa saja!
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        ⚠️ Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="border-t border-gray-200 p-4 bg-white">
+            <form id="aiChatForm" class="flex items-end space-x-2">
+                <div class="flex-1">
+                    <textarea 
+                        id="aiChatInput" 
+                        rows="2" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none" 
+                        placeholder="Ketik pertanyaan Anda di sini..."
+                        maxlength="1000"
+                    ></textarea>
+                    <p class="text-xs text-gray-400 mt-1">Tekan Enter untuk kirim (Shift+Enter untuk baris baru)</p>
+                </div>
+                <button 
+                    type="submit" 
+                    id="sendButton"
+                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4 py-3 hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="chatOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300"></div>
+
+    <script>
+        // Chat Toggle
+        const chatToggle = document.getElementById('aiChatToggle');
+        const chatSidebar = document.getElementById('aiChatSidebar');
+        const chatClose = document.getElementById('aiChatClose');
+        const chatOverlay = document.getElementById('chatOverlay');
+        const chatForm = document.getElementById('aiChatForm');
+        const chatInput = document.getElementById('aiChatInput');
+        const chatMessages = document.getElementById('chatMessages');
+        const sendButton = document.getElementById('sendButton');
+
+        // Open chat
+        chatToggle.addEventListener('click', () => {
+            chatSidebar.classList.remove('translate-x-full');
+            chatOverlay.classList.remove('hidden');
+            chatInput.focus();
+        });
+
+        // Close chat
+        function closeChat() {
+            chatSidebar.classList.add('translate-x-full');
+            chatOverlay.classList.add('hidden');
+        }
+
+        chatClose.addEventListener('click', closeChat);
+        chatOverlay.addEventListener('click', closeChat);
+
+        // Handle form submission
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            
+            // Clear input
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            // Disable send button
+            sendButton.disabled = true;
+
+            // Show typing indicator
+            const typingId = addTypingIndicator();
+
+            try {
+                // Send to AI
+                const response = await fetch('{{ route("health.ai.chat") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+
+                // Remove typing indicator
+                removeTypingIndicator(typingId);
+
+                if (data.success) {
+                    addMessage(data.message, 'ai');
+                } else {
+                    addMessage('❌ ' + data.message, 'ai', true);
+                }
+            } catch (error) {
+                removeTypingIndicator(typingId);
+                addMessage('❌ Terjadi kesalahan koneksi. Silakan coba lagi.', 'ai', true);
+                console.error('Chat error:', error);
+            } finally {
+                sendButton.disabled = false;
+            }
+        });
+
+        // Handle Enter key (Send) and Shift+Enter (New line)
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // Auto-resize textarea
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Add message to chat
+        function addMessage(text, sender = 'user', isError = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-2 animate-fade-in';
+            
+            if (sender === 'user') {
+                messageDiv.classList.add('flex-row-reverse', 'space-x-reverse');
+                messageDiv.innerHTML = `
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg rounded-tr-none p-3 shadow-md max-w-[85%]">
+                        <p class="text-sm">${escapeHtml(text)}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="${isError ? 'bg-red-50 border border-red-200' : 'bg-white'} rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
+                        <p class="text-sm ${isError ? 'text-red-700' : 'text-gray-700'} whitespace-pre-wrap">${escapeHtml(text)}</p>
+                    </div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add typing indicator
+        function addTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'flex items-start space-x-2';
+            typingDiv.innerHTML = `
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return typingDiv.id;
+        }
+
+        // Remove typing indicator
+        function removeTypingIndicator(id) {
+            const indicator = document.getElementById(id);
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out;
+        }
+
+        #chatMessages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chatMessages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #c084fc;
+            border-radius: 3px;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+    </style>
 </x-app-layout>

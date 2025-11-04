@@ -49,6 +49,9 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
 // Patient Dashboard Routes
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/patient/dashboard', [PatientDashboardController::class, 'index'])->name('patient.dashboard');
+    
+    // AI Health Assistant
+    Route::post('/health/ai/chat', [\App\Http\Controllers\HealthAIController::class, 'chat'])->name('health.ai.chat');
 });
 
 // E-Commerce Routes
