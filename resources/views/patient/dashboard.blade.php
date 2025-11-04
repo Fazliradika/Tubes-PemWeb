@@ -504,19 +504,43 @@
                     body: JSON.stringify({ message })
                 });
 
-                const data = await response.json();
-
                 // Remove typing indicator
                 removeTypingIndicator(typingId);
+
+                // Check if response is OK
+                if (!response.ok) {
+                    let errorMessage = '❌ Terjadi kesalahan pada server';
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = '❌ ' + (errorData.message || `Error ${response.status}: ${response.statusText}`);
+                    } catch (e) {
+                        errorMessage = `❌ Error ${response.status}: ${response.statusText}`;
+                    }
+                    addMessage(errorMessage, 'ai', true);
+                    console.error('Server error:', response.status, response.statusText);
+                    return;
+                }
+
+                const data = await response.json();
 
                 if (data.success) {
                     addMessage(data.message, 'ai');
                 } else {
-                    addMessage('❌ ' + data.message, 'ai', true);
+                    addMessage('❌ ' + (data.message || 'Gagal mendapatkan response dari AI'), 'ai', true);
                 }
             } catch (error) {
                 removeTypingIndicator(typingId);
-                addMessage('❌ Terjadi kesalahan koneksi. Silakan coba lagi.', 'ai', true);
+                let errorMsg = '❌ Terjadi kesalahan koneksi. ';
+                
+                if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    errorMsg += 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.';
+                } else if (error.name === 'AbortError') {
+                    errorMsg += 'Request timeout. Silakan coba lagi.';
+                } else {
+                    errorMsg += 'Silakan coba lagi. (' + error.message + ')';
+                }
+                
+                addMessage(errorMsg, 'ai', true);
                 console.error('Chat error:', error);
             } finally {
                 sendButton.disabled = false;
