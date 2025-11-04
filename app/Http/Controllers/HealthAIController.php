@@ -20,12 +20,13 @@ class HealthAIController extends Controller
         $userMessage = $request->message;
         
         // Get Gemini API key from env
-        $apiKey = env('GEMINI_API_KEY');
+        $apiKey = config('services.gemini.api_key', env('GEMINI_API_KEY'));
         
         if (!$apiKey) {
+            Log::error('Gemini API key not configured');
             return response()->json([
                 'success' => false,
-                'message' => 'Gemini API key not configured. Please contact administrator.'
+                'message' => 'Konfigurasi AI belum lengkap. Silakan hubungi administrator.'
             ], 500);
         }
 
@@ -39,46 +40,40 @@ class HealthAIController extends Controller
 
             $fullPrompt = $systemPrompt . "\n\nPertanyaan pasien: " . $userMessage;
 
-            // Call Gemini API
-            $response = Http::timeout(30)->post(
-                'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' . $apiKey,
-                [
-                    'contents' => [
-                        [
-                            'parts' => [
-                                ['text' => $fullPrompt]
+            Log::info('Sending request to Gemini API', [
+                'message_length' => strlen($userMessage),
+                'api_key_present' => !empty($apiKey),
+                'api_key_length' => strlen($apiKey)
+            ]);
+
+            // Call Gemini API with correct authentication header
+            $response = Http::timeout(30)
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'x-goog-api-key' => $apiKey,
+                ])
+                ->post(
+                    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
+                    [
+                        'contents' => [
+                            [
+                                'parts' => [
+                                    ['text' => $fullPrompt]
+                                ]
                             ]
                         ]
-                    ],
-                    'generationConfig' => [
-                        'temperature' => 0.7,
-                        'topK' => 40,
-                        'topP' => 0.95,
-                        'maxOutputTokens' => 1024,
-                    ],
-                    'safetySettings' => [
-                        [
-                            'category' => 'HARM_CATEGORY_HARASSMENT',
-                            'threshold' => 'BLOCK_MEDIUM_AND_ABOVE'
-                        ],
-                        [
-                            'category' => 'HARM_CATEGORY_HATE_SPEECH',
-                            'threshold' => 'BLOCK_MEDIUM_AND_ABOVE'
-                        ],
-                        [
-                            'category' => 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
-                            'threshold' => 'BLOCK_MEDIUM_AND_ABOVE'
-                        ],
-                        [
-                            'category' => 'HARM_CATEGORY_DANGEROUS_CONTENT',
-                            'threshold' => 'BLOCK_MEDIUM_AND_ABOVE'
-                        ]
                     ]
-                ]
-            );
+                );
+
+            Log::info('Gemini API Response', [
+                'status' => $response->status(),
+                'successful' => $response->successful()
+            ]);
 
             if ($response->successful()) {
                 $data = $response->json();
+                
+                Log::info('Gemini API Response Data', ['has_candidates' => isset($data['candidates'])]);
                 
                 if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
                     $aiResponse = $data['candidates'][0]['content']['parts'][0]['text'];
@@ -88,6 +83,7 @@ class HealthAIController extends Controller
                         'message' => $aiResponse
                     ]);
                 } else {
+                    Log::warning('Gemini API returned unexpected format', ['data' => $data]);
                     return response()->json([
                         'success' => false,
                         'message' => 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini. Silakan coba lagi.'
@@ -96,20 +92,42 @@ class HealthAIController extends Controller
             } else {
                 Log::error('Gemini API Error', [
                     'status' => $response->status(),
-                    'body' => $response->body()
+                    'body' => $response->body(),
+                    'headers' => $response->headers()
                 ]);
+                
+                $errorMessage = 'Terjadi kesalahan saat menghubungi AI.';
+                
+                if ($response->status() === 400) {
+                    $errorMessage = 'Permintaan tidak valid. API key mungkin salah.';
+                } elseif ($response->status() === 403) {
+                    $errorMessage = 'API key tidak memiliki akses. Periksa konfigurasi API key.';
+                } elseif ($response->status() === 429) {
+                    $errorMessage = 'Terlalu banyak permintaan. Silakan coba lagi nanti.';
+                }
                 
                 return response()->json([
                     'success' => false,
-                    'message' => 'Terjadi kesalahan saat menghubungi AI. Silakan coba lagi nanti.'
+                    'message' => $errorMessage,
+                    'debug' => app()->environment('local') ? $response->body() : null
                 ], 500);
             }
-        } catch (\Exception $e) {
-            Log::error('Health AI Chat Error: ' . $e->getMessage());
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            Log::error('Gemini API Connection Error: ' . $e->getMessage());
             
             return response()->json([
                 'success' => false,
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                'message' => 'Tidak dapat terhubung ke server AI. Periksa koneksi internet Anda.'
+            ], 500);
+        } catch (\Exception $e) {
+            Log::error('Health AI Chat Error', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
             ], 500);
         }
     }
