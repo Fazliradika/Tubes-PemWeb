@@ -428,17 +428,24 @@
                         placeholder="Ketik pertanyaan Anda di sini..."
                         maxlength="1000"
                     ></textarea>
-                    <p class="text-xs text-gray-400 mt-1">Tekan Enter untuk kirim • Shift+Enter baris baru • Klik ikon mikrofon untuk bicara</p>
+                    <p class="text-xs text-gray-400 mt-1">Tekan Enter untuk kirim • Shift+Enter baris baru • Klik ikon mikrofon atau tahan tombol kirim untuk bicara</p>
                 </div>
                 <!-- Mic Button (Speech to Text) -->
                 <button
                     type="button"
                     id="micButton"
                     title="Klik untuk bicara (Speech to Text). Tahan tombol Kirim untuk push-to-talk."
-                    class="bg-gray-100 text-gray-700 rounded-lg p-3 hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    class="bg-gray-100 text-gray-700 rounded-lg p-3 hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 flex items-center justify-center"
                     aria-label="Aktifkan Speech to Text"
                 >
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <!-- Mic idle icon -->
+                    <svg id="micIconIdle" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
+                        <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
+                    </svg>
+                    <!-- Mic listening icon -->
+                    <svg id="micIconOn" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <circle cx="10" cy="10" r="9" class="text-red-500" fill="currentColor" opacity="0.15"></circle>
                         <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
                         <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
                     </svg>
@@ -446,10 +453,11 @@
                 <button 
                     type="submit" 
                     id="sendButton"
-                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4 py-3 hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4 py-3 hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
+                    <!-- Paper plane icon -->
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9-7-9-7-9 7 9 7zm0 0l-3-7 3-7 3 7-3 7z" />
                     </svg>
                 </button>
             </form>
@@ -472,12 +480,14 @@
         const micButton = document.getElementById('micButton');
 
         // --- Speech To Text (Web Speech API) ---
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
         let isListening = false;
         let holdToTalkActive = false;
         let longPressTimer = null;
         let sendAfterHold = false;
+    let sttFinal = '';
+    let sttInterim = '';
 
         function ensureRecognition() {
             if (!SpeechRecognition) return null;
@@ -491,26 +501,23 @@
                 micButton.classList.remove('bg-gray-100','text-gray-700');
                 micButton.classList.add('bg-red-600','text-white','animate-pulse');
                 micButton.title = 'Mendengarkan... klik untuk berhenti';
+                // toggle icons
+                document.getElementById('micIconIdle').classList.add('hidden');
+                document.getElementById('micIconOn').classList.remove('hidden');
             };
 
             recognition.onresult = (event) => {
-                let interim = '';
-                let finalText = '';
+                // Build stable final and interim without duplications
+                sttInterim = '';
                 for (let i = event.resultIndex; i < event.results.length; i++) {
                     const transcript = event.results[i][0].transcript;
-                    if (event.results[i].isFinal) finalText += transcript + ' ';
-                    else interim += transcript;
+                    if (event.results[i].isFinal) sttFinal += transcript + ' ';
+                    else sttInterim = transcript;
                 }
-                if (interim) {
-                    // preview interim in the input
-                    chatInput.value = (chatInput.dataset.baseText || '') + interim;
-                }
-                if (finalText) {
-                    const base = (chatInput.value || '').trim();
-                    chatInput.value = (base ? base + ' ' : '') + finalText.trim();
-                    chatInput.dataset.baseText = chatInput.value;
-                    chatInput.dispatchEvent(new Event('input'));
-                }
+                const prefix = (chatInput.dataset.baseText || '').trim();
+                const combined = [prefix, (sttFinal + sttInterim).trim()].filter(Boolean).join(' ');
+                chatInput.value = combined;
+                chatInput.dispatchEvent(new Event('input'));
             };
 
             recognition.onerror = (e) => {
@@ -523,10 +530,10 @@
                 micButton.classList.remove('bg-red-600','text-white','animate-pulse');
                 micButton.classList.add('bg-gray-100','text-gray-700');
                 micButton.title = 'Klik untuk bicara (Speech to Text)';
-                if (isListening) {
-                    // Auto-restart if still in listening mode (network hiccup)
-                    try { recognition.start(); } catch(_) {}
-                } else if (sendAfterHold) {
+                document.getElementById('micIconOn').classList.add('hidden');
+                document.getElementById('micIconIdle').classList.remove('hidden');
+                // Do not auto-restart to avoid duplicate transcripts
+                if (sendAfterHold) {
                     sendAfterHold = false;
                     if (chatInput.value.trim()) {
                         chatForm.dispatchEvent(new Event('submit'));
@@ -545,6 +552,8 @@
             sendAfterHold = autoSend;
             isListening = true;
             chatInput.dataset.baseText = chatInput.value || '';
+            sttFinal = '';
+            sttInterim = '';
             try { rec.start(); } catch (_) {}
         }
 
@@ -573,7 +582,7 @@
             holdToTalkActive = true;
             longPressTimer = setTimeout(() => {
                 startListening(true);
-            }, 350);
+            }, 450);
         }
         function clearHoldTimerAndMaybeStop() {
             if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
