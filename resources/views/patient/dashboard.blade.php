@@ -428,8 +428,21 @@
                         placeholder="Ketik pertanyaan Anda di sini..."
                         maxlength="1000"
                     ></textarea>
-                    <p class="text-xs text-gray-400 mt-1">Tekan Enter untuk kirim (Shift+Enter untuk baris baru)</p>
+                    <p class="text-xs text-gray-400 mt-1">Tekan Enter untuk kirim • Shift+Enter baris baru • Klik ikon mikrofon untuk bicara</p>
                 </div>
+                <!-- Mic Button (Speech to Text) -->
+                <button
+                    type="button"
+                    id="micButton"
+                    title="Klik untuk bicara (Speech to Text). Tahan tombol Kirim untuk push-to-talk."
+                    class="bg-gray-100 text-gray-700 rounded-lg p-3 hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    aria-label="Aktifkan Speech to Text"
+                >
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
+                        <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
                 <button 
                     type="submit" 
                     id="sendButton"
@@ -456,6 +469,131 @@
         const chatInput = document.getElementById('aiChatInput');
         const chatMessages = document.getElementById('chatMessages');
         const sendButton = document.getElementById('sendButton');
+        const micButton = document.getElementById('micButton');
+
+        // --- Speech To Text (Web Speech API) ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+        let isListening = false;
+        let holdToTalkActive = false;
+        let longPressTimer = null;
+        let sendAfterHold = false;
+
+        function ensureRecognition() {
+            if (!SpeechRecognition) return null;
+            if (recognition) return recognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'id-ID';
+            recognition.interimResults = true;
+            recognition.continuous = true;
+
+            recognition.onstart = () => {
+                micButton.classList.remove('bg-gray-100','text-gray-700');
+                micButton.classList.add('bg-red-600','text-white','animate-pulse');
+                micButton.title = 'Mendengarkan... klik untuk berhenti';
+            };
+
+            recognition.onresult = (event) => {
+                let interim = '';
+                let finalText = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) finalText += transcript + ' ';
+                    else interim += transcript;
+                }
+                if (interim) {
+                    // preview interim in the input
+                    chatInput.value = (chatInput.dataset.baseText || '') + interim;
+                }
+                if (finalText) {
+                    const base = (chatInput.value || '').trim();
+                    chatInput.value = (base ? base + ' ' : '') + finalText.trim();
+                    chatInput.dataset.baseText = chatInput.value;
+                    chatInput.dispatchEvent(new Event('input'));
+                }
+            };
+
+            recognition.onerror = (e) => {
+                // Show a friendly error only once
+                addMessage('❌ Gagal menggunakan speech-to-text: ' + (e.error || 'unknown error'), 'ai', true);
+                stopListening(false);
+            };
+
+            recognition.onend = () => {
+                micButton.classList.remove('bg-red-600','text-white','animate-pulse');
+                micButton.classList.add('bg-gray-100','text-gray-700');
+                micButton.title = 'Klik untuk bicara (Speech to Text)';
+                if (isListening) {
+                    // Auto-restart if still in listening mode (network hiccup)
+                    try { recognition.start(); } catch(_) {}
+                } else if (sendAfterHold) {
+                    sendAfterHold = false;
+                    if (chatInput.value.trim()) {
+                        chatForm.dispatchEvent(new Event('submit'));
+                    }
+                }
+            };
+            return recognition;
+        }
+
+        function startListening(autoSend = false) {
+            const rec = ensureRecognition();
+            if (!rec) {
+                addMessage('Browser Anda tidak mendukung Speech-to-Text. Coba gunakan Chrome/Edge terbaru di Android/Windows.', 'ai', true);
+                return;
+            }
+            sendAfterHold = autoSend;
+            isListening = true;
+            chatInput.dataset.baseText = chatInput.value || '';
+            try { rec.start(); } catch (_) {}
+        }
+
+        function stopListening(resetAutoSend = true) {
+            if (recognition) {
+                isListening = false;
+                if (resetAutoSend === false) {
+                    // keep sendAfterHold as is
+                } else {
+                    // default: do not auto-send unless explicitly set
+                    sendAfterHold = false;
+                }
+                try { recognition.stop(); } catch (_) {}
+            }
+        }
+
+        if (micButton) {
+            micButton.addEventListener('click', () => {
+                if (isListening) stopListening(); else startListening(false);
+            });
+        }
+
+        // Hold-to-talk on Send button
+        function startHoldTimer(e) {
+            if (longPressTimer) clearTimeout(longPressTimer);
+            holdToTalkActive = true;
+            longPressTimer = setTimeout(() => {
+                startListening(true);
+            }, 350);
+        }
+        function clearHoldTimerAndMaybeStop() {
+            if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
+            if (holdToTalkActive && isListening) {
+                stopListening(false); // keep sendAfterHold=true to auto-send on end
+            }
+            holdToTalkActive = false;
+        }
+
+        sendButton.addEventListener('mousedown', startHoldTimer);
+        sendButton.addEventListener('touchstart', startHoldTimer);
+        ['mouseup','mouseleave','touchend','touchcancel'].forEach(evt => {
+            sendButton.addEventListener(evt, clearHoldTimerAndMaybeStop);
+        });
+        // Prevent form submit if we were in hold-to-talk mode
+        sendButton.addEventListener('click', (e) => {
+            if (holdToTalkActive || isListening) {
+                e.preventDefault();
+            }
+        });
 
         // Open chat
         chatToggle.addEventListener('click', () => {

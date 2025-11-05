@@ -17,7 +17,48 @@ class HealthAIController extends Controller
             'message' => 'required|string|max:1000',
         ]);
 
-        $userMessage = $request->message;
+        $userMessage = trim($request->message);
+
+        // Lightweight topic guard before calling the model
+        $healthKeywords = [
+            'kesehatan','dokter','gejala','penyakit','diagnosa','diagnosis','obat','resep','terapi',
+            'nutrisi','gizi','diet','olahraga','kebugaran','fitness','mental','psikolog','stres','stress',
+            'depresi','cemas','anxiety','tidur','insomnia','vaksin','imunisasi','batuk','demam','flu',
+            'covid','diabetes','hipertensi','jantung','kolesterol','kulit','gigi','pediatri','kehamilan',
+            'kandungan','ginekologi','asma','alergi','nyeri','sakit','BMI','tekanan darah','gula darah',
+            'konsultasi','janji temu','appointment','dokter gigi','psikiater','dermatologi','ortopedi'
+        ];
+        $offTopicHints = [
+            // Tech / finance / general
+            'laptop','pc','komputer','smartphone','hp','gadget','game','gaming','vga','gpu','cpu','ram','ssd','monitor',
+            'programming','koding','coding','framework','react','laravel','python','javascript','java','c++','c#',
+            'crypto','bitcoin','saham','investasi','trading','forex','keuangan','rekening',
+            'travel','wisata','hotel','tiket',
+            'film','movie','music','musik','lagu','artis','seleb',
+            'otomotif','motor','mobil'
+        ];
+
+        $isHealth = false;
+        $lower = mb_strtolower($userMessage, 'UTF-8');
+        foreach ($healthKeywords as $kw) {
+            if (str_contains($lower, mb_strtolower($kw, 'UTF-8'))) {
+                $isHealth = true; break;
+            }
+        }
+        $containsOffTopic = false;
+        foreach ($offTopicHints as $kw) {
+            if (str_contains($lower, mb_strtolower($kw, 'UTF-8'))) {
+                $containsOffTopic = true; break;
+            }
+        }
+
+        if (!$isHealth && $containsOffTopic) {
+            // Early refusal without calling the model
+            return response()->json([
+                'success' => true,
+                'message' => "Maaf, saya adalah asisten AI khusus kesehatan. Saya hanya bisa membantu pertanyaan seputar kesehatan, gejala dini, gaya hidup sehat, nutrisi, olahraga, dan konsultasi janji temu. Coba ajukan pertanyaan yang berkaitan dengan kesehatan, ya."
+            ]);
+        }
         
         // Get Gemini API key from env
         $apiKey = config('services.gemini.api_key', env('GEMINI_API_KEY'));
@@ -31,8 +72,8 @@ class HealthAIController extends Controller
         }
 
         try {
-            // System prompt untuk health assistant - berkualitas, informatif, dan ringkas
-            $systemPrompt = "Anda adalah asisten kesehatan AI profesional. Berikan jawaban dalam Bahasa Indonesia yang:\n\n"
+            // System prompt khusus kesehatan, sertakan aturan penolakan di luar domain
+            $systemPrompt = "Anda adalah asisten kesehatan AI profesional untuk aplikasi klinik. Jawab HANYA pertanyaan terkait kesehatan/medis, gaya hidup sehat, nutrisi, olahraga, kesehatan mental, atau alur janji temu. Jika pertanyaan di luar itu (misal topik komputer, keuangan, hiburan, politik, pemrograman, dsb), TOLAK dengan sopan dan jelaskan bahwa Anda khusus kesehatan. Jangan memberikan jawaban untuk topik di luar domain. Berikan jawaban dalam Bahasa Indonesia yang:\n\n"
                 . "**FORMAT JAWABAN:**\n"
                 . "1. **Judul singkat** yang menjawab pertanyaan\n"
                 . "2. **Penjelasan singkat** (1-2 kalimat context jika diperlukan)\n"
@@ -54,6 +95,10 @@ class HealthAIController extends Controller
                 . "• **Poin 2** - penjelasan dengan contoh konkret\n"
                 . "• **Poin 3** - tips praktis yang mudah diikuti\n\n"
                 . "**[Tips/Catatan jika ada]:** informasi tambahan yang berguna\n\n"
+                . "Jika pertanyaan DI LUAR kesehatan, balas DENGAN format singkat:\n\n"
+                . "**Maaf, saya AI khusus kesehatan.**\n"
+                . "• Saya hanya bisa membantu topik kesehatan, gejala, gaya hidup sehat, nutrisi, olahraga, mental health, dan janji temu.\n"
+                . "• Silakan ajukan pertanyaan terkait kesehatan.\n\n"
                 . "⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**";
 
             $fullPrompt = $systemPrompt . "\n\n**Pertanyaan:** " . $userMessage;
