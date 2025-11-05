@@ -22,6 +22,14 @@ class AppointmentController extends Controller
             ->bySpecialization($specialization)
             ->get();
 
+        // Debug logging
+        \Log::info('AppointmentController@index', [
+            'doctors_count' => $doctors->count(),
+            'specialization' => $specialization,
+            'total_doctors_in_db' => Doctor::count(),
+            'active_doctors_in_db' => Doctor::where('is_active', true)->count()
+        ]);
+
         // Get unique specializations for filter
         $specializations = Doctor::select('specialization')
             ->distinct()
