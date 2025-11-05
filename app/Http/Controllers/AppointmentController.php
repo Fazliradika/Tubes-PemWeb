@@ -55,6 +55,14 @@ class AppointmentController extends Controller
             return back()->with('error', 'Dokter tidak tersedia pada hari tersebut.');
         }
 
+        // Ensure the selected time is within doctor's working hours
+        $selectedTime = strtotime($request->appointment_time);
+        $startTime = strtotime($doctor->start_time);
+        $endTime = strtotime($doctor->end_time);
+        if ($selectedTime < $startTime || $selectedTime > $endTime) {
+            return back()->with('error', 'Waktu yang dipilih berada di luar jam praktik dokter.');
+        }
+
         // Check if time slot is already taken
         $existingAppointment = Appointment::where('doctor_id', $doctor->id)
             ->where('appointment_date', $request->appointment_date)
