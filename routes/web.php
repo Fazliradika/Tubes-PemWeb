@@ -53,6 +53,9 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     
     // AI Health Assistant
     Route::post('/health/ai/chat', [\App\Http\Controllers\HealthAIController::class, 'chat'])->name('health.ai.chat');
+    Route::get('/health/ai/chats', [\App\Http\Controllers\HealthAIController::class, 'chats'])->name('health.ai.chats');
+    Route::get('/health/ai/chats/{chat}', [\App\Http\Controllers\HealthAIController::class, 'messages'])->name('health.ai.chats.messages');
+    Route::delete('/health/ai/chats/{chat}', [\App\Http\Controllers\HealthAIController::class, 'destroy'])->name('health.ai.chats.destroy');
     
     // Appointment Routes
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');

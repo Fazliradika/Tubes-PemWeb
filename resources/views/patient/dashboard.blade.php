@@ -389,11 +389,18 @@
                     <p class="text-xs text-purple-100">Tanya seputar kesehatan Anda</p>
                 </div>
             </div>
-            <button id="aiChatClose" class="text-white hover:bg-white/20 rounded-full p-2 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+            <div class="flex items-center gap-2">
+                <select id="chatSelect" class="hidden md:block text-gray-800 bg-white/90 rounded-md px-2 py-1 text-sm">
+                    <option value="">Chat baru…</option>
+                </select>
+                <button id="newChatButton" class="hidden md:inline-flex bg-white/20 hover:bg-white/30 text-white text-sm px-3 py-1 rounded-md">Chat Baru</button>
+                <button id="deleteChatButton" class="hidden md:inline-flex bg-white/10 hover:bg-white/20 text-white text-sm px-3 py-1 rounded-md">Hapus</button>
+                <button id="aiChatClose" class="text-white hover:bg-white/20 rounded-full p-2 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <!-- Chat Messages Container -->
@@ -478,6 +485,98 @@
         const chatMessages = document.getElementById('chatMessages');
         const sendButton = document.getElementById('sendButton');
         const micButton = document.getElementById('micButton');
+        const chatSelect = document.getElementById('chatSelect');
+        const newChatButton = document.getElementById('newChatButton');
+        const deleteChatButton = document.getElementById('deleteChatButton');
+
+        let currentChatId = null;
+
+        async function fetchChats() {
+            try {
+                const res = await fetch('{{ route("health.ai.chats") }}');
+                if (!res.ok) return;
+                const data = await res.json();
+                if (!data.success) return;
+                chatSelect.innerHTML = '<option value="">Chat baru…</option>';
+                data.data.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = (c.title || 'Percakapan') + ' · ' + new Date(c.updated_at).toLocaleString();
+                    if (String(c.id) === String(currentChatId)) opt.selected = true;
+                    chatSelect.appendChild(opt);
+                });
+                // show controls if any chat exists
+                const has = data.data && data.data.length > 0;
+                chatSelect.classList.toggle('hidden', !has);
+                newChatButton.classList.toggle('hidden', false);
+                deleteChatButton.classList.toggle('hidden', !currentChatId);
+            } catch(_) {}
+        }
+
+        async function loadChatMessages(chatId) {
+            if (!chatId) return;
+            const url = '{{ route("health.ai.chats.messages", ["chat" => 0]) }}'.replace('/0', '/' + chatId);
+            const res = await fetch(url);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (!data.success) return;
+            currentChatId = data.chat_id;
+            // clear messages
+            chatMessages.innerHTML = '';
+            // render all
+            data.messages.forEach(m => {
+                addMessage(m.content, m.role === 'user' ? 'user' : 'ai');
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            deleteChatButton.classList.toggle('hidden', !currentChatId);
+            await fetchChats();
+        }
+
+        if (chatSelect) {
+            chatSelect.addEventListener('change', (e) => {
+                const v = e.target.value;
+                if (!v) {
+                    startNewChat();
+                } else {
+                    loadChatMessages(v);
+                }
+            });
+        }
+
+        function startNewChat() {
+            currentChatId = null;
+            chatInput.value = '';
+            // reset to welcome message area
+            chatMessages.innerHTML = `
+            <div class="flex items-start space-x-2">
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
+                    <p class="text-sm text-gray-700">
+                        👋 Halo! Saya AI Health Assistant. Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. 
+                        Silakan tanyakan apa saja!
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        ⚠️ Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.
+                    </p>
+                </div>
+            </div>`;
+            fetchChats();
+            deleteChatButton.classList.add('hidden');
+        }
+
+        if (newChatButton) newChatButton.addEventListener('click', startNewChat);
+        if (deleteChatButton) {
+            deleteChatButton.addEventListener('click', async () => {
+                if (!currentChatId) return;
+                const url = '{{ route("health.ai.chats.destroy", ["chat" => 0]) }}'.replace('/0', '/' + currentChatId);
+                const res = await fetch(url, { method: 'DELETE', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' } });
+                if (res.ok) startNewChat();
+            });
+        }
 
         // --- Speech To Text (Web Speech API) ---
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -648,7 +747,7 @@
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    body: JSON.stringify({ message })
+                    body: JSON.stringify({ message, chat_id: currentChatId })
                 });
 
                 // Remove typing indicator
@@ -672,6 +771,10 @@
 
                 if (data.success) {
                     addMessage(data.message, 'ai');
+                    if (data.chat_id && !currentChatId) {
+                        currentChatId = data.chat_id;
+                        fetchChats();
+                    }
                 } else {
                     addMessage('❌ ' + (data.message || 'Gagal mendapatkan response dari AI'), 'ai', true);
                 }

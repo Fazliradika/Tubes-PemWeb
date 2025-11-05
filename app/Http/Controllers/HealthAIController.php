@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\AiChat;
+use App\Models\AiMessage;
 
 class HealthAIController extends Controller
 {
@@ -15,9 +19,31 @@ class HealthAIController extends Controller
     {
         $request->validate([
             'message' => 'required|string|max:1000',
+            'chat_id' => 'nullable|integer',
         ]);
 
         $userMessage = trim($request->message);
+        $chatId = $request->input('chat_id');
+
+        // Resolve or create chat
+        $chat = null;
+        if ($chatId) {
+            $chat = AiChat::where('id', $chatId)->where('user_id', Auth::id())->first();
+        }
+        if (!$chat) {
+            $chat = new AiChat([
+                'user_id' => Auth::id(),
+                'title' => Str::limit(preg_replace('/\s+/', ' ', $userMessage), 60),
+            ]);
+            $chat->save();
+        }
+
+        // Persist user message
+        AiMessage::create([
+            'chat_id' => $chat->id,
+            'role' => 'user',
+            'content' => $userMessage,
+        ]);
 
         // Lightweight topic guard before calling the model
         $healthKeywords = [
@@ -53,10 +79,19 @@ class HealthAIController extends Controller
         }
 
         if (!$isHealth && $containsOffTopic) {
-            // Early refusal without calling the model
+            // Early refusal without calling the model; save assistant reply
+            $refusal = "Maaf, saya adalah asisten AI khusus kesehatan. Saya hanya bisa membantu pertanyaan seputar kesehatan, gejala dini, gaya hidup sehat, nutrisi, olahraga, dan konsultasi janji temu. Coba ajukan pertanyaan yang berkaitan dengan kesehatan, ya.";
+            AiMessage::create([
+                'chat_id' => $chat->id,
+                'role' => 'assistant',
+                'content' => $refusal,
+            ]);
+
             return response()->json([
                 'success' => true,
-                'message' => "Maaf, saya adalah asisten AI khusus kesehatan. Saya hanya bisa membantu pertanyaan seputar kesehatan, gejala dini, gaya hidup sehat, nutrisi, olahraga, dan konsultasi janji temu. Coba ajukan pertanyaan yang berkaitan dengan kesehatan, ya."
+                'chat_id' => $chat->id,
+                'title' => $chat->title,
+                'message' => $refusal,
             ]);
         }
         
@@ -140,10 +175,20 @@ class HealthAIController extends Controller
                 
                 if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
                     $aiResponse = $data['candidates'][0]['content']['parts'][0]['text'];
+
+                    // Save assistant reply
+                    AiMessage::create([
+                        'chat_id' => $chat->id,
+                        'role' => 'assistant',
+                        'content' => $aiResponse,
+                    ]);
+                    $chat->touch();
                     
                     return response()->json([
                         'success' => true,
-                        'message' => $aiResponse
+                        'chat_id' => $chat->id,
+                        'title' => $chat->title,
+                        'message' => $aiResponse,
                     ]);
                 } else {
                     Log::warning('Gemini API returned unexpected format', ['data' => $data]);
@@ -193,5 +238,46 @@ class HealthAIController extends Controller
                 'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Return chat list for current user
+     */
+    public function chats(Request $request)
+    {
+        $chats = AiChat::where('user_id', Auth::id())
+            ->orderByDesc('updated_at')
+            ->limit(50)
+            ->get(['id','title','updated_at']);
+
+        return response()->json([
+            'success' => true,
+            'data' => $chats,
+        ]);
+    }
+
+    /**
+     * Return messages for a chat
+     */
+    public function messages(Request $request, AiChat $chat)
+    {
+        if ($chat->user_id !== Auth::id()) abort(403);
+        $messages = $chat->messages()->orderBy('created_at')->get(['role','content','created_at']);
+        return response()->json([
+            'success' => true,
+            'chat_id' => $chat->id,
+            'title' => $chat->title,
+            'messages' => $messages,
+        ]);
+    }
+
+    /**
+     * Delete a chat and its messages
+     */
+    public function destroy(Request $request, AiChat $chat)
+    {
+        if ($chat->user_id !== Auth::id()) abort(403);
+        $chat->delete();
+        return response()->json(['success' => true]);
     }
 }
