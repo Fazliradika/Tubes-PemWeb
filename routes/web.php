@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\PatientDashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -54,12 +55,12 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::post('/health/ai/chat', [\App\Http\Controllers\HealthAIController::class, 'chat'])->name('health.ai.chat');
     
     // Appointment Routes
-    Route::get('/appointments', [\App\Http\Controllers\AppointmentController::class, 'index'])->name('appointments.index');
-    Route::get('/appointments/create/{doctor}', [\App\Http\Controllers\AppointmentController::class, 'create'])->name('appointments.create');
-    Route::post('/appointments/store/{doctor}', [\App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');
-    Route::get('/appointments/{appointment}', [\App\Http\Controllers\AppointmentController::class, 'show'])->name('appointments.show');
-    Route::get('/my-appointments', [\App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my-appointments');
-    Route::patch('/appointments/{appointment}/cancel', [\App\Http\Controllers\AppointmentController::class, 'cancel'])->name('appointments.cancel');
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('/appointments/create/{doctor}', [AppointmentController::class, 'create'])->name('appointments.create');
+    Route::post('/appointments/store/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
+    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.my-appointments');
+    Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
 });
 
 // E-Commerce Routes
