@@ -107,28 +107,32 @@ class DoctorSeeder extends Seeder
         ];
 
         foreach ($doctors as $doctorData) {
-            // Create user account for doctor
-            $user = User::create([
-                'name' => $doctorData['name'],
-                'email' => $doctorData['email'],
-                'password' => Hash::make('password123'),
-                'role' => 'doctor',
-                'phone' => '08' . rand(1000000000, 9999999999),
-                'email_verified_at' => now(),
-            ]);
+            // Create or update user account for doctor
+            $user = User::updateOrCreate(
+                ['email' => $doctorData['email']], // Find by email
+                [
+                    'name' => $doctorData['name'],
+                    'password' => Hash::make('password123'),
+                    'role' => 'doctor',
+                    'phone' => '08' . rand(1000000000, 9999999999),
+                    'email_verified_at' => now(),
+                ]
+            );
 
-            // Create doctor profile
-            Doctor::create([
-                'user_id' => $user->id,
-                'specialization' => $doctorData['specialization'],
-                'bio' => $doctorData['bio'],
-                'price_per_session' => $doctorData['price_per_session'],
-                'years_of_experience' => $doctorData['years_of_experience'],
-                'available_days' => $doctorData['available_days'],
-                'start_time' => $doctorData['start_time'],
-                'end_time' => $doctorData['end_time'],
-                'is_active' => true,
-            ]);
+            // Create or update doctor profile
+            Doctor::updateOrCreate(
+                ['user_id' => $user->id], // Find by user_id
+                [
+                    'specialization' => $doctorData['specialization'],
+                    'bio' => $doctorData['bio'],
+                    'price_per_session' => $doctorData['price_per_session'],
+                    'years_of_experience' => $doctorData['years_of_experience'],
+                    'available_days' => $doctorData['available_days'],
+                    'start_time' => $doctorData['start_time'],
+                    'end_time' => $doctorData['end_time'],
+                    'is_active' => true,
+                ]
+            );
         }
 
         $this->command->info('Doctor seeder completed successfully!');
