@@ -131,7 +131,18 @@ class DoctorDashboardController extends Controller
         
         $appointment->update(['status' => 'confirmed']);
         
-        return back()->with('success', 'Appointment telah dikonfirmasi');
+        // Create conversation if not exists
+        if (!$appointment->conversation) {
+            \App\Models\Conversation::create([
+                'appointment_id' => $appointment->id,
+                'patient_id' => $appointment->patient_id,
+                'doctor_id' => $appointment->doctor_id,
+                'status' => 'active',
+                'last_message_at' => now(),
+            ]);
+        }
+        
+        return back()->with('success', 'Appointment telah dikonfirmasi dan chat dengan pasien sudah tersedia');
     }
     
     /**
@@ -196,8 +207,17 @@ class DoctorDashboardController extends Controller
             'status' => 'confirmed', // Auto-confirm since doctor is creating it
         ]);
         
+        // Create conversation automatically since appointment is confirmed
+        \App\Models\Conversation::create([
+            'appointment_id' => $appointment->id,
+            'patient_id' => $appointment->patient_id,
+            'doctor_id' => $appointment->doctor_id,
+            'status' => 'active',
+            'last_message_at' => now(),
+        ]);
+        
         return redirect()->route('doctor.dashboard')
-            ->with('success', 'Appointment berhasil dibuat');
+            ->with('success', 'Appointment berhasil dibuat dan chat dengan pasien sudah tersedia');
     }
 
     public function patients()

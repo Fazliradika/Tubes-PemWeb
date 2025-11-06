@@ -77,6 +77,19 @@
                                             Detail
                                         </a>
                                         
+                                        @if(in_array($appointment->status, ['confirmed', 'completed']))
+                                            @php
+                                                $conversation = $appointment->conversation;
+                                            @endphp
+                                            <a href="{{ $conversation ? route('chat.show', $conversation->id) : route('chat.index') }}" 
+                                               class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors duration-200 flex items-center gap-2">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-5 5v-5z"/>
+                                                </svg>
+                                                Chat Dokter
+                                            </a>
+                                        @endif
+                                        
                                         @if(in_array($appointment->status, ['pending', 'confirmed']))
                                             <form method="POST" action="{{ route('appointments.cancel', $appointment) }}" 
                                                   onsubmit="return confirm('Apakah Anda yakin ingin membatalkan appointment ini?')">
