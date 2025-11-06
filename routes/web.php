@@ -56,9 +56,15 @@ Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () 
     
     // Appointment Routes (Doctor)
     Route::get('/appointments', [DoctorDashboardController::class, 'appointments'])->name('doctor.appointments.index');
+    Route::get('/appointments/create', [DoctorDashboardController::class, 'createAppointment'])->name('doctor.appointments.create');
+    Route::post('/appointments', [DoctorDashboardController::class, 'storeAppointment'])->name('doctor.appointments.store');
     Route::get('/appointments/{appointment}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor.appointments.show');
     Route::post('/appointments/{appointment}/confirm', [DoctorDashboardController::class, 'confirmAppointment'])->name('doctor.appointments.confirm');
     Route::post('/appointments/{appointment}/cancel', [DoctorDashboardController::class, 'cancelAppointment'])->name('doctor.appointments.cancel');
+    
+    // Patient Records & Schedule Routes (Doctor)
+    Route::get('/patients', [DoctorDashboardController::class, 'patients'])->name('doctor.patients');
+    Route::get('/schedule', [DoctorDashboardController::class, 'schedule'])->name('doctor.schedule');
     
     // Chat Routes (Doctor)
     Route::get('/messages', [\App\Http\Controllers\ChatController::class, 'index'])->name('doctor.chat.index');

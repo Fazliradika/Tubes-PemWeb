@@ -153,4 +153,97 @@ class DoctorDashboardController extends Controller
         
         return back()->with('success', 'Appointment telah dibatalkan');
     }
+
+    public function createAppointment()
+    {
+        $doctor = Auth::user();
+        $doctorProfile = $doctor->doctorProfile;
+        
+        if (!$doctorProfile) {
+            abort(403, 'Doctor profile not found');
+        }
+        
+        // Get all patients (users with patient role)
+        $patients = \App\Models\User::where('role', 'patient')->orderBy('name')->get();
+        
+        return view('doctor.appointments.create', compact('doctor', 'doctorProfile', 'patients'));
+    }
+
+    public function storeAppointment(Request $request)
+    {
+        $doctor = Auth::user();
+        $doctorProfile = $doctor->doctorProfile;
+        
+        if (!$doctorProfile) {
+            abort(403, 'Doctor profile not found');
+        }
+        
+        $validated = $request->validate([
+            'patient_id' => 'required|exists:users,id',
+            'appointment_date' => 'required|date|after_or_equal:today',
+            'appointment_time' => 'required',
+            'symptoms' => 'nullable|string',
+            'notes' => 'nullable|string',
+        ]);
+        
+        $appointment = Appointment::create([
+            'patient_id' => $validated['patient_id'],
+            'doctor_id' => $doctorProfile->id,
+            'appointment_date' => $validated['appointment_date'],
+            'appointment_time' => $validated['appointment_time'],
+            'symptoms' => $validated['symptoms'],
+            'notes' => $validated['notes'],
+            'status' => 'confirmed', // Auto-confirm since doctor is creating it
+        ]);
+        
+        return redirect()->route('doctor.dashboard')
+            ->with('success', 'Appointment berhasil dibuat');
+    }
+
+    public function patients()
+    {
+        $doctor = Auth::user();
+        $doctorProfile = $doctor->doctorProfile;
+        
+        if (!$doctorProfile) {
+            abort(403, 'Doctor profile not found');
+        }
+        
+        // Get all unique patients who have booked this doctor
+        $patients = \App\Models\User::whereHas('appointments', function($query) use ($doctorProfile) {
+            $query->where('doctor_id', $doctorProfile->id);
+        })
+        ->with(['appointments' => function($query) use ($doctorProfile) {
+            $query->where('doctor_id', $doctorProfile->id)
+                ->orderBy('appointment_date', 'desc');
+        }])
+        ->get();
+        
+        return view('doctor.patients.index', compact('patients', 'doctor', 'doctorProfile'));
+    }
+
+    public function schedule()
+    {
+        $doctor = Auth::user();
+        $doctorProfile = $doctor->doctorProfile;
+        
+        if (!$doctorProfile) {
+            abort(403, 'Doctor profile not found');
+        }
+        
+        // Get appointments for the next 30 days
+        $appointments = Appointment::where('doctor_id', $doctorProfile->id)
+            ->whereBetween('appointment_date', [Carbon::today(), Carbon::today()->addDays(30)])
+            ->with('patient')
+            ->orderBy('appointment_date')
+            ->orderBy('appointment_time')
+            ->get();
+        
+        // Group appointments by date
+        $appointmentsByDate = $appointments->groupBy(function($appointment) {
+            return Carbon::parse($appointment->appointment_date)->format('Y-m-d');
+        });
+        
+        return view('doctor.schedule.index', compact('appointmentsByDate', 'doctor', 'doctorProfile'));
+    }
 }
