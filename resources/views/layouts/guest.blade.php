@@ -19,7 +19,7 @@
             <div class="flex flex-col items-center">
                 <a href="/" class="flex flex-col items-center gap-2">
                     <img src="{{ asset('images/LogoRs.png') }}" alt="Hospital Logo" class="w-20 h-20">
-                    <span class="text-2xl font-bold text-gray-800">Health Care</span>
+                    <span class="text-2xl font-bold text-gray-800">HealthFirst Medical</span>
                 </a>
             </div>
 
