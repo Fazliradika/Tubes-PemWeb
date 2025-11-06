@@ -38,6 +38,16 @@ class Doctor extends Model
         return $this->hasMany(Appointment::class);
     }
 
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class);
+    }
+
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
+
     public function getAvailableDaysStringAttribute()
     {
         return implode(', ', $this->available_days ?? []);

@@ -79,6 +79,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get doctor profile if user is a doctor
+     */
+    public function doctorProfile()
+    {
+        return $this->hasOne(Doctor::class);
+    }
+
+    /**
      * Get the cart for the user.
      */
     public function cart()
@@ -92,5 +100,29 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get prescriptions for patient
+     */
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class, 'patient_id');
+    }
+
+    /**
+     * Get conversations as patient
+     */
+    public function patientConversations()
+    {
+        return $this->hasMany(Conversation::class, 'patient_id');
+    }
+
+    /**
+     * Get messages sent by this user
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 }

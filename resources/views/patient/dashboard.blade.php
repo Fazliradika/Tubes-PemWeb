@@ -62,7 +62,7 @@
                             </div>
                             <div class="ml-4">
                                 <p class="text-sm font-medium text-gray-500">Active Prescriptions</p>
-                                <p class="text-2xl font-semibold text-gray-900">3</p>
+                                <p class="text-2xl font-semibold text-gray-900">{{ $activePrescriptionsCount ?? 0 }}</p>
                             </div>
                         </div>
                     </div>
@@ -138,18 +138,18 @@
                             </svg>
                             <span class="text-sm font-medium text-gray-700">My Appointments</span>
                         </a>
-                        <button class="flex flex-col items-center justify-center p-4 bg-green-50 hover:bg-green-100 rounded-lg transition">
+                        <a href="{{ route('prescriptions.index') }}" class="flex flex-col items-center justify-center p-4 bg-green-50 hover:bg-green-100 rounded-lg transition">
                             <svg class="h-8 w-8 text-green-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                             </svg>
                             <span class="text-sm font-medium text-gray-700">Prescriptions</span>
-                        </button>
-                        <button class="flex flex-col items-center justify-center p-4 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition">
+                        </a>
+                        <a href="{{ route('chat.index') }}" class="flex flex-col items-center justify-center p-4 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition">
                             <svg class="h-8 w-8 text-yellow-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                             </svg>
                             <span class="text-sm font-medium text-gray-700">Messages</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

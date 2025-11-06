@@ -43,8 +43,24 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 // Doctor Dashboard Routes
-Route::middleware(['auth', 'role:doctor'])->group(function () {
-    Route::get('/doctor/dashboard', [DoctorDashboardController::class, 'index'])->name('doctor.dashboard');
+Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () {
+    Route::get('/dashboard', [DoctorDashboardController::class, 'index'])->name('doctor.dashboard');
+    
+    // Prescription Routes (Doctor)
+    Route::get('/prescriptions', [\App\Http\Controllers\PrescriptionController::class, 'doctorIndex'])->name('doctor.prescriptions.index');
+    Route::get('/appointments/{appointment}/prescription/create', [\App\Http\Controllers\PrescriptionController::class, 'create'])->name('doctor.prescriptions.create');
+    Route::post('/appointments/{appointment}/prescription', [\App\Http\Controllers\PrescriptionController::class, 'store'])->name('doctor.prescriptions.store');
+    Route::get('/prescriptions/{prescription}/edit', [\App\Http\Controllers\PrescriptionController::class, 'edit'])->name('doctor.prescriptions.edit');
+    Route::put('/prescriptions/{prescription}', [\App\Http\Controllers\PrescriptionController::class, 'update'])->name('doctor.prescriptions.update');
+    Route::get('/prescriptions/{prescription}', [\App\Http\Controllers\PrescriptionController::class, 'show'])->name('doctor.prescriptions.show');
+    
+    // Appointment Routes (Doctor)
+    Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('doctor.appointments.show');
+    
+    // Chat Routes (Doctor)
+    Route::get('/messages', [\App\Http\Controllers\ChatController::class, 'index'])->name('doctor.chat.index');
+    Route::get('/messages/{conversation}', [\App\Http\Controllers\ChatController::class, 'show'])->name('doctor.chat.show');
+    Route::post('/messages/{conversation}/send', [\App\Http\Controllers\ChatController::class, 'sendMessage'])->name('doctor.chat.send');
 });
 
 // Patient Dashboard Routes
@@ -64,6 +80,16 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.my-appointments');
     Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
+    
+    // Prescription Routes (Patient)
+    Route::get('/prescriptions', [\App\Http\Controllers\PrescriptionController::class, 'index'])->name('prescriptions.index');
+    Route::get('/prescriptions/{prescription}', [\App\Http\Controllers\PrescriptionController::class, 'show'])->name('prescriptions.show');
+    
+    // Chat Routes (Patient)
+    Route::get('/messages', [\App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
+    Route::get('/messages/{conversation}', [\App\Http\Controllers\ChatController::class, 'show'])->name('chat.show');
+    Route::post('/messages/{conversation}/send', [\App\Http\Controllers\ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::post('/appointments/{appointment}/chat', [\App\Http\Controllers\ChatController::class, 'createFromAppointment'])->name('chat.create-from-appointment');
 });
 
 // E-Commerce Routes
@@ -91,6 +117,19 @@ Route::prefix('shop')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
+});
+
+// Call Routes (shared between patient and doctor)
+Route::middleware('auth')->prefix('calls')->group(function () {
+    Route::post('/conversations/{conversation}/initiate', [\App\Http\Controllers\ChatController::class, 'initiateCall'])->name('calls.initiate');
+    Route::post('/sessions/{callSession}/answer', [\App\Http\Controllers\ChatController::class, 'answerCall'])->name('calls.answer');
+    Route::post('/sessions/{callSession}/end', [\App\Http\Controllers\ChatController::class, 'endCall'])->name('calls.end');
+    Route::post('/sessions/{callSession}/reject', [\App\Http\Controllers\ChatController::class, 'rejectCall'])->name('calls.reject');
+});
+
+// API Routes for real-time features
+Route::middleware('auth')->prefix('api')->group(function () {
+    Route::get('/messages/unread-count', [\App\Http\Controllers\ChatController::class, 'unreadCount'])->name('api.messages.unread-count');
 });
 
 // Admin Order Management

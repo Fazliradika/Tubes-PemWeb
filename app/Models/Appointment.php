@@ -47,4 +47,14 @@ class Appointment extends Model
     {
         return $query->where('patient_id', $patientId);
     }
+
+    public function prescription()
+    {
+        return $this->hasOne(Prescription::class);
+    }
+
+    public function conversation()
+    {
+        return $this->hasOne(Conversation::class);
+    }
 }
