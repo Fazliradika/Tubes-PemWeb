@@ -98,7 +98,7 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/messages', [\App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
     Route::get('/messages/{conversation}', [\App\Http\Controllers\ChatController::class, 'show'])->name('chat.show');
     Route::post('/messages/{conversation}/send', [\App\Http\Controllers\ChatController::class, 'sendMessage'])->name('chat.send');
-    Route::post('/appointments/{appointment}/chat', [\App\Http\Controllers\ChatController::class, 'createFromAppointment'])->name('chat.create-from-appointment');
+    Route::get('/appointments/{appointment}/chat', [\App\Http\Controllers\ChatController::class, 'createFromAppointment'])->name('chat.create-from-appointment');
 });
 
 // E-Commerce Routes

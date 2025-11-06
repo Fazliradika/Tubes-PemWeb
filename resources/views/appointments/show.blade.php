@@ -90,31 +90,26 @@
                 </div>
 
                 @if(in_array($appointment->status, ['confirmed', 'completed']))
-                    @php
-                        $conversation = $appointment->conversation;
-                    @endphp
-                    @if($conversation)
-                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <svg class="w-6 h-6 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-5 5v-5z"/>
-                                    </svg>
-                                    <div>
-                                        <h4 class="font-semibold text-green-900">Chat Tersedia</h4>
-                                        <p class="text-green-800 text-sm">Anda bisa chat dengan {{ $appointment->doctor->user->name }}</p>
-                                    </div>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-5 5v-5z"/>
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-green-900">Chat Tersedia</h4>
+                                    <p class="text-green-800 text-sm">Anda bisa chat dengan {{ $appointment->doctor->user->name }}</p>
                                 </div>
-                                <a href="{{ route('chat.show', $conversation->id) }}" 
-                                   class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-5 5v-5z"/>
-                                    </svg>
-                                    Mulai Chat
-                                </a>
                             </div>
+                            <a href="{{ route('chat.create-from-appointment', $appointment->id) }}" 
+                               class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-5 5v-5z"/>
+                                </svg>
+                                Mulai Chat
+                            </a>
                         </div>
-                    @endif
+                    </div>
                 @endif
 
                 <div class="flex gap-4">

@@ -91,8 +91,14 @@ class ChatController extends Controller
                 'patient_id' => $appointment->patient_id,
                 'doctor_id' => $appointment->doctor_id,
                 'status' => 'active',
+                'last_message_at' => now(),
             ]
         );
+        
+        // Update last_message_at if conversation already exists but is null
+        if (!$conversation->last_message_at) {
+            $conversation->update(['last_message_at' => now()]);
+        }
 
         return redirect()->route('chat.show', $conversation);
     }
