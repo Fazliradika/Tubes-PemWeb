@@ -5,8 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-white" />
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
+                        <img src="{{ asset('images/LogoRs.png') }}" alt="Hospital Logo" class="h-10 w-auto">
+                        <span class="text-xl font-bold text-white">Health Care</span>
                     </a>
                 </div>
 
