@@ -342,6 +342,90 @@
                 </div>
             </div>
 
+            <!-- Patient Testimonials -->
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                <div class="p-8">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-3">Kata Mereka tentang Halodoc</h3>
+                    <p class="text-gray-600 mb-10 max-w-3xl">
+                        Cerita dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman langsung dari rumah.
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Testimonial 1 -->
+                        <div class="flex flex-col space-y-5">
+                            <div class="flex items-start space-x-4">
+                                <img src="https://i.pravatar.cc/80?img=68" alt="Sainem Wiyono" class="w-14 h-14 rounded-full object-cover border border-gray-200" />
+                                <div>
+                                    <p class="italic text-gray-800 leading-relaxed">
+                                        “Sangat membantu.. malam2 butuh obat, gak perlu keluar rumah”
+                                    </p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">SAINEM WIYONO</p>
+                                </div>
+                            </div>
+                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
+                                Beli Obat
+                            </button>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="flex flex-col space-y-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
+                                    <span class="text-pink-500 font-semibold text-lg">L</span>
+                                </div>
+                                <div>
+                                    <p class="italic text-gray-800 leading-relaxed">
+                                        “Sangat Helpful!!! Terima kasih yaa, sangat menghemat waktu dan respon dokternya juga baik. resep obatnya juga manjur sekali, thank u ya semoga kedepannya tambah keren lagi.”
+                                    </p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">LINTANG ANINDHITYA INDRASWARI</p>
+                                </div>
+                            </div>
+                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
+                                Chat dengan Dokter
+                            </button>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="flex flex-col space-y-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
+                                    <span class="text-pink-500 font-semibold text-lg">A</span>
+                                </div>
+                                <div>
+                                    <p class="italic text-gray-800 leading-relaxed">
+                                        “Menggunakan Halodoc untuk pemanggilan Home Service kesehatan. Sangat memuaskan, walau di proses perlu perubahan jasa medis, tetap dilayani dengan cepat, dan proses refund mudah & cepat. Semoga bisa dipertahankan.”
+                                    </p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">AHKBAR FELYAYTI</p>
+                                </div>
+                            </div>
+                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
+                                Pesan Tes Lab
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 mt-12">
+                        <!-- Testimonial 4 -->
+                        <div class="flex flex-col space-y-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
+                                    <span class="text-pink-500 font-semibold text-lg">I</span>
+                                </div>
+                                <div>
+                                    <p class="italic text-gray-800 leading-relaxed">
+                                        “Hallo, terimakasih Haloskin sejak pertama konsultasi hingga saat ini kulitku sudah banyak mengalami perubahan. Jerawat dan bekasnya semakin membaik berkat saran dokter-dokter Haloskin. Jujur baru kali ini bisa konsultasi dengan dokter kulit secara leluasa dan terbuka, semua pertanyaan tentang jerawatku dijawab secara gamblang.”
+                                    </p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">IZZA AFKARINA MUDMAINAH</p>
+                                </div>
+                            </div>
+                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
+                                Dapatkan Solusi Kulit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Health Tips -->
             <div class="bg-gradient-to-r from-teal-50 to-green-50 overflow-hidden shadow-sm sm:rounded-lg border border-teal-200">
                 <div class="p-6">
