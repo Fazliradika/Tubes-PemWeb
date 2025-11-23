@@ -14,9 +14,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Main Article Content (Left Side) -->
-                <div class="lg:col-span-2">
             <!-- Article Header -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="relative">
@@ -65,62 +62,71 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Article Content and Sidebar Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main Article Content -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-8">
+                            <!-- Article Content -->
+                            <div class="max-w-none" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 17px; line-height: 1.75; color: #374151;">
+                                <style scoped>
+                                    div.max-w-none p {
+                                        margin-bottom: 1.25rem;
+                                        line-height: 1.75;
+                                        color: #374151;
+                                        font-size: 17px;
+                                    }
+                                    div.max-w-none h2 {
+                                        font-size: 24px;
+                                        font-weight: 700;
+                                        margin-top: 2rem;
+                                        margin-bottom: 1rem;
+                                        color: #111827;
+                                    }
+                                    div.max-w-none h3 {
+                                        font-size: 18px;
+                                        font-weight: 600;
+                                        margin-top: 1.5rem;
+                                        margin-bottom: 0.75rem;
+                                        color: #1f2937;
+                                    }
+                                    div.max-w-none ul,
+                                    div.max-w-none ol {
+                                        margin: 1rem 0 2rem 0;
+                                        padding: 0;
+                                        list-style: none;
+                                    }
+                                    div.max-w-none ul li,
+                                    div.max-w-none ol li {
+                                        margin-bottom: 0.5rem;
+                                        line-height: 1.75;
+                                        color: #374151;
+                                        font-size: 17px;
+                                        list-style: none;
+                                    }
+                                    div.max-w-none strong {
+                                        font-weight: 700;
+                                        color: #111827;
+                                    }
+                                </style>
+                                {!! $article['content'] !!}
+                            </div>
 
-                    <!-- Article Content -->
-                    <div class="max-w-none" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 17px; line-height: 1.75; color: #374151;">
-                        <style scoped>
-                            div.max-w-none p {
-                                margin-bottom: 1.25rem;
-                                line-height: 1.75;
-                                color: #374151;
-                                font-size: 17px;
-                            }
-                            div.max-w-none h2 {
-                                font-size: 24px;
-                                font-weight: 700;
-                                margin-top: 2rem;
-                                margin-bottom: 1rem;
-                                color: #111827;
-                            }
-                            div.max-w-none h3 {
-                                font-size: 18px;
-                                font-weight: 600;
-                                margin-top: 1.5rem;
-                                margin-bottom: 0.75rem;
-                                color: #1f2937;
-                            }
-                            div.max-w-none ul,
-                            div.max-w-none ol {
-                                margin: 1rem 0 2rem 0;
-                                padding: 0;
-                                list-style: none;
-                            }
-                            div.max-w-none ul li,
-                            div.max-w-none ol li {
-                                margin-bottom: 0.5rem;
-                                line-height: 1.75;
-                                color: #374151;
-                                font-size: 17px;
-                                list-style: none;
-                            }
-                            div.max-w-none strong {
-                                font-weight: 700;
-                                color: #111827;
-                            }
-                        </style>
-                        {!! $article['content'] !!}
-                    </div>
-
-                    <!-- Tags -->
-                    <div class="mt-8 pt-6 border-t">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-sm font-medium text-gray-600 mr-2">Tags:</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#kesehatan</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#{{ strtolower(str_replace(' ', '', $article['category'])) }}</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#tipskesehatan</span>
+                            <!-- Tags -->
+                            <div class="mt-8 pt-6 border-t">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-sm font-medium text-gray-600 mr-2">Tags:</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#kesehatan</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#{{ strtolower(str_replace(' ', '', $article['category'])) }}</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#tipskesehatan</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
 
                 <!-- Sidebar (Right Side) -->
