@@ -51,18 +51,21 @@
                         
                         <div class="flex items-center space-x-2">
                             <!-- Love Button -->
-                            <button 
-                                id="likeButton"
-                                onclick="toggleLike(event)"
-                                type="button"
-                                class="like-button p-2 rounded-full transition {{ $userHasLiked ? 'text-red-600 bg-red-50' : 'text-gray-600 hover:text-red-600 hover:bg-red-50' }}"
-                                title="Suka artikel ini"
-                                data-liked="{{ $userHasLiked ? 'true' : 'false' }}"
-                            >
-                                <svg id="likeIcon" class="w-5 h-5" fill="{{ $userHasLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
+                            <form id="likeForm" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="article_slug" value="{{ $article['slug'] }}">
+                                <button 
+                                    id="likeButton"
+                                    type="button"
+                                    onclick="handleLikeClick()"
+                                    class="p-2 rounded-full transition duration-200 {{ $userHasLiked ? 'text-red-600 bg-red-50' : 'text-gray-600 hover:text-red-600 hover:bg-red-50' }}"
+                                    title="Suka artikel ini"
+                                >
+                                    <svg id="likeIcon" class="w-5 h-5 transition-all duration-200" fill="{{ $userHasLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                </button>
+                            </form>
                             <span id="likesCount" class="text-sm text-gray-600 font-medium">{{ $likesCount }}</span>
                             
                             <!-- Share Button -->
@@ -416,77 +419,112 @@
             form.classList.toggle('hidden');
         }
         
-        // Toggle like
-        async function toggleLike(event) {
-            if (event) {
-                event.preventDefault();
-            }
+        // Handle like button click
+        function handleLikeClick() {
+            console.log('=== LIKE BUTTON CLICKED ===');
             
             const button = document.getElementById('likeButton');
-            const likesCount = document.getElementById('likesCount');
-            const svg = document.getElementById('likeIcon');
+            const icon = document.getElementById('likeIcon');
+            const countElement = document.getElementById('likesCount');
             
-            console.log('Toggle like clicked'); // Debug
-            
-            // Disable button during request
+            // Prevent double clicks
             if (button.disabled) {
-                console.log('Button already disabled');
+                console.log('Button already processing...');
                 return;
             }
-            button.disabled = true;
             
-            try {
-                console.log('Sending request to:', '{{ route("articles.like.toggle") }}');
+            button.disabled = true;
+            console.log('Button disabled, starting request...');
+            
+            // Get CSRF token
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            console.log('CSRF Token:', token ? 'Found' : 'NOT FOUND');
+            
+            const url = '{{ route("articles.like.toggle") }}';
+            const articleSlug = '{{ $article["slug"] }}';
+            
+            console.log('Request URL:', url);
+            console.log('Article Slug:', articleSlug);
+            
+            // Make request using XMLHttpRequest for better compatibility
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            xhr.setRequestHeader('Accept', 'application/json');
+            
+            xhr.onload = function() {
+                console.log('Response received. Status:', xhr.status);
+                console.log('Response text:', xhr.responseText);
                 
-                const response = await fetch('{{ route("articles.like.toggle") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        article_slug: '{{ $article["slug"] }}'
-                    })
-                });
-                
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Response error:', errorText);
-                    throw new Error(`HTTP ${response.status}: ${errorText}`);
-                }
-                
-                const data = await response.json();
-                console.log('Response data:', data);
-                
-                // Update likes count
-                likesCount.textContent = data.likes_count;
-                
-                // Update button style and icon
-                if (data.liked) {
-                    console.log('Setting to liked state');
-                    button.classList.remove('text-gray-600', 'hover:text-red-600');
-                    button.classList.add('text-red-600', 'bg-red-50');
-                    button.dataset.liked = 'true';
-                    svg.setAttribute('fill', 'currentColor');
-                } else {
-                    console.log('Setting to unliked state');
-                    button.classList.remove('text-red-600', 'bg-red-50');
-                    button.classList.add('text-gray-600', 'hover:text-red-600');
-                    button.dataset.liked = 'false';
-                    svg.setAttribute('fill', 'none');
-                }
-                
-                showNotification(data.liked ? 'Artikel disukai!' : 'Batal menyukai artikel', 'success');
-            } catch (error) {
-                console.error('Error toggling like:', error);
-                showNotification('Gagal menyimpan. Silakan coba lagi.', 'error');
-            } finally {
-                // Re-enable button
                 button.disabled = false;
-            }
+                
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        console.log('Parsed data:', data);
+                        
+                        // Update count
+                        countElement.textContent = data.likes_count;
+                        console.log('Updated count to:', data.likes_count);
+                        
+                        // Update button appearance
+                        if (data.liked) {
+                            console.log('Setting LIKED state (RED)');
+                            button.classList.remove('text-gray-600', 'hover:text-red-600');
+                            button.classList.add('text-red-600', 'bg-red-50');
+                            icon.setAttribute('fill', 'currentColor');
+                            showMessage('❤️ Artikel disukai!', 'success');
+                        } else {
+                            console.log('Setting UNLIKED state (GRAY)');
+                            button.classList.remove('text-red-600', 'bg-red-50');
+                            button.classList.add('text-gray-600', 'hover:text-red-600');
+                            icon.setAttribute('fill', 'none');
+                            showMessage('Batal menyukai artikel', 'info');
+                        }
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                        showMessage('Terjadi kesalahan', 'error');
+                    }
+                } else {
+                    console.error('HTTP Error:', xhr.status);
+                    showMessage('Gagal menyimpan. Coba lagi!', 'error');
+                }
+            };
+            
+            xhr.onerror = function() {
+                console.error('Network error occurred');
+                button.disabled = false;
+                showMessage('Koneksi gagal. Periksa internet Anda!', 'error');
+            };
+            
+            const payload = JSON.stringify({ article_slug: articleSlug });
+            console.log('Sending payload:', payload);
+            xhr.send(payload);
+        }
+        
+        // Show message notification
+        function showMessage(message, type = 'info') {
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+            
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300`;
+            notification.style.opacity = '0';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Fade in
+            setTimeout(() => notification.style.opacity = '1', 10);
+            
+            // Fade out and remove
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
         
         // Share article
