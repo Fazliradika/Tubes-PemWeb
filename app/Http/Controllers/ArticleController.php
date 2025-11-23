@@ -32,7 +32,7 @@ class ArticleController extends Controller
         ]);
     }
 
-    private function getArticles()
+    public function getArticles()
     {
         return [
             // Article 1
@@ -299,9 +299,1834 @@ class ArticleController extends Controller
                 'author' => 'Dr. Ahmad Kardiologi',
             ],
             
-            // Articles 3-12 will continue with similar detailed format...
-            // Due to character limits, I\'ll create a condensed version for the remaining articles
+            // Article 3
+            [
+                'id' => 3,
+                'slug' => 'mengelola-diabetes-dengan-pola-makan-sehat',
+                'title' => 'Mengelola Diabetes dengan Pola Makan Sehat',
+                'excerpt' => 'Pola makan yang tepat sangat penting bagi penderita diabetes. Temukan panduan lengkap tentang makanan yang aman dan nutrisi yang dibutuhkan.',
+                'quote' => 'Diabetes bukan akhir dari kehidupan sehat, tetapi awal dari gaya hidup yang lebih bijak.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-red-50 border-l-4 border-red-500 italic text-gray-700">"Diabetes bukan akhir dari kehidupan sehat, tetapi awal dari gaya hidup yang lebih bijak."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#pengenalan" class="text-blue-600 hover:underline">Pengenalan Diabetes</a></li>
+    <li><a href="#karbohidrat" class="text-blue-600 hover:underline">Mengatur Karbohidrat</a></li>
+    <li><a href="#makanan-sehat" class="text-blue-600 hover:underline">Makanan Sehat untuk Diabetes</a></li>
+    <li><a href="#hindari" class="text-blue-600 hover:underline">Makanan yang Harus Dihindari</a></li>
+    <li><a href="#jadwal-makan" class="text-blue-600 hover:underline">Jadwal Makan</a></li>
+</ul>
+
+<h2 id="pengenalan">Memahami Diabetes</h2>
+<p>Diabetes adalah kondisi di mana tubuh tidak dapat mengatur gula darah dengan baik. Pola makan yang tepat adalah kunci utama dalam mengelola diabetes dan mencegah komplikasi.</p>
+
+<h2 id="karbohidrat">Mengatur Karbohidrat</h2>
+<p>Karbohidrat memiliki dampak terbesar pada gula darah. Pilih karbohidrat kompleks dengan indeks glikemik rendah:</p>
+<ul>
+    <li>Beras merah lebih baik dari nasi putih</li>
+    <li>Roti gandum utuh daripada roti putih</li>
+    <li>Pasta whole grain</li>
+    <li>Kentang manis daripada kentang putih</li>
+    <li>Oatmeal steel-cut untuk sarapan</li>
+</ul>
+
+<h2 id="makanan-sehat">Makanan Sehat untuk Diabetes</h2>
+<p>Fokus pada makanan yang membantu mengontrol gula darah:</p>
+<ul>
+    <li><strong>Sayuran non-starchy:</strong> Brokoli, bayam, kembang kol, mentimun</li>
+    <li><strong>Protein tanpa lemak:</strong> Ikan, dada ayam, tahu, tempe</li>
+    <li><strong>Lemak sehat:</strong> Alpukat, kacang-kacangan, minyak zaitun</li>
+    <li><strong>Buah rendah gula:</strong> Apel, pir, beri, jeruk</li>
+</ul>
+
+<h2 id="hindari">Makanan yang Harus Dihindari</h2>
+<p>Batasi atau hindari makanan ini:</p>
+<ul>
+    <li>Minuman manis dan soda</li>
+    <li>Makanan olahan dan fast food</li>
+    <li>Kue, pastry, dan permen</li>
+    <li>Gorengan dan makanan berlemak tinggi</li>
+    <li>Daging merah berlemak</li>
+</ul>
+
+<h2 id="jadwal-makan">Jadwal Makan Teratur</h2>
+<p>Makan pada waktu yang sama setiap hari membantu mengatur gula darah:</p>
+<ul>
+    <li>Sarapan: Dalam 1 jam setelah bangun</li>
+    <li>Makan siang: 4-5 jam setelah sarapan</li>
+    <li>Makan malam: 4-5 jam setelah makan siang</li>
+    <li>Snack sehat di antara waktu makan jika diperlukan</li>
+</ul>
+
+<p>Konsultasikan dengan dokter atau ahli gizi untuk rencana makan yang sesuai dengan kondisi Anda.</p>',
+                'category' => 'Diabetes',
+                'category_color' => 'red',
+                'image' => 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&h=500&fit=crop',
+                'read_time' => '6 min read',
+                'published_at' => '4 hari lalu',
+                'author' => 'Dr. Linda Endokrinologi',
+            ],
             
+            // Article 4
+            [
+                'id' => 4,
+                'slug' => 'pentingnya-vitamin-dan-mineral-untuk-tubuh',
+                'title' => 'Pentingnya Vitamin dan Mineral untuk Tubuh',
+                'excerpt' => 'Vitamin dan mineral adalah nutrisi esensial yang dibutuhkan tubuh. Pelajari manfaat masing-masing vitamin dan sumber makanan terbaik.',
+                'quote' => 'Vitamin dan mineral adalah kunci untuk kesehatan optimal dan umur panjang.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-500 italic text-gray-700">"Vitamin dan mineral adalah kunci untuk kesehatan optimal dan umur panjang."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#vitamin-c" class="text-blue-600 hover:underline">Vitamin C</a></li>
+    <li><a href="#vitamin-d" class="text-blue-600 hover:underline">Vitamin D</a></li>
+    <li><a href="#kalsium" class="text-blue-600 hover:underline">Kalsium</a></li>
+    <li><a href="#zat-besi" class="text-blue-600 hover:underline">Zat Besi</a></li>
+    <li><a href="#suplemen" class="text-blue-600 hover:underline">Kapan Perlu Suplemen</a></li>
+</ul>
+
+<h2 id="vitamin-c">Vitamin C</h2>
+<p>Vitamin C adalah antioksidan kuat yang meningkatkan sistem kekebalan tubuh:</p>
+<ul>
+    <li><strong>Manfaat:</strong> Melawan infeksi, membantu penyerapan zat besi, menjaga kesehatan kulit</li>
+    <li><strong>Sumber:</strong> Jeruk, strawberry, paprika, brokoli, kiwi</li>
+    <li><strong>Kebutuhan harian:</strong> 75-90 mg untuk orang dewasa</li>
+</ul>
+
+<h2 id="vitamin-d">Vitamin D</h2>
+<p>Vitamin D penting untuk kesehatan tulang dan sistem kekebalan:</p>
+<ul>
+    <li><strong>Manfaat:</strong> Membantu penyerapan kalsium, memperkuat tulang, meningkatkan mood</li>
+    <li><strong>Sumber:</strong> Sinar matahari (15-20 menit/hari), ikan salmon, telur, susu fortifikasi</li>
+    <li><strong>Kebutuhan harian:</strong> 600-800 IU</li>
+</ul>
+
+<h2 id="kalsium">Kalsium</h2>
+<p>Kalsium adalah mineral utama untuk tulang dan gigi yang kuat:</p>
+<ul>
+    <li><strong>Manfaat:</strong> Memperkuat tulang dan gigi, membantu pembekuan darah, fungsi otot</li>
+    <li><strong>Sumber:</strong> Susu, yogurt, keju, bayam, kacang almond, ikan sarden</li>
+    <li><strong>Kebutuhan harian:</strong> 1000-1200 mg</li>
+</ul>
+
+<h2 id="zat-besi">Zat Besi</h2>
+<p>Zat besi penting untuk produksi sel darah merah:</p>
+<ul>
+    <li><strong>Manfaat:</strong> Mengangkut oksigen, mencegah anemia, meningkatkan energi</li>
+    <li><strong>Sumber:</strong> Daging merah, hati, bayam, kacang-kacangan, sereal fortifikasi</li>
+    <li><strong>Kebutuhan harian:</strong> 8-18 mg (lebih tinggi untuk wanita)</li>
+</ul>
+
+<h2 id="suplemen">Kapan Perlu Suplemen</h2>
+<p>Suplemen diperlukan jika:</p>
+<ul>
+    <li>Diet tidak mencukupi kebutuhan nutrisi</li>
+    <li>Kondisi medis tertentu (hamil, menyusui, lansia)</li>
+    <li>Defisiensi vitamin yang didiagnosis dokter</li>
+    <li>Pola makan vegetarian/vegan</li>
+</ul>
+
+<p>Konsultasikan dengan dokter sebelum mengonsumsi suplemen untuk dosis yang tepat.</p>',
+                'category' => 'Nutrisi',
+                'category_color' => 'yellow',
+                'image' => 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=500&fit=crop',
+                'read_time' => '8 min read',
+                'published_at' => '5 hari lalu',
+                'author' => 'Dr. Maria Nutrisionis',
+            ],
+            
+            // Article 5
+            [
+                'id' => 5,
+                'slug' => 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental',
+                'title' => 'Cara Mengatasi Stres dan Menjaga Kesehatan Mental',
+                'excerpt' => 'Kesehatan mental sama pentingnya dengan kesehatan fisik. Temukan strategi efektif untuk mengelola stres dan meningkatkan kesejahteraan mental.',
+                'quote' => 'Kesehatan mental adalah fondasi dari kehidupan yang bahagia dan produktif.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-purple-50 border-l-4 border-purple-500 italic text-gray-700">"Kesehatan mental adalah fondasi dari kehidupan yang bahagia dan produktif."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#mengenal-stres" class="text-blue-600 hover:underline">Mengenal Stres</a></li>
+    <li><a href="#teknik-relaksasi" class="text-blue-600 hover:underline">Teknik Relaksasi</a></li>
+    <li><a href="#olahraga-mental" class="text-blue-600 hover:underline">Olahraga untuk Mental</a></li>
+    <li><a href="#dukungan-sosial" class="text-blue-600 hover:underline">Dukungan Sosial</a></li>
+    <li><a href="#kapan-bantuan" class="text-blue-600 hover:underline">Kapan Perlu Bantuan</a></li>
+</ul>
+
+<h2 id="mengenal-stres">Mengenal Stres</h2>
+<p>Stres adalah respons alami tubuh terhadap tekanan. Namun, stres berkepanjangan dapat merusak kesehatan fisik dan mental:</p>
+<ul>
+    <li><strong>Gejala fisik:</strong> Sakit kepala, gangguan tidur, kelelahan</li>
+    <li><strong>Gejala emosional:</strong> Cemas, mudah marah, sedih berkepanjangan</li>
+    <li><strong>Gejala perilaku:</strong> Perubahan nafsu makan, isolasi sosial</li>
+</ul>
+
+<h2 id="teknik-relaksasi">Teknik Relaksasi</h2>
+<p>Praktikkan teknik ini secara rutin:</p>
+<ul>
+    <li><strong>Pernapasan dalam:</strong> Tarik napas 4 detik, tahan 4 detik, buang 4 detik</li>
+    <li><strong>Meditasi:</strong> 10-15 menit per hari untuk menenangkan pikiran</li>
+    <li><strong>Yoga:</strong> Kombinasi gerakan dan pernapasan untuk relaksasi</li>
+    <li><strong>Progressive muscle relaxation:</strong> Tegang dan relaksasi otot secara bertahap</li>
+    <li><strong>Mindfulness:</strong> Fokus pada saat ini tanpa menilai</li>
+</ul>
+
+<h2 id="olahraga-mental">Olahraga untuk Kesehatan Mental</h2>
+<p>Aktivitas fisik sangat efektif mengurangi stres:</p>
+<ul>
+    <li>Jalan kaki 30 menit setiap hari</li>
+    <li>Bersepeda atau berenang</li>
+    <li>Olahraga kelompok untuk interaksi sosial</li>
+    <li>Yoga atau tai chi untuk keseimbangan</li>
+</ul>
+<p>Olahraga melepaskan endorfin yang meningkatkan mood dan mengurangi stres.</p>
+
+<h2 id="dukungan-sosial">Pentingnya Dukungan Sosial</h2>
+<p>Jangan menghadapi masalah sendirian:</p>
+<ul>
+    <li>Berbicara dengan keluarga dan teman</li>
+    <li>Bergabung dengan komunitas atau kelompok hobi</li>
+    <li>Pertahankan hubungan sosial yang sehat</li>
+    <li>Jangan ragu meminta bantuan</li>
+</ul>
+
+<h2 id="kapan-bantuan">Kapan Perlu Bantuan Profesional</h2>
+<p>Segera cari bantuan jika mengalami:</p>
+<ul>
+    <li>Stres yang mengganggu aktivitas sehari-hari</li>
+    <li>Pikiran untuk menyakiti diri sendiri</li>
+    <li>Depresi yang berkepanjangan</li>
+    <li>Gangguan tidur atau makan yang parah</li>
+    <li>Serangan panik berulang</li>
+</ul>
+
+<p>Psikolog, psikiater, atau konselor profesional dapat memberikan dukungan yang Anda butuhkan.</p>',
+                'category' => 'Kesehatan Mental',
+                'category_color' => 'purple',
+                'image' => 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=500&fit=crop',
+                'read_time' => '10 min read',
+                'published_at' => '1 minggu lalu',
+                'author' => 'Dr. Budi Psikolog',
+            ],
+            
+            // Article 6
+            [
+                'id' => 6,
+                'slug' => 'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya',
+                'title' => 'Tips Tidur Berkualitas untuk Kulit Sehat dan Bercahaya',
+                'excerpt' => 'Tidur yang cukup dan berkualitas sangat penting untuk kesehatan kulit. Pelajari bagaimana tidur mempengaruhi kecantikan dan tips untuk tidur lebih baik.',
+                'quote' => 'Beauty sleep bukan mitos - tidur berkualitas adalah rahasia kulit sehat alami.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-indigo-50 border-l-4 border-indigo-500 italic text-gray-700">"Beauty sleep bukan mitos - tidur berkualitas adalah rahasia kulit sehat alami."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#hubungan" class="text-blue-600 hover:underline">Hubungan Tidur dan Kulit</a></li>
+    <li><a href="#durasi" class="text-blue-600 hover:underline">Durasi Tidur Ideal</a></li>
+    <li><a href="#rutinitas" class="text-blue-600 hover:underline">Rutinitas Sebelum Tidur</a></li>
+    <li><a href="#skincare" class="text-blue-600 hover:underline">Skincare Malam</a></li>
+    <li><a href="#lingkungan" class="text-blue-600 hover:underline">Lingkungan Tidur</a></li>
+</ul>
+
+<h2 id="hubungan">Hubungan Tidur dan Kesehatan Kulit</h2>
+<p>Saat tidur, tubuh memperbaiki sel-sel kulit yang rusak:</p>
+<ul>
+    <li><strong>Produksi kolagen:</strong> Meningkat saat tidur, menjaga elastisitas kulit</li>
+    <li><strong>Regenerasi sel:</strong> Sel kulit mati diganti dengan yang baru</li>
+    <li><strong>Perbaikan DNA:</strong> Kerusakan akibat UV diperbaiki</li>
+    <li><strong>Sirkulasi darah:</strong> Meningkat, memberikan nutrisi ke kulit</li>
+</ul>
+
+<h2 id="durasi">Durasi Tidur Ideal</h2>
+<p>Kebutuhan tidur berdasarkan usia:</p>
+<ul>
+    <li><strong>Remaja (14-17 tahun):</strong> 8-10 jam</li>
+    <li><strong>Dewasa muda (18-25):</strong> 7-9 jam</li>
+    <li><strong>Dewasa (26-64):</strong> 7-9 jam</li>
+    <li><strong>Lansia (65+):</strong> 7-8 jam</li>
+</ul>
+<p>Kurang tidur menyebabkan lingkaran hitam, kulit kusam, dan penuaan dini.</p>
+
+<h2 id="rutinitas">Rutinitas Sebelum Tidur</h2>
+<p>Ciptakan rutinitas yang membantu tidur lebih nyenyak:</p>
+<ul>
+    <li>Tidur dan bangun di waktu yang sama setiap hari</li>
+    <li>Hindari kafein 6 jam sebelum tidur</li>
+    <li>Matikan gadget 1 jam sebelum tidur</li>
+    <li>Mandi air hangat untuk relaksasi</li>
+    <li>Baca buku atau dengarkan musik tenang</li>
+    <li>Hindari makan berat 2-3 jam sebelum tidur</li>
+</ul>
+
+<h2 id="skincare">Skincare Routine Malam</h2>
+<p>Maksimalkan waktu tidur dengan skincare yang tepat:</p>
+<ul>
+    <li><strong>Pembersihan:</strong> Hapus makeup dan kotoran dengan double cleansing</li>
+    <li><strong>Toner:</strong> Seimbangkan pH kulit</li>
+    <li><strong>Serum:</strong> Gunakan serum repair atau anti-aging</li>
+    <li><strong>Eye cream:</strong> Kurangi lingkaran hitam dan kerutan</li>
+    <li><strong>Moisturizer:</strong> Kunci kelembaban sepanjang malam</li>
+    <li><strong>Sleeping mask:</strong> 2-3 kali seminggu untuk hidrasi ekstra</li>
+</ul>
+
+<h2 id="lingkungan">Lingkungan Tidur Ideal</h2>
+<p>Ciptakan kamar tidur yang mendukung kualitas tidur:</p>
+<ul>
+    <li><strong>Suhu:</strong> 18-22°C adalah suhu optimal</li>
+    <li><strong>Pencahayaan:</strong> Ruangan gelap atau gunakan eye mask</li>
+    <li><strong>Ketenangan:</strong> Gunakan earplug jika perlu</li>
+    <li><strong>Kasur dan bantal:</strong> Nyaman dan mendukung postur</li>
+    <li><strong>Sarung bantal:</strong> Gunakan sarung bantal sutra atau satin untuk mengurangi gesekan</li>
+</ul>
+
+<p>Tidur berkualitas adalah investasi terbaik untuk kulit sehat dan bercahaya alami. Mulai rutinitas tidur yang baik dari malam ini!</p>',
+                'category' => 'Kecantikan',
+                'category_color' => 'indigo',
+                'image' => 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&h=500&fit=crop',
+                'read_time' => '6 min read',
+                'published_at' => '1 minggu lalu',
+                'author' => 'Dr. Siti Dermatologi',
+            ],
+            
+            // Article 7
+            [
+                'id' => 7,
+                'slug' => 'bahaya-hipertensi-dan-cara-mencegahnya',
+                'title' => 'Bahaya Hipertensi dan Cara Mencegahnya',
+                'excerpt' => 'Hipertensi atau tekanan darah tinggi adalah silent killer. Kenali bahayanya dan pelajari cara mencegah serta mengelola hipertensi secara efektif.',
+                'quote' => 'Tekanan darah normal adalah kunci kesehatan jangka panjang.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-red-50 border-l-4 border-red-500 italic text-gray-700">"Tekanan darah normal adalah kunci kesehatan jangka panjang."</div>
+
+<h2>Apa Itu Hipertensi?</h2>
+<p>Hipertensi adalah kondisi tekanan darah tinggi (≥140/90 mmHg) yang membebani jantung dan pembuluh darah. Disebut silent killer karena sering tanpa gejala hingga terjadi komplikasi serius.</p>
+
+<h2>Bahaya Hipertensi</h2>
+<ul>
+    <li>Serangan jantung dan gagal jantung</li>
+    <li>Stroke dan kerusakan otak</li>
+    <li>Gagal ginjal kronis</li>
+    <li>Kerusakan pembuluh darah mata</li>
+    <li>Aneurisma (pembengkakan pembuluh darah)</li>
+</ul>
+
+<h2>Faktor Risiko</h2>
+<ul>
+    <li><strong>Usia:</strong> Risiko meningkat seiring bertambahnya usia</li>
+    <li><strong>Keturunan:</strong> Riwayat keluarga hipertensi</li>
+    <li><strong>Obesitas:</strong> Berat badan berlebih</li>
+    <li><strong>Kurang olahraga:</strong> Gaya hidup sedentary</li>
+    <li><strong>Stres:</strong> Tekanan psikologis berkepanjangan</li>
+    <li><strong>Asupan garam tinggi:</strong> Lebih dari 5 gram per hari</li>
+</ul>
+
+<h2>Cara Mencegah Hipertensi</h2>
+<p><strong>1. Diet DASH (Dietary Approaches to Stop Hypertension):</strong></p>
+<ul>
+    <li>Banyak sayur dan buah (8-10 porsi/hari)</li>
+    <li>Whole grains (6-8 porsi/hari)</li>
+    <li>Protein tanpa lemak</li>
+    <li>Kurangi garam hingga kurang dari 1 sendok teh/hari</li>
+</ul>
+
+<p><strong>2. Olahraga Teratur:</strong></p>
+<ul>
+    <li>30 menit aktivitas aerobik, 5 hari seminggu</li>
+    <li>Jalan cepat, bersepeda, berenang</li>
+    <li>Kombinasi dengan latihan kekuatan 2x seminggu</li>
+</ul>
+
+<p><strong>3. Kelola Stres:</strong></p>
+<ul>
+    <li>Meditasi dan yoga</li>
+    <li>Teknik pernapasan dalam</li>
+    <li>Hobi dan rekreasi</li>
+    <li>Tidur cukup 7-9 jam</li>
+</ul>
+
+<p><strong>4. Hindari:</strong></p>
+<ul>
+    <li>Merokok dan alkohol berlebihan</li>
+    <li>Makanan olahan dan fast food</li>
+    <li>Begadang dan kurang tidur</li>
+</ul>
+
+<p>Cek tekanan darah secara rutin, terutama jika memiliki faktor risiko. Deteksi dini adalah kunci pencegahan komplikasi!</p>',
+                'category' => 'Hipertensi',
+                'category_color' => 'red',
+                'image' => 'https://images.unsplash.com/photo-1584362917165-526a968579e8?w=800&h=500&fit=crop',
+                'read_time' => '7 min read',
+                'published_at' => '2 minggu lalu',
+                'author' => 'Dr. Budi Kardiologi',
+            ],
+            
+            // Article 8
+            [
+                'id' => 8,
+                'slug' => 'manfaat-yoga-untuk-kesehatan-fisik-dan-mental',
+                'title' => 'Manfaat Yoga untuk Kesehatan Fisik dan Mental',
+                'excerpt' => 'Yoga bukan hanya olahraga, tapi gaya hidup holistik. Temukan manfaat luar biasa yoga untuk tubuh, pikiran, dan jiwa Anda.',
+                'quote' => 'Yoga adalah perjalanan diri, melalui diri, menuju diri.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-purple-50 border-l-4 border-purple-500 italic text-gray-700">"Yoga adalah perjalanan diri, melalui diri, menuju diri."</div>
+
+<h2>Apa Itu Yoga?</h2>
+<p>Yoga adalah praktik kuno dari India yang menggabungkan postur tubuh (asana), pernapasan (pranayama), dan meditasi untuk keseimbangan fisik dan mental.</p>
+
+<h2>Manfaat Fisik Yoga</h2>
+<ul>
+    <li><strong>Fleksibilitas:</strong> Meningkatkan kelenturan otot dan sendi</li>
+    <li><strong>Kekuatan:</strong> Membangun massa otot tanpa beban berat</li>
+    <li><strong>Postur:</strong> Memperbaiki alignment tulang belakang</li>
+    <li><strong>Keseimbangan:</strong> Meningkatkan koordinasi tubuh</li>
+    <li><strong>Kesehatan jantung:</strong> Menurunkan tekanan darah</li>
+    <li><strong>Pencernaan:</strong> Melancarkan sistem pencernaan</li>
+</ul>
+
+<h2>Manfaat Mental dan Emosional</h2>
+<ul>
+    <li><strong>Mengurangi stres:</strong> Menurunkan kortisol</li>
+    <li><strong>Meningkatkan fokus:</strong> Konsentrasi lebih baik</li>
+    <li><strong>Kualitas tidur:</strong> Tidur lebih nyenyak</li>
+    <li><strong>Kecemasan:</strong> Mengurangi anxiety dan depresi</li>
+    <li><strong>Mindfulness:</strong> Kesadaran diri meningkat</li>
+</ul>
+
+<h2>Jenis Yoga untuk Pemula</h2>
+<p><strong>1. Hatha Yoga:</strong> Paling cocok untuk pemula, gerakan lambat dan dasar</p>
+<p><strong>2. Vinyasa Yoga:</strong> Aliran gerakan yang dinamis</p>
+<p><strong>3. Yin Yoga:</strong> Postur ditahan lama untuk relaksasi mendalam</p>
+<p><strong>4. Restorative Yoga:</strong> Sangat lembut, fokus pada pemulihan</p>
+
+<h2>Tips Memulai Yoga</h2>
+<ul>
+    <li>Mulai dengan kelas pemula atau video online</li>
+    <li>Gunakan matras yoga yang nyaman</li>
+    <li>Pakai pakaian yang fleksibel</li>
+    <li>Jangan paksa tubuh, hormati batasannya</li>
+    <li>Konsisten 3-4 kali seminggu</li>
+    <li>Fokus pada pernapasan</li>
+</ul>
+
+<h2>Pose Yoga Dasar</h2>
+<ul>
+    <li><strong>Mountain Pose (Tadasana):</strong> Postur berdiri dasar</li>
+    <li><strong>Downward Dog:</strong> Peregangan seluruh tubuh</li>
+    <li><strong>Child Pose:</strong> Relaksasi dan istirahat</li>
+    <li><strong>Warrior Pose:</strong> Kekuatan dan keseimbangan</li>
+    <li><strong>Tree Pose:</strong> Fokus dan stabilitas</li>
+</ul>
+
+<p>Yoga adalah investasi untuk kesehatan jangka panjang. Tidak perlu sempurna, yang penting konsisten dan nikmati prosesnya!</p>',
+                'category' => 'Olahraga',
+                'category_color' => 'blue',
+                'image' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=500&fit=crop',
+                'read_time' => '8 min read',
+                'published_at' => '2 minggu lalu',
+                'author' => 'Instruktur Dewi Yoga',
+            ],
+            
+            // Article 9
+            [
+                'id' => 9,
+                'slug' => 'makanan-super-untuk-meningkatkan-imun-tubuh',
+                'title' => 'Makanan Super untuk Meningkatkan Imun Tubuh',
+                'excerpt' => 'Sistem imun yang kuat adalah pertahanan terbaik melawan penyakit. Kenali makanan super yang dapat meningkatkan daya tahan tubuh Anda.',
+                'quote' => 'Makanan adalah obat terbaik, dan obat terbaik adalah makanan.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-green-50 border-l-4 border-green-500 italic text-gray-700">"Makanan adalah obat terbaik, dan obat terbaik adalah makanan."</div>
+
+<h2>Pentingnya Sistem Imun Kuat</h2>
+<p>Sistem imun adalah pertahanan alami tubuh melawan virus, bakteri, dan penyakit. Nutrisi yang tepat dapat memperkuat sistem imun Anda.</p>
+
+<h2>Makanan Super Penambah Imun</h2>
+
+<p><strong>1. Jeruk dan Buah Citrus</strong></p>
+<ul>
+    <li>Tinggi vitamin C (antioksidan kuat)</li>
+    <li>Meningkatkan produksi sel darah putih</li>
+    <li>Contoh: Jeruk, lemon, grapefruit, limau</li>
+</ul>
+
+<p><strong>2. Bawang Putih</strong></p>
+<ul>
+    <li>Mengandung allicin (antibakteri dan antivirus)</li>
+    <li>Meningkatkan respons sel T</li>
+    <li>Konsumsi 2-3 siung per hari</li>
+</ul>
+
+<p><strong>3. Jahe</strong></p>
+<ul>
+    <li>Anti-inflamasi alami</li>
+    <li>Mengurangi sakit tenggorokan</li>
+    <li>Meningkatkan sirkulasi darah</li>
+</ul>
+
+<p><strong>4. Bayam</strong></p>
+<ul>
+    <li>Vitamin C, beta karoten, antioksidan</li>
+    <li>Zat besi untuk energi</li>
+    <li>Masak sebentar untuk nutrisi maksimal</li>
+</ul>
+
+<p><strong>5. Yogurt</strong></p>
+<ul>
+    <li>Probiotik untuk kesehatan usus</li>
+    <li>70% sistem imun ada di usus</li>
+    <li>Pilih plain yogurt tanpa gula</li>
+</ul>
+
+<p><strong>6. Almond</strong></p>
+<ul>
+    <li>Vitamin E (antioksidan larut lemak)</li>
+    <li>28 gram = 50% kebutuhan vitamin E harian</li>
+    <li>Memperkuat respons imun</li>
+</ul>
+
+<p><strong>7. Kunyit</strong></p>
+<ul>
+    <li>Curcumin sebagai anti-inflamasi</li>
+    <li>Meningkatkan antibodi</li>
+    <li>Kombinasi dengan lada hitam untuk penyerapan optimal</li>
+</ul>
+
+<p><strong>8. Teh Hijau</strong></p>
+<ul>
+    <li>EGCG (antioksidan kuat)</li>
+    <li>L-theanine untuk produksi sel T</li>
+    <li>Minum 2-3 cangkir per hari</li>
+</ul>
+
+<p><strong>9. Paprika Merah</strong></p>
+<ul>
+    <li>2x lebih banyak vitamin C dari jeruk</li>
+    <li>Beta karoten untuk kulit sehat</li>
+    <li>Vitamin A untuk mata</li>
+</ul>
+
+<p><strong>10. Kiwi</strong></p>
+<ul>
+    <li>Vitamin C, K, folat, potasium</li>
+    <li>Mendukung seluruh fungsi tubuh</li>
+    <li>Makan dengan kulitnya untuk serat</li>
+</ul>
+
+<h2>Tips Meningkatkan Imun</h2>
+<ul>
+    <li>Variasi makanan warna-warni</li>
+    <li>Minum air 8-10 gelas per hari</li>
+    <li>Tidur cukup 7-9 jam</li>
+    <li>Olahraga teratur 30 menit/hari</li>
+    <li>Kelola stres dengan baik</li>
+    <li>Hindari merokok dan alkohol</li>
+</ul>
+
+<p>Sistem imun yang kuat dimulai dari piring Anda. Konsumsi makanan bergizi setiap hari untuk pertahanan optimal!</p>',
+                'category' => 'Nutrisi',
+                'category_color' => 'yellow',
+                'image' => 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=500&fit=crop',
+                'read_time' => '9 min read',
+                'published_at' => '3 minggu lalu',
+                'author' => 'Dr. Lisa Nutrisionis',
+            ],
+            
+            // Article 10
+            [
+                'id' => 10,
+                'slug' => 'panduan-lengkap-kesehatan-mata-di-era-digital',
+                'title' => 'Panduan Lengkap Kesehatan Mata di Era Digital',
+                'excerpt' => 'Layar digital ada di mana-mana. Pelajari cara melindungi mata dari kelelahan digital dan menjaga kesehatan penglihatan jangka panjang.',
+                'quote' => 'Mata adalah jendela jiwa, jaga dengan baik.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-blue-50 border-l-4 border-blue-500 italic text-gray-700">"Mata adalah jendela jiwa, jaga dengan baik."</div>
+
+<h2>Digital Eye Strain</h2>
+<p>Rata-rata orang menatap layar 7+ jam per hari, menyebabkan Computer Vision Syndrome (CVS) dengan gejala:</p>
+<ul>
+    <li>Mata kering dan gatal</li>
+    <li>Penglihatan kabur</li>
+    <li>Sakit kepala</li>
+    <li>Nyeri leher dan bahu</li>
+    <li>Kesulitan fokus</li>
+</ul>
+
+<h2>Aturan 20-20-20</h2>
+<p>Metode terbaik mencegah kelelahan mata:</p>
+<ul>
+    <li>Setiap 20 menit</li>
+    <li>Lihat objek 20 kaki (6 meter) jauhnya</li>
+    <li>Selama 20 detik</li>
+</ul>
+
+<h2>Ergonomi Layar</h2>
+<ul>
+    <li><strong>Jarak:</strong> 50-70 cm dari mata</li>
+    <li><strong>Posisi:</strong> Bagian atas layar sejajar dengan mata</li>
+    <li><strong>Pencahayaan:</strong> Hindari silau dan pantulan</li>
+    <li><strong>Brightness:</strong> Sesuaikan dengan cahaya ruangan</li>
+    <li><strong>Font size:</strong> Cukup besar untuk dibaca tanpa memicingkan mata</li>
+</ul>
+
+<h2>Blue Light Protection</h2>
+<ul>
+    <li>Gunakan mode night shift/dark mode</li>
+    <li>Pasang screen filter blue light</li>
+    <li>Kacamata anti blue light</li>
+    <li>Kurangi screen time 2 jam sebelum tidur</li>
+</ul>
+
+<h2>Makanan untuk Mata Sehat</h2>
+<p><strong>Vitamin A:</strong> Wortel, ubi jalar, bayam</p>
+<p><strong>Lutein & Zeaxanthin:</strong> Kale, bayam, brokoli</p>
+<p><strong>Omega-3:</strong> Ikan salmon, tuna, sarden</p>
+<p><strong>Vitamin C:</strong> Jeruk, strawberry, paprika</p>
+<p><strong>Zinc:</strong> Kacang-kacangan, daging, telur</p>
+
+<h2>Latihan Mata</h2>
+<p><strong>1. Blinking:</strong> Berkedip 10-15 kali per menit untuk melembabkan</p>
+<p><strong>2. Focus Change:</strong> Fokus objek dekat (15 detik) lalu jauh (15 detik), ulangi 5x</p>
+<p><strong>3. Figure Eight:</strong> Gerakkan mata membentuk angka 8, 5x per arah</p>
+<p><strong>4. Palming:</strong> Gosok tangan, tutup mata dengan telapak hangat, 30 detik</p>
+
+<h2>Tanda Periksa ke Dokter</h2>
+<ul>
+    <li>Penglihatan tiba-tiba kabur</li>
+    <li>Floaters atau kilatan cahaya</li>
+    <li>Nyeri mata persisten</li>
+    <li>Mata merah dan berair terus-menerus</li>
+    <li>Perubahan penglihatan warna</li>
+</ul>
+
+<h2>Tips Perawatan Harian</h2>
+<ul>
+    <li>Bersihkan kacamata/lensa kontak rutin</li>
+    <li>Jangan tidur dengan lensa kontak</li>
+    <li>Gunakan kacamata hitam saat di luar (UV protection)</li>
+    <li>Cukupi kebutuhan cairan</li>
+    <li>Hindari mengucek mata</li>
+</ul>
+
+<p>Pemeriksaan mata rutin setiap 1-2 tahun sangat penting, terutama jika bekerja dengan komputer. Deteksi dini masalah mata dapat mencegah kerusakan permanen!</p>',
+                'category' => 'Hidup Sehat',
+                'category_color' => 'green',
+                'image' => 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=500&fit=crop',
+                'read_time' => '7 min read',
+                'published_at' => '3 minggu lalu',
+                'author' => 'Dr. Rina Oftalmologi',
+            ],
+            
+            // Article 11
+            [
+                'id' => 11,
+                'slug' => 'detoksifikasi-tubuh-secara-alami-dan-aman',
+                'title' => 'Detoksifikasi Tubuh Secara Alami dan Aman',
+                'excerpt' => 'Tubuh memiliki sistem detoks alami. Pelajari cara mendukung proses detoksifikasi tubuh tanpa diet ekstrem atau produk mahal.',
+                'quote' => 'Detoks terbaik dimulai dari dapur, bukan apotek.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-teal-50 border-l-4 border-teal-500 italic text-gray-700">"Detoks terbaik dimulai dari dapur, bukan apotek."</div>
+
+<h2>Sistem Detoks Alami Tubuh</h2>
+<p>Tubuh memiliki organ detoks alami yang bekerja 24/7:</p>
+<ul>
+    <li><strong>Hati:</strong> Menyaring racun dari darah</li>
+    <li><strong>Ginjal:</strong> Mengeluarkan limbah melalui urin</li>
+    <li><strong>Paru-paru:</strong> Mengeluarkan CO2</li>
+    <li><strong>Kulit:</strong> Berkeringat mengeluarkan toksin</li>
+    <li><strong>Usus:</strong> Membuang limbah pencernaan</li>
+</ul>
+
+<h2>Tanda Tubuh Perlu Detoks</h2>
+<ul>
+    <li>Kelelahan kronis</li>
+    <li>Masalah pencernaan (sembelit, kembung)</li>
+    <li>Kulit kusam dan berjerawat</li>
+    <li>Sulit konsentrasi (brain fog)</li>
+    <li>Bau badan atau napas tidak sedap</li>
+    <li>Sering sakit kepala</li>
+</ul>
+
+<h2>Cara Detoks Alami</h2>
+
+<p><strong>1. Hidrasi Optimal</strong></p>
+<ul>
+    <li>Minum 8-10 gelas air per hari</li>
+    <li>Air lemon hangat di pagi hari</li>
+    <li>Teh hijau atau herbal</li>
+    <li>Hindari minuman manis dan soda</li>
+</ul>
+
+<p><strong>2. Makanan Detoks</strong></p>
+<ul>
+    <li><strong>Sayuran hijau:</strong> Bayam, kale, brokoli (klorofil)</li>
+    <li><strong>Bawang putih & bawang bombay:</strong> Sulfur untuk hati</li>
+    <li><strong>Bit:</strong> Membersihkan darah</li>
+    <li><strong>Lemon:</strong> Vitamin C dan antioksidan</li>
+    <li><strong>Jahe & kunyit:</strong> Anti-inflamasi</li>
+</ul>
+
+<p><strong>3. Puasa Intermittent</strong></p>
+<ul>
+    <li>16:8 (puasa 16 jam, makan 8 jam)</li>
+    <li>Memberi istirahat sistem pencernaan</li>
+    <li>Meningkatkan autophagy (pembersihan sel)</li>
+</ul>
+
+<p><strong>4. Olahraga Teratur</strong></p>
+<ul>
+    <li>Berkeringat mengeluarkan toksin</li>
+    <li>30-60 menit cardio</li>
+    <li>Yoga untuk sirkulasi limfatik</li>
+    <li>Sauna atau steam bath</li>
+</ul>
+
+<p><strong>5. Tidur Berkualitas</strong></p>
+<ul>
+    <li>7-9 jam per malam</li>
+    <li>Otak membersihkan toksin saat tidur</li>
+    <li>Tidur konsisten jam yang sama</li>
+</ul>
+
+<h2>Hindari Toksin</h2>
+<ul>
+    <li><strong>Makanan olahan:</strong> Pengawet, pewarna, MSG</li>
+    <li><strong>Alkohol berlebihan:</strong> Membebani hati</li>
+    <li><strong>Merokok:</strong> Racun masuk paru-paru</li>
+    <li><strong>Plastik:</strong> BPA dalam botol dan wadah</li>
+    <li><strong>Pestisida:</strong> Pilih organik jika memungkinkan</li>
+</ul>
+
+<h2>Jus Detoks Sederhana</h2>
+<p><strong>Green Juice:</strong></p>
+<ul>
+    <li>2 genggam bayam</li>
+    <li>1 mentimun</li>
+    <li>1 apel hijau</li>
+    <li>½ lemon</li>
+    <li>Jahe secukupnya</li>
+</ul>
+
+<p><strong>Beet Detox:</strong></p>
+<ul>
+    <li>1 bit merah</li>
+    <li>2 wortel</li>
+    <li>1 apel</li>
+    <li>½ lemon</li>
+</ul>
+
+<h2>Mitos Detoks</h2>
+<ul>
+    <li><strong>Mitos:</strong> Diet jus selama seminggu mendetoks total</li>
+    <li><strong>Fakta:</strong> Tubuh detoks setiap hari, tidak perlu ekstrem</li>
+    <li><strong>Mitos:</strong> Suplemen detoks mahal diperlukan</li>
+    <li><strong>Fakta:</strong> Makanan alami lebih efektif dan aman</li>
+</ul>
+
+<p>Detoks adalah gaya hidup, bukan diet sesaat. Konsisten dengan kebiasaan sehat lebih efektif daripada program detoks ekstrem!</p>',
+                'category' => 'Hidup Sehat',
+                'category_color' => 'green',
+                'image' => 'https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=800&h=500&fit=crop',
+                'read_time' => '8 min read',
+                'published_at' => '1 bulan lalu',
+                'author' => 'Dr. Andi Nutrisionis',
+            ],
+            
+            // Article 12
+            [
+                'id' => 12,
+                'slug' => 'manajemen-nyeri-punggung-untuk-pekerja-kantoran',
+                'title' => 'Manajemen Nyeri Punggung untuk Pekerja Kantoran',
+                'excerpt' => 'Nyeri punggung adalah keluhan umum pekerja kantoran. Temukan cara efektif mencegah dan mengatasi nyeri punggung akibat duduk lama.',
+                'quote' => 'Postur yang baik adalah investasi kesehatan jangka panjang.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-orange-50 border-l-4 border-orange-500 italic text-gray-700">"Postur yang baik adalah investasi kesehatan jangka panjang."</div>
+
+<h2>Penyebab Nyeri Punggung</h2>
+<p>80% pekerja kantoran mengalami nyeri punggung karena:</p>
+<ul>
+    <li>Duduk berkepanjangan (8+ jam)</li>
+    <li>Postur buruk saat bekerja</li>
+    <li>Kursi dan meja tidak ergonomis</li>
+    <li>Kurang gerak dan olahraga</li>
+    <li>Stres dan tegang otot</li>
+    <li>Berat badan berlebih</li>
+</ul>
+
+<h2>Setup Workstation Ergonomis</h2>
+
+<p><strong>Kursi:</strong></p>
+<ul>
+    <li>Punggung tegak tersandar dengan baik</li>
+    <li>Kaki menapak rata di lantai</li>
+    <li>Lutut 90 derajat</li>
+    <li>Lumbar support untuk punggung bawah</li>
+</ul>
+
+<p><strong>Meja & Monitor:</strong></p>
+<ul>
+    <li>Monitor sejajar mata (jarak 50-70 cm)</li>
+    <li>Keyboard dan mouse dalam jangkauan</li>
+    <li>Siku 90 derajat saat mengetik</li>
+    <li>Pergelangan tangan netral</li>
+</ul>
+
+<h2>Latihan Peregangan di Kantor</h2>
+
+<p><strong>1. Cat-Cow Stretch (di kursi):</strong></p>
+<ul>
+    <li>Duduk tegak, tangan di lutut</li>
+    <li>Lengkungkan punggung (cow), tahan 5 detik</li>
+    <li>Bungkukkan punggung (cat), tahan 5 detik</li>
+    <li>Ulangi 5-10 kali</li>
+</ul>
+
+<p><strong>2. Seated Spinal Twist:</strong></p>
+<ul>
+    <li>Duduk tegak, kaki menapak</li>
+    <li>Putar torso ke kanan, tangan di sandaran</li>
+    <li>Tahan 15-30 detik, ulangi sisi lain</li>
+</ul>
+
+<p><strong>3. Shoulder Blade Squeeze:</strong></p>
+<ul>
+    <li>Tarik bahu ke belakang</li>
+    <li>Rapatkan tulang belikat</li>
+    <li>Tahan 5 detik, lepas</li>
+    <li>Ulangi 10-15 kali</li>
+</ul>
+
+<p><strong>4. Chest Opener:</strong></p>
+<ul>
+    <li>Berdiri, tangan di belakang punggung</li>
+    <li>Rapatkan jari, angkat lengan</li>
+    <li>Buka dada, tahan 15-30 detik</li>
+</ul>
+
+<h2>Olahraga untuk Punggung Sehat</h2>
+<ul>
+    <li><strong>Swimming:</strong> Low-impact, memperkuat core</li>
+    <li><strong>Yoga:</strong> Fleksibilitas dan kekuatan</li>
+    <li><strong>Pilates:</strong> Core stability</li>
+    <li><strong>Walking:</strong> 30 menit per hari</li>
+    <li><strong>Planking:</strong> Penguatan otot inti</li>
+</ul>
+
+<h2>Tips Harian</h2>
+<ul>
+    <li><strong>Pomodoro Technique:</strong> Berdiri tiap 25-30 menit</li>
+    <li><strong>Walking meeting:</strong> Diskusi sambil jalan</li>
+    <li><strong>Tangga vs lift:</strong> Pilih tangga</li>
+    <li><strong>Desk exercises:</strong> Peregangan 5 menit/2 jam</li>
+    <li><strong>Proper lifting:</strong> Tekuk lutut, bukan punggung</li>
+</ul>
+
+<h2>Terapi Nyeri Punggung</h2>
+<p><strong>Akut (kurang dari 4 minggu):</strong></p>
+<ul>
+    <li>Kompres dingin 15-20 menit (48 jam pertama)</li>
+    <li>Kompres hangat setelah 48 jam</li>
+    <li>Tetap aktif, hindari bed rest lama</li>
+    <li>Pain reliever jika perlu (konsultasi dokter)</li>
+</ul>
+
+<p><strong>Kronis (lebih dari 3 bulan):</strong></p>
+<ul>
+    <li>Fisioterapi teratur</li>
+    <li>Massage therapy</li>
+    <li>Akupuntur</li>
+    <li>Latihan kekuatan core</li>
+</ul>
+
+<h2>Kapan ke Dokter?</h2>
+<ul>
+    <li>Nyeri hebat tidak membaik 1-2 minggu</li>
+    <li>Menjalar ke kaki (sciatica)</li>
+    <li>Mati rasa atau kesemutan</li>
+    <li>Kelemahan otot kaki</li>
+    <li>Gangguan BAK/BAB</li>
+    <li>Demam atau penurunan berat badan</li>
+</ul>
+
+<p>Pencegahan lebih baik daripada pengobatan. Investasi di kursi ergonomis dan kebiasaan sehat akan menghemat biaya medis di masa depan!</p>',
+                'category' => 'Hidup Sehat',
+                'category_color' => 'green',
+                'image' => 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop',
+                'read_time' => '9 min read',
+                'published_at' => '1 bulan lalu',
+                'author' => 'Dr. Hendra Ortopedi',
+            ],
+
+            // Article 13
+            [
+                'id' => 13,
+                'slug' => 'panduan-lengkap-diet-mediterania-untuk-jantung-sehat',
+                'title' => 'Panduan Lengkap Diet Mediterania untuk Jantung Sehat',
+                'excerpt' => 'Diet Mediterania telah terbukti secara ilmiah sebagai salah satu pola makan terbaik untuk kesehatan jantung dan umur panjang.',
+                'content' => '<p>Diet Mediterania bukan sekadar diet, melainkan gaya hidup sehat yang telah terbukti menurunkan risiko penyakit jantung hingga 30%. Pola makan ini berasal dari negara-negara di sekitar Laut Mediterania seperti Italia, Yunani, dan Spanyol.</p>
+
+<h2>Prinsip Utama Diet Mediterania</h2>
+<p><strong>Makanan Utama:</strong></p>
+<ul>
+    <li>Sayuran dan buah-buahan segar (5-9 porsi/hari)</li>
+    <li>Biji-bijian utuh (whole grains)</li>
+    <li>Minyak zaitun sebagai lemak utama</li>
+    <li>Kacang-kacangan dan biji-bijian</li>
+    <li>Ikan dan seafood (2-3x seminggu)</li>
+</ul>
+
+<p><strong>Konsumsi Sedang:</strong></p>
+<ul>
+    <li>Unggas (ayam, kalkun)</li>
+    <li>Telur (3-4 butir/minggu)</li>
+    <li>Keju dan yogurt</li>
+    <li>Wine merah (opsional, 1 gelas/hari)</li>
+</ul>
+
+<p><strong>Batasi:</strong></p>
+<ul>
+    <li>Daging merah (1-2x per bulan)</li>
+    <li>Makanan olahan dan fast food</li>
+    <li>Gula tambahan</li>
+    <li>Mentega dan margarin</li>
+</ul>
+
+<h2>Menu Harian Diet Mediterania</h2>
+<p><strong>Sarapan:</strong> Oatmeal dengan buah beri, kacang almond, dan madu</p>
+<p><strong>Snack Pagi:</strong> Yogurt Greek dengan walnut</p>
+<p><strong>Makan Siang:</strong> Salad quinoa dengan sayuran panggang, olive, dan feta cheese</p>
+<p><strong>Snack Sore:</strong> Hummus dengan wortel dan mentimun</p>
+<p><strong>Makan Malam:</strong> Ikan salmon panggang dengan brokoli dan sweet potato</p>
+
+<h2>Manfaat Kesehatan</h2>
+<ul>
+    <li>Menurunkan risiko penyakit jantung 30%</li>
+    <li>Mengurangi stroke hingga 25%</li>
+    <li>Mencegah diabetes tipe 2</li>
+    <li>Meningkatkan fungsi kognitif</li>
+    <li>Menurunkan tekanan darah</li>
+    <li>Anti-inflamasi alami</li>
+</ul>
+
+<p>Penelitian menunjukkan bahwa orang yang mengikuti diet Mediterania memiliki umur lebih panjang dan kualitas hidup lebih baik!</p>',
+                'category' => 'Nutrisi',
+                'category_color' => 'yellow',
+                'image' => 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=500&fit=crop',
+                'read_time' => '8 min read',
+                'published_at' => '3 hari lalu',
+                'author' => 'Dr. Maria Nutrisi',
+            ],
+
+            // Article 14
+            [
+                'id' => 14,
+                'slug' => 'terapi-musik-untuk-kesehatan-mental-dan-relaksasi',
+                'title' => 'Terapi Musik untuk Kesehatan Mental dan Relaksasi',
+                'excerpt' => 'Musik memiliki kekuatan luar biasa untuk menyembuhkan jiwa, mengurangi stres, dan meningkatkan kesehatan mental secara keseluruhan.',
+                'content' => '<p>Terapi musik adalah pendekatan terapeutik yang menggunakan musik untuk meningkatkan kesehatan fisik, emosional, kognitif, dan sosial. Penelitian menunjukkan bahwa musik dapat mengubah struktur otak dan meningkatkan produksi hormon bahagia.</p>
+
+<h2>Manfaat Terapi Musik</h2>
+<p><strong>Kesehatan Mental:</strong></p>
+<ul>
+    <li>Mengurangi gejala depresi dan kecemasan</li>
+    <li>Meningkatkan mood dan emosi positif</li>
+    <li>Membantu mengatasi trauma</li>
+    <li>Meningkatkan self-esteem</li>
+    <li>Mengurangi stres hingga 65%</li>
+</ul>
+
+<p><strong>Kesehatan Fisik:</strong></p>
+<ul>
+    <li>Menurunkan tekanan darah</li>
+    <li>Mengurangi detak jantung</li>
+    <li>Meningkatkan sistem imun</li>
+    <li>Mengurangi nyeri kronis</li>
+    <li>Meningkatkan kualitas tidur</li>
+</ul>
+
+<h2>Jenis Musik untuk Terapi</h2>
+<p><strong>Musik Klasik:</strong> Mozart, Beethoven - Meningkatkan konsentrasi dan kreativitas</p>
+<p><strong>Musik Nature Sounds:</strong> Suara ombak, hujan - Relaksasi mendalam</p>
+<p><strong>Binaural Beats:</strong> Frekuensi khusus - Meditasi dan fokus</p>
+<p><strong>Musik Instrumental:</strong> Piano, gitar - Mengurangi kecemasan</p>
+
+<h2>Cara Melakukan Terapi Musik</h2>
+<ul>
+    <li>Dengarkan musik 20-30 menit setiap hari</li>
+    <li>Pilih musik sesuai kebutuhan emosional</li>
+    <li>Gunakan headphone untuk pengalaman immersive</li>
+    <li>Kombinasikan dengan meditasi atau yoga</li>
+    <li>Buat playlist terapi pribadi</li>
+    <li>Mainkan alat musik (lebih efektif)</li>
+</ul>
+
+<h2>Waktu Terbaik</h2>
+<p><strong>Pagi:</strong> Musik energik untuk motivasi</p>
+<p><strong>Siang:</strong> Musik instrumental untuk produktivitas</p>
+<p><strong>Sore:</strong> Musik tenang untuk transisi</p>
+<p><strong>Malam:</strong> Musik relaksasi untuk tidur berkualitas</p>
+
+<p>Terapi musik adalah cara alami, tanpa efek samping, dan menyenangkan untuk meningkatkan kesehatan mental Anda!</p>',
+                'category' => 'Kesehatan Mental',
+                'category_color' => 'purple',
+                'image' => 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=500&fit=crop',
+                'read_time' => '7 min read',
+                'published_at' => '5 hari lalu',
+                'author' => 'Dr. Rina Psikolog',
+            ],
+
+            // Article 15
+            [
+                'id' => 15,
+                'slug' => 'manfaat-puasa-intermittent-untuk-kesehatan-dan-berat-badan',
+                'title' => 'Manfaat Puasa Intermittent untuk Kesehatan dan Berat Badan',
+                'excerpt' => 'Intermittent fasting bukan hanya untuk menurunkan berat badan, tapi juga meningkatkan metabolisme dan memperpanjang umur.',
+                'content' => '<p>Intermittent fasting (IF) adalah pola makan yang mengatur waktu makan dan puasa, bukan membatasi jenis makanan. Metode ini terbukti efektif untuk penurunan berat badan dan peningkatan kesehatan metabolik.</p>
+
+<h2>Metode Intermittent Fasting</h2>
+<p><strong>16/8 Method (Paling Populer):</strong></p>
+<ul>
+    <li>Puasa 16 jam, makan 8 jam</li>
+    <li>Contoh: Makan jam 12 siang - 8 malam</li>
+    <li>Cocok untuk pemula</li>
+</ul>
+
+<p><strong>5:2 Diet:</strong></p>
+<ul>
+    <li>5 hari normal, 2 hari kalori rendah (500-600 kal)</li>
+    <li>Fleksibel untuk jadwal sibuk</li>
+</ul>
+
+<p><strong>Eat-Stop-Eat:</strong></p>
+<ul>
+    <li>Puasa 24 jam, 1-2x seminggu</li>
+    <li>Untuk yang sudah berpengalaman</li>
+</ul>
+
+<p><strong>Alternate Day Fasting:</strong></p>
+<ul>
+    <li>Puasa dan makan bergantian setiap hari</li>
+    <li>Paling intens</li>
+</ul>
+
+<h2>Manfaat Kesehatan</h2>
+<ul>
+    <li><strong>Penurunan Berat Badan:</strong> 3-8% dalam 3-24 minggu</li>
+    <li><strong>Metabolisme:</strong> Meningkat 3.6-14%</li>
+    <li><strong>Insulin Sensitivity:</strong> Meningkat hingga 31%</li>
+    <li><strong>Autophagy:</strong> Pembersihan sel rusak</li>
+    <li><strong>Anti-aging:</strong> Memperpanjang umur sel</li>
+    <li><strong>Brain Health:</strong> Meningkatkan BDNF</li>
+    <li><strong>Inflamasi:</strong> Berkurang signifikan</li>
+</ul>
+
+<h2>Apa yang Boleh Dikonsumsi Saat Puasa?</h2>
+<p><strong>Diperbolehkan:</strong></p>
+<ul>
+    <li>Air putih (unlimited)</li>
+    <li>Kopi hitam (tanpa gula/susu)</li>
+    <li>Teh hijau/herbal</li>
+    <li>Air lemon (tanpa gula)</li>
+</ul>
+
+<p><strong>Hindari:</strong></p>
+<ul>
+    <li>Minuman manis</li>
+    <li>Susu</li>
+    <li>Jus buah</li>
+    <li>Makanan padat apapun</li>
+</ul>
+
+<h2>Menu Berbuka Puasa IF</h2>
+<p><strong>Meal 1 (Berbuka):</strong></p>
+<ul>
+    <li>Protein tinggi: Telur, dada ayam, ikan</li>
+    <li>Sayuran hijau</li>
+    <li>Lemak sehat: Alpukat, kacang</li>
+</ul>
+
+<p><strong>Meal 2 (Sebelum Mulai Puasa):</strong></p>
+<ul>
+    <li>Karbohidrat kompleks: Nasi merah, quinoa</li>
+    <li>Protein</li>
+    <li>Sayuran</li>
+</ul>
+
+<h2>Tips Sukses IF</h2>
+<ul>
+    <li>Mulai bertahap (12 jam dulu)</li>
+    <li>Minum banyak air saat puasa</li>
+    <li>Tetap aktif tapi jangan overexercise</li>
+    <li>Fokus pada kualitas makanan</li>
+    <li>Dengarkan tubuh Anda</li>
+    <li>Konsisten minimal 2-4 minggu</li>
+</ul>
+
+<h2>Siapa yang Tidak Boleh IF?</h2>
+<ul>
+    <li>Ibu hamil dan menyusui</li>
+    <li>Anak-anak dan remaja</li>
+    <li>Diabetes tipe 1</li>
+    <li>Riwayat eating disorder</li>
+    <li>Underweight (BMI &lt; 18.5)</li>
+</ul>
+
+<p>Konsultasikan dengan dokter sebelum memulai, terutama jika memiliki kondisi medis tertentu!</p>',
+                'category' => 'Nutrisi',
+                'category_color' => 'yellow',
+                'image' => 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&h=500&fit=crop',
+                'read_time' => '10 min read',
+                'published_at' => '1 minggu lalu',
+                'author' => 'Dr. Ahmad Gizi',
+            ],
+
+            // Article 16
+            [
+                'id' => 16,
+                'slug' => 'olahraga-hiit-untuk-membakar-lemak-maksimal',
+                'title' => 'Olahraga HIIT untuk Membakar Lemak Maksimal',
+                'excerpt' => 'High Intensity Interval Training (HIIT) adalah cara paling efisien membakar lemak dalam waktu singkat dengan hasil maksimal.',
+                'content' => '<p>HIIT (High-Intensity Interval Training) adalah metode latihan yang menggabungkan periode latihan intensitas tinggi dengan periode istirahat singkat. Hanya 20-30 menit HIIT setara dengan 60 menit cardio biasa!</p>
+
+<h2>Apa itu HIIT?</h2>
+<p>HIIT adalah latihan interval yang bergantian antara burst intensitas maksimal (80-95% HR max) dengan periode recovery singkat. Contoh: Sprint 30 detik, jalan 30 detik, ulangi 10x.</p>
+
+<h2>Manfaat HIIT</h2>
+<ul>
+    <li><strong>Pembakaran Kalori:</strong> 25-30% lebih banyak dari latihan biasa</li>
+    <li><strong>Afterburn Effect:</strong> Bakar kalori hingga 24 jam setelah latihan</li>
+    <li><strong>Metabolisme:</strong> Meningkat hingga 48 jam</li>
+    <li><strong>Lemak Perut:</strong> Berkurang signifikan</li>
+    <li><strong>Muscle Gain:</strong> Mempertahankan massa otot</li>
+    <li><strong>Efisiensi Waktu:</strong> 20 menit = 60 menit cardio</li>
+    <li><strong>VO2 Max:</strong> Meningkatkan kapasitas aerobik</li>
+</ul>
+
+<h2>Contoh Latihan HIIT untuk Pemula</h2>
+<p><strong>HIIT Running (20 menit):</strong></p>
+<ul>
+    <li>Warm-up: Jalan cepat 5 menit</li>
+    <li>Sprint 30 detik (90% effort)</li>
+    <li>Jalan 60 detik (recovery)</li>
+    <li>Ulangi 8-10 kali</li>
+    <li>Cool-down: Jalan santai 5 menit</li>
+</ul>
+
+<p><strong>HIIT Bodyweight (15 menit):</strong></p>
+<ul>
+    <li>Burpees - 40 detik ON, 20 detik OFF</li>
+    <li>Mountain climbers - 40 detik ON, 20 detik OFF</li>
+    <li>Jump squats - 40 detik ON, 20 detik OFF</li>
+    <li>High knees - 40 detik ON, 20 detik OFF</li>
+    <li>Ulangi 3 rounds</li>
+</ul>
+
+<p><strong>HIIT Tabata (4 menit):</strong></p>
+<ul>
+    <li>Pilih 1 gerakan (contoh: burpees)</li>
+    <li>20 detik all-out effort</li>
+    <li>10 detik rest</li>
+    <li>Ulangi 8 rounds (total 4 menit)</li>
+</ul>
+
+<h2>Program HIIT 4 Minggu</h2>
+<p><strong>Week 1-2:</strong> 2x seminggu, 15-20 menit</p>
+<p><strong>Week 3-4:</strong> 3x seminggu, 20-25 menit</p>
+<p><strong>Week 5+:</strong> 3-4x seminggu, 25-30 menit</p>
+
+<h2>Tips Maksimalkan HIIT</h2>
+<ul>
+    <li>Warm-up wajib 5-10 menit</li>
+    <li>Intensitas interval harus 80-95% HR max</li>
+    <li>Recovery aktif, jangan berhenti total</li>
+    <li>Fokus pada form yang benar</li>
+    <li>Hidrasi sebelum, saat, dan sesudah</li>
+    <li>Rest day 48 jam antara session</li>
+    <li>Kombinasikan dengan strength training</li>
+</ul>
+
+<h2>Kesalahan Umum</h2>
+<ul>
+    <li>Terlalu sering (daily) - risiko overtraining</li>
+    <li>Intensitas kurang - bukan HIIT sejati</li>
+    <li>Durasi terlalu lama - bukan interval</li>
+    <li>Skip warm-up - risiko cedera</li>
+    <li>Form buruk - tidak efektif</li>
+</ul>
+
+<h2>Siapa yang Cocok HIIT?</h2>
+<p><strong>Cocok untuk:</strong></p>
+<ul>
+    <li>Yang ingin fat loss cepat</li>
+    <li>Jadwal padat, waktu terbatas</li>
+    <li>Plateau weight loss</li>
+    <li>Fitness level intermediate-advanced</li>
+</ul>
+
+<p><strong>Hindari jika:</strong></p>
+<ul>
+    <li>Baru mulai olahraga (mulai dari LISS dulu)</li>
+    <li>Masalah jantung</li>
+    <li>Cedera sendi/otot</li>
+    <li>Pregnant</li>
+</ul>
+
+<p>Konsultasi dokter dulu jika ada kondisi medis sebelum mulai HIIT!</p>',
+                'category' => 'Olahraga',
+                'category_color' => 'blue',
+                'image' => 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=500&fit=crop',
+                'read_time' => '9 min read',
+                'published_at' => '1 minggu lalu',
+                'author' => 'Coach Budi Fitness',
+            ],
+
+            // Article 17
+            [
+                'id' => 17,
+                'slug' => 'makanan-penurun-kolesterol-tinggi-secara-alami',
+                'title' => 'Makanan Penurun Kolesterol Tinggi Secara Alami',
+                'excerpt' => 'Turunkan kolesterol jahat (LDL) dan tingkatkan kolesterol baik (HDL) dengan makanan alami tanpa obat-obatan.',
+                'content' => '<p>Kolesterol tinggi adalah silent killer yang meningkatkan risiko serangan jantung dan stroke. Kabar baiknya, Anda bisa menurunkan kolesterol LDL hingga 30% dengan perubahan pola makan!</p>
+
+<h2>Makanan Penurun Kolesterol</h2>
+<p><strong>1. Oatmeal dan Serat Larut</strong></p>
+<ul>
+    <li>Mengandung beta-glucan</li>
+    <li>Menurunkan LDL 5-10%</li>
+    <li>1-2 mangkuk per hari</li>
+    <li>Tambahkan buah beri untuk antioksidan</li>
+</ul>
+
+<p><strong>2. Kacang-kacangan</strong></p>
+<ul>
+    <li>Almond, walnut, pistachio</li>
+    <li>Kaya lemak tak jenuh tunggal</li>
+    <li>30-45 gram per hari</li>
+    <li>Menurunkan LDL hingga 5%</li>
+</ul>
+
+<p><strong>3. Ikan Berlemak</strong></p>
+<ul>
+    <li>Salmon, makarel, sarden</li>
+    <li>Omega-3 EPA dan DHA</li>
+    <li>2-3 porsi per minggu</li>
+    <li>Meningkatkan HDL (kolesterol baik)</li>
+</ul>
+
+<p><strong>4. Alpukat</strong></p>
+<ul>
+    <li>Lemak sehat monounsaturated</li>
+    <li>1/2 - 1 buah per hari</li>
+    <li>Menurunkan LDL 10-15%</li>
+    <li>Meningkatkan HDL</li>
+</ul>
+
+<p><strong>5. Minyak Zaitun Extra Virgin</strong></p>
+<ul>
+    <li>Antioksidan kuat</li>
+    <li>2-3 sendok makan per hari</li>
+    <li>Gunakan untuk salad dan masakan</li>
+</ul>
+
+<p><strong>6. Bawang Putih</strong></p>
+<ul>
+    <li>Allicin menurunkan kolesterol</li>
+    <li>2-3 siung per hari</li>
+    <li>Konsumsi mentah lebih efektif</li>
+</ul>
+
+<p><strong>7. Teh Hijau</strong></p>
+<ul>
+    <li>Catechin sebagai antioksidan</li>
+    <li>3-4 cangkir per hari</li>
+    <li>Menurunkan LDL hingga 5%</li>
+</ul>
+
+<p><strong>8. Dark Chocolate (70%+ cocoa)</strong></p>
+<ul>
+    <li>Flavonoid kuat</li>
+    <li>20-30 gram per hari</li>
+    <li>Pilih yang minim gula</li>
+</ul>
+
+<p><strong>9. Buah-buahan Tinggi Serat</strong></p>
+<ul>
+    <li>Apel, pir, jeruk, stroberi</li>
+    <li>Pectin menurunkan LDL</li>
+    <li>2-3 porsi per hari</li>
+</ul>
+
+<p><strong>10. Kedelai dan Produknya</strong></p>
+<ul>
+    <li>Tempe, tahu, edamame</li>
+    <li>Protein nabati pengganti daging</li>
+    <li>25 gram protein kedelai per hari</li>
+</ul>
+
+<h2>Makanan yang Harus Dihindari</h2>
+<ul>
+    <li><strong>Trans Fat:</strong> Gorengan, margarin, pastry</li>
+    <li><strong>Saturated Fat:</strong> Daging berlemak, mentega, santan kental</li>
+    <li><strong>Kolesterol Tinggi:</strong> Jeroan, kuning telur berlebih, seafood tertentu</li>
+    <li><strong>Gula Berlebih:</strong> Meningkatkan trigliserida</li>
+    <li><strong>Fast Food:</strong> Burger, pizza, fried chicken</li>
+</ul>
+
+<h2>Menu Harian Anti-Kolesterol</h2>
+<p><strong>Sarapan:</strong> Oatmeal + blueberry + walnut + teh hijau</p>
+<p><strong>Snack:</strong> Apel + almond</p>
+<p><strong>Makan Siang:</strong> Salmon panggang + quinoa + brokoli + salad</p>
+<p><strong>Snack:</strong> Edamame</p>
+<p><strong>Makan Malam:</strong> Tahu bakar + sayur bayam + nasi merah</p>
+
+<h2>Tips Tambahan</h2>
+<ul>
+    <li>Olahraga 30 menit 5x seminggu</li>
+    <li>Hindari rokok dan alkohol berlebih</li>
+    <li>Jaga berat badan ideal</li>
+    <li>Kelola stres dengan baik</li>
+    <li>Cek kolesterol rutin setiap 3-6 bulan</li>
+</ul>
+
+<h2>Target Kolesterol Sehat</h2>
+<ul>
+    <li>Total Cholesterol: &lt; 200 mg/dL</li>
+    <li>LDL (jahat): &lt; 100 mg/dL</li>
+    <li>HDL (baik): &gt; 60 mg/dL</li>
+    <li>Trigliserida: &lt; 150 mg/dL</li>
+</ul>
+
+<p>Perubahan pola makan bisa menurunkan kolesterol dalam 4-6 minggu. Konsistensi adalah kunci!</p>',
+                'category' => 'Nutrisi',
+                'category_color' => 'yellow',
+                'image' => 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=500&fit=crop',
+                'read_time' => '8 min read',
+                'published_at' => '2 minggu lalu',
+                'author' => 'Dr. Siti Kardiologi',
+            ],
+
+            // Article 18
+            [
+                'id' => 18,
+                'slug' => 'cara-mengatasi-insomnia-dan-gangguan-tidur',
+                'title' => 'Cara Mengatasi Insomnia dan Gangguan Tidur',
+                'excerpt' => 'Tidur berkualitas adalah fondasi kesehatan. Pelajari cara mengatasi insomnia dan gangguan tidur secara alami dan efektif.',
+                'content' => '<p>Insomnia mempengaruhi 30% populasi dewasa. Kurang tidur kronis meningkatkan risiko obesitas, diabetes, penyakit jantung, dan depresi. Tidur berkualitas 7-9 jam per malam adalah kebutuhan vital!</p>
+
+<h2>Jenis Gangguan Tidur</h2>
+<p><strong>1. Insomnia Akut:</strong> Sulit tidur sementara (kurang dari 3 bulan)</p>
+<p><strong>2. Insomnia Kronis:</strong> Gangguan tidur 3+ malam/minggu selama 3+ bulan</p>
+<p><strong>3. Sleep Apnea:</strong> Henti napas saat tidur</p>
+<p><strong>4. Restless Leg Syndrome:</strong> Dorongan menggerakkan kaki</p>
+<p><strong>5. Narcolepsy:</strong> Kantuk berlebihan di siang hari</p>
+
+<h2>Penyebab Insomnia</h2>
+<ul>
+    <li>Stres dan kecemasan</li>
+    <li>Jadwal tidur tidak teratur</li>
+    <li>Screen time berlebih</li>
+    <li>Kafein dan alkohol</li>
+    <li>Lingkungan tidak kondusif</li>
+    <li>Kondisi medis tertentu</li>
+    <li>Obat-obatan</li>
+</ul>
+
+<h2>Sleep Hygiene: Kebiasaan Tidur Sehat</h2>
+<p><strong>Jadwal Konsisten:</strong></p>
+<ul>
+    <li>Tidur dan bangun di waktu yang sama setiap hari</li>
+    <li>Termasuk weekend</li>
+    <li>Jangan tidur siang lebih dari 20 menit</li>
+</ul>
+
+<p><strong>Lingkungan Ideal:</strong></p>
+<ul>
+    <li>Kamar gelap total (gunakan blackout curtains)</li>
+    <li>Suhu sejuk 18-20°C</li>
+    <li>Sunyi (gunakan earplugs atau white noise)</li>
+    <li>Kasur dan bantal nyaman</li>
+    <li>Kamar hanya untuk tidur (bukan kerja)</li>
+</ul>
+
+<p><strong>Rutinitas Sebelum Tidur:</strong></p>
+<ul>
+    <li>Mulai 60-90 menit sebelum tidur</li>
+    <li>Redupkan lampu</li>
+    <li>Mandi air hangat</li>
+    <li>Baca buku (bukan gadget)</li>
+    <li>Meditasi atau journaling</li>
+    <li>Stretching ringan</li>
+</ul>
+
+<h2>Teknik Relaksasi untuk Tidur</h2>
+<p><strong>1. 4-7-8 Breathing:</strong></p>
+<ul>
+    <li>Tarik napas 4 hitungan</li>
+    <li>Tahan 7 hitungan</li>
+    <li>Buang napas 8 hitungan</li>
+    <li>Ulangi 4 siklus</li>
+</ul>
+
+<p><strong>2. Progressive Muscle Relaxation:</strong></p>
+<ul>
+    <li>Tegangkan otot kaki 5 detik, lepas</li>
+    <li>Lanjut ke otot betis, paha, perut, dst</li>
+    <li>Sampai seluruh tubuh rileks</li>
+</ul>
+
+<p><strong>3. Guided Imagery:</strong></p>
+<ul>
+    <li>Bayangkan tempat damai (pantai, gunung)</li>
+    <li>Libatkan semua indera</li>
+    <li>Fokus pada detail</li>
+</ul>
+
+<p><strong>4. Body Scan Meditation:</strong></p>
+<ul>
+    <li>Perhatikan sensasi dari ujung kaki ke kepala</li>
+    <li>Rasakan tanpa menilai</li>
+    <li>10-15 menit</li>
+</ul>
+
+<h2>Makanan & Minuman untuk Tidur</h2>
+<p><strong>Bantu Tidur:</strong></p>
+<ul>
+    <li>Chamomile tea (1 jam sebelum tidur)</li>
+    <li>Susu hangat (tryptophan)</li>
+    <li>Pisang (magnesium, potassium)</li>
+    <li>Kacang almond (melatonin alami)</li>
+    <li>Oatmeal (meningkatkan serotonin)</li>
+    <li>Kiwi (2 buah 1 jam sebelum tidur)</li>
+</ul>
+
+<p><strong>Hindari:</strong></p>
+<ul>
+    <li>Kafein setelah jam 2 siang</li>
+    <li>Alkohol (mengganggu REM sleep)</li>
+    <li>Makanan berat 3 jam sebelum tidur</li>
+    <li>Makanan pedas dan asam</li>
+    <li>Gula berlebih</li>
+</ul>
+
+<h2>Suplemen Tidur Alami</h2>
+<ul>
+    <li><strong>Melatonin:</strong> 0.5-5mg, 30 menit sebelum tidur</li>
+    <li><strong>Magnesium:</strong> 200-400mg (glycinate form terbaik)</li>
+    <li><strong>L-Theanine:</strong> 100-200mg (dari teh hijau)</li>
+    <li><strong>Valerian Root:</strong> 300-600mg</li>
+    <li><strong>Lavender:</strong> Aromaterapi atau oil</li>
+</ul>
+
+<h2>Screen Time dan Blue Light</h2>
+<ul>
+    <li>Stop gadget 2 jam sebelum tidur</li>
+    <li>Gunakan blue light filter (Night Shift/Night Mode)</li>
+    <li>Blue light blocking glasses</li>
+    <li>Ganti TV/scrolling dengan baca buku</li>
+</ul>
+
+<h2>Kapan Harus ke Dokter?</h2>
+<ul>
+    <li>Insomnia lebih dari 3 bulan</li>
+    <li>Kantuk berlebih mengganggu aktivitas</li>
+    <li>Mendengkur keras dengan henti napas</li>
+    <li>Kaki gelisah setiap malam</li>
+    <li>Mimpi buruk berulang</li>
+    <li>Mengalami kecelakaan karena kurang tidur</li>
+</ul>
+
+<p>Tidur berkualitas adalah investasi kesehatan terbaik. Terapkan sleep hygiene konsisten selama 2-4 minggu untuk hasil optimal!</p>',
+                'category' => 'Kesehatan Mental',
+                'category_color' => 'purple',
+                'image' => 'https://images.unsplash.com/photo-1515894203077-9cd36032142f?w=800&h=500&fit=crop',
+                'read_time' => '10 min read',
+                'published_at' => '2 minggu lalu',
+                'author' => 'Dr. Lisa Sleep Specialist',
+            ],
+
+            // Article 19
+            [
+                'id' => 19,
+                'slug' => 'rahasia-kulit-glowing-dengan-perawatan-alami',
+                'title' => 'Rahasia Kulit Glowing dengan Perawatan Alami',
+                'excerpt' => 'Dapatkan kulit bercahaya, sehat, dan awet muda dengan bahan alami tanpa harus ke klinik kecantikan mahal.',
+                'content' => '<p>Kulit glowing bukan hanya tentang skincare mahal. 70% kesehatan kulit ditentukan oleh apa yang Anda konsumsi dan gaya hidup. Berikut rahasia kulit bercahaya dari dalam!</p>
+
+<h2>Prinsip Dasar Kulit Sehat</h2>
+<p><strong>Triangle of Glowing Skin:</strong></p>
+<ul>
+    <li>Nutrisi yang tepat (40%)</li>
+    <li>Skincare konsisten (30%)</li>
+    <li>Lifestyle sehat (30%)</li>
+</ul>
+
+<h2>Makanan untuk Kulit Glowing</h2>
+<p><strong>1. Antioksidan Tinggi:</strong></p>
+<ul>
+    <li>Blueberry, stroberi (vitamin C)</li>
+    <li>Dark chocolate 70%+ (flavonoid)</li>
+    <li>Teh hijau (EGCG)</li>
+    <li>Tomat (lycopene)</li>
+</ul>
+
+<p><strong>2. Lemak Sehat:</strong></p>
+<ul>
+    <li>Salmon (omega-3)</li>
+    <li>Alpukat (vitamin E)</li>
+    <li>Kacang walnut</li>
+    <li>Minyak zaitun</li>
+</ul>
+
+<p><strong>3. Vitamin C Booster:</strong></p>
+<ul>
+    <li>Jeruk, lemon</li>
+    <li>Paprika merah</li>
+    <li>Kiwi</li>
+    <li>Brokoli</li>
+</ul>
+
+<p><strong>4. Kolagen Natural:</strong></p>
+<ul>
+    <li>Bone broth</li>
+    <li>Telur</li>
+    <li>Ikan</li>
+    <li>Vitamin C untuk sintesis kolagen</li>
+</ul>
+
+<p><strong>5. Hidrasi Internal:</strong></p>
+<ul>
+    <li>Air putih 2-3 liter/hari</li>
+    <li>Infused water (lemon, mint, timun)</li>
+    <li>Coconut water</li>
+    <li>Buah tinggi air (semangka, melon)</li>
+</ul>
+
+<h2>Skincare Routine Alami</h2>
+<p><strong>Morning Routine:</strong></p>
+<ul>
+    <li>Cleanser ringan</li>
+    <li>Toner (rose water/green tea)</li>
+    <li>Vitamin C serum (DIY: lemon + vit C powder)</li>
+    <li>Moisturizer (aloe vera gel)</li>
+    <li>Sunscreen SPF 30+ (wajib!)</li>
+</ul>
+
+<p><strong>Night Routine:</strong></p>
+<ul>
+    <li>Double cleansing (oil + water based)</li>
+    <li>Exfoliate 2-3x seminggu (oatmeal scrub)</li>
+    <li>Toner</li>
+    <li>Serum (vitamin E, rosehip oil)</li>
+    <li>Night cream atau sleeping mask (honey mask)</li>
+</ul>
+
+<h2>DIY Face Mask Alami</h2>
+<p><strong>1. Brightening Mask:</strong></p>
+<ul>
+    <li>1 sdm yogurt + 1 sdt madu + 1 sdt lemon</li>
+    <li>Apply 15 menit, 2x seminggu</li>
+</ul>
+
+<p><strong>2. Hydrating Mask:</strong></p>
+<ul>
+    <li>1 sdm aloe vera gel + 1 sdt honey + 1 sdt minyak zaitun</li>
+    <li>Apply 20 menit</li>
+</ul>
+
+<p><strong>3. Anti-Aging Mask:</strong></p>
+<ul>
+    <li>1 putih telur + 1 sdt madu + beberapa tetes lemon</li>
+    <li>Apply hingga kering, bilas</li>
+</ul>
+
+<p><strong>4. Acne-Fighting Mask:</strong></p>
+<ul>
+    <li>1 sdm clay mask + tea tree oil</li>
+    <li>Apply 10-15 menit</li>
+</ul>
+
+<h2>Lifestyle untuk Kulit Sehat</h2>
+<p><strong>1. Tidur Berkualitas:</strong></p>
+<ul>
+    <li>7-9 jam per malam</li>
+    <li>Tidur sebelum jam 11 malam</li>
+    <li>Silk pillowcase (mengurangi wrinkles)</li>
+    <li>Sleep on back (anti aging)</li>
+</ul>
+
+<p><strong>2. Olahraga Teratur:</strong></p>
+<ul>
+    <li>30 menit 4-5x seminggu</li>
+    <li>Meningkatkan sirkulasi darah</li>
+    <li>Detoksifikasi melalui keringat</li>
+    <li>Glow alami dari dalam</li>
+</ul>
+
+<p><strong>3. Stress Management:</strong></p>
+<ul>
+    <li>Meditasi 10-15 menit/hari</li>
+    <li>Yoga</li>
+    <li>Deep breathing</li>
+    <li>Cortisol tinggi = jerawat & penuaan dini</li>
+</ul>
+
+<p><strong>4. Sun Protection:</strong></p>
+<ul>
+    <li>Sunscreen every day (bahkan cloudy/indoor)</li>
+    <li>Reapply setiap 2-3 jam</li>
+    <li>Topi & kacamata hitam</li>
+    <li>Hindari matahari 10 AM - 4 PM</li>
+</ul>
+
+<h2>Kebiasaan yang Merusak Kulit</h2>
+<ul>
+    <li>Merokok (penuaan dini)</li>
+    <li>Alkohol berlebih (dehidrasi)</li>
+    <li>Gula tinggi (glycation = wrinkles)</li>
+    <li>Kurang tidur (dark circles, dull skin)</li>
+    <li>Stress kronis (jerawat, eksim)</li>
+    <li>Jarang ganti sarung bantal (bakteri)</li>
+    <li>Touch face too often (bakteri)</li>
+</ul>
+
+<h2>Suplemen untuk Kulit</h2>
+<ul>
+    <li><strong>Kolagen:</strong> 5-10 gram/hari</li>
+    <li><strong>Vitamin C:</strong> 1000mg/hari</li>
+    <li><strong>Vitamin E:</strong> 400 IU</li>
+    <li><strong>Omega-3:</strong> 1000-2000mg</li>
+    <li><strong>Biotin:</strong> 2500-5000 mcg</li>
+    <li><strong>Zinc:</strong> 15-30mg (anti-acne)</li>
+</ul>
+
+<h2>Timeline Hasil</h2>
+<ul>
+    <li><strong>2 weeks:</strong> Kulit lebih hydrated</li>
+    <li><strong>4 weeks:</strong> Tone lebih merata</li>
+    <li><strong>8 weeks:</strong> Fine lines berkurang</li>
+    <li><strong>12 weeks:</strong> Glow dari dalam terlihat</li>
+</ul>
+
+<h2>Tips Extra</h2>
+<ul>
+    <li>Jangan pop pimples (scar risk)</li>
+    <li>Change pillowcase 2x seminggu</li>
+    <li>Clean makeup brushes weekly</li>
+    <li>Remove makeup every night</li>
+    <li>Facial massage 5 menit/hari</li>
+    <li>Ice facial (reduce puffiness)</li>
+</ul>
+
+<p>Kulit glowing adalah hasil konsistensi jangka panjang, bukan produk instan. Commit to the routine minimal 3 bulan untuk hasil optimal!</p>',
+                'category' => 'Kecantikan',
+                'category_color' => 'pink',
+                'image' => 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&h=500&fit=crop',
+                'read_time' => '10 min read',
+                'published_at' => '3 minggu lalu',
+                'author' => 'Dr. Ayu Dermatologi',
+            ],
+
+            // Article 20
+            [
+                'id' => 20,
+                'slug' => 'panduan-hidup-sehat-untuk-penderita-asma',
+                'title' => 'Panduan Hidup Sehat untuk Penderita Asma',
+                'excerpt' => 'Kelola asma dengan baik agar tidak mengganggu aktivitas sehari-hari. Pelajari trigger, pencegahan, dan cara mengatasi serangan asma.',
+                'content' => '<p>Asma mempengaruhi 300 juta orang di dunia. Meski tidak bisa disembuhkan total, asma bisa dikontrol dengan baik sehingga penderita bisa hidup normal tanpa serangan yang mengganggu.</p>
+
+<h2>Apa itu Asma?</h2>
+<p>Asma adalah penyakit kronis saluran napas yang menyebabkan:</p>
+<ul>
+    <li>Inflamasi (peradangan) saluran napas</li>
+    <li>Penyempitan bronkus</li>
+    <li>Produksi lendir berlebih</li>
+    <li>Kesulitan bernapas, mengi, batuk</li>
+</ul>
+
+<h2>Gejala Asma</h2>
+<p><strong>Gejala Umum:</strong></p>
+<ul>
+    <li>Napas pendek (sesak)</li>
+    <li>Mengi (wheezing) - suara "ngik-ngik"</li>
+    <li>Batuk, terutama malam/pagi hari</li>
+    <li>Dada terasa sesak/tertekan</li>
+    <li>Sulit tidur karena sesak napas</li>
+</ul>
+
+<p><strong>Tanda Serangan Berat (Emergency):</strong></p>
+<ul>
+    <li>Napas sangat cepat</li>
+    <li>Bibir/kuku membiru</li>
+    <li>Tidak bisa bicara lengkap</li>
+    <li>Retraksi dada (dada tertarik ke dalam)</li>
+    <li>Tidak ada perbaikan setelah inhaler</li>
+</ul>
+
+<h2>Pemicu (Trigger) Asma</h2>
+<p><strong>Allergen:</strong></p>
+<ul>
+    <li>Debu rumah & tungau</li>
+    <li>Bulu hewan peliharaan</li>
+    <li>Serbuk sari (pollen)</li>
+    <li>Jamur dan mold</li>
+    <li>Kecoa</li>
+</ul>
+
+<p><strong>Irritant:</strong></p>
+<ul>
+    <li>Asap rokok (aktif & pasif)</li>
+    <li>Polusi udara</li>
+    <li>Parfum/pewangi kuat</li>
+    <li>Asap pembakaran</li>
+    <li>Chemical cleaners</li>
+</ul>
+
+<p><strong>Lainnya:</strong></p>
+<ul>
+    <li>Olahraga intensitas tinggi (exercise-induced)</li>
+    <li>Udara dingin</li>
+    <li>Infeksi pernapasan (flu, COVID)</li>
+    <li>Stress emosional</li>
+    <li>Obat tertentu (aspirin, beta-blocker)</li>
+    <li>GERD (asam lambung naik)</li>
+</ul>
+
+<h2>Mengelola Lingkungan</h2>
+<p><strong>Di Rumah:</strong></p>
+<ul>
+    <li>Vacuum dengan HEPA filter 2x seminggu</li>
+    <li>Cuci sprei & sarung bantal air panas (60°C) weekly</li>
+    <li>Gunakan mattress & pillow cover anti-tungau</li>
+    <li>Hindari karpet tebal (sarang debu)</li>
+    <li>Jaga kelembaban 30-50% (gunakan dehumidifier)</li>
+    <li>Air purifier dengan HEPA filter</li>
+    <li>No smoking zone</li>
+</ul>
+
+<p><strong>Di Kamar Tidur:</strong></p>
+<ul>
+    <li>Minimalkan soft toys</li>
+    <li>Gorden tipis yang mudah dicuci</li>
+    <li>Hindari tanaman indoor</li>
+    <li>Jendela tertutup saat pollen season</li>
+</ul>
+
+<h2>Obat Asma</h2>
+<p><strong>1. Controller (Pencegahan - Daily):</strong></p>
+<ul>
+    <li>Inhaled Corticosteroid (ICS): Budesonide, Fluticasone</li>
+    <li>Long-acting beta agonist (LABA): Salmeterol</li>
+    <li>Combination ICS + LABA: Seretide, Symbicort</li>
+    <li>Leukotriene modifiers: Montelukast (Singulair)</li>
+</ul>
+
+<p><strong>2. Reliever (Pereda - Saat Serangan):</strong></p>
+<ul>
+    <li>Short-acting beta agonist (SABA): Salbutamol (Ventolin)</li>
+    <li>Albuterol inhaler</li>
+    <li>Selalu bawa kemana-mana!</li>
+</ul>
+
+<h2>Cara Menggunakan Inhaler</h2>
+<ul>
+    <li>Kocok inhaler 5-10x</li>
+    <li>Buang napas penuh</li>
+    <li>Posisikan mulut rapat di mouthpiece</li>
+    <li>Press inhaler sambil tarik napas dalam</li>
+    <li>Tahan napas 10 detik</li>
+    <li>Buang napas perlahan</li>
+    <li>Tunggu 30-60 detik sebelum puff kedua</li>
+    <li>Kumur mulut setelah ICS (cegah candidiasis)</li>
+</ul>
+
+<h2>Olahraga untuk Penderita Asma</h2>
+<p><strong>Olahraga Aman:</strong></p>
+<ul>
+    <li>Berenang (udara lembab)</li>
+    <li>Walking/jogging ringan</li>
+    <li>Yoga (breathwork)</li>
+    <li>Bersepeda santai</li>
+    <li>Tai chi</li>
+</ul>
+
+<p><strong>Tips Olahraga:</strong></p>
+<ul>
+    <li>Warm-up 10-15 menit (penting!)</li>
+    <li>Gunakan reliever 15 menit sebelum olahraga</li>
+    <li>Olahraga indoor jika udara dingin</li>
+    <li>Bernapas melalui hidung (filter & hangatkan udara)</li>
+    <li>Cool-down gradual</li>
+    <li>Bawa inhaler selalu</li>
+</ul>
+
+<p><strong>Hindari:</strong></p>
+<ul>
+    <li>Olahraga saat udara sangat dingin/kering</li>
+    <li>HIIT intensitas tinggi (untuk sebagian orang)</li>
+    <li>Olahraga saat flu/infeksi</li>
+</ul>
+
+<h2>Makanan untuk Asma</h2>
+<p><strong>Baik untuk Asma:</strong></p>
+<ul>
+    <li>Buah-buahan (vitamin C): Jeruk, kiwi, pepaya</li>
+    <li>Sayuran hijau (antioksidan)</li>
+    <li>Ikan berlemak (omega-3 anti-inflamasi)</li>
+    <li>Kacang-kacangan (vitamin E)</li>
+    <li>Bawang putih & jahe (anti-inflamasi)</li>
+</ul>
+
+<p><strong>Hindari:</strong></p>
+<ul>
+    <li>Makanan dengan sulfite (wine, dried fruit)</li>
+    <li>Food allergen pribadi</li>
+    <li>Makanan yang menyebabkan GERD</li>
+    <li>MSG berlebihan (untuk beberapa orang)</li>
+</ul>
+
+<h2>Asthma Action Plan</h2>
+<p><strong>Green Zone (Kontrol Baik):</strong></p>
+<ul>
+    <li>Tidak ada gejala</li>
+    <li>Lanjutkan controller daily</li>
+    <li>Aktivitas normal</li>
+</ul>
+
+<p><strong>Yellow Zone (Waspada):</strong></p>
+<ul>
+    <li>Gejala ringan muncul</li>
+    <li>Gunakan reliever</li>
+    <li>Double controller jika perlu</li>
+    <li>Kurangi aktivitas berat</li>
+</ul>
+
+<p><strong>Red Zone (Bahaya):</strong></p>
+<ul>
+    <li>Gejala berat, tidak membaik</li>
+    <li>Gunakan reliever immediate</li>
+    <li>Call emergency/ke IGD</li>
+</ul>
+
+<h2>Monitoring Asma</h2>
+<ul>
+    <li>Peak Flow Meter: Check di pagi & malam</li>
+    <li>Asthma diary: Catat gejala & trigger</li>
+    <li>Regular check-up 3-6 bulan</li>
+    <li>Spirometry test tahunan</li>
+</ul>
+
+<h2>Tips Hidup dengan Asma</h2>
+<ul>
+    <li>Patuhi obat controller (jangan skip!)</li>
+    <li>Identifikasi & hindari trigger pribadi</li>
+    <li>Vaksinasi flu & pneumonia</li>
+    <li>Jaga berat badan ideal</li>
+    <li>Kelola stress</li>
+    <li>Quit smoking</li>
+    <li>Medical ID bracelet</li>
+    <li>Edukasi keluarga/teman tentang asma Anda</li>
+</ul>
+
+<p>Asma yang terkontrol baik = hidup normal tanpa batasan. Kunci adalah konsistensi obat controller dan menghindari trigger!</p>',
+                'category' => 'Hidup Sehat',
+                'category_color' => 'green',
+                'image' => 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&h=500&fit=crop',
+                'read_time' => '11 min read',
+                'published_at' => '3 minggu lalu',
+                'author' => 'Dr. Budi Pulmonologi',
+            ],
         ];
     }
 }
+

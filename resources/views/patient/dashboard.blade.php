@@ -161,35 +161,10 @@
                         <h3 class="text-2xl font-bold text-gray-800">Artikel Kesehatan Terkini untuk Anda</h3>
                     </div>
 
-                    <!-- Article Categories -->
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Nutrisi
-                        </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Diabetes
-                        </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Jantung
-                        </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Kesehatan Mulut
-                        </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Kolesterol Tinggi
-                        </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Diet
-                        </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-green-50 transition">
-                            Kecantikan
-                        </button>
-                    </div>
-
                     <!-- Articles Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Article 1 -->
-                        <a href="{{ route('articles.show', '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian') }}" class="block">
+                        <a href="{{ route('articles.show', '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian') }}" class="article-card block" data-category="Hidup Sehat">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop" 
@@ -215,7 +190,7 @@
                         </a>
 
                         <!-- Article 2 -->
-                        <a href="{{ route('articles.show', 'tips-olahraga-efektif-untuk-kesehatan-jantung') }}" class="block">
+                        <a href="{{ route('articles.show', 'tips-olahraga-efektif-untuk-kesehatan-jantung') }}" class="article-card block" data-category="Olahraga">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop" 
@@ -241,7 +216,7 @@
                         </a>
 
                         <!-- Article 3 -->
-                        <a href="{{ route('articles.show', 'mengelola-diabetes-dengan-pola-makan-sehat') }}" class="block">
+                        <a href="{{ route('articles.show', 'mengelola-diabetes-dengan-pola-makan-sehat') }}" class="article-card block" data-category="Diabetes">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=250&fit=crop" 
@@ -266,7 +241,7 @@
                         </div>
 
                         <!-- Article 4 -->
-                        <a href="{{ route('articles.show', 'pentingnya-vitamin-dan-mineral-untuk-tubuh') }}" class="block">
+                        <a href="{{ route('articles.show', 'pentingnya-vitamin-dan-mineral-untuk-tubuh') }}" class="article-card block" data-category="Nutrisi">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=250&fit=crop" 
@@ -292,7 +267,7 @@
                         </a>
 
                         <!-- Article 5 -->
-                        <a href="{{ route('articles.show', 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental') }}" class="block">
+                        <a href="{{ route('articles.show', 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental') }}" class="article-card block" data-category="Kesehatan Mental">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop" 
@@ -318,10 +293,10 @@
                         </a>
 
                         <!-- Article 6 -->
-                        <a href="{{ route('articles.show', 'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya') }}" class="block">
+                        <a href="{{ route('articles.show', 'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya') }}" class="article-card block" data-category="Kecantikan">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1559388372-d01ad0cd0bce?w=400&h=250&fit=crop" 
+                                    <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=250&fit=crop" 
                                          alt="Sleep" 
                                          class="w-full h-48 object-cover">
                                     <span class="absolute top-3 left-3 bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
@@ -344,10 +319,13 @@
                         </a>
                     </div>
 
-                    <!-- View More Button -->
-                    <div class="mt-8 text-center">
-                        <a href="{{ route('articles.index') }}" class="inline-block px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
-                            Lihat Semua Artikel
+                    <!-- View All Button -->
+                    <div class="text-center mt-8">
+                        <a href="{{ route('articles.index') }}" class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200">
+                            <span>Lihat Semua Artikel</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
                         </a>
                     </div>
                 </div>

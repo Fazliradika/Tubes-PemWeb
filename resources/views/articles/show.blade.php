@@ -13,7 +13,10 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main Article Content (Left Side) -->
+                <div class="lg:col-span-2">
             <!-- Article Header -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="relative">
@@ -64,7 +67,47 @@
                     </div>
 
                     <!-- Article Content -->
-                    <div class="prose prose-lg max-w-none">
+                    <div class="max-w-none" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 17px; line-height: 1.75; color: #374151;">
+                        <style scoped>
+                            div.max-w-none p {
+                                margin-bottom: 1.25rem;
+                                line-height: 1.75;
+                                color: #374151;
+                                font-size: 17px;
+                            }
+                            div.max-w-none h2 {
+                                font-size: 24px;
+                                font-weight: 700;
+                                margin-top: 2rem;
+                                margin-bottom: 1rem;
+                                color: #111827;
+                            }
+                            div.max-w-none h3 {
+                                font-size: 18px;
+                                font-weight: 600;
+                                margin-top: 1.5rem;
+                                margin-bottom: 0.75rem;
+                                color: #1f2937;
+                            }
+                            div.max-w-none ul,
+                            div.max-w-none ol {
+                                margin: 1rem 0 2rem 0;
+                                padding: 0;
+                                list-style: none;
+                            }
+                            div.max-w-none ul li,
+                            div.max-w-none ol li {
+                                margin-bottom: 0.5rem;
+                                line-height: 1.75;
+                                color: #374151;
+                                font-size: 17px;
+                                list-style: none;
+                            }
+                            div.max-w-none strong {
+                                font-weight: 700;
+                                color: #111827;
+                            }
+                        </style>
                         {!! $article['content'] !!}
                     </div>
 
@@ -79,76 +122,301 @@
                     </div>
                 </div>
             </div>
+                </div>
 
-            <!-- Related Articles -->
-            @if($relatedArticles->count() > 0)
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Artikel Terkait</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach($relatedArticles as $related)
-                    <a href="{{ route('articles.show', $related['slug']) }}" class="block group">
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
-                            <img src="{{ $related['image'] }}" 
-                                 alt="{{ $related['title'] }}" 
-                                 class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="p-4">
-                                <span class="inline-block bg-{{ $related['category_color'] }}-100 text-{{ $related['category_color'] }}-800 text-xs font-semibold px-2 py-1 rounded mb-2">
-                                    {{ $related['category'] }}
-                                </span>
-                                <h3 class="font-bold text-gray-800 text-sm mb-2 group-hover:text-green-600 transition-colors line-clamp-2">
-                                    {{ $related['title'] }}
-                                </h3>
-                                <p class="text-xs text-gray-500">{{ $related['read_time'] }}</p>
+                <!-- Sidebar (Right Side) -->
+                <div class="lg:col-span-1">
+                    <!-- Topik Terkini -->
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6 sticky top-6">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-bold text-gray-900">Topik Terkini</h3>
+                                <a href="{{ route('articles.index') }}" class="text-sm text-green-600 hover:text-green-700 font-medium">
+                                    Lihat Semua
+                                </a>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                    Diabetes
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                    Jantung
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                    Hipertensi
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                    Anemia
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                    Kolesterol
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                    Kanker
+                                </a>
+                            </div>
+
+                            <div class="border-t pt-4">
+                                <h4 class="text-sm font-bold text-gray-900 mb-4">Artikel Terkait</h4>
+                                <div class="space-y-4">
+                                    @php
+                                        $sidebarArticles = collect($relatedArticles)->take(4);
+                                        if($sidebarArticles->count() == 0) {
+                                            $allArticles = app('App\Http\Controllers\ArticleController')->getArticles();
+                                            $sidebarArticles = collect($allArticles)
+                                                ->where('slug', '!=', $article['slug'])
+                                                ->take(4);
+                                        }
+                                    @endphp
+                                    
+                                    @foreach($sidebarArticles as $sidebar)
+                                    <a href="{{ route('articles.show', $sidebar['slug']) }}" class="block group">
+                                        <div class="flex gap-3">
+                                            <img src="{{ $sidebar['image'] }}" 
+                                                 alt="{{ $sidebar['title'] }}" 
+                                                 class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
+                                            <div class="flex-1 min-w-0">
+                                                <h5 class="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2 mb-1">
+                                                    {{ $sidebar['title'] }}
+                                                </h5>
+                                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                                    <span class="text-green-600 font-medium">{{ $sidebar['category'] }}</span>
+                                                    <span>•</span>
+                                                    <span>{{ $sidebar['read_time'] }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </a>
-                    @endforeach
+                    </div>
                 </div>
             </div>
-            @endif
         </div>
     </div>
 
     @push('styles')
     <style>
-        .prose h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: #1f2937;
+        /* Article Content Styling */
+        .article-content {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+            font-size: 1.0625rem !important;
+            line-height: 1.75 !important;
+            color: #1f2937 !important;
         }
-        .prose h3 {
-            font-size: 1.375rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: #374151;
+
+        /* Quote Styling */
+        .article-quote {
+            font-size: 1.125rem !important;
+            line-height: 1.8 !important;
+            padding: 1.5rem 1.25rem !important;
+            margin: 2rem 0 !important;
+            border-radius: 0.5rem !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
         }
-        .prose p {
-            margin-bottom: 1.25rem;
-            line-height: 1.75;
-            color: #4b5563;
+
+        /* Table of Contents */
+        .toc {
+            background: linear-gradient(to right, #f9fafb, #f3f4f6) !important;
+            padding: 1.25rem !important;
+            border-radius: 0.75rem !important;
+            margin: 2rem 0 !important;
+            border: 1px solid #e5e7eb !important;
         }
-        .prose ul {
+
+        .toc li {
+            padding: 0.5rem 0 !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            list-style: none !important;
+        }
+
+        .toc li:last-child {
+            border-bottom: none !important;
+        }
+
+        .toc a {
+            font-size: 1.0625rem !important;
+            font-weight: 500 !important;
+            transition: all 0.2s !important;
+            display: block !important;
+            padding-left: 1rem !important;
+        }
+
+        .toc a:hover {
+            color: #059669 !important;
+            padding-left: 1.5rem !important;
+        }
+
+        /* Headings */
+        .article-content h2 {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+            color: #111827 !important;
+            padding-bottom: 0 !important;
+            border-bottom: none !important;
+            line-height: 1.3 !important;
+        }
+
+        .article-content h3 {
+            font-size: 1.125rem !important;
+            font-weight: 600 !important;
+            margin-top: 1.5rem !important;
+            margin-bottom: 0.75rem !important;
+            color: #1f2937 !important;
+            line-height: 1.4 !important;
+        }
+
+        /* Paragraphs */
+        .article-content p {
+            margin-bottom: 1.25rem !important;
+            line-height: 1.75 !important;
+            color: #374151 !important;
+            text-align: left !important;
+            font-size: 1.0625rem !important;
+        }
+
+        .article-content p:first-of-type {
+            font-size: 1.0625rem !important;
+            color: #1f2937 !important;
+            line-height: 1.75 !important;
+            margin-bottom: 1.25rem !important;
+        }
+
+        /* Lists */
+        .article-content ul {
+            margin-top: 1rem !important;
+            margin-bottom: 2rem !important;
+            padding-left: 0 !important;
+            list-style-type: none !important;
+        }
+
+        .article-content ul li {
+            margin-bottom: 0.5rem !important;
+            color: #374151 !important;
+            font-size: 1.0625rem !important;
+            line-height: 1.75 !important;
+            position: relative !important;
+            padding-left: 0 !important;
+            list-style: none !important;
+        }
+
+        .article-content ul li:before {
+            content: "" !important;
+            display: none !important;
+        }
+
+        .article-content ol {
+            margin-top: 1rem !important;
+            margin-bottom: 2rem !important;
+            padding-left: 0 !important;
+            counter-reset: item !important;
+            list-style-type: none !important;
+        }
+
+        .article-content ol li {
+            margin-bottom: 0.5rem !important;
+            color: #374151 !important;
+            font-size: 1.0625rem !important;
+            line-height: 1.75 !important;
+            counter-increment: item !important;
+            padding-left: 0 !important;
+            position: relative !important;
+            list-style: none !important;
+        }
+
+        .article-content ol li:before {
+            content: "" !important;
+            display: none !important;
+        }
+
+        /* Strong/Bold text */
+        .article-content strong {
+            font-weight: 700 !important;
+            color: #111827 !important;
+            font-size: 1.0625rem !important;
+        }
+
+        /* Links */
+        .article-content a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .article-content a:hover {
+            color: #1d4ed8;
+            border-bottom-color: #2563eb;
+        }
+
+        /* First letter styling - DISABLED for cleaner look */
+        .article-content > p:first-of-type:first-letter {
+            /* Disabled drop cap for cleaner appearance */
+        }
+
+        /* Sections spacing */
+        .article-content > * + * {
             margin-top: 1rem;
-            margin-bottom: 1.25rem;
-            padding-left: 1.5rem;
-            list-style-type: disc;
         }
-        .prose li {
-            margin-bottom: 0.5rem;
-            color: #4b5563;
-        }
-        .prose strong {
-            font-weight: 600;
-            color: #1f2937;
-        }
+
+        /* Related articles */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+        
+        /* Sidebar sticky */
+        .sticky {
+            position: sticky;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .article-content {
+                font-size: 1rem;
+            }
+            
+            .article-content h2 {
+                font-size: 1.5rem;
+                margin-top: 2rem;
+            }
+            
+            .article-content h3 {
+                font-size: 1.25rem;
+            }
+            
+            .article-content p {
+                font-size: 1rem;
+            }
+            
+            .article-quote {
+                font-size: 1.125rem;
+                padding: 1.5rem 1rem;
+            }
+            
+            .article-content > p:first-of-type:first-letter {
+                font-size: 3rem;
+                line-height: 2.5rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .article-content {
+                font-size: 12pt;
+                line-height: 1.6;
+            }
+            
+            .article-content h2 {
+                page-break-after: avoid;
+            }
         }
     </style>
     @endpush
