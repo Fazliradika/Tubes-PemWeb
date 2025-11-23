@@ -296,7 +296,7 @@
                         <a href="{{ route('articles.show', 'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya') }}" class="article-card block" data-category="Kecantikan">
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=250&fit=crop" 
+                                    <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=250&fit=crop"
                                          alt="Sleep" 
                                          class="w-full h-48 object-cover">
                                     <span class="absolute top-3 left-3 bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full">

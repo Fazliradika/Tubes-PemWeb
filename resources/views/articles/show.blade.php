@@ -121,7 +121,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 </div>
 
                 <!-- Sidebar (Right Side) -->
@@ -206,9 +205,7 @@
             font-size: 1.0625rem !important;
             line-height: 1.75 !important;
             color: #1f2937 !important;
-        }
-
-        /* Quote Styling */
+        }        /* Quote Styling */
         .article-quote {
             font-size: 1.125rem !important;
             line-height: 1.8 !important;
