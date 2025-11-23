@@ -26,9 +26,16 @@ class ArticleController extends Controller
             ->where('slug', '!=', $slug)
             ->take(3);
         
+        $comments = \App\Models\Comment::where('article_slug', $slug)
+            ->whereNull('parent_id')
+            ->with(['user', 'replies.user'])
+            ->latest()
+            ->get();
+        
         return view('articles.show', [
             'article' => $article,
             'relatedArticles' => $relatedArticles,
+            'comments' => $comments,
         ]);
     }
 

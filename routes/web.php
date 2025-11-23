@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\PatientDashboardController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
@@ -152,12 +153,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
-});
-
-// Articles Routes (accessible to all authenticated users)
-Route::middleware('auth')->group(function () {
-    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-    Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+    
+    // Comment Routes
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 Route::middleware('auth')->group(function () {

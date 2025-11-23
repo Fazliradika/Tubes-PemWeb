@@ -216,8 +216,191 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Comments Section -->
+            <div class="mt-8 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Diskusi & Pertanyaan ({{ $comments->count() }})</h3>
+                    
+                    @if(session('success'))
+                        <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    
+                    <!-- Comment Form -->
+                    <form action="{{ route('comments.store') }}" method="POST" class="mb-8">
+                        @csrf
+                        <input type="hidden" name="article_slug" value="{{ $article['slug'] }}">
+                        
+                        <div class="mb-4">
+                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tulis komentar atau pertanyaan Anda
+                            </label>
+                            <textarea 
+                                name="comment" 
+                                id="comment" 
+                                rows="4" 
+                                required
+                                maxlength="1000"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                                placeholder="Bagikan pemikiran atau pertanyaan Anda tentang artikel ini..."
+                            >{{ old('comment') }}</textarea>
+                            @error('comment')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-1 text-xs text-gray-500">Maksimal 1000 karakter</p>
+                        </div>
+                        
+                        <button 
+                            type="submit" 
+                            class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 flex items-center gap-2"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            Kirim Komentar
+                        </button>
+                    </form>
+                    
+                    <!-- Comments List -->
+                    <div class="space-y-6">
+                        @forelse($comments as $comment)
+                            <div class="border-b border-gray-200 pb-6 last:border-b-0">
+                                <!-- Main Comment -->
+                                <div class="flex gap-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
+                                            {{ strtoupper(substr($comment->user->name, 0, 1)) }}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900">{{ $comment->user->name }}</h4>
+                                                <p class="text-xs text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
+                                            </div>
+                                            
+                                            @if($comment->user_id === auth()->id())
+                                                <form action="{{ route('comments.destroy', $comment) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus komentar ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-800 text-sm">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                        
+                                        <p class="text-gray-700 leading-relaxed mb-3">{{ $comment->comment }}</p>
+                                        
+                                        <!-- Reply Button -->
+                                        <button 
+                                            onclick="toggleReplyForm({{ $comment->id }})" 
+                                            class="text-green-600 hover:text-green-700 text-sm font-medium flex items-center gap-1"
+                                        >
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                                            </svg>
+                                            Balas
+                                        </button>
+                                        
+                                        <!-- Reply Form (Hidden by default) -->
+                                        <div id="reply-form-{{ $comment->id }}" class="mt-4 hidden">
+                                            <form action="{{ route('comments.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="article_slug" value="{{ $article['slug'] }}">
+                                                <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                                                
+                                                <textarea 
+                                                    name="comment" 
+                                                    rows="3" 
+                                                    required
+                                                    maxlength="1000"
+                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none mb-2"
+                                                    placeholder="Tulis balasan Anda..."
+                                                ></textarea>
+                                                
+                                                <div class="flex gap-2">
+                                                    <button 
+                                                        type="submit" 
+                                                        class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition"
+                                                    >
+                                                        Kirim Balasan
+                                                    </button>
+                                                    <button 
+                                                        type="button" 
+                                                        onclick="toggleReplyForm({{ $comment->id }})" 
+                                                        class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-300 transition"
+                                                    >
+                                                        Batal
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                        <!-- Replies -->
+                                        @if($comment->replies->count() > 0)
+                                            <div class="mt-4 space-y-4 pl-4 border-l-2 border-gray-200">
+                                                @foreach($comment->replies as $reply)
+                                                    <div class="flex gap-3">
+                                                        <div class="flex-shrink-0">
+                                                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                                                                {{ strtoupper(substr($reply->user->name, 0, 1)) }}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="flex-1">
+                                                            <div class="flex items-center justify-between mb-1">
+                                                                <div>
+                                                                    <h5 class="font-semibold text-gray-900 text-sm">{{ $reply->user->name }}</h5>
+                                                                    <p class="text-xs text-gray-500">{{ $reply->created_at->diffForHumans() }}</p>
+                                                                </div>
+                                                                
+                                                                @if($reply->user_id === auth()->id())
+                                                                    <form action="{{ route('comments.destroy', $reply) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus balasan ini?')">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="text-red-600 hover:text-red-800 text-xs">
+                                                                            Hapus
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+                                                            </div>
+                                                            
+                                                            <p class="text-gray-700 text-sm leading-relaxed">{{ $reply->comment }}</p>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center py-12">
+                                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Belum ada komentar</h3>
+                                <p class="text-gray-600">Jadilah yang pertama untuk berkomentar atau bertanya!</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    
+    @push('scripts')
+    <script>
+        function toggleReplyForm(commentId) {
+            const form = document.getElementById(`reply-form-${commentId}`);
+            form.classList.toggle('hidden');
+        }
+    </script>
+    @endpush
 
     @push('styles')
     <style>
