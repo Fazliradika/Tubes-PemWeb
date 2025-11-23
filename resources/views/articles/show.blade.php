@@ -130,42 +130,54 @@
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-bold text-gray-900">Topik Terkini</h3>
-                                <a href="{{ route('articles.index') }}" class="text-sm text-green-600 hover:text-green-700 font-medium">
+                                <a href="{{ route('articles.index') }}" class="text-sm text-red-600 hover:text-red-700 font-medium">
                                     Lihat Semua
                                 </a>
                             </div>
                             
                             <div class="flex flex-wrap gap-2 mb-6">
-                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                    Coronavirus
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
                                     Diabetes
                                 </a>
-                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
                                     Jantung
                                 </a>
-                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
-                                    Hipertensi
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                    Stroke
                                 </a>
-                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
-                                    Anemia
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                    Kehamilan
                                 </a>
-                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
                                     Kolesterol
                                 </a>
-                                <a href="{{ route('articles.index') }}" class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                    Hipertensi
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                    Anemia
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
                                     Kanker
+                                </a>
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                    Reproduksi
                                 </a>
                             </div>
 
-                            <div class="border-t pt-4">
-                                <h4 class="text-sm font-bold text-gray-900 mb-4">Artikel Terkait</h4>
-                                <div class="space-y-4">
+                            <div class="border-t pt-6">
+                                <h4 class="text-lg font-bold text-gray-900 mb-4">Artikel Terkait</h4>
+                                <div class="space-y-5">
                                     @php
-                                        $sidebarArticles = collect($relatedArticles)->take(4);
+                                        $sidebarArticles = collect($relatedArticles)->take(5);
                                         if($sidebarArticles->count() == 0) {
                                             $allArticles = app('App\Http\Controllers\ArticleController')->getArticles();
                                             $sidebarArticles = collect($allArticles)
                                                 ->where('slug', '!=', $article['slug'])
-                                                ->take(4);
+                                                ->take(5);
                                         }
                                     @endphp
                                     
@@ -174,13 +186,13 @@
                                         <div class="flex gap-3">
                                             <img src="{{ $sidebar['image'] }}" 
                                                  alt="{{ $sidebar['title'] }}" 
-                                                 class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
+                                                 class="w-24 h-24 object-cover rounded-lg flex-shrink-0">
                                             <div class="flex-1 min-w-0">
-                                                <h5 class="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2 mb-1">
+                                                <h5 class="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2 mb-2 leading-snug">
                                                     {{ $sidebar['title'] }}
                                                 </h5>
-                                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                                    <span class="text-green-600 font-medium">{{ $sidebar['category'] }}</span>
+                                                <div class="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                                                    <span class="text-teal-600 font-medium">{{ $sidebar['category'] }}</span>
                                                     <span>•</span>
                                                     <span>{{ $sidebar['read_time'] }}</span>
                                                 </div>
