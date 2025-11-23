@@ -217,7 +217,7 @@
                 </div>
             </div>
             
-            <!-- Comments Section -->
+            <!-- Comments Section (Full Width Below) -->
             <div class="mt-8 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6">Diskusi & Pertanyaan ({{ $comments->count() }})</h3>
@@ -392,7 +392,7 @@
             </div>
         </div>
     </div>
-    
+
     @push('scripts')
     <script>
         function toggleReplyForm(commentId) {
