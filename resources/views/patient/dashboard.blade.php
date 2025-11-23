@@ -189,65 +189,70 @@
                     <!-- Articles Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Article 1 -->
-                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop" 
-                                     alt="Healthy Food" 
-                                     class="w-full h-48 object-cover">
-                                <span class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                    Hidup Sehat
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
-                                    7 Makanan yang Bikin Kurus, Cocok untuk Menu Diet Harian
-                                </h4>
-                                <p class="text-sm text-gray-600 mb-3">
-                                    Makanan yang bikin kurus menjadi incaran banyak orang yang ingin menurunkan berat badan tanpa rasa lapar atau tersiksa. Dengan memilih...
-                                </p>
-                                <div class="flex items-center justify-between text-xs text-gray-500">
-                                    <span>5 min read</span>
-                                    <span>• 2 hari lalu</span>
+                        <a href="{{ route('articles.show', '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian') }}" class="block">
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop" 
+                                         alt="Healthy Food" 
+                                         class="w-full h-48 object-cover">
+                                    <span class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                        Hidup Sehat
+                                    </span>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                        7 Makanan yang Bikin Kurus, Cocok untuk Menu Diet Harian
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mb-3">
+                                        Makanan yang bikin kurus menjadi incaran banyak orang yang ingin menurunkan berat badan tanpa rasa lapar atau tersiksa. Dengan memilih...
+                                    </p>
+                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                        <span>5 min read</span>
+                                        <span>• 2 hari lalu</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Article 2 -->
-                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop" 
-                                     alt="Exercise" 
-                                     class="w-full h-48 object-cover">
-                                <span class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                    Olahraga
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
-                                    Tips Olahraga yang Efektif untuk Kesehatan Jantung
-                                </h4>
-                                <p class="text-sm text-gray-600 mb-3">
-                                    Olahraga teratur sangat penting untuk menjaga kesehatan jantung. Pelajari jenis olahraga yang paling efektif untuk meningkatkan fungsi...
-                                </p>
-                                <div class="flex items-center justify-between text-xs text-gray-500">
-                                    <span>7 min read</span>
-                                    <span>• 3 hari lalu</span>
+                        <a href="{{ route('articles.show', 'tips-olahraga-efektif-untuk-kesehatan-jantung') }}" class="block">
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop" 
+                                         alt="Exercise" 
+                                         class="w-full h-48 object-cover">
+                                    <span class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                        Olahraga
+                                    </span>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                        Tips Olahraga yang Efektif untuk Kesehatan Jantung
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mb-3">
+                                        Olahraga teratur sangat penting untuk menjaga kesehatan jantung. Pelajari jenis olahraga yang paling efektif untuk meningkatkan fungsi...
+                                    </p>
+                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                        <span>7 min read</span>
+                                        <span>• 3 hari lalu</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Article 3 -->
-                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=250&fit=crop" 
-                                     alt="Diabetes" 
-                                     class="w-full h-48 object-cover">
-                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                    Diabetes
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                        <a href="{{ route('articles.show', 'mengelola-diabetes-dengan-pola-makan-sehat') }}" class="block">
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=250&fit=crop" 
+                                         alt="Diabetes" 
+                                         class="w-full h-48 object-cover">
+                                    <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                        Diabetes
+                                    </span>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
                                     Mengelola Diabetes dengan Pola Makan Sehat
                                 </h4>
                                 <p class="text-sm text-gray-600 mb-3">
@@ -261,83 +266,89 @@
                         </div>
 
                         <!-- Article 4 -->
-                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=250&fit=crop" 
-                                     alt="Nutrition" 
-                                     class="w-full h-48 object-cover">
-                                <span class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                    Nutrisi
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
-                                    Pentingnya Vitamin dan Mineral untuk Tubuh
-                                </h4>
-                                <p class="text-sm text-gray-600 mb-3">
-                                    Vitamin dan mineral adalah nutrisi esensial yang dibutuhkan tubuh. Pelajari manfaat masing-masing vitamin dan sumber makanan terbaik...
-                                </p>
-                                <div class="flex items-center justify-between text-xs text-gray-500">
-                                    <span>8 min read</span>
-                                    <span>• 5 hari lalu</span>
+                        <a href="{{ route('articles.show', 'pentingnya-vitamin-dan-mineral-untuk-tubuh') }}" class="block">
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=250&fit=crop" 
+                                         alt="Nutrition" 
+                                         class="w-full h-48 object-cover">
+                                    <span class="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                        Nutrisi
+                                    </span>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                        Pentingnya Vitamin dan Mineral untuk Tubuh
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mb-3">
+                                        Vitamin dan mineral adalah nutrisi esensial yang dibutuhkan tubuh. Pelajari manfaat masing-masing vitamin dan sumber makanan terbaik...
+                                    </p>
+                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                        <span>8 min read</span>
+                                        <span>• 5 hari lalu</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Article 5 -->
-                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop" 
-                                     alt="Mental Health" 
-                                     class="w-full h-48 object-cover">
-                                <span class="absolute top-3 left-3 bg-purple-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                    Kesehatan Mental
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
-                                    Cara Mengatasi Stres dan Menjaga Kesehatan Mental
-                                </h4>
-                                <p class="text-sm text-gray-600 mb-3">
-                                    Kesehatan mental sama pentingnya dengan kesehatan fisik. Temukan strategi efektif untuk mengelola stres dan meningkatkan kesejahteraan...
-                                </p>
-                                <div class="flex items-center justify-between text-xs text-gray-500">
-                                    <span>10 min read</span>
-                                    <span>• 1 minggu lalu</span>
+                        <a href="{{ route('articles.show', 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental') }}" class="block">
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop" 
+                                         alt="Mental Health" 
+                                         class="w-full h-48 object-cover">
+                                    <span class="absolute top-3 left-3 bg-purple-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                        Kesehatan Mental
+                                    </span>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                        Cara Mengatasi Stres dan Menjaga Kesehatan Mental
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mb-3">
+                                        Kesehatan mental sama pentingnya dengan kesehatan fisik. Temukan strategi efektif untuk mengelola stres dan meningkatkan kesejahteraan...
+                                    </p>
+                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                        <span>10 min read</span>
+                                        <span>• 1 minggu lalu</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Article 6 -->
-                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400&h=250&fit=crop" 
-                                     alt="Beauty Sleep Skincare" 
-                                     class="w-full h-48 object-cover">
-                                <span class="absolute top-3 left-3 bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                    Kecantikan
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
-                                    Tips Tidur Berkualitas untuk Kulit Sehat dan Bercahaya
-                                </h4>
-                                <p class="text-sm text-gray-600 mb-3">
-                                    Tidur yang cukup dan berkualitas sangat penting untuk kesehatan kulit. Pelajari bagaimana tidur mempengaruhi kecantikan dan tips untuk...
-                                </p>
-                                <div class="flex items-center justify-between text-xs text-gray-500">
-                                    <span>6 min read</span>
-                                    <span>• 1 minggu lalu</span>
+                        <a href="{{ route('articles.show', 'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya') }}" class="block">
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1559388372-d01ad0cd0bce?w=400&h=250&fit=crop" 
+                                         alt="Sleep" 
+                                         class="w-full h-48 object-cover">
+                                    <span class="absolute top-3 left-3 bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                        Kecantikan
+                                    </span>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                        Tips Tidur Berkualitas untuk Kulit Sehat dan Bercahaya
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mb-3">
+                                        Tidur yang cukup dan berkualitas sangat penting untuk kesehatan kulit. Pelajari bagaimana tidur mempengaruhi kecantikan dan tips untuk...
+                                    </p>
+                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                        <span>6 min read</span>
+                                        <span>• 1 minggu lalu</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- View More Button -->
                     <div class="mt-8 text-center">
-                        <button class="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
+                        <a href="{{ route('articles.index') }}" class="inline-block px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
                             Lihat Semua Artikel
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
