@@ -411,7 +411,6 @@
         </div>
     </div>
 
-    @push('scripts')
     <script>
         // Toggle reply form
         function toggleReplyForm(commentId) {
@@ -678,9 +677,7 @@
             }, 3000);
         }
     </script>
-    @endpush
 
-    @push('styles')
     <style>
         /* Article Content Styling */
         .article-content {
@@ -899,5 +896,4 @@
             }
         }
     </style>
-    @endpush
 </x-app-layout>
