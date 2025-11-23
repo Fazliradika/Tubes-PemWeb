@@ -142,18 +142,32 @@
                             </div>
                             
                             @php
-                                // Define relevant topics based on article category
-                                $topicsByCategory = [
-                                    'Nutrisi' => ['Diabetes', 'Jantung', 'Hipertensi', 'Anemia', 'Kolesterol', 'Kanker'],
-                                    'Olahraga' => ['Jantung', 'Diabetes', 'Hipertensi', 'Stroke', 'Kolesterol', 'Anemia'],
-                                    'Diabetes' => ['Diabetes', 'Jantung', 'Hipertensi', 'Kolesterol', 'Stroke', 'Anemia'],
-                                    'Kesehatan Mental' => ['Relationship', 'Insecure', 'Anemia', 'Reproduksi', 'Hipertensi', 'Kanker'],
-                                    'Hidup Sehat' => ['Hipertensi', 'Diabetes', 'Jantung', 'Kolesterol', 'Stroke', 'Kanker'],
-                                    'Kecantikan' => ['Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes', 'Jantung', 'Kanker'],
+                                // Define relevant topics based on specific article content
+                                $topicsBySlug = [
+                                    '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian' => ['Diet', 'Diabetes', 'Jantung', 'Stroke', 'Kolesterol', 'Hipertensi'],
+                                    'tips-olahraga-efektif-untuk-kesehatan-jantung' => ['Jantung', 'Stroke', 'Hipertensi', 'Kolesterol', 'Diabetes', 'Anemia'],
+                                    'mengelola-diabetes-dengan-pola-makan-sehat' => ['Diabetes', 'Jantung', 'Hipertensi', 'Kolesterol', 'Stroke', 'Anemia'],
+                                    'pentingnya-vitamin-dan-mineral-untuk-tubuh' => ['Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes', 'Jantung', 'Kanker'],
+                                    'cara-mengatasi-stres-dan-menjaga-kesehatan-mental' => ['Insecure', 'Relationship', 'Anemia', 'Reproduksi', 'Hipertensi', 'Kanker'],
+                                    'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya' => ['Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes', 'Jantung', 'Kanker'],
+                                    'bahaya-hipertensi-dan-cara-mencegahnya' => ['Hipertensi', 'Jantung', 'Stroke', 'Diabetes', 'Kolesterol', 'Anemia'],
+                                    'manfaat-yoga-untuk-kesehatan-fisik-dan-mental' => ['Jantung', 'Hipertensi', 'Diabetes', 'Stroke', 'Kolesterol', 'Anemia'],
+                                    'makanan-super-untuk-meningkatkan-imun-tubuh' => ['Diabetes', 'Jantung', 'Hipertensi', 'Anemia', 'Kolesterol', 'Kanker'],
+                                    'panduan-lengkap-kesehatan-mata-di-era-digital' => ['Diabetes', 'Hipertensi', 'Anemia', 'Jantung', 'Stroke', 'Kanker'],
+                                    'detoksifikasi-tubuh-secara-alami-dan-aman' => ['Hipertensi', 'Diabetes', 'Jantung', 'Kolesterol', 'Stroke', 'Kanker'],
+                                    'manajemen-nyeri-punggung-untuk-pekerja-kantoran' => ['Hipertensi', 'Diabetes', 'Jantung', 'Stroke', 'Kolesterol', 'Anemia'],
+                                    'panduan-lengkap-diet-mediterania-untuk-jantung-sehat' => ['Jantung', 'Diabetes', 'Hipertensi', 'Kolesterol', 'Stroke', 'Anemia'],
+                                    'terapi-musik-untuk-kesehatan-mental-dan-relaksasi' => ['Relationship', 'Insecure', 'Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes'],
+                                    'manfaat-puasa-intermittent-untuk-kesehatan-dan-berat-badan' => ['Diabetes', 'Jantung', 'Hipertensi', 'Kolesterol', 'Stroke', 'Anemia'],
+                                    'olahraga-hiit-untuk-membakar-lemak-maksimal' => ['Jantung', 'Diabetes', 'Hipertensi', 'Stroke', 'Kolesterol', 'Anemia'],
+                                    'makanan-penurun-kolesterol-tinggi-secara-alami' => ['Kolesterol', 'Jantung', 'Diabetes', 'Hipertensi', 'Stroke', 'Anemia'],
+                                    'cara-mengatasi-insomnia-dan-gangguan-tidur' => ['Insecure', 'Relationship', 'Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes'],
+                                    'rahasia-kulit-glowing-dengan-perawatan-alami' => ['Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes', 'Jantung', 'Kanker'],
+                                    'panduan-hidup-sehat-untuk-penderita-asma' => ['Hipertensi', 'Diabetes', 'Jantung', 'Stroke', 'Kolesterol', 'Anemia'],
                                 ];
                                 
-                                // Get relevant topics or use default
-                                $relevantTopics = $topicsByCategory[$article['category']] ?? ['Diabetes', 'Jantung', 'Stroke', 'Kehamilan', 'Kolesterol', 'Hipertensi'];
+                                // Get relevant topics based on article slug or use default
+                                $relevantTopics = $topicsBySlug[$article['slug']] ?? ['Diabetes', 'Jantung', 'Stroke', 'Kehamilan', 'Kolesterol', 'Hipertensi'];
                             @endphp
                             
                             <div class="flex flex-wrap gap-2 mb-6">
