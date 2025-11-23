@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\PatientDashboardController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,12 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
 // Patient Dashboard Routes
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/patient/dashboard', [PatientDashboardController::class, 'index'])->name('patient.dashboard');
+});
+
+// Articles Routes (accessible to all authenticated users)
+Route::middleware('auth')->group(function () {
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 });
 
 Route::middleware('auth')->group(function () {
