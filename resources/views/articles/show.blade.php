@@ -53,11 +53,13 @@
                             <!-- Love Button -->
                             <button 
                                 id="likeButton"
-                                onclick="toggleLike()"
+                                onclick="toggleLike(event)"
+                                type="button"
                                 class="like-button p-2 rounded-full transition {{ $userHasLiked ? 'text-red-600 bg-red-50' : 'text-gray-600 hover:text-red-600 hover:bg-red-50' }}"
                                 title="Suka artikel ini"
+                                data-liked="{{ $userHasLiked ? 'true' : 'false' }}"
                             >
-                                <svg class="w-5 h-5" fill="{{ $userHasLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg id="likeIcon" class="w-5 h-5" fill="{{ $userHasLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                             </button>
@@ -415,15 +417,27 @@
         }
         
         // Toggle like
-        async function toggleLike() {
+        async function toggleLike(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
             const button = document.getElementById('likeButton');
             const likesCount = document.getElementById('likesCount');
-            const svg = button.querySelector('svg');
+            const svg = document.getElementById('likeIcon');
+            
+            console.log('Toggle like clicked'); // Debug
             
             // Disable button during request
+            if (button.disabled) {
+                console.log('Button already disabled');
+                return;
+            }
             button.disabled = true;
             
             try {
+                console.log('Sending request to:', '{{ route("articles.like.toggle") }}');
+                
                 const response = await fetch('{{ route("articles.like.toggle") }}', {
                     method: 'POST',
                     headers: {
@@ -436,25 +450,36 @@
                     })
                 });
                 
+                console.log('Response status:', response.status);
+                
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    const errorText = await response.text();
+                    console.error('Response error:', errorText);
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
                 }
                 
                 const data = await response.json();
+                console.log('Response data:', data);
                 
                 // Update likes count
                 likesCount.textContent = data.likes_count;
                 
                 // Update button style and icon
                 if (data.liked) {
+                    console.log('Setting to liked state');
                     button.classList.remove('text-gray-600', 'hover:text-red-600');
                     button.classList.add('text-red-600', 'bg-red-50');
+                    button.dataset.liked = 'true';
                     svg.setAttribute('fill', 'currentColor');
                 } else {
+                    console.log('Setting to unliked state');
                     button.classList.remove('text-red-600', 'bg-red-50');
                     button.classList.add('text-gray-600', 'hover:text-red-600');
+                    button.dataset.liked = 'false';
                     svg.setAttribute('fill', 'none');
                 }
+                
+                showNotification(data.liked ? 'Artikel disukai!' : 'Batal menyukai artikel', 'success');
             } catch (error) {
                 console.error('Error toggling like:', error);
                 showNotification('Gagal menyimpan. Silakan coba lagi.', 'error');
