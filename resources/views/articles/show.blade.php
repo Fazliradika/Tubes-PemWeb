@@ -420,17 +420,25 @@
             const likesCount = document.getElementById('likesCount');
             const svg = button.querySelector('svg');
             
+            // Disable button during request
+            button.disabled = true;
+            
             try {
                 const response = await fetch('{{ route("articles.like.toggle") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({
                         article_slug: '{{ $article["slug"] }}'
                     })
                 });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
                 
                 const data = await response.json();
                 
@@ -449,15 +457,18 @@
                 }
             } catch (error) {
                 console.error('Error toggling like:', error);
-                alert('Gagal menyimpan. Silakan coba lagi.');
+                showNotification('Gagal menyimpan. Silakan coba lagi.', 'error');
+            } finally {
+                // Re-enable button
+                button.disabled = false;
             }
         }
         
         // Share article
         async function shareArticle() {
             const url = window.location.href;
-            const title = '{{ $article["title"] }}';
-            const text = '{{ Str::limit($article["excerpt"], 100) }}';
+            const title = decodeHtmlEntities('{{ addslashes($article["title"]) }}');
+            const text = decodeHtmlEntities('{{ addslashes(Str::limit($article["excerpt"], 100)) }}');
             
             // Check if Web Share API is supported
             if (navigator.share) {
@@ -467,6 +478,7 @@
                         text: text,
                         url: url
                     });
+                    showNotification('Artikel berhasil dibagikan!', 'success');
                 } catch (error) {
                     if (error.name !== 'AbortError') {
                         fallbackShare(url, title);
@@ -477,31 +489,34 @@
             }
         }
         
+        // Decode HTML entities
+        function decodeHtmlEntities(str) {
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = str;
+            return textarea.value;
+        }
+        
         // Fallback share (copy to clipboard)
         function fallbackShare(url, title) {
-            // Try to copy URL to clipboard
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(url).then(() => {
-                    showShareModal(url);
-                }).catch(() => {
-                    showShareModal(url);
-                });
-            } else {
-                showShareModal(url);
-            }
+            showShareModal(url, title);
         }
         
         // Show share modal with options
-        function showShareModal(url) {
+        function showShareModal(url, title) {
             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => {
+                if (e.target === modal) modal.remove();
+            };
+            
             modal.innerHTML = `
-                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                <div class="bg-white rounded-lg p-6 max-w-md w-full" onclick="event.stopPropagation()">
                     <h3 class="text-lg font-bold text-gray-900 mb-4">Bagikan Artikel</h3>
                     
-                    <div class="space-y-3 mb-4">
+                    <div class="space-y-2 mb-4">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" 
                            target="_blank"
+                           onclick="showNotification('Membuka Facebook...', 'info')"
                            class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition">
                             <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -511,8 +526,9 @@
                             <span class="font-medium text-gray-900">Bagikan ke Facebook</span>
                         </a>
                         
-                        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent('{{ $article["title"] }}')}" 
+                        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}" 
                            target="_blank"
+                           onclick="showNotification('Membuka Twitter...', 'info')"
                            class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition">
                             <div class="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center text-white">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -522,8 +538,9 @@
                             <span class="font-medium text-gray-900">Bagikan ke Twitter</span>
                         </a>
                         
-                        <a href="https://wa.me/?text=${encodeURIComponent('{{ $article["title"] }} - ' + url)}" 
+                        <a href="https://wa.me/?text=${encodeURIComponent(title + ' - ' + url)}" 
                            target="_blank"
+                           onclick="showNotification('Membuka WhatsApp...', 'info')"
                            class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition">
                             <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -533,7 +550,7 @@
                             <span class="font-medium text-gray-900">Bagikan ke WhatsApp</span>
                         </a>
                         
-                        <button onclick="copyToClipboard('${url}')" 
+                        <button onclick="copyToClipboard('${url}'); this.closest('.fixed').remove();" 
                                 class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition">
                             <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -551,33 +568,51 @@
                 </div>
             `;
             document.body.appendChild(modal);
-            
-            // Close on background click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.remove();
-                }
-            });
         }
         
         // Copy to clipboard
         function copyToClipboard(text) {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(text).then(() => {
-                    alert('Link berhasil disalin!');
+                    showNotification('Link berhasil disalin!', 'success');
+                }).catch(() => {
+                    fallbackCopy(text);
                 });
             } else {
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                textarea.style.position = 'fixed';
-                textarea.style.opacity = '0';
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('Link berhasil disalin!');
+                fallbackCopy(text);
             }
+        }
+        
+        // Fallback copy method
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showNotification('Link berhasil disalin!', 'success');
+            } catch (err) {
+                showNotification('Gagal menyalin link', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity duration-300`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
     </script>
     @endpush
