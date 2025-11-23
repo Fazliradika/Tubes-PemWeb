@@ -32,10 +32,19 @@ class ArticleController extends Controller
             ->latest()
             ->get();
         
+        $likesCount = \App\Models\ArticleLike::where('article_slug', $slug)->count();
+        $userHasLiked = auth()->check() 
+            ? \App\Models\ArticleLike::where('article_slug', $slug)
+                ->where('user_id', auth()->id())
+                ->exists()
+            : false;
+        
         return view('articles.show', [
             'article' => $article,
             'relatedArticles' => $relatedArticles,
             'comments' => $comments,
+            'likesCount' => $likesCount,
+            'userHasLiked' => $userHasLiked,
         ]);
     }
 

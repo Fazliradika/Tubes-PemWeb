@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\PatientDashboardController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
@@ -157,6 +158,9 @@ Route::middleware('auth')->group(function () {
     // Comment Routes
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    
+    // Article Like Routes
+    Route::post('/articles/like/toggle', [ArticleLikeController::class, 'toggle'])->name('articles.like.toggle');
 });
 
 Route::middleware('auth')->group(function () {
