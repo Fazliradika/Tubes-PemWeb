@@ -141,42 +141,32 @@
                                 </a>
                             </div>
                             
+                            @php
+                                // Define relevant topics based on article category
+                                $topicsByCategory = [
+                                    'Nutrisi' => ['Diabetes', 'Jantung', 'Hipertensi', 'Anemia', 'Kolesterol', 'Kanker'],
+                                    'Olahraga' => ['Jantung', 'Diabetes', 'Hipertensi', 'Stroke', 'Kolesterol', 'Anemia'],
+                                    'Diabetes' => ['Diabetes', 'Jantung', 'Hipertensi', 'Kolesterol', 'Stroke', 'Anemia'],
+                                    'Kesehatan Mental' => ['Relationship', 'Insecure', 'Anemia', 'Reproduksi', 'Hipertensi', 'Kanker'],
+                                    'Hidup Sehat' => ['Hipertensi', 'Diabetes', 'Jantung', 'Kolesterol', 'Stroke', 'Kanker'],
+                                    'Kecantikan' => ['Anemia', 'Reproduksi', 'Hipertensi', 'Diabetes', 'Jantung', 'Kanker'],
+                                ];
+                                
+                                // Get relevant topics or use default
+                                $relevantTopics = $topicsByCategory[$article['category']] ?? ['Diabetes', 'Jantung', 'Stroke', 'Kehamilan', 'Kolesterol', 'Hipertensi'];
+                            @endphp
+                            
                             <div class="flex flex-wrap gap-2 mb-6">
+                                @foreach($relevantTopics as $topic)
                                 <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Coronavirus
+                                    {{ $topic }}
                                 </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Diabetes
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Jantung
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Stroke
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Kehamilan
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Kolesterol
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Hipertensi
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Anemia
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Kanker
-                                </a>
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                                    Reproduksi
-                                </a>
+                                @endforeach
                             </div>
 
                             <div class="border-t pt-6">
                                 <h4 class="text-lg font-bold text-gray-900 mb-4">Artikel Terkait</h4>
-                                <div class="space-y-5">
+                                <div class="space-y-4">
                                     @php
                                         $sidebarArticles = collect($relatedArticles)->take(5);
                                         if($sidebarArticles->count() == 0) {
@@ -188,19 +178,19 @@
                                     @endphp
                                     
                                     @foreach($sidebarArticles as $sidebar)
-                                    <a href="{{ route('articles.show', $sidebar['slug']) }}" class="block group">
+                                    <a href="{{ route('articles.show', $sidebar['slug']) }}" class="block group hover:bg-gray-50 rounded-lg transition p-2 -mx-2">
                                         <div class="flex gap-3">
                                             <img src="{{ $sidebar['image'] }}" 
                                                  alt="{{ $sidebar['title'] }}" 
-                                                 class="w-24 h-24 object-cover rounded-lg flex-shrink-0">
+                                                 class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
                                             <div class="flex-1 min-w-0">
-                                                <h5 class="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2 mb-2 leading-snug">
+                                                <h5 class="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2 mb-2 leading-tight">
                                                     {{ $sidebar['title'] }}
                                                 </h5>
-                                                <div class="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                                                <div class="flex items-center gap-2 text-xs">
                                                     <span class="text-teal-600 font-medium">{{ $sidebar['category'] }}</span>
-                                                    <span>•</span>
-                                                    <span>{{ $sidebar['read_time'] }}</span>
+                                                    <span class="text-gray-400">•</span>
+                                                    <span class="text-gray-500">{{ $sidebar['read_time'] }}</span>
                                                 </div>
                                             </div>
                                         </div>
