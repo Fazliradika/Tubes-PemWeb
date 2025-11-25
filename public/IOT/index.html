@@ -151,6 +151,24 @@
                     <p>Dapatkan peringatan langsung ke smartphone melalui aplikasi Blynk saat pakan hampir habis atau pH air tidak normal</p>
                     <div class="feature-tag">Blynk IoT App</div>
                 </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <h3>Sensor Suhu Air</h3>
+                    <p>Monitor suhu air akuarium secara real-time untuk menjaga kondisi optimal bagi ikan </p>
+                    <div class="feature-tag">DS18B20 Waterproof</div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3>Alarm Buzzer</h3>
+                    <p>Buzzer akan berbunyi sebagai peringatan ketika pakan ikan habis</p>
+                    <div class="feature-tag">Buzzer Active 3V-5V</div>
+                </div>
             </div>
         </div>
     </section>
@@ -214,6 +232,44 @@
                             <li><i class="fas fa-check"></i> Torsi: 1.8 kg/cm</li>
                             <li><i class="fas fa-check"></i> Rotasi: 0-180°</li>
                             <li><i class="fas fa-check"></i> Voltage: 4.8-6V</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sensor-item reverse">
+                    <div class="sensor-visual">
+                        <div class="sensor-icon-large" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="sensor-waves" style="border-color: rgba(239, 68, 68, 0.3);"></div>
+                    </div>
+                    <div class="sensor-info">
+                        <h3>Sensor Suhu DS18B20 Waterproof</h3>
+                        <p>Sensor suhu tahan air yang dirancang khusus untuk mengukur suhu air akuarium dengan akurasi tinggi. Digunakan untuk monitoring suhu secara real-time</p>
+                        <ul class="sensor-specs">
+                            <li><i class="fas fa-check"></i> Range: -55°C hingga +125°C</li>
+                            <li><i class="fas fa-check"></i> Akurasi: ±0.5°C</li>
+                            <li><i class="fas fa-check"></i> Waterproof stainless steel probe</li>
+                            <li><i class="fas fa-check"></i> Kabel: 1 meter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sensor-item">
+                    <div class="sensor-visual">
+                        <div class="sensor-icon-large" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="buzzer-pulse"></div>
+                    </div>
+                    <div class="sensor-info">
+                        <h3>Buzzer Active 3V-5V</h3>
+                        <p>Buzzer aktif sebagai sistem peringatan audio ketika pakan ikan habis atau kondisi air tidak optimal. Memberikan notifikasi langsung tanpa perlu melihat layar</p>
+                        <ul class="sensor-specs">
+                            <li><i class="fas fa-check"></i> Voltage: 3V - 5V DC</li>
+                            <li><i class="fas fa-check"></i> Frekuensi: 2300Hz</li>
+                            <li><i class="fas fa-check"></i> Ukuran: 12x9.5mm</li>
+                            <li><i class="fas fa-check"></i> Trigger: Pakan habis / pH abnormal</li>
                         </ul>
                     </div>
                 </div>
@@ -293,6 +349,25 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="dashboard-card buzzer-card">
+                    <div class="card-header">
+                        <i class="fas fa-volume-up"></i>
+                        <span>Alarm Buzzer</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="buzzer-display">
+                            <div class="buzzer-icon" id="buzzer-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="buzzer-status-text" id="buzzer-text">Standby</div>
+                        </div>
+                        <div class="status-badge good" id="buzzer-status">Normal</div>
+                        <div class="buzzer-info">
+                            <small><i class="fas fa-info-circle"></i> Berbunyi saat pakan &lt;20% atau pH abnormal</small>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="schedule-section">
@@ -358,7 +433,7 @@
                     <div class="workflow-number">4</div>
                     <div class="workflow-content">
                         <h4>Monitoring</h4>
-                        <p>Data ditampilkan di LCD dan aplikasi web</p>
+                        <p>Data ditampilkan di LCD dan aplikasi mobile</p>
                     </div>
                 </div>
             </div>

@@ -147,6 +147,72 @@ function updateDashboard() {
     const tempStatusEl = document.getElementById('temp-status');
     tempStatusEl.textContent = tempStatus.status;
     tempStatusEl.className = `status-badge ${tempStatus.class}`;
+
+    // Update Buzzer Status
+    updateBuzzerStatus(feedLevel, parseFloat(phValue));
+}
+
+// ===== BUZZER STATUS UPDATE =====
+function updateBuzzerStatus(feedLevel, phValue) {
+    const buzzerIcon = document.getElementById('buzzer-icon');
+    const buzzerText = document.getElementById('buzzer-text');
+    const buzzerStatus = document.getElementById('buzzer-status');
+    
+    if (!buzzerIcon || !buzzerText || !buzzerStatus) return;
+    
+    // Check if buzzer should be active
+    const feedLow = feedLevel < 20;
+    const phAbnormal = phValue < 6.0 || phValue > 8.0;
+    
+    if (feedLow || phAbnormal) {
+        // Activate buzzer alarm
+        buzzerIcon.classList.add('active');
+        buzzerIcon.innerHTML = '<i class="fas fa-bell" style="animation: shake 0.5s ease-in-out infinite;"></i>';
+        
+        if (feedLow && phAbnormal) {
+            buzzerText.textContent = 'ALARM! Pakan & pH';
+            buzzerText.style.color = '#ef4444';
+        } else if (feedLow) {
+            buzzerText.textContent = 'ALARM! Pakan Habis';
+            buzzerText.style.color = '#ef4444';
+        } else {
+            buzzerText.textContent = 'ALARM! pH Abnormal';
+            buzzerText.style.color = '#ef4444';
+        }
+        
+        buzzerStatus.textContent = 'Berbunyi!';
+        buzzerStatus.className = 'status-badge danger';
+    } else if (feedLevel < 30 || (phValue < 6.5 || phValue > 7.5)) {
+        // Warning state
+        buzzerIcon.classList.remove('active');
+        buzzerIcon.innerHTML = '<i class="fas fa-bell"></i>';
+        buzzerText.textContent = 'Siaga';
+        buzzerText.style.color = '#f59e0b';
+        buzzerStatus.textContent = 'Waspada';
+        buzzerStatus.className = 'status-badge warning';
+    } else {
+        // Normal state
+        buzzerIcon.classList.remove('active');
+        buzzerIcon.innerHTML = '<i class="fas fa-bell"></i>';
+        buzzerText.textContent = 'Standby';
+        buzzerText.style.color = '#00ffc8';
+        buzzerStatus.textContent = 'Normal';
+        buzzerStatus.className = 'status-badge good';
+    }
+}
+
+// Add shake animation for buzzer
+if (!document.querySelector('#buzzer-shake-style')) {
+    const style = document.createElement('style');
+    style.id = 'buzzer-shake-style';
+    style.textContent = `
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 // Update dashboard every 2 seconds

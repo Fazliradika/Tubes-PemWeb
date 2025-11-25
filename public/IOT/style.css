@@ -896,6 +896,81 @@ body {
     text-align: center;
 }
 
+/* Buzzer Card */
+.buzzer-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.buzzer-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.2));
+    border: 2px solid #f59e0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.buzzer-icon i {
+    font-size: 2rem;
+    color: #f59e0b;
+}
+
+.buzzer-icon.active {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3));
+    border-color: #ef4444;
+    animation: buzzer-alarm 0.5s ease-in-out infinite;
+}
+
+.buzzer-icon.active i {
+    color: #ef4444;
+}
+
+@keyframes buzzer-alarm {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px 10px rgba(239, 68, 68, 0.2); }
+}
+
+.buzzer-status-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--water-cyan);
+}
+
+.buzzer-info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.buzzer-info small {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+.buzzer-info i {
+    margin-right: 5px;
+}
+
+/* Buzzer Pulse Animation for Sensor Section */
+.buzzer-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(245, 158, 11, 0.5);
+    border-radius: 50%;
+    animation: buzzer-pulse-anim 2s ease-out infinite;
+}
+
+@keyframes buzzer-pulse-anim {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
 /* Status Badge */
 .status-badge {
     padding: 5px 20px;
