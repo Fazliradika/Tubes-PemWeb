@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFeeder Fish IoT - Ocean and Engines</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="ocean-bg">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <div class="bubble bubble5"></div>
+        <div class="bubble bubble6"></div>
+        <div class="bubble bubble7"></div>
+        <div class="bubble bubble8"></div>
+        <div class="fish fish1">🐠</div>
+        <div class="fish fish2">🐟</div>
+        <div class="fish fish3">🐡</div>
+        <div class="seaweed seaweed1">🌿</div>
+        <div class="seaweed seaweed2">🌿</div>
+        <div class="seaweed seaweed3">🌿</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-fish"></i>
+                <span>Ocean & Engines</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#sensors">Sensor</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#team">Tim</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="glowing-text">SmartFeeder Fish IoT</h1>
+                <h2>Discover the Future of Smart Aquaculture!</h2>
+                <p>Temukan teknologi pintar untuk memberi pakan ikan otomatis dan memantau kualitas air kapan saja</p>
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> Mulai Eksplorasi
+                    </a>
+                    <a href="#dashboard" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> Lihat Dashboard
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="aquarium-display">
+                    <div class="aquarium-glass">
+                        <div class="water-effect"></div>
+                        <div class="mini-fish">🐠</div>
+                        <div class="mini-fish">🐟</div>
+                        <div class="mini-fish">🐡</div>
+                        <div class="coral">🪸</div>
+                        <div class="feeder-indicator">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,googl172.46-45.71,248.8-84.81V0Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i> Fitur Unggulan
+            </h2>
+            <p class="section-subtitle">Solusi lengkap untuk pemeliharaan ikan yang cerdas dan efisien</p>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Pemberian Pakan Otomatis</h3>
+                    <p>Jadwalkan pemberian pakan ikan secara otomatis dengan presisi tinggi menggunakan servo motor</p>
+                    <div class="feature-tag">Servo Motor SG90</div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Monitoring pH Air</h3>
+                    <p>Pantau keasaman air akuarium secara real-time untuk menjaga kesehatan ikan</p>
+                    <div class="feature-tag">pH Sensor</div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Deteksi Level Pakan</h3>
+                    <p>Sensor ultrasonik mendeteksi level pakan dan memberikan notifikasi saat hampir habis</p>
+                    <div class="feature-tag">HC-SR04</div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Konektivitas IoT</h3>
+                    <p>Terhubung ke internet untuk monitoring dan kontrol jarak jauh melalui smartphone</p>
+                    <div class="feature-tag">ESP32/NodeMCU</div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>Display LCD</h3>
+                    <p>Tampilan LCD menunjukkan status sistem, pH air, dan level pakan secara real-time</p>
+                    <div class="feature-tag">LCD 16x2 I2C</div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon blynk-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Notifikasi via Blynk</h3>
+                    <p>Dapatkan peringatan langsung ke smartphone melalui aplikasi Blynk saat pakan hampir habis atau pH air tidak normal</p>
+                    <div class="feature-tag">Blynk IoT App</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sensors Section -->
+    <section id="sensors" class="sensors">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-microchip"></i> Komponen Sensor
+            </h2>
+            <p class="section-subtitle">Teknologi sensor canggih untuk monitoring akuarium</p>
+
+            <div class="sensors-showcase">
+                <div class="sensor-item">
+                    <div class="sensor-visual">
+                        <div class="sensor-icon-large">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="sensor-waves"></div>
+                    </div>
+                    <div class="sensor-info">
+                        <h3>pH Sensor</h3>
+                        <p>Sensor pH digunakan untuk mengukur tingkat keasaman air akuarium. pH ideal untuk ikan air tawar adalah 6.5-7.5</p>
+                        <ul class="sensor-specs">
+                            <li><i class="fas fa-check"></i> Range: 0-14 pH</li>
+                            <li><i class="fas fa-check"></i> Akurasi: ±0.1 pH</li>
+                            <li><i class="fas fa-check"></i> Response time: &lt;1 detik</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sensor-item reverse">
+                    <div class="sensor-visual">
+                        <div class="sensor-icon-large ultrasonic">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <div class="ultrasonic-wave"></div>
+                    </div>
+                    <div class="sensor-info">
+                        <h3>Sensor Ultrasonik HC-SR04</h3>
+                        <p>Menggunakan prinsip yang sama dengan kelelawar! Sensor memancarkan gelombang ultrasonik untuk mengukur jarak dan mendeteksi level pakan</p>
+                        <ul class="sensor-specs">
+                            <li><i class="fas fa-check"></i> Range: 2cm - 400cm</li>
+                            <li><i class="fas fa-check"></i> Frekuensi: 40kHz</li>
+                            <li><i class="fas fa-check"></i> Akurasi: 3mm</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sensor-item">
+                    <div class="sensor-visual">
+                        <div class="sensor-icon-large servo">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="servo-motion"></div>
+                    </div>
+                    <div class="sensor-info">
+                        <h3>Servo Motor SG90</h3>
+                        <p>Motor servo mengontrol mekanisme pembukaan wadah pakan dengan presisi tinggi</p>
+                        <ul class="sensor-specs">
+                            <li><i class="fas fa-check"></i> Torsi: 1.8 kg/cm</li>
+                            <li><i class="fas fa-check"></i> Rotasi: 0-180°</li>
+                            <li><i class="fas fa-check"></i> Voltage: 4.8-6V</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-tachometer-alt"></i> Live Dashboard
+            </h2>
+            <p class="section-subtitle">Monitoring real-time kondisi akuarium Anda</p>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card ph-card">
+                    <div class="card-header">
+                        <i class="fas fa-vial"></i>
+                        <span>pH Air</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="gauge-container">
+                            <div class="gauge" id="ph-gauge">
+                                <div class="gauge-fill"></div>
+                                <div class="gauge-value" id="ph-value">7.2</div>
+                            </div>
+                        </div>
+                        <div class="status-badge good" id="ph-status">Normal</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card feed-card">
+                    <div class="card-header">
+                        <i class="fas fa-box"></i>
+                        <span>Level Pakan</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="feed-level-container">
+                            <div class="feed-tank">
+                                <div class="feed-fill" id="feed-fill"></div>
+                                <div class="feed-percentage" id="feed-percentage">75%</div>
+                            </div>
+                        </div>
+                        <div class="status-badge good" id="feed-status">Cukup</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card temp-card">
+                    <div class="card-header">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>Suhu Air</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="temp-display">
+                            <span class="temp-value" id="temp-value">26</span>
+                            <span class="temp-unit">°C</span>
+                        </div>
+                        <div class="status-badge good" id="temp-status">Optimal</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card feeder-card">
+                    <div class="card-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Feeder Status</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="feeder-control">
+                            <button class="feed-btn" id="feed-btn" onclick="triggerFeeding()">
+                                <i class="fas fa-hand-pointer"></i>
+                                <span>Beri Pakan</span>
+                            </button>
+                        </div>
+                        <div class="last-feed" id="last-feed">
+                            Terakhir: <span id="last-feed-time">10:30 WIB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-section">
+                <h3><i class="fas fa-calendar-alt"></i> Jadwal Pemberian Pakan</h3>
+                <div class="schedule-grid">
+                    <div class="schedule-item active">
+                        <div class="schedule-time">07:00</div>
+                        <div class="schedule-label">Pagi</div>
+                        <div class="schedule-status"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">12:00</div>
+                        <div class="schedule-label">Siang</div>
+                        <div class="schedule-status"><i class="fas fa-clock"></i></div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">18:00</div>
+                        <div class="schedule-label">Sore</div>
+                        <div class="schedule-status"><i class="fas fa-clock"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-cogs"></i> Cara Kerja
+            </h2>
+            <p class="section-subtitle">Sistem terintegrasi yang bekerja secara otomatis</p>
+
+            <div class="workflow">
+                <div class="workflow-item">
+                    <div class="workflow-number">1</div>
+                    <div class="workflow-content">
+                        <h4>Sensor Membaca Data</h4>
+                        <p>pH sensor dan ultrasonik mengumpulkan data kondisi akuarium</p>
+                    </div>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                
+                <div class="workflow-item">
+                    <div class="workflow-number">2</div>
+                    <div class="workflow-content">
+                        <h4>Mikrokontroler Proses</h4>
+                        <p>ESP32 memproses data dan mengirim ke cloud</p>
+                    </div>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                
+                <div class="workflow-item">
+                    <div class="workflow-number">3</div>
+                    <div class="workflow-content">
+                        <h4>Aksi Otomatis</h4>
+                        <p>Servo motor memberi pakan sesuai jadwal atau perintah</p>
+                    </div>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                
+                <div class="workflow-item">
+                    <div class="workflow-number">4</div>
+                    <div class="workflow-content">
+                        <h4>Monitoring</h4>
+                        <p>Data ditampilkan di LCD dan aplikasi web</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i> Tim Ocean & Engines
+            </h2>
+            <p class="section-subtitle">S1IT-KJ-23-002 | Kelompok 2 | Telkom University Jakarta</p>
+
+            <div class="team-info">
+                <div class="university-badge">
+                    <i class="fas fa-university"></i>
+                    <div>
+                        <h4>Telkom University Jakarta</h4>
+                        <p>Kampus Stasiun Bumi</p>
+                    </div>
+                </div>
+                <div class="event-info">
+                    <i class="fas fa-calendar-check"></i>
+                    <div>
+                        <h4>Presentasi Project</h4>
+                        <p>26 November 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Members -->
+            <div class="team-members">
+                <h3 class="team-members-title"><i class="fas fa-user-friends"></i> Anggota Kelompok</h3>
+                <div class="members-grid">
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Fachrul Rozi</h4>
+                            <span class="nim">103062330074</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Irfan Nafis Maulana</h4>
+                            <span class="nim">103062330076</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Abiyyu Aryasena</h4>
+                            <span class="nim">103062300085</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Muhammad Rafadi Kurniawan</h4>
+                            <span class="nim">103062300089</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Fazli Radika</h4>
+                            <span class="nim">103062300092</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Muhammad Afriza Hidayat</h4>
+                            <span class="nim">103062300093</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Andi Naufal Dwi Putra</h4>
+                            <span class="nim">103062300099</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-showcase">
+                <div class="showcase-title">
+                    <h3>🐟 SmartFeeder Fish IoT Project 🐟</h3>
+                    <p>Inovasi teknologi untuk akuakultur cerdas masa depan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-fish"></i>
+                <span>Ocean & Engines</span>
+            </div>
+            <p>SmartFeeder Fish IoT - Discover the Future of Smart Aquaculture</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#features">Fitur</a>
+                <a href="#sensors">Sensor</a>
+                <a href="#dashboard">Dashboard</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">© 2025 Ocean & Engines - Telkom University Jakarta</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
