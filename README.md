@@ -1,52 +1,76 @@
-# 🏥 Healthcare E-Commerce Platform# 🐺 Tugas Besar Pemrograman Web - Kelompok Serigala Putih
+# 🏥 HealthFirst Medical - Sistem Manajemen Rumah Sakit
 
-
-
-Sistem E-Commerce untuk produk kesehatan yang dibangun dengan Laravel 12.![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)
-
+![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)
 ![PHP](https://img.shields.io/badge/PHP-8.4-blue?style=for-the-badge&logo=php)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=for-the-badge&logo=tailwind-css)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?style=for-the-badge&logo=mysql)
 
-![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=flat-square&logo=laravel)![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=for-the-badge&logo=tailwind-css)
+---
 
-![PHP](https://img.shields.io/badge/PHP-8.2+-blue?style=flat-square&logo=php)
+## 📖 Tentang Proyek
 
-![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?style=flat-square&logo=mysql)---
+HealthFirst Medical adalah sistem manajemen rumah sakit berbasis web yang dibangun dengan Laravel 12. Sistem ini menyediakan layanan kesehatan lengkap mulai dari konsultasi dokter, manajemen appointment, resep digital, hingga e-commerce produk kesehatan.
 
+---
 
+## ✨ Fitur Utama
 
----## 📖 Tentang Proyek
-
-
-
-## 🎯 Fitur UtamaIni adalah proyek Tugas Besar Pemrograman Web yang dikerjakan oleh **Kelompok Serigala Putih**. Proyek ini menggunakan Laravel Framework dengan berbagai fitur modern untuk membangun aplikasi web yang lengkap.
-
-
-
-### 🔐 Autentikasi & Manajemen User---
-
-- Login & Register dengan role (Admin/Dokter/Pasien)
-
-- Profile management dengan upload foto## ✨ Fitur Utama
-
+### 🔐 Autentikasi & Manajemen Pengguna
+- Sistem login & registrasi dengan role (Admin/Dokter/Pasien)
+- Manajemen profil dengan upload foto
 - Role-based access control
+- Manajemen password
 
-- Password management- 🔐 **Authentication & User Management** - Sistem login, register, dan manajemen user
+### 🏥 Sistem Appointment Dokter
+- Pembuatan janji temu dengan dokter
+- Manajemen jadwal dokter
+- Status appointment (pending, confirmed, completed, cancelled)
+- Riwayat konsultasi pasien
 
-- 🛒 **E-Commerce System** - Katalog produk, shopping cart, dan checkout
+### 💊 Resep Digital
+- Dokter dapat membuat resep untuk pasien
+- Pasien dapat melihat resep mereka
+- Detail obat dan instruksi penggunaan
+- Riwayat resep
 
-### 🛒 E-Commerce- 📊 **Dashboard & Analytics** - Visualisasi data dan laporan
+### 💬 Chat Real-time
+- Chat antara dokter dan pasien
+- Konsultasi online
+- Riwayat percakapan
 
-- Katalog produk kesehatan (18 produk dalam 5 kategori)- 📝 **Content Management System** - Manajemen artikel dan konten
+### 🤖 AI Health Assistant
+- Asisten kesehatan berbasis AI (Google Gemini)
+- Konsultasi kesehatan otomatis
+- Saran kesehatan personalisasi
 
-- Shopping cart untuk guest dan user- ⚙️ **Admin Panel** - Panel administrasi lengkap
+### 🛒 E-Commerce Produk Kesehatan
+- Katalog produk kesehatan (obat, suplemen, alat kesehatan)
+- Shopping cart untuk guest dan user
+- Pencarian & filter produk
+- Proses checkout lengkap
+- Pelacakan pesanan dengan 5 status
+- Simulasi pembayaran (Transfer Bank, E-wallet, COD)
 
-- Search & filter produk- 📱 **Responsive Design** - Tampilan yang optimal di semua perangkat
+### 📊 Dashboard & Analytics
+- Dashboard admin dengan statistik lengkap
+- Dashboard dokter untuk manajemen pasien
+- Dashboard pasien untuk riwayat medis
+- Laporan penjualan dan pengguna
+- Visualisasi data interaktif
 
-- Checkout process lengkap
+### ⚙️ Panel Admin
+- Manajemen pengguna (Admin, Dokter, Pasien)
+- Manajemen produk dan kategori
+- Manajemen pesanan
+- Laporan dan analytics
+- Konfigurasi sistem
 
-- Order tracking dengan 5 status---
+### 📱 Responsive Design
+- Tampilan optimal di semua perangkat
+- Mobile-friendly interface
+- Modern UI dengan Tailwind CSS
 
-- Payment simulation (Bank Transfer, E-wallet, COD)
+---
 
 ## 🛠️ Teknologi yang Digunakan
 
