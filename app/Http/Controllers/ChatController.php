@@ -132,14 +132,11 @@ class ChatController extends Controller
         // Update conversation last message time
         $conversation->update(['last_message_at' => now()]);
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => $message->load('sender'),
-            ]);
-        }
-
-        return back();
+        // Always return JSON for AJAX requests
+        return response()->json([
+            'success' => true,
+            'message' => $message->load('sender'),
+        ]);
     }
 
     /**

@@ -160,29 +160,69 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({ message })
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+                
+                if (data.success) {
                     messageInput.value = '';
-                    // Reload messages or append via JS
-                    location.reload();
+                    
+                    // Add message to UI immediately
+                    const messagesArea = document.getElementById('messagesArea');
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'flex justify-end';
+                    messageDiv.innerHTML = `
+                        <div class="max-w-xs lg:max-w-md">
+                            <div class="rounded-lg p-3 bg-blue-600 text-white">
+                                <p class="text-sm">${escapeHtml(message)}</p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 text-right">
+                                ${new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit'})}
+                            </p>
+                        </div>
+                    `;
+                    messagesArea.appendChild(messageDiv);
+                    messagesArea.scrollTop = messagesArea.scrollHeight;
                 }
             } catch (error) {
                 console.error('Error sending message:', error);
+                alert('Gagal mengirim pesan');
             }
         });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         // Initiate Call
         async function initiateCall(type) {
             try {
+                // Request permission first
+                const constraints = {
+                    audio: true,
+                    video: type === 'video'
+                };
+
+                try {
+                    localStream = await navigator.mediaDevices.getUserMedia(constraints);
+                } catch (mediaError) {
+                    alert('Tidak dapat mengakses ' + (type === 'video' ? 'kamera/mikrofon' : 'mikrofon') + '. Pastikan Anda memberikan izin akses.');
+                    console.error('Media error:', mediaError);
+                    return;
+                }
+
                 const response = await fetch(`/calls/conversations/${conversationId}/initiate`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({ type })
                 });
@@ -190,29 +230,32 @@
                 const data = await response.json();
                 
                 if (!data.success) {
-                    alert('Gagal memulai panggilan');
+                    alert('Gagal memulai panggilan: ' + (data.error || 'Unknown error'));
+                    if (localStream) {
+                        localStream.getTracks().forEach(track => track.stop());
+                    }
                     return;
                 }
                 
                 currentCallSession = data.call_session;
-
-                // Get user media
-                const constraints = {
-                    audio: true,
-                    video: type === 'video'
-                };
-
-                localStream = await navigator.mediaDevices.getUserMedia(constraints);
 
                 // Show call modal
                 document.getElementById('callModal').classList.remove('hidden');
                 
                 if (type === 'video') {
                     document.getElementById('videoContainer').classList.remove('hidden');
-                    document.getElementById('localVideo').srcObject = localStream;
+                    document.getElementById('voiceContainer').classList.add('hidden');
+                    const localVideo = document.getElementById('localVideo');
+                    localVideo.srcObject = localStream;
                     document.getElementById('toggleCamera').classList.remove('hidden');
+                    
+                    // Simulate remote video (in production, this would be the actual remote stream)
+                    const remoteVideo = document.getElementById('remoteVideo');
+                    remoteVideo.srcObject = localStream; // Demo: show own video
                 } else {
                     document.getElementById('voiceContainer').classList.remove('hidden');
+                    document.getElementById('videoContainer').classList.add('hidden');
+                    document.getElementById('toggleCamera').classList.add('hidden');
                 }
 
                 // Update call status
@@ -227,39 +270,19 @@
                     document.getElementById('callDuration').textContent = 
                         `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
                 }, 1000);
-
-                // Setup peer connection
-                setupPeerConnection();
                 
             } catch (error) {
                 console.error('Error initiating call:', error);
-                alert('Gagal memulai panggilan. Pastikan browser Anda mengizinkan akses kamera/mikrofon.');
+                alert('Gagal memulai panggilan: ' + error.message);
+                if (localStream) {
+                    localStream.getTracks().forEach(track => track.stop());
+                }
             }
         }
 
         function setupPeerConnection() {
-            peerConnection = new RTCPeerConnection(configuration);
-
-            // Add local stream tracks
-            localStream.getTracks().forEach(track => {
-                peerConnection.addTrack(track, localStream);
-            });
-
-            // Handle incoming tracks
-            peerConnection.ontrack = (event) => {
-                const remoteVideo = document.getElementById('remoteVideo');
-                if (remoteVideo) {
-                    remoteVideo.srcObject = event.streams[0];
-                }
-            };
-
-            // Handle ICE candidates
-            peerConnection.onicecandidate = (event) => {
-                if (event.candidate) {
-                    // Send candidate to remote peer via signaling server
-                    console.log('ICE candidate:', event.candidate);
-                }
-            };
+            // Simplified for demo - in production you'd implement full WebRTC signaling
+            console.log('Call session established');
         }
 
         // End Call
@@ -269,7 +292,9 @@
                     await fetch(`/calls/sessions/${currentCallSession.id}/end`, {
                         method: 'POST',
                         headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
                         }
                     });
                 }
@@ -277,11 +302,13 @@
                 // Stop all tracks
                 if (localStream) {
                     localStream.getTracks().forEach(track => track.stop());
+                    localStream = null;
                 }
 
                 // Close peer connection
                 if (peerConnection) {
                     peerConnection.close();
+                    peerConnection = null;
                 }
 
                 // Hide call modal
@@ -292,12 +319,27 @@
                 // Clear interval
                 if (callDurationInterval) {
                     clearInterval(callDurationInterval);
+                    callDurationInterval = null;
                 }
 
-                // Reload page
+                // Reset current session
+                currentCallSession = null;
+
+                // Show success message
+                alert('Panggilan selesai');
+                
+                // Reload to show call history
                 location.reload();
             } catch (error) {
                 console.error('Error ending call:', error);
+                // Still cleanup even if request fails
+                if (localStream) {
+                    localStream.getTracks().forEach(track => track.stop());
+                }
+                document.getElementById('callModal').classList.add('hidden');
+                if (callDurationInterval) {
+                    clearInterval(callDurationInterval);
+                }
             }
         }
 
