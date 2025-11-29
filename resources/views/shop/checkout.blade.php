@@ -151,7 +151,7 @@
                                     @foreach($cart->cartItems as $item)
                                         <div class="flex items-start space-x-3 text-sm">
                                             @if($item->product->image)
-                                                <img src="{{ asset('storage/' . $item->product->image) }}" 
+                                                <img src="https://via.placeholder.com/150x150/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}" 
                                                     alt="{{ $item->product->name }}" 
                                                     class="w-12 h-12 object-cover rounded">
                                             @else

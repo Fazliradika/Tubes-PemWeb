@@ -19,7 +19,7 @@
                 <div class="md:w-1/3 bg-gradient-to-br from-blue-500 to-blue-600 p-8 text-white">
                     <div class="text-center">
                         @if($doctor->photo)
-                            <img src="{{ asset('storage/' . $doctor->photo) }}" 
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($doctor->name) }}&size=300&background=4F46E5&color=fff&bold=true" 
                                  alt="{{ $doctor->user->name }}"
                                  class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white object-cover">
                         @else

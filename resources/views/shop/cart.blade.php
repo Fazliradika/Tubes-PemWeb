@@ -35,7 +35,7 @@
                                             <!-- Product Image -->
                                             <div class="flex-shrink-0">
                                                 @if($item->product->image)
-                                                    <img src="{{ asset('storage/' . $item->product->image) }}" 
+                                                    <img src="https://via.placeholder.com/200x200/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}" 
                                                         alt="{{ $item->product->name }}" 
                                                         class="w-24 h-24 object-cover rounded">
                                                 @else

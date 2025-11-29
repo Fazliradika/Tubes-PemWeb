@@ -38,7 +38,7 @@
                         <!-- Doctor Photo -->
                         <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600 relative">
                             @if($doctor->photo)
-                                <img src="{{ asset('storage/' . $doctor->photo) }}" 
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($doctor->name) }}&size=200&background=4F46E5&color=fff&bold=true" 
                                      alt="{{ $doctor->user->name }}"
                                      class="w-full h-full object-cover">
                             @else

@@ -30,7 +30,7 @@
                         <!-- Product Image -->
                         <div>
                             @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" 
+                                <img src="https://via.placeholder.com/600x600/4F46E5/FFFFFF?text={{ urlencode($product->name) }}" alt="{{ $product->name }}" 
                                     class="w-full h-auto rounded-lg shadow-md">
                             @else
                                 <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -116,7 +116,7 @@
                             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                                 <a href="{{ route('products.show', $relatedProduct->slug) }}">
                                     @if($relatedProduct->image)
-                                        <img src="{{ asset('storage/' . $relatedProduct->image) }}" alt="{{ $relatedProduct->name }}" 
+                                        <img src="https://via.placeholder.com/300x300/4F46E5/FFFFFF?text={{ urlencode($relatedProduct->name) }}" alt="{{ $relatedProduct->name }}" 
                                             class="w-full h-48 object-cover">
                                     @else
                                         <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
