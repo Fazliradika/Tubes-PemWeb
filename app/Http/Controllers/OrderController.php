@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -12,7 +13,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id', auth()->id())
+        $orders = Order::where('user_id', Auth::id())
             ->with(['orderItems.product', 'payment'])
             ->latest()
             ->paginate(10);
@@ -25,7 +26,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        if ($order->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        
+        if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 

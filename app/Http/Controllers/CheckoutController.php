@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
@@ -16,7 +17,7 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+        $cart = Cart::where('user_id', Auth::id())->with('cartItems.product')->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
@@ -39,7 +40,7 @@ class CheckoutController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+        $cart = Cart::where('user_id', Auth::id())->with('cartItems.product')->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
@@ -56,7 +57,7 @@ class CheckoutController extends Controller
         try {
             // Create order
             $order = Order::create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'order_number' => Order::generateOrderNumber(),
                 'total_amount' => $cart->total,
                 'status' => 'pending',
@@ -106,7 +107,11 @@ class CheckoutController extends Controller
      */
     public function success(Order $order)
     {
-        if ($order->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        
+        // Allow owner or admin to view
+        if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 
@@ -120,7 +125,11 @@ class CheckoutController extends Controller
      */
     public function confirmPayment(Request $request, Order $order)
     {
-        if ($order->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        
+        // Allow owner or admin to confirm payment
+        if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 
