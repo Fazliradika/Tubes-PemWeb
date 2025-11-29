@@ -71,6 +71,29 @@
                                 </div>
                                 <p class="text-sm text-gray-600 mt-4">Ini adalah simulasi pembayaran</p>
                             </div>
+                        @elseif($order->payment->payment_method == 'qris')
+                            <div class="text-center py-6">
+                                <p class="text-gray-700 mb-4 font-semibold">Scan QRIS Code untuk membayar:</p>
+                                
+                                <!-- QRIS Dummy Image -->
+                                <div class="inline-block bg-white border-4 border-gray-800 p-4 rounded-lg shadow-lg mb-4">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226670016COM.NOBUBANK.WWW01189360050300000898740214{{ $order->order_number }}0303UMI51440014ID.CO.QRIS.WWW0215ID10232995167140303UMI5204481253033605802ID5917HealthFirst Medical6007Jakarta61051234062070703A0163044C7D" 
+                                         alt="QRIS" 
+                                         class="w-64 h-64">
+                                </div>
+                                
+                                <div class="bg-blue-50 border border-blue-200 rounded p-4 max-w-md mx-auto">
+                                    <div class="font-semibold text-blue-800 mb-2">Total Pembayaran:</div>
+                                    <div class="text-3xl font-bold text-blue-900">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</div>
+                                    <div class="text-sm text-blue-700 mt-3">
+                                        <i class="fas fa-info-circle mr-1"></i>Scan dengan aplikasi e-wallet apapun (GoPay, OVO, Dana, dll)
+                                    </div>
+                                </div>
+                                
+                                <p class="text-sm text-gray-500 mt-4">
+                                    <i class="fas fa-lock mr-1"></i>Pembayaran aman dengan QRIS
+                                </p>
+                            </div>
                         @endif
                     </div>
 
