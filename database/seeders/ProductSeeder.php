@@ -61,6 +61,7 @@ class ProductSeeder extends Seeder
                 'price' => 85000,
                 'stock' => 100,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1550572017-4814c2ea04fc?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 1,
@@ -70,6 +71,7 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'stock' => 75,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 1,
@@ -79,6 +81,7 @@ class ProductSeeder extends Seeder
                 'price' => 150000,
                 'stock' => 50,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 1,
@@ -88,6 +91,7 @@ class ProductSeeder extends Seeder
                 'price' => 95000,
                 'stock' => 60,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=400&fit=crop',
             ],
 
             // Obat-obatan
@@ -99,6 +103,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 200,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 2,
@@ -108,6 +113,7 @@ class ProductSeeder extends Seeder
                 'price' => 35000,
                 'stock' => 80,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 2,
@@ -117,6 +123,7 @@ class ProductSeeder extends Seeder
                 'price' => 25000,
                 'stock' => 100,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop',
             ],
 
             // Alat Kesehatan
@@ -128,6 +135,7 @@ class ProductSeeder extends Seeder
                 'price' => 75000,
                 'stock' => 40,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 3,
@@ -137,6 +145,7 @@ class ProductSeeder extends Seeder
                 'price' => 250000,
                 'stock' => 30,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 3,
@@ -146,6 +155,7 @@ class ProductSeeder extends Seeder
                 'price' => 45000,
                 'stock' => 150,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 3,
@@ -155,6 +165,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 200,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1584744982491-665216d95f8b?w=400&h=400&fit=crop',
             ],
 
             // Perawatan Tubuh
@@ -166,6 +177,7 @@ class ProductSeeder extends Seeder
                 'price' => 30000,
                 'stock' => 120,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1585421514738-01798e348b17?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 4,
@@ -175,6 +187,7 @@ class ProductSeeder extends Seeder
                 'price' => 55000,
                 'stock' => 80,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 4,
@@ -184,6 +197,7 @@ class ProductSeeder extends Seeder
                 'price' => 85000,
                 'stock' => 60,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop',
             ],
 
             // Herbal & Tradisional
@@ -195,6 +209,7 @@ class ProductSeeder extends Seeder
                 'price' => 75000,
                 'stock' => 50,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1587049352846-4a222e784210?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 5,
@@ -204,6 +219,7 @@ class ProductSeeder extends Seeder
                 'price' => 35000,
                 'stock' => 90,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1599894439780-33f56ce5c26a?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 5,
@@ -213,6 +229,7 @@ class ProductSeeder extends Seeder
                 'price' => 65000,
                 'stock' => 70,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop',
             ],
             [
                 'category_id' => 5,
@@ -222,6 +239,7 @@ class ProductSeeder extends Seeder
                 'price' => 45000,
                 'stock' => 85,
                 'is_active' => true,
+                'image' => 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&h=400&fit=crop',
             ],
         ];
 

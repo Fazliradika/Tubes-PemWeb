@@ -64,7 +64,7 @@
                 @forelse($products as $product)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <a href="{{ route('products.show', $product->slug) }}">
-                            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop" alt="{{ $product->name }}" 
+                            <img src="{{ $product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop' }}" alt="{{ $product->name }}" 
                                 class="w-full h-48 object-cover">
                         </a>
 

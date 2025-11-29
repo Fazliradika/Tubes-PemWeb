@@ -95,7 +95,7 @@
                             <div class="space-y-4">
                                 @foreach($order->orderItems as $item)
                                     <div class="flex items-center space-x-4 p-4 border rounded-lg">
-                                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop" 
+                                        <img src="{{ $item->product->image ?? 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}" 
                                             alt="{{ $item->product_name }}" 
                                                 class="w-20 h-20 object-cover rounded">
                                         <div class="flex-1">
