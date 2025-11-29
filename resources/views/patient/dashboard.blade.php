@@ -334,9 +334,9 @@
             <!-- Patient Testimonials -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-8">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-3">Kata Mereka tentang Halodoc</h3>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-3">Kata Mereka tentang HealthFirst Medical</h3>
                     <p class="text-gray-600 mb-10 max-w-3xl">
-                        Cerita dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman langsung dari rumah.
+                        Cerita dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman di HealthFirst Medical.
                     </p>
 
                     <div class="grid md:grid-cols-3 gap-8">
@@ -351,8 +351,8 @@
                                     <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">SAINEM WIYONO</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
-                                Beli Obat
+                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                                Lihat Layanan
                             </button>
                         </div>
 
@@ -369,8 +369,8 @@
                                     <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">LINTANG ANINDHITYA INDRASWARI</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
-                                Chat dengan Dokter
+                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                                Buat Janji Temu
                             </button>
                         </div>
 
@@ -382,13 +382,13 @@
                                 </div>
                                 <div>
                                     <p class="italic text-gray-800 leading-relaxed">
-                                        “Menggunakan Halodoc untuk pemanggilan Home Service kesehatan. Sangat memuaskan, walau di proses perlu perubahan jasa medis, tetap dilayani dengan cepat, dan proses refund mudah & cepat. Semoga bisa dipertahankan.”
+                                        “Pengalaman rawat inap di HealthFirst Medical sangat berkesan. Perawatnya sangat care, kamarnya nyaman, dan makanannya enak. Terima kasih atas pelayanan terbaiknya!”
                                     </p>
                                     <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">AHKBAR FELYAYTI</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
-                                Pesan Tes Lab
+                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                                Info Rawat Inap
                             </button>
                         </div>
                     </div>
@@ -402,13 +402,13 @@
                                 </div>
                                 <div>
                                     <p class="italic text-gray-800 leading-relaxed">
-                                        “Hallo, terimakasih Haloskin sejak pertama konsultasi hingga saat ini kulitku sudah banyak mengalami perubahan. Jerawat dan bekasnya semakin membaik berkat saran dokter-dokter Haloskin. Jujur baru kali ini bisa konsultasi dengan dokter kulit secara leluasa dan terbuka, semua pertanyaan tentang jerawatku dijawab secara gamblang.”
+                                        “Hallo, terimakasih HealthFirst Medical sejak pertama konsultasi hingga saat ini kulitku sudah banyak mengalami perubahan. Jerawat dan bekasnya semakin membaik berkat saran dokter-dokter HealthFirst Medical. Jujur baru kali ini bisa konsultasi dengan dokter kulit secara leluasa dan terbuka, semua pertanyaan tentang jerawatku dijawab secara gamblang.”
                                     </p>
                                     <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">IZZA AFKARINA MUDMAINAH</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-pink-500 text-pink-500 rounded-full text-xs font-semibold hover:bg-pink-50 transition">
-                                Dapatkan Solusi Kulit
+                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                                Cek Layanan Kami
                             </button>
                         </div>
                     </div>
