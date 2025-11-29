@@ -398,7 +398,7 @@
         // Update QRIS QR Code
         function updateQrisCode() {
             const orderNumber = 'ORD-' + Date.now();
-            const qrisData = `00020101021226670016COM.NOBUBANK.WWW01189360050300000898740214${orderNumber}0303UMI51440014ID.CO.QRIS.WWW0215ID10232995167140303UMI5204481253033605802ID5917RS Project Medical6007Jakarta61051234062070703A0163044C7D`;
+            const qrisData = `00020101021226670016COM.NOBUBANK.WWW01189360050300000898740214${orderNumber}0303UMI51440014ID.CO.QRIS.WWW0215ID10232995167140303UMI5204481253033605802ID5917HealthFirst Medical6007Jakarta61051234062070703A0163044C7D`;
             
             const qrisImage = document.getElementById('qrisImage');
             qrisImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrisData)}`;
