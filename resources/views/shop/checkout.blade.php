@@ -41,7 +41,7 @@
                                             Alamat Lengkap *
                                         </label>
                                         <textarea name="shipping_address" id="shipping_address" rows="3" required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                             placeholder="Jalan, nomor rumah, RT/RW">{{ old('shipping_address', auth()->user()->address) }}</textarea>
                                     </div>
 
@@ -52,7 +52,7 @@
                                             </label>
                                             <input type="text" name="shipping_city" id="shipping_city" required
                                                 value="{{ old('shipping_city') }}"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                                 placeholder="Nama kota">
                                         </div>
 
@@ -62,7 +62,7 @@
                                             </label>
                                             <input type="text" name="shipping_postal_code" id="shipping_postal_code" required
                                                 value="{{ old('shipping_postal_code') }}"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                                 placeholder="12345">
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                         </label>
                                         <input type="tel" name="shipping_phone" id="shipping_phone" required
                                             value="{{ old('shipping_phone', auth()->user()->phone) }}"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                             placeholder="08123456789">
                                     </div>
                                 </div>
@@ -88,50 +88,50 @@
                                 </h3>
 
                                 <div class="space-y-3">
-                                    <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <input type="radio" name="payment_method" value="bank_transfer" required
                                             class="mr-3" {{ old('payment_method') == 'bank_transfer' ? 'checked' : '' }}>
                                         <div class="flex items-center flex-1">
                                             <i class="fas fa-university text-blue-600 text-2xl mr-3"></i>
                                             <div>
-                                                <div class="font-semibold">Transfer Bank</div>
+                                                <div class="font-semibold text-gray-900 dark:text-white">Transfer Bank</div>
                                                 <div class="text-sm text-gray-600 dark:text-gray-400">BCA, BNI, Mandiri, BRI</div>
                                             </div>
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <input type="radio" name="payment_method" value="credit_card" required
                                             class="mr-3" {{ old('payment_method') == 'credit_card' ? 'checked' : '' }}>
                                         <div class="flex items-center flex-1">
                                             <i class="fas fa-credit-card text-blue-600 text-2xl mr-3"></i>
                                             <div>
-                                                <div class="font-semibold">Kartu Kredit/Debit</div>
+                                                <div class="font-semibold text-gray-900 dark:text-white">Kartu Kredit/Debit</div>
                                                 <div class="text-sm text-gray-600 dark:text-gray-400">Visa, Mastercard, JCB</div>
                                             </div>
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <input type="radio" name="payment_method" value="e_wallet" required
                                             class="mr-3" {{ old('payment_method') == 'e_wallet' ? 'checked' : '' }}>
                                         <div class="flex items-center flex-1">
                                             <i class="fas fa-wallet text-blue-600 text-2xl mr-3"></i>
                                             <div>
-                                                <div class="font-semibold">E-Wallet</div>
+                                                <div class="font-semibold text-gray-900 dark:text-white">E-Wallet</div>
                                                 <div class="text-sm text-gray-600 dark:text-gray-400">GoPay, OVO, Dana, ShopeePay</div>
                                             </div>
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <input type="radio" name="payment_method" value="qris" required
                                             class="mr-3" {{ old('payment_method') == 'qris' ? 'checked' : '' }}
                                             onchange="toggleQrisCode()">
                                         <div class="flex items-center flex-1">
                                             <i class="fas fa-qrcode text-blue-600 text-2xl mr-3"></i>
                                             <div>
-                                                <div class="font-semibold">QRIS</div>
+                                                <div class="font-semibold text-gray-900 dark:text-white">QRIS</div>
                                                 <div class="text-sm text-gray-600 dark:text-gray-400">Scan QR Code untuk Bayar</div>
                                             </div>
                                         </div>
@@ -180,7 +180,7 @@
                                 </h3>
 
                                 <div class="space-y-3">
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="gosend_instant" required
                                                 class="mr-3" {{ old('courier') == 'gosend_instant' ? 'checked' : '' }}>
@@ -194,7 +194,7 @@
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="gosend_sameday" required
                                                 class="mr-3" {{ old('courier') == 'gosend_sameday' ? 'checked' : '' }}>
@@ -208,7 +208,7 @@
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="grabexpress_instant" required
                                                 class="mr-3" {{ old('courier') == 'grabexpress_instant' ? 'checked' : '' }}>
@@ -222,7 +222,7 @@
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="grabexpress_sameday" required
                                                 class="mr-3" {{ old('courier') == 'grabexpress_sameday' ? 'checked' : '' }}>
@@ -236,7 +236,7 @@
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="jne_instant" required
                                                 class="mr-3" {{ old('courier') == 'jne_instant' ? 'checked' : '' }}>
@@ -250,7 +250,7 @@
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="anteraja_instant" required
                                                 class="mr-3" {{ old('courier') == 'anteraja_instant' ? 'checked' : '' }}>
@@ -264,7 +264,7 @@
                                         </div>
                                     </label>
 
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <div class="flex items-center">
                                             <input type="radio" name="courier" value="anteraja_sameday" required
                                                 class="mr-3" {{ old('courier') == 'anteraja_sameday' ? 'checked' : '' }}>

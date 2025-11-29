@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Search and Filter -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6">
                     <form method="GET" action="{{ route('products.index') }}" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -16,7 +16,7 @@
                             <div>
                                 <label for="search" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cari Produk</label>
                                 <input type="text" name="search" id="search" value="{{ request('search') }}" 
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                     placeholder="Nama produk...">
                             </div>
 
@@ -24,7 +24,7 @@
                             <div>
                                 <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                                 <select name="category" id="category" 
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     <option value="">Semua Kategori</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
@@ -38,7 +38,7 @@
                             <div>
                                 <label for="sort" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Urutkan</label>
                                 <select name="sort" id="sort" 
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
                                     <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Harga Terendah</option>
                                     <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Harga Tertinggi</option>
