@@ -5,7 +5,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-9.5.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
 **Sistem Manajemen Klinik & E-Commerce Kesehatan Modern**
 
@@ -130,11 +130,11 @@ Deployment  : Railway
 
 | Nama | NIM | Peran |
 |------|-----|-------|
-| Anggota 1 | - | Authentication & User Management |
-| Anggota 2 | - | E-Commerce & Product Management |
-| Anggota 3 | - | Dashboard & Analytics |
-| Anggota 4 | - | AI Health Assistant & Chat |
-| Anggota 5 | - | Admin Panel & Settings |
+| Fazli Radika | 103062300092 | Authentication & User Management |
+| Muhammad Rafadi Kurniawan | 103062300089 | E-Commerce & Product Management |
+| Aldyansyah Wisnu Saputra | 103062300100 | Dashboard & Analytics |
+| Muhammad Afriza Hidayat | 103062300093 | AI Health Assistant & Chat |
+| Naufal Saifullah Yusuf | 103062300091 | Admin Panel & Settings |
 
 ---
 
