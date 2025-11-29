@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Produk Kesehatan') }}
         </h2>
     </x-slot>
@@ -14,7 +14,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <!-- Search -->
                             <div>
-                                <label for="search" class="block text-sm font-medium text-gray-700">Cari Produk</label>
+                                <label for="search" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cari Produk</label>
                                 <input type="text" name="search" id="search" value="{{ request('search') }}" 
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                     placeholder="Nama produk...">
@@ -22,7 +22,7 @@
 
                             <!-- Category Filter -->
                             <div>
-                                <label for="category" class="block text-sm font-medium text-gray-700">Kategori</label>
+                                <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                                 <select name="category" id="category" 
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     <option value="">Semua Kategori</option>
@@ -36,7 +36,7 @@
 
                             <!-- Sort -->
                             <div>
-                                <label for="sort" class="block text-sm font-medium text-gray-700">Urutkan</label>
+                                <label for="sort" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Urutkan</label>
                                 <select name="sort" id="sort" 
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="flex justify-end space-x-2">
-                            <a href="{{ route('products.index') }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">
+                            <a href="{{ route('products.index') }}" class="px-4 py-2 bg-gray-200 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300">
                                 Reset
                             </a>
                             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
@@ -70,16 +70,16 @@
 
                         <div class="p-4">
                             <div class="text-sm text-blue-600 mb-1">{{ $product->category->name }}</div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                 <a href="{{ route('products.show', $product->slug) }}" class="hover:text-blue-600">
                                     {{ $product->name }}
                                 </a>
                             </h3>
-                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ Str::limit($product->description, 80) }}</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{{ Str::limit($product->description, 80) }}</p>
                             
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <span class="text-2xl font-bold text-gray-900">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                    <span class="text-2xl font-bold text-gray-900 dark:text-white">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                                     <div class="text-sm text-gray-500">Stok: {{ $product->stock }}</div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">Tidak ada produk</h3>
+                        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Tidak ada produk</h3>
                         <p class="mt-1 text-sm text-gray-500">Coba ubah filter atau kata kunci pencarian Anda.</p>
                     </div>
                 @endforelse

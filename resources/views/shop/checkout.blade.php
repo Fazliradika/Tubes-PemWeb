@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Checkout') }}
         </h2>
     </x-slot>
@@ -29,15 +29,15 @@
                     <!-- Shipping Information -->
                     <div class="lg:col-span-2 space-y-6">
                         <!-- Shipping Address -->
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     <i class="fas fa-map-marker-alt mr-2"></i>Alamat Pengiriman
                                 </h3>
 
                                 <div class="space-y-4">
                                     <div>
-                                        <label for="shipping_address" class="block text-sm font-medium text-gray-700 mb-1">
+                                        <label for="shipping_address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                             Alamat Lengkap *
                                         </label>
                                         <textarea name="shipping_address" id="shipping_address" rows="3" required
@@ -47,7 +47,7 @@
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label for="shipping_city" class="block text-sm font-medium text-gray-700 mb-1">
+                                            <label for="shipping_city" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                                 Kota *
                                             </label>
                                             <input type="text" name="shipping_city" id="shipping_city" required
@@ -57,7 +57,7 @@
                                         </div>
 
                                         <div>
-                                            <label for="shipping_postal_code" class="block text-sm font-medium text-gray-700 mb-1">
+                                            <label for="shipping_postal_code" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                                 Kode Pos *
                                             </label>
                                             <input type="text" name="shipping_postal_code" id="shipping_postal_code" required
@@ -68,7 +68,7 @@
                                     </div>
 
                                     <div>
-                                        <label for="shipping_phone" class="block text-sm font-medium text-gray-700 mb-1">
+                                        <label for="shipping_phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                             Nomor Telepon *
                                         </label>
                                         <input type="tel" name="shipping_phone" id="shipping_phone" required
@@ -81,9 +81,9 @@
                         </div>
 
                         <!-- Payment Method -->
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     <i class="fas fa-credit-card mr-2"></i>Metode Pembayaran
                                 </h3>
 
@@ -95,7 +95,7 @@
                                             <i class="fas fa-university text-blue-600 text-2xl mr-3"></i>
                                             <div>
                                                 <div class="font-semibold">Transfer Bank</div>
-                                                <div class="text-sm text-gray-600">BCA, BNI, Mandiri, BRI</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">BCA, BNI, Mandiri, BRI</div>
                                             </div>
                                         </div>
                                     </label>
@@ -107,7 +107,7 @@
                                             <i class="fas fa-credit-card text-blue-600 text-2xl mr-3"></i>
                                             <div>
                                                 <div class="font-semibold">Kartu Kredit/Debit</div>
-                                                <div class="text-sm text-gray-600">Visa, Mastercard, JCB</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">Visa, Mastercard, JCB</div>
                                             </div>
                                         </div>
                                     </label>
@@ -119,7 +119,7 @@
                                             <i class="fas fa-wallet text-blue-600 text-2xl mr-3"></i>
                                             <div>
                                                 <div class="font-semibold">E-Wallet</div>
-                                                <div class="text-sm text-gray-600">GoPay, OVO, Dana, ShopeePay</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">GoPay, OVO, Dana, ShopeePay</div>
                                             </div>
                                         </div>
                                     </label>
@@ -132,7 +132,7 @@
                                             <i class="fas fa-qrcode text-blue-600 text-2xl mr-3"></i>
                                             <div>
                                                 <div class="font-semibold">QRIS</div>
-                                                <div class="text-sm text-gray-600">Scan QR Code untuk Bayar</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">Scan QR Code untuk Bayar</div>
                                             </div>
                                         </div>
                                     </label>
@@ -141,7 +141,7 @@
                                 <!-- QRIS QR Code Display (Hidden by default) -->
                                 <div id="qrisCodeSection" class="hidden mt-6 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
                                     <div class="text-center">
-                                        <h4 class="text-lg font-semibold text-gray-900 mb-4">
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                             <i class="fas fa-qrcode mr-2 text-blue-600"></i>Scan QRIS untuk Bayar
                                         </h4>
                                         
@@ -160,7 +160,7 @@
                                             </div>
                                         </div>
                                         
-                                        <p class="text-sm text-gray-600 mt-4">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
                                             <i class="fas fa-shield-alt mr-1"></i>Pembayaran aman dengan QRIS Indonesia
                                         </p>
                                         
@@ -173,9 +173,9 @@
                         </div>
 
                         <!-- Shipping Method -->
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     <i class="fas fa-shipping-fast mr-2"></i>Pilih Pengiriman Instant
                                 </h3>
 
@@ -186,7 +186,7 @@
                                                 class="mr-3" {{ old('courier') == 'gosend_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GoSend Instant</div>
-                                                <div class="text-sm text-gray-600">15-30 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -200,7 +200,7 @@
                                                 class="mr-3" {{ old('courier') == 'gosend_sameday' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GoSend Same Day</div>
-                                                <div class="text-sm text-gray-600">40-60 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">40-60 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -214,7 +214,7 @@
                                                 class="mr-3" {{ old('courier') == 'grabexpress_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GrabExpress Instant</div>
-                                                <div class="text-sm text-gray-600">15-30 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -228,7 +228,7 @@
                                                 class="mr-3" {{ old('courier') == 'grabexpress_sameday' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GrabExpress Same Day</div>
-                                                <div class="text-sm text-gray-600">40-60 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">40-60 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -242,7 +242,7 @@
                                                 class="mr-3" {{ old('courier') == 'jne_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">JNE Instant</div>
-                                                <div class="text-sm text-gray-600">15-30 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -256,7 +256,7 @@
                                                 class="mr-3" {{ old('courier') == 'anteraja_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">AnterAja Instant</div>
-                                                <div class="text-sm text-gray-600">15-30 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -270,7 +270,7 @@
                                                 class="mr-3" {{ old('courier') == 'anteraja_sameday' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">AnterAja Same Day</div>
-                                                <div class="text-sm text-gray-600">40-60 menit</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">40-60 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -282,9 +282,9 @@
                         </div>
 
                         <!-- Notes -->
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     <i class="fas fa-sticky-note mr-2"></i>Catatan (Opsional)
                                 </h3>
                                 <textarea name="notes" id="notes" rows="3"
@@ -296,9 +296,9 @@
 
                     <!-- Order Summary -->
                     <div class="lg:col-span-1">
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden sticky top-4">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden sticky top-4">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Ringkasan Pesanan</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Ringkasan Pesanan</h3>
 
                                 <!-- Products -->
                                 <div class="space-y-3 mb-4 max-h-64 overflow-y-auto">
@@ -308,10 +308,10 @@
                                                 alt="{{ $item->product->name }}" 
                                                 class="w-12 h-12 object-cover rounded">
                                             <div class="flex-1">
-                                                <div class="font-medium text-gray-900">{{ $item->product->name }}</div>
-                                                <div class="text-gray-600">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
+                                                <div class="font-medium text-gray-900 dark:text-white">{{ $item->product->name }}</div>
+                                                <div class="text-gray-600 dark:text-gray-400">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
                                             </div>
-                                            <div class="font-semibold text-gray-900">
+                                            <div class="font-semibold text-gray-900 dark:text-white">
                                                 Rp {{ number_format($item->subtotal, 0, ',', '.') }}
                                             </div>
                                         </div>
@@ -320,11 +320,11 @@
 
                                 <!-- Price Breakdown -->
                                 <div class="border-t pt-4 space-y-2">
-                                    <div class="flex justify-between text-gray-600">
+                                    <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Subtotal ({{ $cart->itemsCount }} item)</span>
                                         <span>Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
                                     </div>
-                                    <div class="flex justify-between text-gray-600">
+                                    <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Ongkos Kirim</span>
                                         <span id="shipping-cost">Rp 0</span>
                                     </div>
@@ -340,7 +340,7 @@
                                     <i class="fas fa-lock mr-2"></i>Proses Pembayaran
                                 </button>
 
-                                <div class="mt-4 text-center text-sm text-gray-600">
+                                <div class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
                                     <i class="fas fa-shield-alt text-green-600 mr-1"></i>
                                     Transaksi Anda Aman & Terpercaya
                                 </div>

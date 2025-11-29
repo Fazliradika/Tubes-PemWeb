@@ -37,6 +37,7 @@ class CheckoutController extends Controller
             'shipping_postal_code' => 'required|string',
             'shipping_phone' => 'required|string',
             'payment_method' => 'required|in:bank_transfer,credit_card,e_wallet,qris',
+            'courier' => 'required|string',
             'notes' => 'nullable|string',
         ]);
 

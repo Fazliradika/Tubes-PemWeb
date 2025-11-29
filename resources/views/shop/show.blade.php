@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ $product->name }}
             </h2>
             <a href="{{ route('products.index') }}" class="text-blue-600 hover:text-blue-800">
@@ -41,21 +41,21 @@
                                 </span>
                             </div>
 
-                            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $product->name }}</h1>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ $product->name }}</h1>
 
                             <div class="text-4xl font-bold text-blue-600 mb-6">
                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                             </div>
 
                             <div class="mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Deskripsi Produk</h3>
-                                <p class="text-gray-700 leading-relaxed">{{ $product->description }}</p>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Deskripsi Produk</h3>
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{{ $product->description }}</p>
                             </div>
 
                             <div class="mb-6">
                                 <div class="flex items-center space-x-4">
                                     <div>
-                                        <span class="text-sm text-gray-600">Ketersediaan:</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Ketersediaan:</span>
                                         @if($product->stock > 0)
                                             <span class="text-green-600 font-semibold">Tersedia ({{ $product->stock }} unit)</span>
                                         @else
@@ -69,7 +69,7 @@
                                 <form action="{{ route('cart.add', $product) }}" method="POST" class="mb-6">
                                     @csrf
                                     <div class="flex items-center space-x-4 mb-4">
-                                        <label for="quantity" class="text-sm font-medium text-gray-700">Jumlah:</label>
+                                        <label for="quantity" class="text-sm font-medium text-gray-700 dark:text-gray-300">Jumlah:</label>
                                         <input type="number" name="quantity" id="quantity" min="1" max="{{ $product->stock }}" value="1" 
                                             class="w-24 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                     </div>
@@ -87,8 +87,8 @@
                             @endif
 
                             <div class="border-t pt-6 mt-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-3">Informasi Tambahan</h3>
-                                <ul class="space-y-2 text-gray-600">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Informasi Tambahan</h3>
+                                <ul class="space-y-2 text-gray-600 dark:text-gray-400">
                                     <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Produk Original</li>
                                     <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Tersedia Konsultasi Gratis</li>
                                     <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Pengiriman Cepat</li>
@@ -102,7 +102,7 @@
             <!-- Related Products -->
             @if($relatedProducts->count() > 0)
                 <div class="mt-12">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Produk Terkait</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Produk Terkait</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach($relatedProducts as $relatedProduct)
                             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -111,7 +111,7 @@
                                         class="w-full h-48 object-cover">
                                 </a>
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                         <a href="{{ route('products.show', $relatedProduct->slug) }}" class="hover:text-blue-600">
                                             {{ $relatedProduct->name }}
                                         </a>

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Pesanan Saya') }}
         </h2>
     </x-slot>
@@ -13,7 +13,7 @@
                 </div>
             @endif
 
-            <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                 <div class="p-6">
                     @if($orders->count() > 0)
                         <div class="space-y-4">
@@ -21,7 +21,7 @@
                                 <div class="border rounded-lg p-6 hover:shadow-md transition-shadow">
                                     <div class="flex items-start justify-between mb-4">
                                         <div>
-                                            <div class="text-sm text-gray-600">Nomor Pesanan</div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400">Nomor Pesanan</div>
                                             <div class="text-lg font-bold text-blue-600">{{ $order->order_number }}</div>
                                             <div class="text-sm text-gray-500">{{ $order->created_at->format('d F Y, H:i') }}</div>
                                         </div>
@@ -64,8 +64,8 @@
                                                         </div>
                                                     @endif
                                                     <div class="flex-1">
-                                                        <div class="font-medium text-gray-900">{{ $item->product_name }}</div>
-                                                        <div class="text-sm text-gray-600">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
+                                                        <div class="font-medium text-gray-900 dark:text-white">{{ $item->product_name }}</div>
+                                                        <div class="text-sm text-gray-600 dark:text-gray-400">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -79,8 +79,8 @@
 
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <div class="text-sm text-gray-600">Total Pembayaran</div>
-                                            <div class="text-xl font-bold text-gray-900">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400">Total Pembayaran</div>
+                                            <div class="text-xl font-bold text-gray-900 dark:text-white">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</div>
                                             @if($order->payment)
                                                 <div class="text-sm">
                                                     @if($order->payment->payment_status == 'paid')
@@ -113,8 +113,8 @@
                             <svg class="mx-auto h-24 w-24 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">Belum Ada Pesanan</h3>
-                            <p class="text-gray-600 mb-6">Anda belum pernah melakukan pemesanan</p>
+                            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Belum Ada Pesanan</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-6">Anda belum pernah melakukan pemesanan</p>
                             <a href="{{ route('products.index') }}" 
                                 class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                                 <i class="fas fa-shopping-bag mr-2"></i>Mulai Belanja
