@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         
         // Create Admin Users
         $admins = [
+            ['name' => 'Admin Health First', 'email' => 'admin@healthfirst.com', 'password' => 'password'],
             ['name' => 'Admin', 'email' => 'admin@example.com', 'password' => 'password123'],
             ['name' => 'Admin Healthcare', 'email' => 'admin@healthcare.com', 'password' => 'password'],
             ['name' => 'Super Admin', 'email' => 'superadmin@example.com', 'password' => 'password'],
@@ -39,6 +40,7 @@ class UserSeeder extends Seeder
 
         // Create Doctor Users with varied registration dates
         $doctors = [
+            ['name' => 'Dr. Health First', 'email' => 'doctor@healthfirst.com', 'specialty' => 'General Practitioner'],
             ['name' => 'Dr. Ahmad Fadli', 'email' => 'ahmad.fadli@hospital.com', 'specialty' => 'Cardiologist'],
             ['name' => 'Dr. Budi Santoso', 'email' => 'budi.santoso@hospital.com', 'specialty' => 'Pediatrician'],
             ['name' => 'Dr. Citra Dewi', 'email' => 'citra.dewi@hospital.com', 'specialty' => 'Dermatologist'],

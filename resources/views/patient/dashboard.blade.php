@@ -437,115 +437,140 @@
     </div>
 
     <!-- AI Health Assistant - Floating Button -->
-    <button id="aiChatToggle" class="fixed bottom-6 right-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full p-4 shadow-2xl hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300 z-40 group">
-        <svg class="w-7 h-7 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-        </svg>
-        <span class="absolute -top-1 -right-1 flex h-4 w-4">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-4 w-4 bg-pink-500"></span>
+    <button id="aiChatToggle" class="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl p-4 shadow-xl hover:shadow-blue-500/40 hover:scale-105 transition-all duration-300 z-40 group flex items-center gap-2">
+        <div class="bg-white/20 rounded-xl p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        </div>
+        <span class="hidden md:inline font-semibold">Health AI</span>
+        <span class="absolute -top-1 -right-1 flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
         </span>
     </button>
 
     <!-- AI Chat Sidebar -->
-    <div id="aiChatSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col">
+    <div id="aiChatSidebar" class="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col rounded-l-3xl overflow-hidden">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white/20 rounded-full p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+        <div class="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-5">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white rounded-xl p-2.5 shadow-lg">
+                        <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl">Health First AI</h3>
+                        <p class="text-xs text-blue-100 flex items-center gap-1">
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                            Asisten Kesehatan Online
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-bold text-lg">AI Health Assistant</h3>
-                    <p class="text-xs text-purple-100">Tanya seputar kesehatan Anda</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <select id="chatSelect" class="hidden md:block text-gray-800 bg-white/90 rounded-md px-2 py-1 text-sm">
-                    <option value="">Chat baru…</option>
-                </select>
-                <button id="newChatButton" class="hidden md:inline-flex bg-white/20 hover:bg-white/30 text-white text-sm px-3 py-1 rounded-md">Chat Baru</button>
-                <button id="deleteChatButton" class="hidden md:inline-flex bg-white/10 hover:bg-white/20 text-white text-sm px-3 py-1 rounded-md">Hapus</button>
-                <button id="aiChatClose" class="text-white hover:bg-white/20 rounded-full p-2 transition">
+                <button id="aiChatClose" class="text-white hover:bg-white/20 rounded-xl p-2.5 transition-all duration-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Chat Controls -->
+            <div class="flex items-center gap-2">
+                <select id="chatSelect" class="flex-1 text-gray-700 bg-white rounded-xl px-3 py-2.5 text-sm font-medium shadow-sm border-0 focus:ring-2 focus:ring-blue-300">
+                    <option value="">💬 Percakapan baru...</option>
+                </select>
+                <button id="newChatButton" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center gap-2 font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span class="hidden sm:inline">Baru</span>
+                </button>
+                <button id="deleteChatButton" class="hidden bg-red-500/80 hover:bg-red-500 text-white px-3 py-2.5 rounded-xl transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                 </button>
             </div>
         </div>
 
         <!-- Chat Messages Container -->
-        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-gradient-to-b from-blue-50/50 to-white">
             <!-- Welcome Message -->
-            <div class="flex items-start space-x-2">
-                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+            <div class="flex items-start space-x-3">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-2.5 flex-shrink-0 shadow-lg">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </div>
-                <div class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
-                    <p class="text-sm text-gray-700">
-                        👋 Halo! Saya AI Health Assistant. Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. 
-                        Silakan tanyakan apa saja!
+                <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm max-w-[85%] border border-blue-100">
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        👋 <strong>Halo!</strong> Saya <span class="text-blue-600 font-semibold">Health First AI Assistant</span>. 
+                        Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. Silakan tanyakan apa saja!
                     </p>
-                    <p class="text-xs text-gray-400 mt-1">
-                        ⚠️ Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.
-                    </p>
+                    <div class="mt-3 p-2.5 bg-amber-50 rounded-xl border border-amber-200">
+                        <p class="text-xs text-amber-700 flex items-start gap-2">
+                            <span class="text-amber-500">⚠️</span>
+                            <span>Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Input Area -->
-        <div class="border-t border-gray-200 p-4 bg-white">
-            <form id="aiChatForm" class="flex items-end space-x-2">
-                <div class="flex-1">
+        <div class="border-t border-gray-100 p-4 bg-white">
+            <form id="aiChatForm" class="space-y-3">
+                <div class="relative">
                     <textarea 
                         id="aiChatInput" 
                         rows="2" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none" 
-                        placeholder="Ketik pertanyaan Anda di sini..."
+                        class="w-full px-4 py-3 pr-12 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-gray-50 text-gray-700 placeholder-gray-400" 
+                        placeholder="Ketik pertanyaan kesehatan Anda..."
                         maxlength="1000"
                     ></textarea>
-                    <p class="text-xs text-gray-400 mt-1">Tekan Enter untuk kirim • Shift+Enter baris baru • Klik ikon mikrofon atau tahan tombol kirim untuk bicara</p>
+                    <!-- Mic Button Inside Input -->
+                    <button
+                        type="button"
+                        id="micButton"
+                        title="Klik untuk bicara"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200 p-1.5 rounded-full hover:bg-blue-50"
+                        aria-label="Aktifkan Speech to Text"
+                    >
+                        <svg id="micIconIdle" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
+                            <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
+                        </svg>
+                        <svg id="micIconOn" class="w-5 h-5 hidden text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
+                            <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
                 </div>
-                <!-- Mic Button (Speech to Text) -->
-                <button
-                    type="button"
-                    id="micButton"
-                    title="Klik untuk bicara (Speech to Text). Tahan tombol Kirim untuk push-to-talk."
-                    class="bg-gray-100 text-gray-700 rounded-lg p-3 hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 flex items-center justify-center"
-                    aria-label="Aktifkan Speech to Text"
-                >
-                    <!-- Mic idle icon -->
-                    <svg id="micIconIdle" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
-                        <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
-                    </svg>
-                    <!-- Mic listening icon -->
-                    <svg id="micIconOn" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
-                        <circle cx="10" cy="10" r="9" class="text-red-500" fill="currentColor" opacity="0.15"></circle>
-                        <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
-                        <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
-                    </svg>
-                </button>
-                <button 
-                    type="submit" 
-                    id="sendButton"
-                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4 py-3 hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-                >
-                    <!-- Paper plane icon -->
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9-7-9-7-9 7 9 7zm0 0l-3-7 3-7 3 7-3 7z" />
-                    </svg>
-                </button>
+                
+                <div class="flex items-center justify-between">
+                    <p class="text-xs text-gray-400">
+                        <span class="hidden sm:inline">Enter = kirim • Shift+Enter = baris baru</span>
+                        <span class="sm:hidden">Enter untuk kirim</span>
+                    </p>
+                    <button 
+                        type="submit" 
+                        id="sendButton"
+                        class="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl px-6 py-2.5 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
+                    >
+                        <span>Kirim</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 
     <!-- Overlay -->
-    <div id="chatOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300"></div>
+    <div id="chatOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
     <script>
         // Chat Toggle
@@ -621,20 +646,23 @@
             chatInput.value = '';
             // reset to welcome message area
             chatMessages.innerHTML = `
-            <div class="flex items-start space-x-2">
-                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+            <div class="flex items-start space-x-3">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-2.5 flex-shrink-0 shadow-lg">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </div>
-                <div class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
-                    <p class="text-sm text-gray-700">
-                        👋 Halo! Saya AI Health Assistant. Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. 
-                        Silakan tanyakan apa saja!
+                <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm max-w-[85%] border border-blue-100">
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        👋 <strong>Halo!</strong> Saya <span class="text-blue-600 font-semibold">Health First AI Assistant</span>. 
+                        Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. Silakan tanyakan apa saja!
                     </p>
-                    <p class="text-xs text-gray-400 mt-1">
-                        ⚠️ Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.
-                    </p>
+                    <div class="mt-3 p-2.5 bg-amber-50 rounded-xl border border-amber-200">
+                        <p class="text-xs text-amber-700 flex items-start gap-2">
+                            <span class="text-amber-500">⚠️</span>
+                            <span>Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.</span>
+                        </p>
+                    </div>
                 </div>
             </div>`;
             fetchChats();
@@ -887,29 +915,29 @@
         // Add message to chat
         function addMessage(text, sender = 'user', isError = false) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = 'flex items-start space-x-2 animate-fade-in';
+            messageDiv.className = 'flex items-start space-x-3 animate-fade-in';
             
             if (sender === 'user') {
                 messageDiv.classList.add('flex-row-reverse', 'space-x-reverse');
                 messageDiv.innerHTML = `
-                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-2.5 flex-shrink-0 shadow-lg">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg rounded-tr-none p-3 shadow-md max-w-[85%]">
-                        <p class="text-sm">${escapeHtml(text)}</p>
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl rounded-tr-md p-4 shadow-lg max-w-[85%]">
+                        <p class="text-sm leading-relaxed">${escapeHtml(text)}</p>
                     </div>
                 `;
             } else {
                 messageDiv.innerHTML = `
-                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-2.5 flex-shrink-0 shadow-lg">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                     </div>
-                    <div class="${isError ? 'bg-red-50 border border-red-200' : 'bg-white'} rounded-lg rounded-tl-none p-3 shadow-sm max-w-[85%]">
-                        <div class="text-sm ${isError ? 'text-red-700' : 'text-gray-700'} markdown-content">${isError ? escapeHtml(text) : formatMarkdown(text)}</div>
+                    <div class="${isError ? 'bg-red-50 border border-red-200' : 'bg-white border border-blue-100'} rounded-2xl rounded-tl-md p-4 shadow-sm max-w-[85%]">
+                        <div class="text-sm ${isError ? 'text-red-700' : 'text-gray-700'} leading-relaxed markdown-content">${isError ? escapeHtml(text) : formatMarkdown(text)}</div>
                     </div>
                 `;
             }
@@ -922,18 +950,18 @@
         function addTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.id = 'typing-indicator';
-            typingDiv.className = 'flex items-start space-x-2';
+            typingDiv.className = 'flex items-start space-x-3';
             typingDiv.innerHTML = `
-                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2 flex-shrink-0">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-2.5 flex-shrink-0 shadow-lg">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </div>
-                <div class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm">
-                    <div class="flex space-x-1">
-                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
-                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
-                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+                <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border border-blue-100">
+                    <div class="flex space-x-1.5">
+                        <div class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+                        <div class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+                        <div class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
                     </div>
                 </div>
             `;
@@ -967,13 +995,13 @@
             formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>');
             
             // Convert bullet points • to styled bullets
-            formatted = formatted.replace(/^• (.+)$/gm, '<div class="flex items-start ml-2 mb-1"><span class="text-purple-600 mr-2">•</span><span>$1</span></div>');
+            formatted = formatted.replace(/^• (.+)$/gm, '<div class="flex items-start ml-2 mb-1"><span class="text-blue-600 mr-2">•</span><span>$1</span></div>');
             
             // Convert line breaks to <br>
             formatted = formatted.replace(/\n/g, '<br>');
             
             // Highlight warning/important emoji
-            formatted = formatted.replace(/⚠️/g, '<span class="text-orange-500 text-lg">⚠️</span>');
+            formatted = formatted.replace(/⚠️/g, '<span class="text-amber-500 text-lg">⚠️</span>');
             
             return formatted;
         }
@@ -981,11 +1009,11 @@
 
     <style>
         .markdown-content {
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .markdown-content strong {
-            color: #1f2937;
+            color: #1e40af;
             font-weight: 700;
         }
 
@@ -1009,16 +1037,31 @@
         }
 
         #chatMessages::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #f1f5f9;
+            border-radius: 3px;
         }
 
         #chatMessages::-webkit-scrollbar-thumb {
-            background: #c084fc;
+            background: #93c5fd;
             border-radius: 3px;
         }
 
         #chatMessages::-webkit-scrollbar-thumb:hover {
-            background: #a855f7;
+            background: #3b82f6;
+        }
+
+        /* Mic button listening animation */
+        #micButton.listening {
+            animation: pulse-mic 1.5s infinite;
+        }
+
+        @keyframes pulse-mic {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
         }
     </style>
 </x-app-layout>

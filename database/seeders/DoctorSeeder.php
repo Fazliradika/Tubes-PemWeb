@@ -17,6 +17,17 @@ class DoctorSeeder extends Seeder
         // Create doctor users and their doctor profiles
         $doctors = [
             [
+                'name' => 'Dr. Health First',
+                'email' => 'doctor@healthfirst.com',
+                'specialization' => 'Dokter Umum',
+                'bio' => 'Dokter umum utama Health First Medical. Siap membantu Anda dengan berbagai keluhan kesehatan.',
+                'price_per_session' => 150000,
+                'years_of_experience' => 8,
+                'available_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                'start_time' => '08:00:00',
+                'end_time' => '20:00:00',
+            ],
+            [
                 'name' => 'Dr. Ahmad Fadli',
                 'email' => 'ahmad.fadli@hospital.com',
                 'specialization' => 'Kardiologi',

@@ -30,40 +30,30 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            // Validate input
+            // Validate input - Only patients can register
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'phone' => ['nullable', 'string', 'max:20'],
-                'role' => ['required', 'in:patient,doctor'],
             ]);
 
-            // Create user with only fillable fields
+            // Create user - Role is always 'patient' (doctors are created by admin)
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
-                'role' => $validated['role'] ?? 'patient',
+                'role' => 'patient', // Only patients can self-register
                 'phone' => $validated['phone'] ?? null,
-                'email_verified_at' => now(), // Auto-verify email on registration
+                'email_verified_at' => now(),
             ]);
 
             event(new Registered($user));
 
             Auth::login($user);
 
-            // Redirect based on user role
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            } elseif ($user->role === 'doctor') {
-                return redirect()->route('doctor.dashboard');
-            } elseif ($user->role === 'patient') {
-                return redirect()->route('patient.dashboard');
-            }
-
-            // Default fallback
-            return redirect()->route('dashboard');
+            // Always redirect to patient dashboard (only patients can self-register)
+            return redirect()->route('patient.dashboard');
             
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Re-throw validation exceptions

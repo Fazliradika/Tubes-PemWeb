@@ -13,7 +13,7 @@ use App\Models\AiMessage;
 class HealthAIController extends Controller
 {
     /**
-     * Chat with Gemini AI for health questions
+     * Chat with Groq AI for health questions
      */
     public function chat(Request $request)
     {
@@ -95,11 +95,11 @@ class HealthAIController extends Controller
             ]);
         }
         
-        // Get Gemini API key from env
-        $apiKey = config('services.gemini.api_key', env('GEMINI_API_KEY'));
+        // Get Groq API key from env
+        $apiKey = config('services.groq.api_key', env('GROQ_API_KEY'));
         
         if (!$apiKey) {
-            Log::error('Gemini API key not configured');
+            Log::error('Groq API key not configured');
             return response()->json([
                 'success' => false,
                 'message' => 'Konfigurasi AI belum lengkap. Silakan hubungi administrator.'
@@ -136,34 +136,38 @@ class HealthAIController extends Controller
                 . "• Silakan ajukan pertanyaan terkait kesehatan.\n\n"
                 . "⚠️ **PENTING: Konsultasikan dengan dokter untuk diagnosis yang akurat.**";
 
-            $fullPrompt = $systemPrompt . "\n\n**Pertanyaan:** " . $userMessage;
-
-            Log::info('Sending request to Gemini API', [
+            Log::info('Sending request to Groq API', [
                 'message_length' => strlen($userMessage),
                 'api_key_present' => !empty($apiKey),
                 'api_key_length' => strlen($apiKey)
             ]);
 
-            // Call Gemini API with correct authentication header
+            // Call Groq API (OpenAI-compatible format)
             $response = Http::timeout(30)
                 ->withHeaders([
                     'Content-Type' => 'application/json',
-                    'x-goog-api-key' => $apiKey,
+                    'Authorization' => 'Bearer ' . $apiKey,
                 ])
                 ->post(
-                    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
+                    'https://api.groq.com/openai/v1/chat/completions',
                     [
-                        'contents' => [
+                        'model' => 'llama-3.3-70b-versatile',
+                        'messages' => [
                             [
-                                'parts' => [
-                                    ['text' => $fullPrompt]
-                                ]
+                                'role' => 'system',
+                                'content' => $systemPrompt
+                            ],
+                            [
+                                'role' => 'user',
+                                'content' => $userMessage
                             ]
-                        ]
+                        ],
+                        'temperature' => 0.7,
+                        'max_tokens' => 2048,
                     ]
                 );
 
-            Log::info('Gemini API Response', [
+            Log::info('Groq API Response', [
                 'status' => $response->status(),
                 'successful' => $response->successful()
             ]);
@@ -171,10 +175,10 @@ class HealthAIController extends Controller
             if ($response->successful()) {
                 $data = $response->json();
                 
-                Log::info('Gemini API Response Data', ['has_candidates' => isset($data['candidates'])]);
+                Log::info('Groq API Response Data', ['has_choices' => isset($data['choices'])]);
                 
-                if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
-                    $aiResponse = $data['candidates'][0]['content']['parts'][0]['text'];
+                if (isset($data['choices'][0]['message']['content'])) {
+                    $aiResponse = $data['choices'][0]['message']['content'];
 
                     // Save assistant reply
                     AiMessage::create([
@@ -191,14 +195,14 @@ class HealthAIController extends Controller
                         'message' => $aiResponse,
                     ]);
                 } else {
-                    Log::warning('Gemini API returned unexpected format', ['data' => $data]);
+                    Log::warning('Groq API returned unexpected format', ['data' => $data]);
                     return response()->json([
                         'success' => false,
                         'message' => 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini. Silakan coba lagi.'
                     ], 500);
                 }
             } else {
-                Log::error('Gemini API Error', [
+                Log::error('Groq API Error', [
                     'status' => $response->status(),
                     'body' => $response->body(),
                     'headers' => $response->headers()
@@ -208,8 +212,8 @@ class HealthAIController extends Controller
                 
                 if ($response->status() === 400) {
                     $errorMessage = 'Permintaan tidak valid. API key mungkin salah.';
-                } elseif ($response->status() === 403) {
-                    $errorMessage = 'API key tidak memiliki akses. Periksa konfigurasi API key.';
+                } elseif ($response->status() === 401) {
+                    $errorMessage = 'API key tidak valid. Periksa konfigurasi API key.';
                 } elseif ($response->status() === 429) {
                     $errorMessage = 'Terlalu banyak permintaan. Silakan coba lagi nanti.';
                 }
@@ -221,7 +225,7 @@ class HealthAIController extends Controller
                 ], 500);
             }
         } catch (\Illuminate\Http\Client\ConnectionException $e) {
-            Log::error('Gemini API Connection Error: ' . $e->getMessage());
+            Log::error('Groq API Connection Error: ' . $e->getMessage());
             
             return response()->json([
                 'success' => false,
