@@ -10,14 +10,14 @@
                 @endif
             </h2>
             <div class="flex space-x-2">
-                <button onclick="initiateCall('voice')" 
+                <button id="voiceCallBtn"
                         class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                     </svg>
                     Voice Call
                 </button>
-                <button onclick="initiateCall('video')" 
+                <button id="videoCallBtn"
                         class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
@@ -144,9 +144,6 @@
         const configuration = {
             iceServers: [
                 { urls: 'stun:stun.l.google.com:19302' },
-                { urls: 'stun:stun1.l.google.com:19302' }
-            ]
-        };
                 { urls: 'stun:stun1.l.google.com:19302' }
             ]
         };
@@ -394,6 +391,17 @@
                     document.getElementById('toggleCamera').classList.toggle('bg-gray-200');
                 }
             }
+        });
+
+        // Call button event listeners
+        document.getElementById('voiceCallBtn').addEventListener('click', () => {
+            console.log('Voice call button clicked');
+            initiateCall('voice');
+        });
+
+        document.getElementById('videoCallBtn').addEventListener('click', () => {
+            console.log('Video call button clicked');
+            initiateCall('video');
         });
 
         // Auto scroll to bottom
