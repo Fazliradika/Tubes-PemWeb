@@ -142,20 +142,34 @@
                             <div>
                                 <h4 class="font-bold text-pink-500 text-xs mb-4 uppercase tracking-wide">Keamanan & Privasi</h4>
                                 <div class="flex items-center space-x-4">
-                                    <div class="bg-white border border-gray-200 rounded-lg p-2">
-                                        <img src="https://www.bsigroup.com/LocalFiles/id-id/sertifikasi/BSI-Assurance-Mark-ISMS-27001-KEYB.png" alt="ISO 27001" class="h-12 w-auto object-contain">
+                                    <div class="bg-white border border-gray-200 rounded-lg p-3 flex items-center gap-2">
+                                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                                        </svg>
+                                        <span class="text-xs font-semibold text-gray-700">ISO 27001</span>
                                     </div>
-                                    <div class="bg-white border border-gray-200 rounded-lg p-2">
-                                        <img src="https://www.bsigroup.com/LocalFiles/id-id/sertifikasi/BSI-Assurance-Mark-ISMS-27017-KEYB.png" alt="ISO 27017" class="h-12 w-auto object-contain">
+                                    <div class="bg-white border border-gray-200 rounded-lg p-3 flex items-center gap-2">
+                                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                                        </svg>
+                                        <span class="text-xs font-semibold text-gray-700">SSL Secure</span>
                                     </div>
-                                    <div class="bg-white border border-gray-200 rounded-lg p-2">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/LegalScript_Certified_Logo.svg/200px-LegalScript_Certified_Logo.svg.png" alt="LegalScript Certified" class="h-12 w-auto object-contain">
+                                    <div class="bg-white border border-gray-200 rounded-lg p-3 flex items-center gap-2">
+                                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                        </svg>
+                                        <span class="text-xs font-semibold text-gray-700">Data Protected</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-2">
+                            <div class="flex items-center space-x-3 bg-white border border-gray-200 rounded-lg px-4 py-2">
                                 <span class="text-gray-600 text-sm">Dibina oleh</span>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kemenkes_RI_new_logo.png/200px-Kemenkes_RI_new_logo.png" alt="Kemenkes" class="h-12 w-auto object-contain">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    <span class="text-xs font-bold text-gray-700">Kemenkes RI</span>
+                                </div>
                             </div>
                         </div>
                     </div>
