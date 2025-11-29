@@ -124,7 +124,7 @@
     <div class="container mx-auto px-4">
         <h2 class="text-4xl font-bold text-gray-900 text-left mb-4">Kata Mereka tentang HealthFirst Medical</h2>
         <p class="text-gray-600 text-left mb-12 max-w-3xl">
-            Cerita nyata dari pasien yang merasakan layanan kesehatan berkualitas, profesional, dan nyaman di HealthFirst Medical.
+            Cerita nyata dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman di HealthFirst Medical.
         </p>
 
         <div class="grid md:grid-cols-3 gap-10">
