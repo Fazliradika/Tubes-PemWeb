@@ -188,6 +188,12 @@
                 });
 
                 const data = await response.json();
+                
+                if (!data.success) {
+                    alert('Gagal memulai panggilan');
+                    return;
+                }
+                
                 currentCallSession = data.call_session;
 
                 // Get user media
@@ -209,12 +215,25 @@
                     document.getElementById('voiceContainer').classList.remove('hidden');
                 }
 
+                // Update call status
+                document.getElementById('callStatus').textContent = 'Terhubung';
+
+                // Start call duration timer
+                let seconds = 0;
+                callDurationInterval = setInterval(() => {
+                    seconds++;
+                    const minutes = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    document.getElementById('callDuration').textContent = 
+                        `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+
                 // Setup peer connection
                 setupPeerConnection();
                 
             } catch (error) {
                 console.error('Error initiating call:', error);
-                alert('Gagal memulai panggilan');
+                alert('Gagal memulai panggilan. Pastikan browser Anda mengizinkan akses kamera/mikrofon.');
             }
         }
 

@@ -133,10 +133,11 @@ Route::middleware('auth')->group(function () {
 
 // Call Routes (shared between patient and doctor)
 Route::middleware('auth')->prefix('calls')->group(function () {
-    Route::post('/conversations/{conversation}/initiate', [\App\Http\Controllers\ChatController::class, 'initiateCall'])->name('calls.initiate');
-    Route::post('/sessions/{callSession}/answer', [\App\Http\Controllers\ChatController::class, 'answerCall'])->name('calls.answer');
-    Route::post('/sessions/{callSession}/end', [\App\Http\Controllers\ChatController::class, 'endCall'])->name('calls.end');
-    Route::post('/sessions/{callSession}/reject', [\App\Http\Controllers\ChatController::class, 'rejectCall'])->name('calls.reject');
+    Route::post('/conversations/{conversation}/initiate', [\App\Http\Controllers\CallController::class, 'initiate'])->name('calls.initiate');
+    Route::post('/sessions/{callSession}/answer', [\App\Http\Controllers\CallController::class, 'answer'])->name('calls.answer');
+    Route::post('/sessions/{callSession}/end', [\App\Http\Controllers\CallController::class, 'end'])->name('calls.end');
+    Route::get('/sessions/{callSession}', [\App\Http\Controllers\CallController::class, 'show'])->name('calls.show');
+    Route::post('/sessions/{callSession}/signal', [\App\Http\Controllers\CallController::class, 'signal'])->name('calls.signal');
 });
 
 // API Routes for real-time features

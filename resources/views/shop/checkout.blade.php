@@ -153,11 +153,11 @@
                                                 class="mr-3" {{ old('courier') == 'gosend_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GoSend Instant</div>
-                                                <div class="text-sm text-gray-600">1-2 jam</div>
+                                                <div class="text-sm text-gray-600">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 15.000</div>
+                                            <div class="font-semibold text-blue-600">Rp 20.000</div>
                                         </div>
                                     </label>
 
@@ -167,7 +167,7 @@
                                                 class="mr-3" {{ old('courier') == 'gosend_sameday' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GoSend Same Day</div>
-                                                <div class="text-sm text-gray-600">Hari ini juga</div>
+                                                <div class="text-sm text-gray-600">40-60 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -181,11 +181,11 @@
                                                 class="mr-3" {{ old('courier') == 'grabexpress_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GrabExpress Instant</div>
-                                                <div class="text-sm text-gray-600">1-2 jam</div>
+                                                <div class="text-sm text-gray-600">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 16.000</div>
+                                            <div class="font-semibold text-blue-600">Rp 22.000</div>
                                         </div>
                                     </label>
 
@@ -195,7 +195,7 @@
                                                 class="mr-3" {{ old('courier') == 'grabexpress_sameday' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">GrabExpress Same Day</div>
-                                                <div class="text-sm text-gray-600">Hari ini juga</div>
+                                                <div class="text-sm text-gray-600">40-60 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -205,15 +205,15 @@
 
                                     <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <div class="flex items-center">
-                                            <input type="radio" name="courier" value="jne_yes" required
-                                                class="mr-3" {{ old('courier') == 'jne_yes' ? 'checked' : '' }}>
+                                            <input type="radio" name="courier" value="jne_instant" required
+                                                class="mr-3" {{ old('courier') == 'jne_instant' ? 'checked' : '' }}>
                                             <div>
-                                                <div class="font-semibold">JNE YES Same Day</div>
-                                                <div class="text-sm text-gray-600">Hari ini juga</div>
+                                                <div class="font-semibold">JNE Instant</div>
+                                                <div class="text-sm text-gray-600">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 18.000</div>
+                                            <div class="font-semibold text-blue-600">Rp 25.000</div>
                                         </div>
                                     </label>
 
@@ -223,11 +223,25 @@
                                                 class="mr-3" {{ old('courier') == 'anteraja_instant' ? 'checked' : '' }}>
                                             <div>
                                                 <div class="font-semibold">AnterAja Instant</div>
-                                                <div class="text-sm text-gray-600">3-4 jam</div>
+                                                <div class="text-sm text-gray-600">15-30 menit</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 14.000</div>
+                                            <div class="font-semibold text-blue-600">Rp 18.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="anteraja_sameday" required
+                                                class="mr-3" {{ old('courier') == 'anteraja_sameday' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">AnterAja Same Day</div>
+                                                <div class="text-sm text-gray-600">40-60 menit</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 10.000</div>
                                         </div>
                                     </label>
                                 </div>
@@ -306,14 +320,15 @@
     </div>
 
     <script>
-        // Courier pricing (instant/same day only)
+        // Courier pricing (instant 15-30 min vs same day 40-60 min)
         const courierPricing = {
-            'gosend_instant': 15000,
+            'gosend_instant': 20000,
             'gosend_sameday': 12000,
-            'grabexpress_instant': 16000,
+            'grabexpress_instant': 22000,
             'grabexpress_sameday': 13000,
-            'jne_yes': 18000,
-            'anteraja_instant': 14000
+            'jne_instant': 25000,
+            'anteraja_instant': 18000,
+            'anteraja_sameday': 10000
         };
 
         const subtotal = {{ $cart->total }};
