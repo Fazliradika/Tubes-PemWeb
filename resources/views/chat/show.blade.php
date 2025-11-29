@@ -131,13 +131,14 @@
         </div>
     </div>
 
-    @push('scripts')
     <script>
         const conversationId = {{ $conversation->id }};
         let localStream = null;
         let peerConnection = null;
         let currentCallSession = null;
         let callDurationInterval = null;
+
+        console.log('Chat script loaded, conversation ID:', conversationId);
 
         // WebRTC Configuration
         const configuration = {
@@ -146,27 +147,42 @@
                 { urls: 'stun:stun1.l.google.com:19302' }
             ]
         };
+                { urls: 'stun:stun1.l.google.com:19302' }
+            ]
+        };
 
         // Send Message
         document.getElementById('messageForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log('Form submitted');
+            
             const messageInput = document.getElementById('messageInput');
             const message = messageInput.value.trim();
             
-            if (!message) return;
+            console.log('Message:', message);
+            
+            if (!message) {
+                console.log('Empty message, returning');
+                return;
+            }
+
+            const url = `{{ auth()->user()->isDoctor() ? route('doctor.chat.send', $conversation) : route('chat.send', $conversation) }}`;
+            console.log('Sending to URL:', url);
 
             try {
-                const response = await fetch(`{{ auth()->user()->isDoctor() ? route('doctor.chat.send', $conversation) : route('chat.send', $conversation) }}`, {
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ message })
                 });
 
+                console.log('Response status:', response.status);
                 const data = await response.json();
+                console.log('Response data:', data);
                 
                 if (data.success) {
                     messageInput.value = '';
@@ -187,10 +203,14 @@
                     `;
                     messagesArea.appendChild(messageDiv);
                     messagesArea.scrollTop = messagesArea.scrollHeight;
+                    console.log('Message added to UI');
+                } else {
+                    console.error('Success false:', data);
+                    alert('Gagal mengirim pesan: ' + (data.message || 'Unknown error'));
                 }
             } catch (error) {
                 console.error('Error sending message:', error);
-                alert('Gagal mengirim pesan');
+                alert('Gagal mengirim pesan: ' + error.message);
             }
         });
 
@@ -202,6 +222,8 @@
 
         // Initiate Call
         async function initiateCall(type) {
+            console.log('Initiating call, type:', type);
+            
             try {
                 // Request permission first
                 const constraints = {
@@ -209,15 +231,21 @@
                     video: type === 'video'
                 };
 
+                console.log('Requesting media access:', constraints);
+
                 try {
                     localStream = await navigator.mediaDevices.getUserMedia(constraints);
+                    console.log('Media access granted');
                 } catch (mediaError) {
-                    alert('Tidak dapat mengakses ' + (type === 'video' ? 'kamera/mikrofon' : 'mikrofon') + '. Pastikan Anda memberikan izin akses.');
                     console.error('Media error:', mediaError);
+                    alert('Tidak dapat mengakses ' + (type === 'video' ? 'kamera/mikrofon' : 'mikrofon') + '. Pastikan Anda memberikan izin akses.');
                     return;
                 }
 
-                const response = await fetch(`/calls/conversations/${conversationId}/initiate`, {
+                const url = `/calls/conversations/${conversationId}/initiate`;
+                console.log('Calling URL:', url);
+
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -227,7 +255,9 @@
                     body: JSON.stringify({ type })
                 });
 
+                console.log('Call response status:', response.status);
                 const data = await response.json();
+                console.log('Call response data:', data);
                 
                 if (!data.success) {
                     alert('Gagal memulai panggilan: ' + (data.error || 'Unknown error'));
@@ -238,6 +268,7 @@
                 }
                 
                 currentCallSession = data.call_session;
+                console.log('Call session created:', currentCallSession);
 
                 // Show call modal
                 document.getElementById('callModal').classList.remove('hidden');
@@ -367,7 +398,10 @@
 
         // Auto scroll to bottom
         const messagesArea = document.getElementById('messagesArea');
-        messagesArea.scrollTop = messagesArea.scrollHeight;
+        if (messagesArea) {
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        console.log('Chat script fully initialized');
     </script>
-    @endpush
 </x-app-layout>
