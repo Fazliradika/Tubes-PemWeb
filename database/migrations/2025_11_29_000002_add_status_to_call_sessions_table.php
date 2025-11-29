@@ -11,13 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('call_sessions') && !Schema::hasColumn('call_sessions', 'status')) {
-            Schema::table('call_sessions', function (Blueprint $table) {
-                $table->enum('status', ['ringing', 'ongoing', 'ended', 'missed', 'declined'])
-                    ->default('ringing')
-                    ->after('type');
-            });
-        }
+        // Drop existing table if it exists
+        Schema::dropIfExists('call_sessions');
+        
+        // Create new table with correct structure
+        Schema::create('call_sessions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('caller_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade');
+            $table->enum('type', ['voice', 'video']);
+            $table->enum('status', ['ringing', 'ongoing', 'ended', 'missed', 'declined'])->default('ringing');
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
+            $table->integer('duration_seconds')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -25,10 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasColumn('call_sessions', 'status')) {
-            Schema::table('call_sessions', function (Blueprint $table) {
-                $table->dropColumn('status');
-            });
-        }
+        Schema::dropIfExists('call_sessions');
     }
 };
