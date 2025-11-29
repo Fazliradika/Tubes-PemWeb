@@ -29,7 +29,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <!-- Product Image -->
                         <div>
-                            <img src="https://via.placeholder.com/600x600/4F46E5/FFFFFF?text={{ urlencode($product->name) }}" alt="{{ $product->name }}" 
+                            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop" alt="{{ $product->name }}" 
                                 class="w-full h-auto rounded-lg shadow-md">
                         </div>
 
@@ -107,7 +107,7 @@
                         @foreach($relatedProducts as $relatedProduct)
                             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                                 <a href="{{ route('products.show', $relatedProduct->slug) }}">
-                                    <img src="https://via.placeholder.com/300x300/4F46E5/FFFFFF?text={{ urlencode($relatedProduct->name) }}" alt="{{ $relatedProduct->name }}" 
+                                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&h=300&fit=crop" alt="{{ $relatedProduct->name }}" 
                                         class="w-full h-48 object-cover">
                                 </a>
                                 <div class="p-4">

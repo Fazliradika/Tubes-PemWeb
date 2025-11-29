@@ -123,6 +123,113 @@
                                             </div>
                                         </div>
                                     </label>
+
+                                    <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="payment_method" value="qris" required
+                                            class="mr-3" {{ old('payment_method') == 'qris' ? 'checked' : '' }}>
+                                        <div class="flex items-center flex-1">
+                                            <i class="fas fa-qrcode text-blue-600 text-2xl mr-3"></i>
+                                            <div>
+                                                <div class="font-semibold">QRIS</div>
+                                                <div class="text-sm text-gray-600">Scan QR Code untuk Bayar</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Method -->
+                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                                    <i class="fas fa-shipping-fast mr-2"></i>Pilih Kurir Pengiriman
+                                </h3>
+
+                                <div class="space-y-3">
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="jne_reg" required
+                                                class="mr-3" {{ old('courier') == 'jne_reg' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">JNE Regular</div>
+                                                <div class="text-sm text-gray-600">2-3 hari</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 15.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="jne_yes" required
+                                                class="mr-3" {{ old('courier') == 'jne_yes' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">JNE YES</div>
+                                                <div class="text-sm text-gray-600">1 hari</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 25.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="jnt_reg" required
+                                                class="mr-3" {{ old('courier') == 'jnt_reg' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">J&T Regular</div>
+                                                <div class="text-sm text-gray-600">2-3 hari</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 12.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="sicepat" required
+                                                class="mr-3" {{ old('courier') == 'sicepat' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">SiCepat BEST</div>
+                                                <div class="text-sm text-gray-600">2-3 hari</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 13.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="anteraja" required
+                                                class="mr-3" {{ old('courier') == 'anteraja' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">AnterAja Regular</div>
+                                                <div class="text-sm text-gray-600">2-4 hari</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 10.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="gosend" required
+                                                class="mr-3" {{ old('courier') == 'gosend' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">GoSend Instant</div>
+                                                <div class="text-sm text-gray-600">Same day</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 20.000</div>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -150,15 +257,9 @@
                                 <div class="space-y-3 mb-4 max-h-64 overflow-y-auto">
                                     @foreach($cart->cartItems as $item)
                                         <div class="flex items-start space-x-3 text-sm">
-                                            @if($item->product->image)
-                                                <img src="https://via.placeholder.com/150x150/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}" 
-                                                    alt="{{ $item->product->name }}" 
-                                                    class="w-12 h-12 object-cover rounded">
-                                            @else
-                                                <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
-                                                    <i class="fas fa-image text-gray-400"></i>
-                                                </div>
-                                            @endif
+                                            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop" 
+                                                alt="{{ $item->product->name }}" 
+                                                class="w-12 h-12 object-cover rounded">
                                             <div class="flex-1">
                                                 <div class="font-medium text-gray-900">{{ $item->product->name }}</div>
                                                 <div class="text-gray-600">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
@@ -178,11 +279,11 @@
                                     </div>
                                     <div class="flex justify-between text-gray-600">
                                         <span>Ongkos Kirim</span>
-                                        <span class="text-green-600 font-semibold">GRATIS</span>
+                                        <span id="shipping-cost">Rp 0</span>
                                     </div>
                                     <div class="border-t pt-2 flex justify-between text-lg font-bold">
                                         <span>Total Pembayaran</span>
-                                        <span class="text-blue-600">Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
+                                        <span class="text-blue-600" id="total-amount">Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
 
@@ -203,4 +304,30 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // Courier pricing
+        const courierPricing = {
+            'jne_reg': 15000,
+            'jne_yes': 25000,
+            'jnt_reg': 12000,
+            'sicepat': 13000,
+            'anteraja': 10000,
+            'gosend': 20000
+        };
+
+        const subtotal = {{ $cart->total }};
+
+        // Update shipping cost when courier is selected
+        document.querySelectorAll('input[name="courier"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const shippingCost = courierPricing[this.value] || 0;
+                const total = subtotal + shippingCost;
+
+                // Update display
+                document.getElementById('shipping-cost').textContent = 'Rp ' + shippingCost.toLocaleString('id-ID');
+                document.getElementById('total-amount').textContent = 'Rp ' + total.toLocaleString('id-ID');
+            });
+        });
+    </script>
 </x-app-layout>

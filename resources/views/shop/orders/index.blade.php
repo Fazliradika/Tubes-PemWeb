@@ -52,7 +52,7 @@
                                         <div class="space-y-2">
                                             @foreach($order->orderItems->take(2) as $item)
                                                 <div class="flex items-center space-x-4">
-                                                    <img src="https://via.placeholder.com/150x150/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}"
+                                                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop"
                                                             alt="{{ $item->product_name }}" 
                                                             class="w-12 h-12 object-cover rounded">
                                                     @else
