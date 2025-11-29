@@ -130,11 +130,11 @@ Deployment  : Railway
 
 | Nama | NIM | Peran |
 |------|-----|-------|
-| Fazli Radika | 103062300092 | Authentication & User Management |
 | Muhammad Rafadi Kurniawan | 103062300089 | E-Commerce & Product Management |
-| Aldyansyah Wisnu Saputra | 103062300100 | Dashboard & Analytics |
-| Muhammad Afriza Hidayat | 103062300093 | AI Health Assistant & Chat |
 | Naufal Saifullah Yusuf | 103062300091 | Admin Panel & Settings |
+| Fazli Radika | 103062300092 | Authentication & User Management |
+| Muhammad Afriza Hidayat | 103062300093 | AI Health Assistant & Chat |
+| Aldyansyah Wisnu Saputra | 103062300100 | Dashboard & Analytics |
 
 ---
 
