@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('My Dashboard') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Welcome Card - Primary Emerald -->
+            <!-- Welcome Card - Primary Blue -->
             <div class="bg-gradient-to-r from-emerald-600 to-teal-500 overflow-hidden shadow-lg sm:rounded-2xl mb-6">
                 <div class="p-6 text-white">
                     <h3 class="text-2xl font-bold mb-2">Welcome, {{ $patient->name }}!</h3>
@@ -15,54 +15,54 @@
                 </div>
             </div>
 
-            <!-- Stats Grid - Consistent Emerald Tones -->
+            <!-- Stats Grid - With Dark Mode Support -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <!-- Upcoming Appointments -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-gray-100">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 dark:border-slate-700">
                     <div class="p-6">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-emerald-50 rounded-xl p-3">
-                                <svg class="h-6 w-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3">
+                                <svg class="h-6 w-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-500">Upcoming Appointments</p>
-                                <p class="text-2xl font-semibold text-gray-900">2</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Upcoming Appointments</p>
+                                <p class="text-2xl font-semibold text-gray-900 dark:text-white">2</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Medical Records -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-gray-100">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 dark:border-slate-700">
                     <div class="p-6">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-teal-50 rounded-xl p-3">
-                                <svg class="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 bg-teal-50 dark:bg-teal-900/30 rounded-xl p-3">
+                                <svg class="h-6 w-6 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-500">Medical Records</p>
-                                <p class="text-2xl font-semibold text-gray-900">15</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Medical Records</p>
+                                <p class="text-2xl font-semibold text-gray-900 dark:text-white">15</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Active Prescriptions -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-gray-100">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 dark:border-slate-700">
                     <div class="p-6">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-cyan-50 rounded-xl p-3">
-                                <svg class="h-6 w-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 bg-cyan-50 dark:bg-cyan-900/30 rounded-xl p-3">
+                                <svg class="h-6 w-6 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-500">Active Prescriptions</p>
-                                <p class="text-2xl font-semibold text-gray-900">{{ $activePrescriptionsCount ?? 0 }}</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Prescriptions</p>
+                                <p class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $activePrescriptionsCount ?? 0 }}</p>
                             </div>
                         </div>
                     </div>
@@ -70,11 +70,11 @@
             </div>
 
             <!-- Upcoming Appointments - Harmonized -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 mb-6">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 dark:border-slate-700 mb-6">
                 <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Your Upcoming Appointments</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Your Upcoming Appointments</h3>
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                        <div class="flex items-center justify-between p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/50 rounded-xl">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-12 w-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-semibold">
                                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,37 +82,37 @@
                                     </svg>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-semibold text-gray-900">Dr. Ahmad Fadli</p>
-                                    <p class="text-xs text-gray-600">Cardiologist</p>
-                                    <p class="text-xs text-gray-500 mt-1">General Checkup</p>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Dr. Ahmad Fadli</p>
+                                    <p class="text-xs text-emerald-600 dark:text-emerald-400">Cardiologist</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 mt-1">General Checkup</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="text-sm font-bold text-gray-900">Tomorrow</p>
-                                <p class="text-sm text-gray-600">10:00 AM</p>
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 mt-2">
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Tomorrow</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">10:00 AM</p>
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-800/50 text-emerald-700 dark:text-emerald-300 mt-2">
                                     Confirmed
                                 </span>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between p-4 bg-teal-50 border border-teal-100 rounded-xl">
+                        <div class="flex items-center justify-between p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/50 rounded-xl">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 h-12 w-12 bg-teal-500 rounded-full flex items-center justify-center text-white font-semibold">
+                                <div class="flex-shrink-0 h-12 w-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-semibold">
                                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-semibold text-gray-900">Dr. Citra Dewi</p>
-                                    <p class="text-xs text-gray-600">Dermatologist</p>
-                                    <p class="text-xs text-gray-500 mt-1">Skin Consultation</p>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Dr. Citra Dewi</p>
+                                    <p class="text-xs text-emerald-600 dark:text-emerald-400">Dermatologist</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 mt-1">Skin Consultation</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="text-sm font-bold text-gray-900">Nov 5, 2025</p>
-                                <p class="text-sm text-gray-600">02:30 PM</p>
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-700 mt-2">
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Nov 5, 2025</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">02:30 PM</p>
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-800/50 text-emerald-700 dark:text-emerald-300 mt-2">
                                     Confirmed
                                 </span>
                             </div>
@@ -121,51 +121,51 @@
                 </div>
             </div>
 
-            <!-- Quick Actions - Unified Emerald Theme -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 mb-6">
+            <!-- Quick Actions - Unified Theme with Dark Mode -->
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 dark:border-slate-700 mb-6">
                 <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <a href="{{ route('appointments.index') }}" class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 rounded-xl transition">
-                            <svg class="h-8 w-8 text-emerald-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('appointments.index') }}" class="flex flex-col items-center justify-center p-4 bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 border border-emerald-100 dark:border-emerald-800/50 rounded-xl transition">
+                            <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            <span class="text-sm font-medium text-gray-700">Book Appointment</span>
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Book Appointment</span>
                         </a>
-                        <a href="{{ route('appointments.my-appointments') }}" class="flex flex-col items-center justify-center p-4 bg-teal-50 hover:bg-teal-100 border border-teal-100 rounded-xl transition">
-                            <svg class="h-8 w-8 text-teal-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('appointments.my-appointments') }}" class="flex flex-col items-center justify-center p-4 bg-teal-50 dark:bg-teal-900/20 hover:bg-teal-100 dark:hover:bg-teal-900/40 border border-teal-100 dark:border-teal-800/50 rounded-xl transition">
+                            <svg class="h-8 w-8 text-teal-600 dark:text-teal-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            <span class="text-sm font-medium text-gray-700">My Appointments</span>
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">My Appointments</span>
                         </a>
-                        <a href="{{ route('prescriptions.index') }}" class="flex flex-col items-center justify-center p-4 bg-cyan-50 hover:bg-cyan-100 border border-cyan-100 rounded-xl transition">
-                            <svg class="h-8 w-8 text-cyan-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('prescriptions.index') }}" class="flex flex-col items-center justify-center p-4 bg-cyan-50 dark:bg-cyan-900/20 hover:bg-cyan-100 dark:hover:bg-cyan-900/40 border border-cyan-100 dark:border-cyan-800/50 rounded-xl transition">
+                            <svg class="h-8 w-8 text-cyan-600 dark:text-cyan-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                             </svg>
-                            <span class="text-sm font-medium text-gray-700">Prescriptions</span>
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Prescriptions</span>
                         </a>
-                        <a href="{{ route('chat.index') }}" class="flex flex-col items-center justify-center p-4 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-xl transition">
-                            <svg class="h-8 w-8 text-slate-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('chat.index') }}" class="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-700/50 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-600 rounded-xl transition">
+                            <svg class="h-8 w-8 text-slate-600 dark:text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                             </svg>
-                            <span class="text-sm font-medium text-gray-700">Messages</span>
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Messages</span>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Health Articles Section - Harmonized -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 mb-6">
+            <!-- Health Articles Section - With Dark Mode -->
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-xl border border-gray-100 dark:border-slate-700 mb-6">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-2xl font-bold text-gray-800">Artikel Kesehatan Terkini untuk Anda</h3>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Artikel Kesehatan Terkini untuk Anda</h3>
                     </div>
 
                     <!-- Articles Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Article 1 -->
                         <a href="{{ route('articles.show', '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian') }}" class="article-card block" data-category="Hidup Sehat">
-                            <div class="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
+                            <div class="bg-white dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-xl overflow-hidden hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-700 transition-all duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop" 
                                          alt="Healthy Food" 
@@ -175,13 +175,13 @@
                                     </span>
                                 </div>
                                 <div class="p-4">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-emerald-600 cursor-pointer">
+                                    <h4 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
                                         7 Makanan yang Bikin Kurus, Cocok untuk Menu Diet Harian
                                     </h4>
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                         Makanan yang bikin kurus menjadi incaran banyak orang yang ingin menurunkan berat badan tanpa rasa lapar atau tersiksa. Dengan memilih...
                                     </p>
-                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400">
                                         <span>5 min read</span>
                                         <span>• 2 hari lalu</span>
                                     </div>
@@ -191,7 +191,7 @@
 
                         <!-- Article 2 -->
                         <a href="{{ route('articles.show', 'tips-olahraga-efektif-untuk-kesehatan-jantung') }}" class="article-card block" data-category="Olahraga">
-                            <div class="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:border-teal-200 transition-all duration-300">
+                            <div class="bg-white dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-xl overflow-hidden hover:shadow-lg hover:border-teal-200 dark:hover:border-teal-700 transition-all duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop" 
                                          alt="Exercise" 
@@ -201,13 +201,13 @@
                                     </span>
                                 </div>
                                 <div class="p-4">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-emerald-600 cursor-pointer">
+                                    <h4 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
                                         Tips Olahraga yang Efektif untuk Kesehatan Jantung
                                     </h4>
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                         Olahraga teratur sangat penting untuk menjaga kesehatan jantung. Pelajari jenis olahraga yang paling efektif untuk meningkatkan fungsi...
                                     </p>
-                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                                         <span>7 min read</span>
                                         <span>• 3 hari lalu</span>
                                     </div>
@@ -217,7 +217,7 @@
 
                         <!-- Article 3 -->
                         <a href="{{ route('articles.show', 'mengelola-diabetes-dengan-pola-makan-sehat') }}" class="article-card block" data-category="Diabetes">
-                            <div class="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:border-cyan-200 transition-all duration-300">
+                            <div class="bg-white dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-xl overflow-hidden hover:shadow-lg hover:border-cyan-200 dark:hover:border-cyan-700 transition-all duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=250&fit=crop" 
                                          alt="Diabetes" 
@@ -227,13 +227,13 @@
                                     </span>
                                 </div>
                                 <div class="p-4">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-emerald-600 cursor-pointer">
+                                    <h4 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
                                     Mengelola Diabetes dengan Pola Makan Sehat
                                 </h4>
-                                <p class="text-sm text-gray-600 mb-3">
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                     Pola makan yang tepat sangat penting bagi penderita diabetes. Temukan panduan lengkap tentang makanan yang aman dan nutrisi yang...
                                 </p>
-                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                                     <span>6 min read</span>
                                     <span>• 4 hari lalu</span>
                                 </div>
@@ -242,7 +242,7 @@
 
                         <!-- Article 4 -->
                         <a href="{{ route('articles.show', 'pentingnya-vitamin-dan-mineral-untuk-tubuh') }}" class="article-card block" data-category="Nutrisi">
-                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=250&fit=crop" 
                                          alt="Nutrition" 
@@ -252,13 +252,13 @@
                                     </span>
                                 </div>
                                 <div class="p-4">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                    <h4 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
                                         Pentingnya Vitamin dan Mineral untuk Tubuh
                                     </h4>
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                         Vitamin dan mineral adalah nutrisi esensial yang dibutuhkan tubuh. Pelajari manfaat masing-masing vitamin dan sumber makanan terbaik...
                                     </p>
-                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                                         <span>8 min read</span>
                                         <span>• 5 hari lalu</span>
                                     </div>
@@ -268,7 +268,7 @@
 
                         <!-- Article 5 -->
                         <a href="{{ route('articles.show', 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental') }}" class="article-card block" data-category="Kesehatan Mental">
-                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop" 
                                          alt="Mental Health" 
@@ -278,13 +278,13 @@
                                     </span>
                                 </div>
                                 <div class="p-4">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                    <h4 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
                                         Cara Mengatasi Stres dan Menjaga Kesehatan Mental
                                     </h4>
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                         Kesehatan mental sama pentingnya dengan kesehatan fisik. Temukan strategi efektif untuk mengelola stres dan meningkatkan kesejahteraan...
                                     </p>
-                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                                         <span>10 min read</span>
                                         <span>• 1 minggu lalu</span>
                                     </div>
@@ -294,7 +294,7 @@
 
                         <!-- Article 6 -->
                         <a href="{{ route('articles.show', 'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya') }}" class="article-card block" data-category="Kecantikan">
-                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                 <div class="relative">
                                     <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=250&fit=crop"
                                          alt="Sleep" 
@@ -304,13 +304,13 @@
                                     </span>
                                 </div>
                                 <div class="p-4">
-                                    <h4 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 cursor-pointer">
+                                    <h4 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
                                         Tips Tidur Berkualitas untuk Kulit Sehat dan Bercahaya
                                     </h4>
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                         Tidur yang cukup dan berkualitas sangat penting untuk kesehatan kulit. Pelajari bagaimana tidur mempengaruhi kecantikan dan tips untuk...
                                     </p>
-                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                                         <span>6 min read</span>
                                         <span>• 1 minggu lalu</span>
                                     </div>
@@ -332,10 +332,10 @@
             </div>
 
             <!-- Patient Testimonials -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg border border-gray-100 dark:border-slate-700 mb-6">
                 <div class="p-8">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-3">Kata Mereka tentang HealthFirst Medical</h3>
-                    <p class="text-gray-600 mb-10 max-w-3xl">
+                    <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Kata Mereka tentang HealthFirst Medical</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-3xl">
                         Cerita dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman di HealthFirst Medical.
                     </p>
 
@@ -345,13 +345,13 @@
                             <div class="flex items-start space-x-4">
                                 <img src="https://i.pravatar.cc/80?img=68" alt="Sainem Wiyono" class="w-14 h-14 rounded-full object-cover border border-gray-200" />
                                 <div>
-                                    <p class="italic text-gray-800 leading-relaxed">
+                                    <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Sangat membantu.. malam2 butuh obat, gak perlu keluar rumah”
                                     </p>
-                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">SAINEM WIYONO</p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 dark:text-gray-400 mt-3">SAINEM WIYONO</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                            <button class="w-fit px-5 py-2 border border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-400 rounded-full text-xs font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
                                 Lihat Layanan
                             </button>
                         </div>
@@ -359,17 +359,17 @@
                         <!-- Testimonial 2 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <div class="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
-                                    <span class="text-pink-500 font-semibold text-lg">L</span>
+                                <div class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                    <span class="text-blue-500 dark:text-blue-400 font-semibold text-lg">L</span>
                                 </div>
                                 <div>
-                                    <p class="italic text-gray-800 leading-relaxed">
+                                    <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Sangat Helpful!!! Terima kasih yaa, sangat menghemat waktu dan respon dokternya juga baik. resep obatnya juga manjur sekali, thank u ya semoga kedepannya tambah keren lagi.”
                                     </p>
-                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">LINTANG ANINDHITYA INDRASWARI</p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 dark:text-gray-400 mt-3">LINTANG ANINDHITYA INDRASWARI</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                            <button class="w-fit px-5 py-2 border border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-400 rounded-full text-xs font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
                                 Buat Janji Temu
                             </button>
                         </div>
@@ -377,17 +377,17 @@
                         <!-- Testimonial 3 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <div class="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
-                                    <span class="text-pink-500 font-semibold text-lg">A</span>
+                                <div class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                    <span class="text-blue-500 dark:text-blue-400 font-semibold text-lg">A</span>
                                 </div>
                                 <div>
-                                    <p class="italic text-gray-800 leading-relaxed">
+                                    <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Pengalaman rawat inap di HealthFirst Medical sangat berkesan. Perawatnya sangat care, kamarnya nyaman, dan makanannya enak. Terima kasih atas pelayanan terbaiknya!”
                                     </p>
-                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">AHKBAR FELYAYTI</p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 dark:text-gray-400 mt-3">AHKBAR FELYAYTI</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                            <button class="w-fit px-5 py-2 border border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-400 rounded-full text-xs font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
                                 Info Rawat Inap
                             </button>
                         </div>
@@ -397,17 +397,17 @@
                         <!-- Testimonial 4 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <div class="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
-                                    <span class="text-pink-500 font-semibold text-lg">I</span>
+                                <div class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                    <span class="text-blue-500 dark:text-blue-400 font-semibold text-lg">I</span>
                                 </div>
                                 <div>
-                                    <p class="italic text-gray-800 leading-relaxed">
+                                    <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Hallo, terimakasih HealthFirst Medical sejak pertama konsultasi hingga saat ini kulitku sudah banyak mengalami perubahan. Jerawat dan bekasnya semakin membaik berkat saran dokter-dokter HealthFirst Medical. Jujur baru kali ini bisa konsultasi dengan dokter kulit secara leluasa dan terbuka, semua pertanyaan tentang jerawatku dijawab secara gamblang.”
                                     </p>
-                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 mt-3">IZZA AFKARINA MUDMAINAH</p>
+                                    <p class="uppercase tracking-wide text-[11px] text-gray-500 dark:text-gray-400 mt-3">IZZA AFKARINA MUDMAINAH</p>
                                 </div>
                             </div>
-                            <button class="w-fit px-5 py-2 border border-purple-500 text-purple-500 rounded-full text-xs font-semibold hover:bg-purple-50 transition">
+                            <button class="w-fit px-5 py-2 border border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-400 rounded-full text-xs font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
                                 Cek Layanan Kami
                             </button>
                         </div>
