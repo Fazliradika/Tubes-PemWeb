@@ -34,8 +34,7 @@
                                         <div class="flex items-center space-x-4 p-4 border rounded-lg">
                                             <!-- Product Image -->
                                             <div class="flex-shrink-0">
-                                                @if($item->product->image)
-                                                    <img src="https://via.placeholder.com/200x200/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}" 
+                                                <img src="https://via.placeholder.com/200x200/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}" 
                                                         alt="{{ $item->product->name }}" 
                                                         class="w-24 h-24 object-cover rounded">
                                                 @else

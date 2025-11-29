@@ -83,9 +83,8 @@
                         <div class="space-y-3">
                             @foreach($order->orderItems as $item)
                                 <div class="flex items-center justify-between py-2 border-b last:border-b-0">
-                                    <div class="flex items-center space-x-3">
-                                        @if($item->product && $item->product->image)
-                                            <img src="https://via.placeholder.com/150x150/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}" 
+                                    <div class="flex items-center space-x-4">
+                                        <img src="https://via.placeholder.com/150x150/4F46E5/FFFFFF?text={{ urlencode($item->product->name) }}"
                                                 alt="{{ $item->product_name }}" 
                                                 class="w-12 h-12 object-cover rounded">
                                         @else

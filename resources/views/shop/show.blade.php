@@ -29,16 +29,8 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <!-- Product Image -->
                         <div>
-                            @if($product->image)
-                                <img src="https://via.placeholder.com/600x600/4F46E5/FFFFFF?text={{ urlencode($product->name) }}" alt="{{ $product->name }}" 
-                                    class="w-full h-auto rounded-lg shadow-md">
-                            @else
-                                <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-                                    <svg class="w-32 h-32 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                            @endif
+                            <img src="https://via.placeholder.com/600x600/4F46E5/FFFFFF?text={{ urlencode($product->name) }}" alt="{{ $product->name }}" 
+                                class="w-full h-auto rounded-lg shadow-md">
                         </div>
 
                         <!-- Product Info -->
@@ -115,16 +107,8 @@
                         @foreach($relatedProducts as $relatedProduct)
                             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                                 <a href="{{ route('products.show', $relatedProduct->slug) }}">
-                                    @if($relatedProduct->image)
-                                        <img src="https://via.placeholder.com/300x300/4F46E5/FFFFFF?text={{ urlencode($relatedProduct->name) }}" alt="{{ $relatedProduct->name }}" 
-                                            class="w-full h-48 object-cover">
-                                    @else
-                                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                            <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                        </div>
-                                    @endif
+                                    <img src="https://via.placeholder.com/300x300/4F46E5/FFFFFF?text={{ urlencode($relatedProduct->name) }}" alt="{{ $relatedProduct->name }}" 
+                                        class="w-full h-48 object-cover">
                                 </a>
                                 <div class="p-4">
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">
