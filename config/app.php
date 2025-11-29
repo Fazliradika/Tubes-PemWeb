@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'HealthFirst Medical'),
+    'name' => env('APP_NAME', 'RS Project'),
 
     /*
     |--------------------------------------------------------------------------

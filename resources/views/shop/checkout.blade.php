@@ -126,7 +126,8 @@
 
                                     <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <input type="radio" name="payment_method" value="qris" required
-                                            class="mr-3" {{ old('payment_method') == 'qris' ? 'checked' : '' }}>
+                                            class="mr-3" {{ old('payment_method') == 'qris' ? 'checked' : '' }}
+                                            onchange="toggleQrisCode()">
                                         <div class="flex items-center flex-1">
                                             <i class="fas fa-qrcode text-blue-600 text-2xl mr-3"></i>
                                             <div>
@@ -135,6 +136,38 @@
                                             </div>
                                         </div>
                                     </label>
+                                </div>
+
+                                <!-- QRIS QR Code Display (Hidden by default) -->
+                                <div id="qrisCodeSection" class="hidden mt-6 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
+                                    <div class="text-center">
+                                        <h4 class="text-lg font-semibold text-gray-900 mb-4">
+                                            <i class="fas fa-qrcode mr-2 text-blue-600"></i>Scan QRIS untuk Bayar
+                                        </h4>
+                                        
+                                        <div class="inline-block bg-white border-4 border-gray-800 p-4 rounded-lg shadow-lg mb-4">
+                                            <img id="qrisImage" 
+                                                 src="" 
+                                                 alt="QRIS Code" 
+                                                 class="w-64 h-64">
+                                        </div>
+                                        
+                                        <div class="bg-white border border-blue-300 rounded-lg p-4 max-w-md mx-auto">
+                                            <div class="font-semibold text-blue-800 mb-2">Total Pembayaran:</div>
+                                            <div id="qrisTotal" class="text-3xl font-bold text-blue-900"></div>
+                                            <div class="text-sm text-blue-700 mt-3">
+                                                <i class="fas fa-mobile-alt mr-1"></i>Gunakan aplikasi e-wallet (GoPay, OVO, Dana, ShopeePay, dll)
+                                            </div>
+                                        </div>
+                                        
+                                        <p class="text-sm text-gray-600 mt-4">
+                                            <i class="fas fa-shield-alt mr-1"></i>Pembayaran aman dengan QRIS Indonesia
+                                        </p>
+                                        
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            Setelah scan, lanjutkan checkout untuk menyelesaikan pesanan
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -332,17 +365,66 @@
         };
 
         const subtotal = {{ $cart->total }};
+        let currentTotal = subtotal;
 
         // Update shipping cost when courier is selected
         document.querySelectorAll('input[name="courier"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const shippingCost = courierPricing[this.value] || 0;
-                const total = subtotal + shippingCost;
+                currentTotal = subtotal + shippingCost;
 
                 // Update display
                 document.getElementById('shipping-cost').textContent = 'Rp ' + shippingCost.toLocaleString('id-ID');
-                document.getElementById('total-amount').textContent = 'Rp ' + total.toLocaleString('id-ID');
+                document.getElementById('total-amount').textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
+                
+                // Update QRIS total if visible
+                updateQrisTotal();
             });
+        });
+
+        // Toggle QRIS QR Code display
+        function toggleQrisCode() {
+            const qrisRadio = document.querySelector('input[name="payment_method"][value="qris"]');
+            const qrisSection = document.getElementById('qrisCodeSection');
+            
+            if (qrisRadio && qrisRadio.checked) {
+                qrisSection.classList.remove('hidden');
+                updateQrisCode();
+            } else {
+                qrisSection.classList.add('hidden');
+            }
+        }
+
+        // Update QRIS QR Code
+        function updateQrisCode() {
+            const orderNumber = 'ORD-' + Date.now();
+            const qrisData = `00020101021226670016COM.NOBUBANK.WWW01189360050300000898740214${orderNumber}0303UMI51440014ID.CO.QRIS.WWW0215ID10232995167140303UMI5204481253033605802ID5917RS Project Medical6007Jakarta61051234062070703A0163044C7D`;
+            
+            const qrisImage = document.getElementById('qrisImage');
+            qrisImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrisData)}`;
+            
+            updateQrisTotal();
+        }
+
+        // Update QRIS total amount display
+        function updateQrisTotal() {
+            const qrisTotal = document.getElementById('qrisTotal');
+            if (qrisTotal) {
+                qrisTotal.textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
+            }
+        }
+
+        // Add event listeners to all payment method radios
+        document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+            radio.addEventListener('change', toggleQrisCode);
+        });
+
+        // Check on page load if QRIS was selected (from old() values)
+        window.addEventListener('DOMContentLoaded', function() {
+            const qrisRadio = document.querySelector('input[name="payment_method"][value="qris"]');
+            if (qrisRadio && qrisRadio.checked) {
+                toggleQrisCode();
+            }
         });
     </script>
 </x-app-layout>

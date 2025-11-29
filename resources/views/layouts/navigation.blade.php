@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
                         <img src="{{ asset('images/LogoRs.png') }}" alt="Hospital Logo" class="h-10 w-auto">
-                        <span class="text-xl font-bold text-white">HealthFirst Medical</span>
+                        <span class="text-xl font-bold text-white">RS Project</span>
                     </a>
                 </div>
 
