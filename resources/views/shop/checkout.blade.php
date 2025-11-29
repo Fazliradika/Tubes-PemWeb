@@ -143,17 +143,17 @@
                         <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
                             <div class="p-6">
                                 <h3 class="text-lg font-semibold text-gray-900 mb-4">
-                                    <i class="fas fa-shipping-fast mr-2"></i>Pilih Kurir Pengiriman
+                                    <i class="fas fa-shipping-fast mr-2"></i>Pilih Pengiriman Instant
                                 </h3>
 
                                 <div class="space-y-3">
                                     <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <div class="flex items-center">
-                                            <input type="radio" name="courier" value="jne_reg" required
-                                                class="mr-3" {{ old('courier') == 'jne_reg' ? 'checked' : '' }}>
+                                            <input type="radio" name="courier" value="gosend_instant" required
+                                                class="mr-3" {{ old('courier') == 'gosend_instant' ? 'checked' : '' }}>
                                             <div>
-                                                <div class="font-semibold">JNE Regular</div>
-                                                <div class="text-sm text-gray-600">2-3 hari</div>
+                                                <div class="font-semibold">GoSend Instant</div>
+                                                <div class="text-sm text-gray-600">1-2 jam</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -163,25 +163,11 @@
 
                                     <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <div class="flex items-center">
-                                            <input type="radio" name="courier" value="jne_yes" required
-                                                class="mr-3" {{ old('courier') == 'jne_yes' ? 'checked' : '' }}>
+                                            <input type="radio" name="courier" value="gosend_sameday" required
+                                                class="mr-3" {{ old('courier') == 'gosend_sameday' ? 'checked' : '' }}>
                                             <div>
-                                                <div class="font-semibold">JNE YES</div>
-                                                <div class="text-sm text-gray-600">1 hari</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 25.000</div>
-                                        </div>
-                                    </label>
-
-                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                        <div class="flex items-center">
-                                            <input type="radio" name="courier" value="jnt_reg" required
-                                                class="mr-3" {{ old('courier') == 'jnt_reg' ? 'checked' : '' }}>
-                                            <div>
-                                                <div class="font-semibold">J&T Regular</div>
-                                                <div class="text-sm text-gray-600">2-3 hari</div>
+                                                <div class="font-semibold">GoSend Same Day</div>
+                                                <div class="text-sm text-gray-600">Hari ini juga</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -191,11 +177,25 @@
 
                                     <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <div class="flex items-center">
-                                            <input type="radio" name="courier" value="sicepat" required
-                                                class="mr-3" {{ old('courier') == 'sicepat' ? 'checked' : '' }}>
+                                            <input type="radio" name="courier" value="grabexpress_instant" required
+                                                class="mr-3" {{ old('courier') == 'grabexpress_instant' ? 'checked' : '' }}>
                                             <div>
-                                                <div class="font-semibold">SiCepat BEST</div>
-                                                <div class="text-sm text-gray-600">2-3 hari</div>
+                                                <div class="font-semibold">GrabExpress Instant</div>
+                                                <div class="text-sm text-gray-600">1-2 jam</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-blue-600">Rp 16.000</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="courier" value="grabexpress_sameday" required
+                                                class="mr-3" {{ old('courier') == 'grabexpress_sameday' ? 'checked' : '' }}>
+                                            <div>
+                                                <div class="font-semibold">GrabExpress Same Day</div>
+                                                <div class="text-sm text-gray-600">Hari ini juga</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
@@ -205,29 +205,29 @@
 
                                     <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <div class="flex items-center">
-                                            <input type="radio" name="courier" value="anteraja" required
-                                                class="mr-3" {{ old('courier') == 'anteraja' ? 'checked' : '' }}>
+                                            <input type="radio" name="courier" value="jne_yes" required
+                                                class="mr-3" {{ old('courier') == 'jne_yes' ? 'checked' : '' }}>
                                             <div>
-                                                <div class="font-semibold">AnterAja Regular</div>
-                                                <div class="text-sm text-gray-600">2-4 hari</div>
+                                                <div class="font-semibold">JNE YES Same Day</div>
+                                                <div class="text-sm text-gray-600">Hari ini juga</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 10.000</div>
+                                            <div class="font-semibold text-blue-600">Rp 18.000</div>
                                         </div>
                                     </label>
 
                                     <label class="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                         <div class="flex items-center">
-                                            <input type="radio" name="courier" value="gosend" required
-                                                class="mr-3" {{ old('courier') == 'gosend' ? 'checked' : '' }}>
+                                            <input type="radio" name="courier" value="anteraja_instant" required
+                                                class="mr-3" {{ old('courier') == 'anteraja_instant' ? 'checked' : '' }}>
                                             <div>
-                                                <div class="font-semibold">GoSend Instant</div>
-                                                <div class="text-sm text-gray-600">Same day</div>
+                                                <div class="font-semibold">AnterAja Instant</div>
+                                                <div class="text-sm text-gray-600">3-4 jam</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-semibold text-blue-600">Rp 20.000</div>
+                                            <div class="font-semibold text-blue-600">Rp 14.000</div>
                                         </div>
                                     </label>
                                 </div>
@@ -306,14 +306,14 @@
     </div>
 
     <script>
-        // Courier pricing
+        // Courier pricing (instant/same day only)
         const courierPricing = {
-            'jne_reg': 15000,
-            'jne_yes': 25000,
-            'jnt_reg': 12000,
-            'sicepat': 13000,
-            'anteraja': 10000,
-            'gosend': 20000
+            'gosend_instant': 15000,
+            'gosend_sameday': 12000,
+            'grabexpress_instant': 16000,
+            'grabexpress_sameday': 13000,
+            'jne_yes': 18000,
+            'anteraja_instant': 14000
         };
 
         const subtotal = {{ $cart->total }};
