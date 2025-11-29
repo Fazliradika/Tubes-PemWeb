@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Home - Kelompok Serigala Putih')
+@section('title', 'Home - HealthFirst Medical')
 
 @section('content')
 <!-- Hero Section -->
 <section class="gradient-bg text-white py-20">
     <div class="container mx-auto px-4 text-center">
         <h1 class="text-5xl font-bold mb-4 animate-fade-in">
-            Selamat Datang di Proyek Serigala Putih
+            Selamat Datang di HealthFirst Medical
         </h1>
         <p class="text-xl mb-8 text-purple-100">
-            Tugas Besar Pemrograman Web - Solusi Digital Terbaik
+            Layanan Kesehatan Berkualitas untuk Anda dan Keluarga
         </p>
         <div class="flex justify-center space-x-4">
             <button class="px-8 py-3 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition">
