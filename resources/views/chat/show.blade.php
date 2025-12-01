@@ -319,14 +319,10 @@
                 }, 2000);
             }
         }
-                
-            } catch (error) {
-                console.error('Error initiating call:', error);
-                alert('Gagal memulai panggilan: ' + error.message);
-                if (localStream) {
-                    localStream.getTracks().forEach(track => track.stop());
-                }
-            }
+
+        function setupPeerConnection() {
+            // Simplified for demo
+            console.log('Call session established');
         }
 
         function setupPeerConnection() {
