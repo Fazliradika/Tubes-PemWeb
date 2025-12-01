@@ -1,19 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Pesan') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700">
                     @if($conversations->count() > 0)
                         <div class="grid grid-cols-1 gap-4">
                             @foreach($conversations as $conversation)
                                 <a href="{{ auth()->user()->isDoctor() ? route('doctor.chat.show', $conversation) : route('chat.show', $conversation) }}" 
-                                   class="block border rounded-lg p-4 hover:shadow-lg hover:border-blue-500 transition">
+                                   class="block border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-400 transition">
                                     <div class="flex items-start justify-between">
                                         <div class="flex items-start space-x-4 flex-1">
                                             <div class="flex-shrink-0">
@@ -27,7 +27,7 @@
                                             </div>
                                             <div class="flex-1 min-w-0">
                                                 <div class="flex items-center justify-between">
-                                                    <p class="text-lg font-semibold text-gray-900">
+                                                    <p class="text-lg font-semibold text-gray-900 dark:text-white">
                                                         @if(auth()->user()->isPatient())
                                                             Dr. {{ $conversation->doctor->user->name }}
                                                         @else
@@ -35,23 +35,23 @@
                                                         @endif
                                                     </p>
                                                     @if($conversation->last_message_at)
-                                                        <p class="text-sm text-gray-500">
+                                                        <p class="text-sm text-gray-500 dark:text-gray-400">
                                                             {{ $conversation->last_message_at->diffForHumans() }}
                                                         </p>
                                                     @endif
                                                 </div>
                                                 @if(auth()->user()->isPatient())
-                                                    <p class="text-sm text-gray-600">{{ $conversation->doctor->specialization }}</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $conversation->doctor->specialization }}</p>
                                                 @endif
                                                 @if($conversation->latestMessage)
-                                                    <p class="text-sm text-gray-600 mt-1 truncate">
+                                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 truncate">
                                                         {{ $conversation->latestMessage->message ?? 'Media' }}
                                                     </p>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="ml-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                                                 {{ $conversation->status }}
                                             </span>
                                         </div>
