@@ -249,72 +249,34 @@
             return div.innerHTML;
         }
 
-        // Initiate Call
+        // Initiate Call (Simulation only - no real call)
         async function initiateCall(type) {
-            console.log('Initiating call, type:', type);
+            console.log('Initiating call simulation, type:', type);
             
-            try {
-                // Request permission first
-                const constraints = {
-                    audio: true,
-                    video: type === 'video'
-                };
-
-                console.log('Requesting media access:', constraints);
-
+            // Show call modal immediately
+            document.getElementById('callModal').classList.remove('hidden');
+            
+            if (type === 'video') {
+                document.getElementById('videoContainer').classList.remove('hidden');
+                document.getElementById('voiceContainer').classList.add('hidden');
+                document.getElementById('videoCallInfo').classList.remove('hidden');
+                document.getElementById('toggleCamera').classList.remove('hidden');
+                
+                // Try to get camera/microphone for video preview (optional)
                 try {
-                    localStream = await navigator.mediaDevices.getUserMedia(constraints);
-                    console.log('Media access granted');
-                } catch (mediaError) {
-                    console.error('Media error:', mediaError);
-                    alert('Tidak dapat mengakses ' + (type === 'video' ? 'kamera/mikrofon' : 'mikrofon') + '. Pastikan Anda memberikan izin akses.');
-                    return;
-                }
-
-                const url = `/calls/conversations/${conversationId}/initiate`;
-                console.log('Calling URL:', url);
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ type })
-                });
-
-                console.log('Call response status:', response.status);
-                const data = await response.json();
-                console.log('Call response data:', data);
-                
-                if (!data.success) {
-                    alert('Gagal memulai panggilan: ' + (data.error || 'Unknown error'));
-                    if (localStream) {
-                        localStream.getTracks().forEach(track => track.stop());
-                    }
-                    return;
-                }
-                
-                currentCallSession = data.call_session;
-                console.log('Call session created:', currentCallSession);
-
-                // Show call modal
-                document.getElementById('callModal').classList.remove('hidden');
-                
-                if (type === 'video') {
-                    document.getElementById('videoContainer').classList.remove('hidden');
-                    document.getElementById('voiceContainer').classList.add('hidden');
-                    document.getElementById('videoCallInfo').classList.remove('hidden');
+                    localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
                     const localVideo = document.getElementById('localVideo');
-                    localVideo.srcObject = localStream;
-                    document.getElementById('toggleCamera').classList.remove('hidden');
-                    
-                    // Simulate remote video (in production, this would be the actual remote stream)
                     const remoteVideo = document.getElementById('remoteVideo');
-                    remoteVideo.srcObject = localStream; // Demo: show own video
-                    
-                    // Update video call duration
+                    localVideo.srcObject = localStream;
+                    remoteVideo.srcObject = localStream; // Show own video as simulation
+                } catch (error) {
+                    console.log('Camera access denied or not available, showing placeholder');
+                    // Continue without video - just show the UI
+                }
+                
+                // Simulate "connecting" then "connected"
+                setTimeout(() => {
+                    // Start video call duration timer
                     let videoSeconds = 0;
                     callDurationInterval = setInterval(() => {
                         videoSeconds++;
@@ -323,15 +285,28 @@
                         document.getElementById('videoCallDuration').textContent = 
                             `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
                     }, 1000);
-                } else {
-                    document.getElementById('voiceContainer').classList.remove('hidden');
-                    document.getElementById('videoContainer').classList.add('hidden');
-                    document.getElementById('videoCallInfo').classList.add('hidden');
-                    document.getElementById('toggleCamera').classList.add('hidden');
-                    
-                    // Update call status
+                }, 2000);
+                
+            } else {
+                // Voice call
+                document.getElementById('voiceContainer').classList.remove('hidden');
+                document.getElementById('videoContainer').classList.add('hidden');
+                document.getElementById('videoCallInfo').classList.add('hidden');
+                document.getElementById('toggleCamera').classList.add('hidden');
+                
+                // Try to get microphone (optional)
+                try {
+                    localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+                } catch (error) {
+                    console.log('Microphone access denied or not available');
+                }
+                
+                // Simulate "calling" for 2 seconds, then "connected"
+                document.getElementById('callStatus').textContent = 'Memanggil...';
+                
+                setTimeout(() => {
                     document.getElementById('callStatus').textContent = 'Terhubung';
-
+                    
                     // Start call duration timer
                     let seconds = 0;
                     callDurationInterval = setInterval(() => {
@@ -341,7 +316,9 @@
                         document.getElementById('callDuration').textContent = 
                             `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
                     }, 1000);
-                }
+                }, 2000);
+            }
+        }
                 
             } catch (error) {
                 console.error('Error initiating call:', error);
@@ -357,71 +334,42 @@
             console.log('Call session established');
         }
 
-        // End Call
-        async function endCall() {
-            try {
-                if (currentCallSession) {
-                    await fetch(`/calls/sessions/${currentCallSession.id}/end`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Accept': 'application/json'
-                        }
-                    });
-                }
-
-                // Stop all tracks
-                if (localStream) {
-                    localStream.getTracks().forEach(track => track.stop());
-                    localStream = null;
-                }
-
-                // Close peer connection
-                if (peerConnection) {
-                    peerConnection.close();
-                    peerConnection = null;
-                }
-
-                // Hide call modal
-                document.getElementById('callModal').classList.add('hidden');
-                document.getElementById('videoContainer').classList.add('hidden');
-                document.getElementById('voiceContainer').classList.add('hidden');
-
-                // Clear interval
-                if (callDurationInterval) {
-                    clearInterval(callDurationInterval);
-                    callDurationInterval = null;
-                }
-
-                // Reset current session
-                currentCallSession = null;
-
-                // Show success message
-                alert('Panggilan selesai');
-                
-                // Reload to show call history
-                location.reload();
-            } catch (error) {
-                console.error('Error ending call:', error);
-                // Still cleanup even if request fails
-                if (localStream) {
-                    localStream.getTracks().forEach(track => track.stop());
-                }
-                document.getElementById('callModal').classList.add('hidden');
-                if (callDurationInterval) {
-                    clearInterval(callDurationInterval);
-                }
+        // End Call (Simulation)
+        function endCall() {
+            // Stop all media tracks
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
             }
+
+            // Hide call modal
+            document.getElementById('callModal').classList.add('hidden');
+            document.getElementById('videoContainer').classList.add('hidden');
+            document.getElementById('voiceContainer').classList.add('hidden');
+
+            // Clear interval
+            if (callDurationInterval) {
+                clearInterval(callDurationInterval);
+                callDurationInterval = null;
+            }
+
+            // Reset durations
+            document.getElementById('callDuration').textContent = '00:00';
+            document.getElementById('videoCallDuration').textContent = '00:00';
+            document.getElementById('callStatus').textContent = 'Memanggil...';
+            
+            console.log('Call ended');
         }
 
         // Toggle microphone
         document.getElementById('toggleMicrophone').addEventListener('click', () => {
             if (localStream) {
                 const audioTrack = localStream.getAudioTracks()[0];
-                audioTrack.enabled = !audioTrack.enabled;
-                document.getElementById('toggleMicrophone').classList.toggle('bg-red-600');
-                document.getElementById('toggleMicrophone').classList.toggle('bg-gray-200');
+                if (audioTrack) {
+                    audioTrack.enabled = !audioTrack.enabled;
+                    document.getElementById('toggleMicrophone').classList.toggle('bg-red-600');
+                    document.getElementById('toggleMicrophone').classList.toggle('bg-slate-700');
+                }
             }
         });
 
@@ -432,7 +380,7 @@
                 if (videoTrack) {
                     videoTrack.enabled = !videoTrack.enabled;
                     document.getElementById('toggleCamera').classList.toggle('bg-red-600');
-                    document.getElementById('toggleCamera').classList.toggle('bg-gray-200');
+                    document.getElementById('toggleCamera').classList.toggle('bg-slate-700');
                 }
             }
         });
