@@ -7,6 +7,15 @@
 
         <title>HealthFirst Medical - Layanan Kesehatan Terpercaya</title>
 
+        <!-- Prevent Dark Mode Flash -->
+        <script>
+            if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
+
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('images/LogoRs.png') }}">
 
