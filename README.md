@@ -1,5 +1,7 @@
 # 🏥 Health First Medical
 
+<!-- Build trigger: 2025-12-03 -->
+
 <div align="center">
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
