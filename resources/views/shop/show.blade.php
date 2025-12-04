@@ -66,17 +66,58 @@
                             </div>
 
                             @if($product->stock > 0)
-                                <form action="{{ route('cart.add', $product) }}" method="POST" class="mb-6">
+                                <form action="{{ route('cart.add', $product) }}" method="POST" class="mb-6" x-data="{ 
+                                    quantity: 1, 
+                                    maxStock: {{ $product->stock }},
+                                    price: {{ $product->price }},
+                                    increment() { if(this.quantity < this.maxStock) this.quantity++ },
+                                    decrement() { if(this.quantity > 1) this.quantity-- },
+                                    get subtotal() { return this.quantity * this.price }
+                                }">
                                     @csrf
-                                    <div class="flex items-center space-x-4 mb-4">
-                                        <label for="quantity" class="text-sm font-medium text-gray-700 dark:text-gray-300">Jumlah:</label>
-                                        <input type="number" name="quantity" id="quantity" min="1" max="{{ $product->stock }}" value="1" 
-                                            class="w-24 rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    
+                                    <!-- Quantity Selector -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Jumlah:</label>
+                                        <div class="flex items-center space-x-4">
+                                            <!-- Minus Button -->
+                                            <button type="button" @click="decrement()" 
+                                                :class="quantity <= 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white'"
+                                                class="w-12 h-12 rounded-lg flex items-center justify-center transition-colors border border-gray-300 dark:border-slate-500">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            
+                                            <!-- Quantity Input -->
+                                            <input type="number" name="quantity" x-model.number="quantity" 
+                                                min="1" max="{{ $product->stock }}" 
+                                                @input="quantity = Math.min(Math.max(1, quantity), maxStock)"
+                                                class="w-20 h-12 text-center text-xl font-bold rounded-lg border-gray-300 dark:border-slate-500 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                            
+                                            <!-- Plus Button -->
+                                            <button type="button" @click="increment()" 
+                                                :class="quantity >= maxStock ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'"
+                                                class="w-12 h-12 rounded-lg flex items-center justify-center transition-colors">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                            
+                                            <!-- Max Stock Info -->
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">
+                                                (Maks: {{ $product->stock }} unit)
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Subtotal Preview -->
+                                    <div class="bg-gray-50 dark:bg-slate-700 rounded-lg p-4 mb-6">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-600 dark:text-gray-300">Subtotal:</span>
+                                            <span class="text-2xl font-bold text-blue-600" x-text="'Rp ' + subtotal.toLocaleString('id-ID')"></span>
+                                        </div>
                                     </div>
 
                                     <button type="submit" 
-                                        class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                                        <i class="fas fa-cart-plus mr-2"></i>Tambah ke Keranjang
+                                        class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                                        <i class="fas fa-cart-plus mr-2"></i>Tambah <span x-text="quantity" class="mx-1"></span> Item ke Keranjang
                                     </button>
                                 </form>
                             @else
