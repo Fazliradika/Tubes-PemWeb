@@ -107,11 +107,12 @@
                             @foreach($order->orderItems as $item)
                                 <div class="flex items-center justify-between py-2 border-b last:border-b-0">
                                     <div class="flex items-center space-x-4">
-                                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop"
+                                        @if($item->product && $item->product->image)
+                                            <img src="{{ $item->product->image }}"
                                                 alt="{{ $item->product_name }}" 
                                                 class="w-12 h-12 object-cover rounded">
                                         @else
-                                            <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
+                                            <div class="w-12 h-12 bg-gray-200 dark:bg-slate-600 rounded flex items-center justify-center">
                                                 <i class="fas fa-image text-gray-400"></i>
                                             </div>
                                         @endif
