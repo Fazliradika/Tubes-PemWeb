@@ -147,7 +147,7 @@
                     <!-- Top Section with Logo -->
                     <div class="mb-8">
                         <div class="flex items-center mb-6">
-                            <img src="{{ asset('images/LogoRs.png') }}" alt="HealthFirst Medical" class="h-10 w-auto mr-2">
+                            <img src="{{ asset('images/LogoRs.png') }}" alt="HealthFirst Medical" class="h-14 w-auto mr-3">
                             <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">HealthFirst Medical</span>
                         </div>
 
