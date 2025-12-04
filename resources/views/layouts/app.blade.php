@@ -104,6 +104,9 @@
         </style>
     </head>
     <body class="font-sans antialiased">
+        <!-- Toast Container -->
+        <div id="toast-container" class="fixed top-4 right-4 z-[9999] flex flex-col gap-2"></div>
+        
         <div class="min-h-screen bg-gray-100 dark:bg-slate-900 transition-colors duration-300">
             @include('layouts.navigation')
 
@@ -127,6 +130,7 @@
                     </div>
                 </header>
             @endif
+
 
             <!-- Page Content -->
             <main class="dark:text-slate-200">
@@ -267,5 +271,25 @@
                 </div>
             </footer>
         </div>
+        
+        <!-- Flash Message Toast Script -->
+        @if(session('success') || session('error') || session('warning') || session('info'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                @if(session('success'))
+                    window.showToast(@json(session('success')), 'success');
+                @endif
+                @if(session('error'))
+                    window.showToast(@json(session('error')), 'error');
+                @endif
+                @if(session('warning'))
+                    window.showToast(@json(session('warning')), 'warning');
+                @endif
+                @if(session('info'))
+                    window.showToast(@json(session('info')), 'info');
+                @endif
+            });
+        </script>
+        @endif
     </body>
 </html>

@@ -76,8 +76,10 @@ Akses: **http://localhost:8000**
 | Role | Email | Password |
 |------|-------|----------|
 | 👨‍💼 Admin | `admin@healthfirst.com` | `password` |
-| 👨‍⚕️ Dokter | `doctor@healthfirst.com` | `password123` |
-| 👤 Pasien | `patient@test.com` | `password123` |
+| 👨‍💼 Admin 2 | `admin@example.com` | `password123` |
+| 👨‍⚕️ Dokter | `doctor@healthfirst.com` | `password` |
+| 👨‍⚕️ Dokter 2 | `ahmad.fadli@hospital.com` | `password` |
+| 👤 Pasien | `patient@healthfirst.com` | `password` |
 
 > ⚠️ **Catatan:** Hanya pasien yang dapat registrasi mandiri. Akun dokter dibuat oleh admin.
 

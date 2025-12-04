@@ -98,6 +98,21 @@ class UserSeeder extends Seeder
         ];
 
         // Create patients with varied registration dates (more recent registrations)
+        
+        // First, create a demo patient account
+        User::updateOrCreate(
+            ['email' => 'patient@healthfirst.com'],
+            [
+                'name' => 'Demo Patient',
+                'password' => Hash::make('password'),
+                'role' => 'patient',
+                'email_verified_at' => now(),
+                'created_at' => now()->subDays(30),
+                'updated_at' => now(),
+            ]
+        );
+        $this->command->info('✅ Created demo patient: patient@healthfirst.com');
+        
         foreach ($patientNames as $index => $name) {
             // More patients registered recently (last 6 months)
             $daysAgo = $this->getRealisticRegistrationDate($index, count($patientNames));
