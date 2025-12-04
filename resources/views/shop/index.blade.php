@@ -62,16 +62,16 @@
             <!-- Products Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 @forelse($products as $product)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <a href="{{ route('products.show', $product->slug) }}">
                             <img src="{{ $product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop' }}" alt="{{ $product->name }}" 
                                 class="w-full h-48 object-cover">
                         </a>
 
                         <div class="p-4">
-                            <div class="text-sm text-blue-600 mb-1">{{ $product->category->name }}</div>
+                            <div class="text-sm text-blue-600 dark:text-blue-400 mb-1">{{ $product->category->name }}</div>
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                <a href="{{ route('products.show', $product->slug) }}" class="hover:text-blue-600">
+                                <a href="{{ route('products.show', $product->slug) }}" class="hover:text-blue-600 dark:hover:text-blue-400">
                                     {{ $product->name }}
                                 </a>
                             </h3>
@@ -80,7 +80,7 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <span class="text-2xl font-bold text-gray-900 dark:text-white">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                    <div class="text-sm text-gray-500">Stok: {{ $product->stock }}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">Stok: {{ $product->stock }}</div>
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@
                                     </button>
                                 @else
                                     <button type="button" disabled
-                                        class="w-full bg-gray-300 text-gray-500 py-2 rounded-md cursor-not-allowed">
+                                        class="w-full bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 py-2 rounded-md cursor-not-allowed">
                                         Stok Habis
                                     </button>
                                 @endif
@@ -107,7 +107,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Tidak ada produk</h3>
-                        <p class="mt-1 text-sm text-gray-500">Coba ubah filter atau kata kunci pencarian Anda.</p>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Coba ubah filter atau kata kunci pencarian Anda.</p>
                     </div>
                 @endforelse
             </div>

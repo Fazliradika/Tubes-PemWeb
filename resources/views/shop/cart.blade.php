@@ -31,7 +31,7 @@
 
                                 <div class="space-y-4">
                                     @foreach($cart->cartItems as $item)
-                                        <div class="flex items-center space-x-4 p-4 border rounded-lg">
+                                        <div class="flex items-center space-x-4 p-4 border dark:border-slate-600 rounded-lg">
                                             <!-- Product Image -->
                                             <div class="flex-shrink-0">
                                                 <img src="{{ $item->product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=200&h=200&fit=crop' }}" 
@@ -59,7 +59,7 @@
                                                     @method('PATCH')
                                                     <input type="number" name="quantity" value="{{ $item->quantity }}" 
                                                         min="1" max="{{ $item->product->stock }}"
-                                                        class="w-16 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                                        class="w-16 rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                                     <button type="submit" class="text-blue-600 hover:text-blue-800">
                                                         <i class="fas fa-sync-alt"></i>
                                                     </button>
@@ -84,7 +84,7 @@
                                     @endforeach
                                 </div>
 
-                                <div class="mt-6 pt-6 border-t flex justify-between items-center">
+                                <div class="mt-6 pt-6 border-t dark:border-slate-600 flex justify-between items-center">
                                     <form action="{{ route('cart.clear') }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -116,7 +116,7 @@
                                         <span>Ongkos Kirim</span>
                                         <span class="text-green-600 font-semibold">GRATIS</span>
                                     </div>
-                                    <div class="border-t pt-3 flex justify-between text-lg font-bold">
+                                    <div class="border-t dark:border-slate-600 pt-3 flex justify-between text-lg font-bold">
                                         <span>Total</span>
                                         <span class="text-blue-600">Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
                                     </div>
@@ -137,7 +137,7 @@
                                     </div>
                                 @endauth
 
-                                <div class="mt-6 pt-6 border-t">
+                                <div class="mt-6 pt-6 border-t dark:border-slate-600">
                                     <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Keuntungan Belanja di Sini:</h4>
                                     <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                                         <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Produk Original & Terpercaya</li>

@@ -92,10 +92,10 @@
                         <div class="p-6">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Produk yang Dipesan</h3>
                             
-                            <div class="space-y-4">
+                            <div class=\"space-y-4\">
                                 @foreach($order->orderItems as $item)
-                                    <div class="flex items-center space-x-4 p-4 border rounded-lg">
-                                        <img src="{{ $item->product->image ?? 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}" 
+                                    <div class=\"flex items-center space-x-4 p-4 border dark:border-slate-600 rounded-lg\">
+                                        <img src=\"{{ $item->product->image ?? 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}\"
                                             alt="{{ $item->product_name }}" 
                                                 class="w-20 h-20 object-cover rounded">
                                         <div class="flex-1">
@@ -111,7 +111,7 @@
                                 @endforeach
                             </div>
 
-                            <div class="border-t mt-6 pt-6">
+                            <div class="border-t dark:border-slate-600 mt-6 pt-6">
                                 <div class="space-y-2">
                                     <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Subtotal</span>
@@ -121,7 +121,7 @@
                                         <span>Ongkos Kirim</span>
                                         <span class="text-green-600 font-semibold">GRATIS</span>
                                     </div>
-                                    <div class="border-t pt-2 flex justify-between text-xl font-bold">
+                                    <div class="border-t dark:border-slate-600 pt-2 flex justify-between text-xl font-bold">
                                         <span>Total</span>
                                         <span class="text-blue-600">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                                     </div>

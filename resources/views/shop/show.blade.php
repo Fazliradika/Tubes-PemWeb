@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <!-- Product Image -->
@@ -71,7 +71,7 @@
                                     <div class="flex items-center space-x-4 mb-4">
                                         <label for="quantity" class="text-sm font-medium text-gray-700 dark:text-gray-300">Jumlah:</label>
                                         <input type="number" name="quantity" id="quantity" min="1" max="{{ $product->stock }}" value="1" 
-                                            class="w-24 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                            class="w-24 rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                     </div>
 
                                     <button type="submit" 
@@ -105,7 +105,7 @@
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Produk Terkait</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach($relatedProducts as $relatedProduct)
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                                 <a href="{{ route('products.show', $relatedProduct->slug) }}">
                                     <img src="{{ $relatedProduct->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&h=300&fit=crop' }}" alt="{{ $relatedProduct->name }}" 
                                         class="w-full h-48 object-cover">
