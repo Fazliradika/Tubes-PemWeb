@@ -132,41 +132,67 @@
                                     .article-content h3 { color: #1f2937; }
                                     .article-content strong { color: #111827; }
                                     /* Dark mode colors */
+                                    .dark .article-content,
                                     .dark .article-content p,
-                                    .dark .article-content li { color: #d1d5db; }
-                                    .dark .article-content h2 { color: #f9fafb; }
-                                    .dark .article-content h3 { color: #e5e7eb; }
-                                    .dark .article-content strong { color: #f9fafb; }
-                                    /* Quote box styling */
-                                    .article-content blockquote {
-                                        background: #ecfdf5;
-                                        border-left: 4px solid #10b981;
-                                        padding: 1.5rem;
-                                        margin: 1.5rem 0;
-                                        border-radius: 0.5rem;
+                                    .dark .article-content li { color: #d1d5db !important; }
+                                    .dark .article-content h2 { color: #f9fafb !important; }
+                                    .dark .article-content h3 { color: #e5e7eb !important; }
+                                    .dark .article-content strong { color: #f9fafb !important; }
+                                    
+                                    /* Quote box styling - Override inline classes */
+                                    .article-content .article-quote,
+                                    .article-content blockquote,
+                                    .article-content [class*="bg-green-50"] {
+                                        background: #ecfdf5 !important;
+                                        border-left: 4px solid #10b981 !important;
+                                        padding: 1.5rem !important;
+                                        margin: 1.5rem 0 !important;
+                                        border-radius: 0.5rem !important;
                                         font-style: italic;
+                                        color: #374151 !important;
                                     }
-                                    .dark .article-content blockquote {
-                                        background: rgba(16, 185, 129, 0.1);
-                                        border-left-color: #34d399;
+                                    .dark .article-content .article-quote,
+                                    .dark .article-content blockquote,
+                                    .dark .article-content [class*="bg-green-50"] {
+                                        background: rgba(16, 185, 129, 0.15) !important;
+                                        border-left-color: #34d399 !important;
+                                        color: #d1d5db !important;
                                     }
-                                    /* TOC styling */
-                                    .article-content .toc-container {
-                                        background: #f9fafb;
-                                        border: 1px solid #e5e7eb;
-                                        border-radius: 0.5rem;
-                                        padding: 1.5rem;
-                                        margin-bottom: 2rem;
+                                    
+                                    /* TOC styling - Override inline classes */
+                                    .article-content .toc,
+                                    .article-content .toc-container,
+                                    .article-content [class*="bg-gray-50"] {
+                                        background: #f9fafb !important;
+                                        border: 1px solid #e5e7eb !important;
+                                        border-radius: 0.5rem !important;
+                                        padding: 1.5rem !important;
+                                        margin-bottom: 2rem !important;
                                     }
-                                    .dark .article-content .toc-container {
-                                        background: #1e293b;
-                                        border-color: #334155;
+                                    .dark .article-content .toc,
+                                    .dark .article-content .toc-container,
+                                    .dark .article-content [class*="bg-gray-50"] {
+                                        background: #1e293b !important;
+                                        border-color: #475569 !important;
                                     }
-                                    .article-content .toc-container a {
-                                        color: #059669;
+                                    
+                                    /* TOC links */
+                                    .article-content .toc a,
+                                    .article-content .toc-container a,
+                                    .article-content [class*="text-blue-600"] {
+                                        color: #059669 !important;
                                     }
-                                    .dark .article-content .toc-container a {
-                                        color: #34d399;
+                                    .dark .article-content .toc a,
+                                    .dark .article-content .toc-container a,
+                                    .dark .article-content [class*="text-blue-600"] {
+                                        color: #34d399 !important;
+                                    }
+                                    
+                                    /* TOC heading */
+                                    .article-content .toc h2,
+                                    .article-content .toc-container h2 {
+                                        font-size: 1.25rem !important;
+                                        margin-bottom: 1rem !important;
                                     }
                                 </style>
                                 {!! $article['content'] !!}
