@@ -1,5 +1,23 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))" :class="{ 'dark': darkMode }">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ 
+    darkMode: localStorage.getItem('darkMode') !== null 
+        ? localStorage.getItem('darkMode') === 'true' 
+        : window.matchMedia('(prefers-color-scheme: dark)').matches 
+}" x-init="
+    $watch('darkMode', val => {
+        localStorage.setItem('darkMode', val);
+        if (val) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    });
+    if (darkMode) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+" :class="{ 'dark': darkMode }">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,11 +27,15 @@
 
         <!-- Prevent Dark Mode Flash -->
         <script>
-            if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+            (function() {
+                var stored = localStorage.getItem('darkMode');
+                var isDark = stored !== null ? stored === 'true' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            })();
         </script>
 
         <!-- Favicon -->

@@ -437,7 +437,7 @@
     </div>
 
     <!-- AI Health Assistant - Floating Button -->
-    <button id="aiChatToggle" class="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl p-4 shadow-xl hover:shadow-blue-500/40 hover:scale-105 transition-all duration-300 z-40 group flex items-center gap-2">
+    <button id="aiChatToggle" class="fixed bottom-6 right-6 bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-500 dark:to-teal-400 text-white rounded-2xl p-4 shadow-xl shadow-emerald-500/30 dark:shadow-emerald-400/20 hover:shadow-emerald-500/50 dark:hover:shadow-emerald-400/40 hover:scale-105 transition-all duration-300 z-40 group flex items-center gap-2">
         <div class="bg-white/20 rounded-xl p-2">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -451,7 +451,7 @@
     </button>
 
     <!-- AI Chat Sidebar -->
-    <div id="aiChatSidebar" class="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col rounded-l-3xl overflow-hidden">
+    <div id="aiChatSidebar" class="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white dark:bg-slate-800 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col rounded-l-3xl overflow-hidden">
         <!-- Header -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-5">
             <div class="flex items-center justify-between mb-4">
@@ -496,7 +496,7 @@
         </div>
 
         <!-- Chat Messages Container -->
-        <div id="chatMessages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-gradient-to-b from-blue-50/50 to-white">
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-gradient-to-b from-blue-50/50 to-white dark:from-slate-800 dark:to-slate-800">
             <!-- Welcome Message -->
             <div class="flex items-start space-x-3">
                 <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-2.5 flex-shrink-0 shadow-lg">
@@ -504,13 +504,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </div>
-                <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm max-w-[85%] border border-blue-100">
-                    <p class="text-sm text-gray-700 leading-relaxed">
-                        👋 <strong>Halo!</strong> Saya <span class="text-blue-600 font-semibold">Health First AI Assistant</span>. 
+                <div class="bg-white dark:bg-slate-700 rounded-2xl rounded-tl-md p-4 shadow-sm max-w-[85%] border border-blue-100 dark:border-slate-600">
+                    <p class="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
+                        👋 <strong>Halo!</strong> Saya <span class="text-blue-600 dark:text-blue-400 font-semibold">Health First AI Assistant</span>. 
                         Saya siap membantu menjawab pertanyaan seputar kesehatan Anda. Silakan tanyakan apa saja!
                     </p>
-                    <div class="mt-3 p-2.5 bg-amber-50 rounded-xl border border-amber-200">
-                        <p class="text-xs text-amber-700 flex items-start gap-2">
+                    <div class="mt-3 p-2.5 bg-amber-50 dark:bg-amber-900/30 rounded-xl border border-amber-200 dark:border-amber-700">
+                        <p class="text-xs text-amber-700 dark:text-amber-300 flex items-start gap-2">
                             <span class="text-amber-500">⚠️</span>
                             <span>Saya bukan pengganti dokter. Untuk diagnosis dan pengobatan, konsultasikan dengan dokter profesional.</span>
                         </p>
@@ -520,13 +520,13 @@
         </div>
 
         <!-- Input Area -->
-        <div class="border-t border-gray-100 p-4 bg-white">
+        <div class="border-t border-gray-100 dark:border-slate-700 p-4 bg-white dark:bg-slate-800">
             <form id="aiChatForm" class="space-y-3">
                 <div class="relative">
                     <textarea 
                         id="aiChatInput" 
                         rows="2" 
-                        class="w-full px-4 py-3 pr-12 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-gray-50 text-gray-700 placeholder-gray-400" 
+                        class="w-full px-4 py-3 pr-12 border border-gray-200 dark:border-slate-600 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-gray-50 dark:bg-slate-700 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500" 
                         placeholder="Ketik pertanyaan kesehatan Anda..."
                         maxlength="1000"
                     ></textarea>
