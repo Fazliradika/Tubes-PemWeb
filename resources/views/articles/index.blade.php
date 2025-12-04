@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Artikel Kesehatan') }}
         </h2>
     </x-slot>
@@ -21,22 +21,22 @@
                     <button onclick="filterArticles('all')" class="category-btn px-4 py-2 text-sm font-medium text-white bg-green-600 border border-green-600 rounded-full hover:bg-green-700 transition active" data-category="all">
                         Semua
                     </button>
-                    <button onclick="filterArticles('Nutrisi')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition" data-category="Nutrisi">
+                    <button onclick="filterArticles('Nutrisi')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full hover:bg-gray-50 dark:hover:bg-slate-600 transition" data-category="Nutrisi">
                         Nutrisi
                     </button>
-                    <button onclick="filterArticles('Diabetes')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition" data-category="Diabetes">
+                    <button onclick="filterArticles('Diabetes')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full hover:bg-gray-50 dark:hover:bg-slate-600 transition" data-category="Diabetes">
                         Diabetes
                     </button>
-                    <button onclick="filterArticles('Olahraga')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition" data-category="Olahraga">
+                    <button onclick="filterArticles('Olahraga')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full hover:bg-gray-50 dark:hover:bg-slate-600 transition" data-category="Olahraga">
                         Olahraga
                     </button>
-                    <button onclick="filterArticles('Kesehatan Mental')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition" data-category="Kesehatan Mental">
+                    <button onclick="filterArticles('Kesehatan Mental')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full hover:bg-gray-50 dark:hover:bg-slate-600 transition" data-category="Kesehatan Mental">
                         Kesehatan Mental
                     </button>
-                    <button onclick="filterArticles('Hidup Sehat')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition" data-category="Hidup Sehat">
+                    <button onclick="filterArticles('Hidup Sehat')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full hover:bg-gray-50 dark:hover:bg-slate-600 transition" data-category="Hidup Sehat">
                         Hidup Sehat
                     </button>
-                    <button onclick="filterArticles('Kecantikan')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition" data-category="Kecantikan">
+                    <button onclick="filterArticles('Kecantikan')" class="category-btn px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-full hover:bg-gray-50 dark:hover:bg-slate-600 transition" data-category="Kecantikan">
                         Kecantikan
                     </button>
                 </div>
@@ -46,7 +46,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($articles as $article)
                 <a href="{{ route('articles.show', $article['slug']) }}" class="block article-card" data-category="{{ $article['category'] }}">
-                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <div class="relative">
                             <img src="{{ $article['image'] }}" 
                                  alt="{{ $article['title'] }}" 
@@ -56,13 +56,13 @@
                             </span>
                         </div>
                         <div class="p-5">
-                            <h3 class="text-lg font-bold text-gray-800 mb-2 hover:text-green-600 transition-colors">
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                                 {{ $article['title'] }}
                             </h3>
-                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
                                 {{ $article['excerpt'] }}
                             </p>
-                            <div class="flex items-center justify-between text-xs text-gray-500">
+                            <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                                 <span>{{ $article['read_time'] }}</span>
                                 <span>• {{ $article['published_at'] }}</span>
                             </div>
