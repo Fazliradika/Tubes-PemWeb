@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HealthCare - Layanan Kesehatan Terpercaya</title>
+        <title>Health First Medical - Layanan Kesehatan Terpercaya</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex items-center">
-                        <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">🏥 HealthCare</span>
+                        <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">🏥 Health First Medical</span>
                     </div>
                     @if (Route::has('login'))
                         <div class="flex items-center space-x-4">
@@ -148,7 +148,7 @@
         <div class="bg-white dark:bg-gray-800 py-16 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Mengapa Memilih HealthCare?</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Mengapa Memilih Health First Medical?</h2>
                     <p class="text-xl text-gray-600 dark:text-gray-300">Platform kesehatan digital terlengkap dan terpercaya di Indonesia</p>
                 </div>
 
@@ -189,8 +189,8 @@
         <!-- Footer -->
         <footer class="bg-gray-900 text-white py-8 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p class="text-lg font-semibold mb-2">🏥 HealthCare</p>
-                <p class="text-gray-400">&copy; 2025 HealthCare. Layanan Kesehatan Digital Terpercaya.</p>
+                <p class="text-lg font-semibold mb-2">🏥 Health First Medical</p>
+                <p class="text-gray-400">&copy; 2025 Health First Medical. Layanan Kesehatan Digital Terpercaya.</p>
             </div>
         </footer>
     </body>

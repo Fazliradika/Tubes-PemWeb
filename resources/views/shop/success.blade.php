@@ -41,12 +41,12 @@
                                     <div class="border rounded p-4">
                                         <div class="font-semibold text-gray-900 dark:text-white">Bank BCA</div>
                                         <div class="text-gray-600 dark:text-gray-400">1234567890</div>
-                                        <div class="text-sm text-gray-500">a.n. HealthCare Store</div>
+                                        <div class="text-sm text-gray-500">a.n. Health First Medical Store</div>
                                     </div>
                                     <div class="border rounded p-4">
                                         <div class="font-semibold text-gray-900 dark:text-white">Bank Mandiri</div>
                                         <div class="text-gray-600 dark:text-gray-400">0987654321</div>
-                                        <div class="text-sm text-gray-500">a.n. HealthCare Store</div>
+                                        <div class="text-sm text-gray-500">a.n. Health First Medical Store</div>
                                     </div>
                                 </div>
 

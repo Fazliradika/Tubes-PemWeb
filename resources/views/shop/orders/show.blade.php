@@ -234,7 +234,7 @@
                                     class="block w-full bg-green-600 text-white text-center py-2 rounded-lg hover:bg-green-700 transition-colors">
                                     <i class="fab fa-whatsapp mr-2"></i>WhatsApp
                                 </a>
-                                <a href="mailto:support@healthcare.com"
+                                <a href="mailto:support@healthfirstmedical.com"
                                     class="block w-full bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                     <i class="fas fa-envelope mr-2"></i>Email
                                 </a>
