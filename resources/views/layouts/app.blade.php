@@ -39,7 +39,7 @@
         </script>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('images/LogoRs.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('images/Health Favicon.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -169,7 +169,7 @@
                     <!-- Top Section with Logo -->
                     <div class="mb-8">
                         <div class="flex items-center mb-6">
-                            <img src="{{ asset('images/LogoRs.png') }}" alt="HealthFirst Medical" class="h-14 w-auto mr-3">
+                            <img src="{{ asset('images/logo-new.jpg') }}" alt="HealthFirst Medical" class="h-14 w-auto mr-3">
                             <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">HealthFirst Medical</span>
                         </div>
 

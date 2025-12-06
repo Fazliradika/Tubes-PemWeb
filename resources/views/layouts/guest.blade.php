@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('images/LogoRs.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('images/Health Favicon.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,7 +21,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div class="flex flex-col items-center">
                 <a href="/" class="flex flex-col items-center gap-2">
-                    <img src="{{ asset('images/LogoRs.png') }}" alt="Hospital Logo" class="w-24 h-24">
+                    <img src="{{ asset('images/logo-new.jpg') }}" alt="Hospital Logo" class="w-24 h-24">
                     <span class="text-2xl font-bold text-gray-800">HealthFirst Medical</span>
                 </a>
             </div>
