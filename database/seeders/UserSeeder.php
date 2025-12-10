@@ -10,10 +10,15 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * 
+     * ⚠️ SECURITY WARNING: This seeder creates users with default passwords.
+     * ALWAYS change these passwords in production environments!
+     * Default password: 'password' or 'password123'
      */
     public function run(): void
     {
         $this->command->info('🌱 Seeding Users...');
+        $this->command->warn('⚠️  Using default passwords - CHANGE THESE IN PRODUCTION!');
         
         // Create Admin Users
         $admins = [
