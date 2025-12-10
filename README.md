@@ -88,9 +88,13 @@ Setelah menjalankan seeder (`php artisan db:seed`), Anda dapat login dengan akun
 | 👨‍⚕️ Dokter | `doctor@healthfirst.com` | `password` |
 | 👤 Pasien | `patient@healthfirst.com` | `password` |
 
+> **📝 Catatan:** Seeder juga membuat beberapa akun dokter dan pasien tambahan untuk keperluan testing.
+> Semua akun menggunakan password yang sama: `password`
+>
 > ⚠️ **PENTING - Keamanan:**
 > - **GANTI password default** segera setelah deployment pertama kali
 > - **JANGAN gunakan** kredensial ini di production
+> - **HAPUS atau disable** akun demo yang tidak diperlukan di production
 > - Hanya pasien yang dapat registrasi mandiri. Akun dokter dibuat oleh admin.
 > - Untuk production, buat akun baru dengan password yang kuat dan unik
 
