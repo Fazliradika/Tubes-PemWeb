@@ -11,9 +11,8 @@ class AdminSeeder extends Seeder
     /**
      * Run the database seeds.
      * 
-     * ⚠️ SECURITY WARNING: This seeder creates an admin with default password.
+     * ⚠️ SECURITY WARNING: This seeder creates an admin with a weak default password.
      * ALWAYS change this password immediately after deployment!
-     * Default password: 'password123'
      */
     public function run(): void
     {

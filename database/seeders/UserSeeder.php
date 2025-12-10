@@ -11,9 +11,8 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      * 
-     * ⚠️ SECURITY WARNING: This seeder creates users with default passwords.
-     * ALWAYS change these passwords in production environments!
-     * Default password: 'password' or 'password123'
+     * ⚠️ SECURITY WARNING: This seeder creates users with weak default passwords.
+     * ALWAYS change ALL user passwords in production environments immediately after deployment!
      */
     public function run(): void
     {
