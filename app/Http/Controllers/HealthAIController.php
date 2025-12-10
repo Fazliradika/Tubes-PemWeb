@@ -138,8 +138,7 @@ class HealthAIController extends Controller
 
             Log::info('Sending request to Groq API', [
                 'message_length' => strlen($userMessage),
-                'api_key_present' => !empty($apiKey),
-                'api_key_length' => strlen($apiKey)
+                'api_key_configured' => !empty($apiKey)
             ]);
 
             // Call Groq API (OpenAI-compatible format)

@@ -1,8 +1,12 @@
 *.log
 .DS_Store
 .env
+.env.*
+!.env.example
 .env.backup
 .env.production
+.env.local
+.env.staging
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -22,3 +26,13 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 database/database.sqlite
+
+# Security: Additional sensitive files
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+config/secrets.php
+config/credentials.php

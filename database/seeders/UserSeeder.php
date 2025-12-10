@@ -10,17 +10,18 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * 
+     * ⚠️ SECURITY WARNING: This seeder creates users with weak default passwords.
+     * ALWAYS change ALL user passwords in production environments immediately after deployment!
      */
     public function run(): void
     {
         $this->command->info('🌱 Seeding Users...');
+        $this->command->warn('⚠️  Using default passwords - CHANGE THESE IN PRODUCTION!');
         
         // Create Admin Users
         $admins = [
             ['name' => 'Admin Health First', 'email' => 'admin@healthfirst.com', 'password' => 'password'],
-            ['name' => 'Admin', 'email' => 'admin@example.com', 'password' => 'password123'],
-            ['name' => 'Admin Health First Medical', 'email' => 'admin@healthfirstmedical.com', 'password' => 'password'],
-            ['name' => 'Super Admin', 'email' => 'superadmin@example.com', 'password' => 'password'],
         ];
 
         foreach ($admins as $admin) {

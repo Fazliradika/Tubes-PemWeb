@@ -58,6 +58,13 @@ php artisan key:generate
 # DB_USERNAME=root
 # DB_PASSWORD=
 
+# ⚠️ PENTING - Keamanan:
+# - JANGAN commit file .env ke repository
+# - Untuk production: Ganti semua password default
+# - Set APP_DEBUG=false di production
+# - Dapatkan GROQ_API_KEY dari: https://console.groq.com/
+# - Lihat SECURITY.md untuk panduan lengkap
+
 # 5. Migrasi & seed data
 php artisan migrate:fresh --seed
 php artisan storage:link
@@ -73,15 +80,23 @@ Akses: **http://localhost:8000**
 
 ## 👤 Akun Demo
 
+Setelah menjalankan seeder (`php artisan db:seed`), Anda dapat login dengan akun demo berikut:
+
 | Role | Email | Password |
 |------|-------|----------|
 | 👨‍💼 Admin | `admin@healthfirst.com` | `password` |
-| 👨‍💼 Admin 2 | `admin@example.com` | `password123` |
 | 👨‍⚕️ Dokter | `doctor@healthfirst.com` | `password` |
-| 👨‍⚕️ Dokter 2 | `ahmad.fadli@hospital.com` | `password` |
 | 👤 Pasien | `patient@healthfirst.com` | `password` |
 
-> ⚠️ **Catatan:** Hanya pasien yang dapat registrasi mandiri. Akun dokter dibuat oleh admin.
+> **📝 Catatan:** Seeder juga membuat beberapa akun dokter dan pasien tambahan untuk keperluan testing.
+> Semua akun menggunakan password yang sama: `password`
+>
+> ⚠️ **PENTING - Keamanan:**
+> - **GANTI password default** segera setelah deployment pertama kali
+> - **JANGAN gunakan** kredensial ini di production
+> - **HAPUS atau disable** akun demo yang tidak diperlukan di production
+> - Hanya pasien yang dapat registrasi mandiri. Akun dokter dibuat oleh admin.
+> - Untuk production, buat akun baru dengan password yang kuat dan unik
 
 ---
 
@@ -125,6 +140,20 @@ Deployment  : Railway
    GROQ_API_KEY=your_key
    ```
 5. Deploy! 🚀
+
+---
+
+## 🔒 Keamanan / Security
+
+**PENTING untuk Production:**
+
+1. **Ganti password default** - Jangan gunakan password "password" atau "password123"
+2. **Set APP_DEBUG=false** - Nonaktifkan debug mode di production
+3. **Amankan API Keys** - Simpan GROQ_API_KEY dengan aman, jangan commit ke repository
+4. **HTTPS** - Gunakan SSL/TLS certificate untuk koneksi aman
+5. **Backup** - Lakukan backup database secara berkala
+
+📖 **Baca panduan lengkap di [SECURITY.md](SECURITY.md)**
 
 ---
 
