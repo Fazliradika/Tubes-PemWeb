@@ -97,11 +97,10 @@
                                     </form>
                                     
                                     {{-- Buy Now Button --}}
-                                    <form id="buyNowForm{{ $product->id }}" action="{{ route('cart.buyNow', $product) }}" method="POST" class="flex-1">
+                                    <form action="{{ route('cart.buyNow', $product) }}" method="POST" class="flex-1">
                                         @csrf
-                                        <input type="hidden" name="quantity" id="buyNowQty{{ $product->id }}" value="1">
-                                        <button type="button" 
-                                            onclick="promptBuyNow({{ $product->id }}, {{ $product->stock }}, '{{ $product->name }}')"
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" 
                                             class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors text-sm">
                                             <i class="fas fa-bolt mr-1"></i>Beli Langsung
                                         </button>
@@ -134,33 +133,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function promptBuyNow(productId, maxStock, productName) {
-            // Show prompt asking for quantity
-            const quantity = prompt(`Berapa jumlah "${productName}" yang ingin Anda beli?\n\nStok tersedia: ${maxStock}`, '1');
-            
-            // If user cancels, do nothing
-            if (quantity === null) {
-                return;
-            }
-            
-            // Validate input
-            const qty = parseInt(quantity);
-            
-            if (isNaN(qty) || qty < 1) {
-                alert('Jumlah minimal adalah 1');
-                return;
-            }
-            
-            if (qty > maxStock) {
-                alert(`Stok tidak mencukupi. Maksimal ${maxStock} item`);
-                return;
-            }
-            
-            // Set quantity and submit form
-            document.getElementById('buyNowQty' + productId).value = qty;
-            document.getElementById('buyNowForm' + productId).submit();
-        }
-    </script>
 </x-app-layout>

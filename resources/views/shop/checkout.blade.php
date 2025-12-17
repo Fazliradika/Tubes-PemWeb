@@ -303,19 +303,50 @@
                                 <!-- Products -->
                                 <div class="space-y-3 mb-4 max-h-64 overflow-y-auto">
                                     @if($buyNow)
-                                        {{-- Buy Now Mode - Single Product --}}
-                                        <div class="flex items-start space-x-3 text-sm">
+                                        {{-- Buy Now Mode - Single Product with Editable Quantity --}}
+                                        <div class="flex items-start space-x-3 text-sm border-b dark:border-gray-700 pb-3">
                                             <img src="{{ $buyNow['image'] ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}" 
                                                 alt="{{ $buyNow['product_name'] }}" 
-                                                class="w-12 h-12 object-cover rounded">
+                                                class="w-16 h-16 object-cover rounded">
                                             <div class="flex-1">
-                                                <div class="font-medium text-gray-900 dark:text-white">{{ $buyNow['product_name'] }}</div>
-                                                <div class="text-gray-600 dark:text-gray-400">{{ $buyNow['quantity'] }} x Rp {{ number_format($buyNow['price'], 0, ',', '.') }}</div>
+                                                <div class="font-medium text-gray-900 dark:text-white mb-2">{{ $buyNow['product_name'] }}</div>
+                                                <div class="text-gray-600 dark:text-gray-400 text-xs mb-2">Stok tersedia: {{ $buyNow['stock'] }}</div>
+                                                
+                                                {{-- Quantity Editor --}}
+                                                <div class="flex items-center gap-2">
+                                                    <label class="text-xs text-gray-600 dark:text-gray-400">Jumlah:</label>
+                                                    <div class="flex items-center border dark:border-gray-600 rounded">
+                                                        <button type="button" 
+                                                            onclick="updateBuyNowQty(-1)"
+                                                            class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700">
+                                                            <i class="fas fa-minus text-xs"></i>
+                                                        </button>
+                                                        <input type="number" 
+                                                            id="buyNowQuantity"
+                                                            name="buy_now_quantity"
+                                                            value="{{ $buyNow['quantity'] }}" 
+                                                            min="1" 
+                                                            max="{{ $buyNow['stock'] }}"
+                                                            class="w-16 text-center border-0 dark:bg-slate-800 dark:text-white focus:ring-0 text-sm"
+                                                            onchange="validateAndUpdateBuyNow()">
+                                                        <button type="button" 
+                                                            onclick="updateBuyNowQty(1)"
+                                                            class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700">
+                                                            <i class="fas fa-plus text-xs"></i>
+                                                        </button>
+                                                    </div>
+                                                    <span class="text-xs text-gray-600 dark:text-gray-400">x Rp <span id="buyNowUnitPrice">{{ number_format($buyNow['price'], 0, ',', '.') }}</span></span>
+                                                </div>
                                             </div>
                                             <div class="font-semibold text-gray-900 dark:text-white">
-                                                Rp {{ number_format($buyNow['price'] * $buyNow['quantity'], 0, ',', '.') }}
+                                                Rp <span id="buyNowItemTotal">{{ number_format($buyNow['price'] * $buyNow['quantity'], 0, ',', '.') }}</span>
                                             </div>
                                         </div>
+                                        
+                                        {{-- Hidden inputs for form submission --}}
+                                        <input type="hidden" name="product_id" value="{{ $buyNow['product_id'] }}">
+                                        <input type="hidden" id="buyNowMaxStock" value="{{ $buyNow['stock'] }}">
+                                        <input type="hidden" id="buyNowPrice" value="{{ $buyNow['price'] }}">
                                     @else
                                         {{-- Cart Mode - Multiple Products --}}
                                         @foreach($cart->cartItems as $item)
@@ -443,5 +474,52 @@
                 toggleQrisCode();
             }
         });
+
+        // Buy Now Quantity Functions
+        function updateBuyNowQty(change) {
+            const input = document.getElementById('buyNowQuantity');
+            const max = parseInt(document.getElementById('buyNowMaxStock').value);
+            let newQty = parseInt(input.value) + change;
+            
+            if (newQty < 1) newQty = 1;
+            if (newQty > max) newQty = max;
+            
+            input.value = newQty;
+            validateAndUpdateBuyNow();
+        }
+
+        function validateAndUpdateBuyNow() {
+            const input = document.getElementById('buyNowQuantity');
+            const max = parseInt(document.getElementById('buyNowMaxStock').value);
+            const price = parseInt(document.getElementById('buyNowPrice').value);
+            let qty = parseInt(input.value);
+            
+            // Validate
+            if (isNaN(qty) || qty < 1) {
+                qty = 1;
+                input.value = 1;
+            }
+            if (qty > max) {
+                qty = max;
+                input.value = max;
+                alert(`Stok maksimal ${max} item`);
+            }
+            
+            // Update item total
+            const itemTotal = price * qty;
+            document.getElementById('buyNowItemTotal').textContent = itemTotal.toLocaleString('id-ID');
+            
+            // Update subtotal (for buy now, subtotal = item total)
+            subtotal = itemTotal;
+            
+            // Recalculate total with shipping
+            const selectedCourier = document.querySelector('input[name="courier"]:checked');
+            const shippingCost = selectedCourier ? (courierPricing[selectedCourier.value] || 0) : 0;
+            currentTotal = subtotal + shippingCost;
+            
+            // Update displays
+            document.getElementById('total-amount').textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
+            updateQrisTotal();
+        }
     </script>
 </x-app-layout>
