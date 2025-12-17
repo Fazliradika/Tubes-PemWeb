@@ -77,55 +77,56 @@
 
                             <!-- Doctor Info -->
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-1">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">
                                     {{ $doctor->user->name }}
                                 </h3>
 
-                                <p class="text-blue-600 font-semibold mb-3">
+                                <p class="text-blue-600 dark:text-blue-400 font-semibold mb-3">
                                     {{ $doctor->specialization }}
                                 </p>
 
                                 @if($doctor->years_of_experience > 0)
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                         <span class="font-medium">Pengalaman:</span> {{ $doctor->years_of_experience }} tahun
                                     </p>
                                 @endif
 
                                 @if($doctor->bio)
-                                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                                         {{ $doctor->bio }}
                                     </p>
                                 @endif
 
                                 <!-- Schedule -->
-                                <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                                    <p class="text-xs font-semibold text-gray-700 mb-2">Jadwal Praktik:</p>
+                                <div class="mb-4 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
+                                    <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Jadwal Praktik:</p>
                                     <div class="flex flex-wrap gap-1 mb-2">
                                         @foreach($doctor->available_days as $day)
-                                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                                            <span
+                                                class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs rounded">
                                                 {{ $day }}
                                             </span>
                                         @endforeach
                                     </div>
-                                    <p class="text-xs text-gray-600">
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">
                                         {{ \Carbon\Carbon::parse($doctor->start_time)->format('H:i') }} -
                                         {{ \Carbon\Carbon::parse($doctor->end_time)->format('H:i') }}
                                     </p>
                                 </div>
 
                                 <!-- Hospital Address -->
-                                <div class="mb-4 p-3 bg-blue-50 rounded-lg">
-                                    <p class="text-xs font-semibold text-gray-700 mb-1">Alamat Rumah Sakit:</p>
-                                    <p class="text-sm font-medium text-gray-800">RS Bandung Sehat</p>
-                                    <p class="text-xs text-gray-600">Jl. Soekarno Hatta No. 576</p>
-                                    <p class="text-xs text-gray-600">Bandung, Jawa Barat 40286</p>
+                                <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                                    <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Alamat Rumah Sakit:</p>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">RS Bandung Sehat</p>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">Jl. Soekarno Hatta No. 576</p>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">Bandung, Jawa Barat 40286</p>
                                 </div>
 
                                 <!-- Price -->
                                 <div class="flex items-center justify-between mb-4">
                                     <div>
-                                        <p class="text-xs text-gray-600">Harga per sesi</p>
-                                        <p class="text-2xl font-bold text-green-600">
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">Harga per sesi</p>
+                                        <p class="text-2xl font-bold text-green-600 dark:text-green-400">
                                             Rp {{ number_format($doctor->price_per_session, 0, ',', '.') }}
                                         </p>
                                     </div>
