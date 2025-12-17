@@ -65,7 +65,7 @@
                     <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <a href="{{ route('products.show', $product->slug) }}">
                             <img src="{{ $product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop' }}" alt="{{ $product->name }}" 
-                                class="w-full h-48 object-cover">
+                                class="w-full h-48 object-contain bg-white dark:bg-slate-700">
                         </a>
 
                         <div class="p-4">
