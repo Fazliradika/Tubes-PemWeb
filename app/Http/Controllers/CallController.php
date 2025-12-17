@@ -158,9 +158,42 @@ class CallController extends Controller
             'data' => 'required'
         ]);
 
-        // In a production app, you would use WebSocket or Pusher
-        // For now, we'll store the signal data temporarily
-        
-        return response()->json(['success' => true]);
+        if (!$this->userBelongsToCallSession($callSession)) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $signal = \App\Models\CallSignal::create([
+            'call_session_id' => $callSession->id,
+            'sender_id' => auth()->id(),
+            'type' => $request->type,
+            'data' => $request->data,
+        ]);
+
+        return response()->json(['success' => true, 'signal_id' => $signal->id]);
+    }
+
+    /**
+     * Poll call signals (simple long-poll replacement)
+     */
+    public function signals(Request $request, CallSession $callSession)
+    {
+        if (!$this->userBelongsToCallSession($callSession)) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $afterId = (int) $request->query('after_id', 0);
+
+        $signals = \App\Models\CallSignal::where('call_session_id', $callSession->id)
+            ->where('sender_id', '!=', auth()->id()) // Only get signals from other party
+            ->when($afterId > 0, fn($q) => $q->where('id', '>', $afterId))
+            ->orderBy('id')
+            ->limit(100)
+            ->get(['id', 'sender_id', 'type', 'data', 'created_at']);
+
+        return response()->json([
+            'success' => true,
+            'signals' => $signals,
+            'call_session' => $callSession->fresh(),
+        ]);
     }
 }

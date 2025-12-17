@@ -249,9 +249,9 @@
             return div.innerHTML;
         }
 
-        // Initiate Call (Simulation only - no real call)
+        // Initiate Call with API
         async function initiateCall(type) {
-            console.log('Initiating call simulation, type:', type);
+            console.log('Initiating call, type:', type);
             
             // Show call modal immediately
             document.getElementById('callModal').classList.remove('hidden');
@@ -261,77 +261,244 @@
                 document.getElementById('voiceContainer').classList.add('hidden');
                 document.getElementById('videoCallInfo').classList.remove('hidden');
                 document.getElementById('toggleCamera').classList.remove('hidden');
-                
-                // Try to get camera/microphone for video preview (optional)
-                try {
-                    localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-                    const localVideo = document.getElementById('localVideo');
-                    const remoteVideo = document.getElementById('remoteVideo');
-                    localVideo.srcObject = localStream;
-                    remoteVideo.srcObject = localStream; // Show own video as simulation
-                } catch (error) {
-                    console.log('Camera access denied or not available, showing placeholder');
-                    // Continue without video - just show the UI
-                }
-                
-                // Simulate "connecting" then "connected"
-                setTimeout(() => {
-                    // Start video call duration timer
-                    let videoSeconds = 0;
-                    callDurationInterval = setInterval(() => {
-                        videoSeconds++;
-                        const minutes = Math.floor(videoSeconds / 60);
-                        const secs = videoSeconds % 60;
-                        document.getElementById('videoCallDuration').textContent = 
-                            `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                    }, 1000);
-                }, 2000);
-                
             } else {
-                // Voice call
                 document.getElementById('voiceContainer').classList.remove('hidden');
                 document.getElementById('videoContainer').classList.add('hidden');
                 document.getElementById('videoCallInfo').classList.add('hidden');
                 document.getElementById('toggleCamera').classList.add('hidden');
-                
-                // Try to get microphone (optional)
-                try {
-                    localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-                } catch (error) {
-                    console.log('Microphone access denied or not available');
-                }
-                
-                // Simulate "calling" for 2 seconds, then "connected"
                 document.getElementById('callStatus').textContent = 'Memanggil...';
+            }
+
+            // Call initiate API
+            try {
+                const response = await fetch(`/calls/conversations/${conversationId}/initiate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ type: type })
+                });
                 
-                setTimeout(() => {
-                    document.getElementById('callStatus').textContent = 'Terhubung';
+                const data = await response.json();
+                console.log('Call initiate response:', data);
+                
+                if (data.success && data.call_session) {
+                    currentCallSession = data.call_session;
                     
-                    // Start call duration timer
-                    let seconds = 0;
-                    callDurationInterval = setInterval(() => {
-                        seconds++;
-                        const minutes = Math.floor(seconds / 60);
-                        const secs = seconds % 60;
-                        document.getElementById('callDuration').textContent = 
-                            `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                    }, 1000);
-                }, 2000);
+                    // Get user media
+                    const constraints = type === 'video' 
+                        ? { audio: true, video: true }
+                        : { audio: true, video: false };
+                    
+                    try {
+                        localStream = await navigator.mediaDevices.getUserMedia(constraints);
+                        
+                        if (type === 'video') {
+                            document.getElementById('localVideo').srcObject = localStream;
+                            document.getElementById('remoteVideo').srcObject = localStream;
+                        }
+                        
+                        // Setup WebRTC and start signaling
+                        setupWebRTC(type);
+                        
+                    } catch (mediaError) {
+                        console.log('Media access denied:', mediaError);
+                        // Continue without media - simulated call
+                        startCallTimer(type);
+                    }
+                } else {
+                    console.error('Failed to initiate call:', data);
+                    alert('Gagal memulai panggilan');
+                    endCall();
+                }
+            } catch (error) {
+                console.error('Error initiating call:', error);
+                // Fallback to simulation mode
+                startCallTimer(type);
             }
         }
 
-        function setupPeerConnection() {
-            // Simplified for demo
-            console.log('Call session established');
+        function startCallTimer(type) {
+            // Simulate connected after 2 seconds
+            setTimeout(() => {
+                if (type === 'voice') {
+                    document.getElementById('callStatus').textContent = 'Terhubung';
+                }
+                
+                let seconds = 0;
+                callDurationInterval = setInterval(() => {
+                    seconds++;
+                    const minutes = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    const timeStr = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                    
+                    if (type === 'video') {
+                        document.getElementById('videoCallDuration').textContent = timeStr;
+                    } else {
+                        document.getElementById('callDuration').textContent = timeStr;
+                    }
+                }, 1000);
+            }, 2000);
         }
 
-        function setupPeerConnection() {
-            // Simplified for demo - in production you'd implement full WebRTC signaling
-            console.log('Call session established');
+        function setupWebRTC(type) {
+            console.log('Setting up WebRTC...');
+            
+            peerConnection = new RTCPeerConnection(configuration);
+            
+            // Add local tracks
+            if (localStream) {
+                localStream.getTracks().forEach(track => {
+                    peerConnection.addTrack(track, localStream);
+                });
+            }
+            
+            // Handle remote tracks
+            peerConnection.ontrack = (event) => {
+                console.log('Remote track received');
+                if (type === 'video') {
+                    document.getElementById('remoteVideo').srcObject = event.streams[0];
+                }
+            };
+            
+            // Handle ICE candidates
+            peerConnection.onicecandidate = async (event) => {
+                if (event.candidate && currentCallSession) {
+                    await sendSignal('ice-candidate', event.candidate);
+                }
+            };
+            
+            // Create offer
+            createOffer();
+            
+            // Start polling for signals
+            startSignalPolling();
+            
+            // Start call timer
+            startCallTimer(type);
         }
 
-        // End Call (Simulation)
-        function endCall() {
+        async function createOffer() {
+            try {
+                const offer = await peerConnection.createOffer();
+                await peerConnection.setLocalDescription(offer);
+                await sendSignal('offer', offer);
+            } catch (error) {
+                console.error('Error creating offer:', error);
+            }
+        }
+
+        async function sendSignal(type, data) {
+            if (!currentCallSession) return;
+            
+            try {
+                await fetch(`/calls/sessions/${currentCallSession.id}/signal`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ type, data })
+                });
+            } catch (error) {
+                console.error('Error sending signal:', error);
+            }
+        }
+
+        let signalPollInterval = null;
+        let lastSignalId = 0;
+
+        function startSignalPolling() {
+            signalPollInterval = setInterval(async () => {
+                if (!currentCallSession) {
+                    clearInterval(signalPollInterval);
+                    return;
+                }
+                
+                try {
+                    const response = await fetch(
+                        `/calls/sessions/${currentCallSession.id}/signals?after_id=${lastSignalId}`,
+                        {
+                            headers: {
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        }
+                    );
+                    
+                    const data = await response.json();
+                    
+                    if (data.success && data.signals) {
+                        for (const signal of data.signals) {
+                            await handleSignal(signal);
+                            lastSignalId = Math.max(lastSignalId, signal.id);
+                        }
+                    }
+                    
+                    // Check if call ended
+                    if (data.call_session && data.call_session.status === 'ended') {
+                        endCall();
+                    }
+                } catch (error) {
+                    console.error('Error polling signals:', error);
+                }
+            }, 1000);
+        }
+
+        async function handleSignal(signal) {
+            if (!peerConnection) return;
+            
+            try {
+                if (signal.type === 'offer') {
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(signal.data));
+                    const answer = await peerConnection.createAnswer();
+                    await peerConnection.setLocalDescription(answer);
+                    await sendSignal('answer', answer);
+                } else if (signal.type === 'answer') {
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(signal.data));
+                } else if (signal.type === 'ice-candidate') {
+                    await peerConnection.addIceCandidate(new RTCIceCandidate(signal.data));
+                }
+            } catch (error) {
+                console.error('Error handling signal:', error);
+            }
+        }
+
+        // End Call
+        async function endCall() {
+            // Call end API if we have an active session
+            if (currentCallSession) {
+                try {
+                    await fetch(`/calls/sessions/${currentCallSession.id}/end`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error ending call:', error);
+                }
+                currentCallSession = null;
+            }
+            
+            // Stop signal polling
+            if (signalPollInterval) {
+                clearInterval(signalPollInterval);
+                signalPollInterval = null;
+            }
+            lastSignalId = 0;
+            
+            // Close peer connection
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnection = null;
+            }
+            
             // Stop all media tracks
             if (localStream) {
                 localStream.getTracks().forEach(track => track.stop());
