@@ -61,8 +61,7 @@
                             <!-- Doctor Photo -->
                             <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600 relative">
                                 @if($doctor->photo)
-                                    <img src="{{ $doctor->photo }}" alt="{{ $doctor->user->name }}"
-                                        class="w-full h-full object-contain">
+                                    <img src="{{ $doctor->photo }}" alt="{{ $doctor->user->name }}" class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">
                                         <div class="w-32 h-32 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center">

@@ -61,7 +61,7 @@ class ProductSeeder extends Seeder
                 'price' => 85000,
                 'stock' => 100,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1550572017-4814c2ea04fc?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&h=500&fit=crop',
             ],
             [
                 'category_id' => 1,
@@ -71,7 +71,7 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'stock' => 75,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=500&h=500&fit=crop',
             ],
             [
                 'category_id' => 1,
@@ -81,7 +81,7 @@ class ProductSeeder extends Seeder
                 'price' => 150000,
                 'stock' => 50,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&h=500&fit=crop',
             ],
             [
                 'category_id' => 1,
@@ -91,7 +91,7 @@ class ProductSeeder extends Seeder
                 'price' => 95000,
                 'stock' => 60,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500&h=500&fit=crop',
             ],
 
             // Obat-obatan
@@ -103,7 +103,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 200,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500&h=500&fit=crop',
             ],
             [
                 'category_id' => 2,
@@ -113,7 +113,7 @@ class ProductSeeder extends Seeder
                 'price' => 35000,
                 'stock' => 80,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=500&h=500&fit=crop',
             ],
             [
                 'category_id' => 2,
@@ -123,7 +123,7 @@ class ProductSeeder extends Seeder
                 'price' => 25000,
                 'stock' => 100,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1550572017-4814c2ea04fc?w=500&h=500&fit=crop',
             ],
 
             // Alat Kesehatan
@@ -135,7 +135,7 @@ class ProductSeeder extends Seeder
                 'price' => 75000,
                 'stock' => 40,
                 'is_active' => true,
-                'image' => 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=400&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500&h=500&fit=crop',
             ],
             [
                 'category_id' => 3,
