@@ -23,8 +23,12 @@ class ProductController extends Controller
         }
 
         // Search
-        if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+        if ($request->has('search') && $request->search) {
+            $searchTerm = $request->search;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
         }
 
         // Sort
