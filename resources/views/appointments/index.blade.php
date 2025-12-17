@@ -5,19 +5,23 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900">Book Appointment</h1>
-                <p class="mt-2 text-gray-600">Pilih dokter dan jadwalkan konsultasi Anda</p>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Book Appointment</h1>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Pilih dokter dan jadwalkan konsultasi Anda</p>
+                <p class="mt-1 text-sm text-blue-600 dark:text-blue-400">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    Jl. Ganesha No. 10, Bandung, Jawa Barat 40132
+                </p>
             </div>
 
             <!-- Filter Section -->
             <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-6 mb-6">
                 <form method="GET" action="{{ route('appointments.index') }}" class="flex flex-wrap gap-4 items-end">
                     <div class="flex-1 min-w-[200px]">
-                        <label for="specialization" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="specialization" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Filter by Specialization
                         </label>
                         <select name="specialization" id="specialization"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                             onchange="this.form.submit()">
                             <option value="all" {{ $specialization == 'all' ? 'selected' : '' }}>Semua Spesialis</option>
                             @foreach($specializations as $spec)
@@ -29,11 +33,11 @@
                     </div>
 
                     <div class="flex-1 min-w-[200px]">
-                        <label for="day" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="day" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Filter by Day
                         </label>
                         <select name="day" id="day"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                             onchange="this.form.submit()">
                             <option value="all" {{ $day == 'all' ? 'selected' : '' }}>All Days</option>
                             <option value="Monday" {{ $day == 'Monday' ? 'selected' : '' }}>Monday</option>
