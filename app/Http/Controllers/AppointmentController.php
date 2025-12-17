@@ -16,16 +16,27 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         $specialization = $request->get('specialization', 'all');
-        
-        $doctors = Doctor::with('user')
-            ->active()
-            ->bySpecialization($specialization)
-            ->get();
+        $day = $request->get('day', 'all');
+
+        $query = Doctor::with('user')->active();
+
+        // Filter by specialization
+        if ($specialization && $specialization !== 'all') {
+            $query->where('specialization', $specialization);
+        }
+
+        // Filter by day
+        if ($day && $day !== 'all') {
+            $query->whereJsonContains('available_days', $day);
+        }
+
+        $doctors = $query->get();
 
         // Debug logging
         \Log::info('AppointmentController@index', [
             'doctors_count' => $doctors->count(),
             'specialization' => $specialization,
+            'day' => $day,
             'total_doctors_in_db' => Doctor::count(),
             'active_doctors_in_db' => Doctor::where('is_active', true)->count()
         ]);
@@ -35,7 +46,7 @@ class AppointmentController extends Controller
             ->distinct()
             ->pluck('specialization');
 
-        return view('appointments.index', compact('doctors', 'specializations', 'specialization'));
+        return view('appointments.index', compact('doctors', 'specializations', 'specialization', 'day'));
     }
 
     /**
@@ -116,7 +127,7 @@ class AppointmentController extends Controller
         }
 
         $appointment->load(['doctor.user', 'patient']);
-        
+
         return view('appointments.show', compact('appointment'));
     }
 
