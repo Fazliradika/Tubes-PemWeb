@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="flex justify-end space-x-2">
-                            <a href="{{ route('products.index') }}" class="px-4 py-2 bg-gray-200 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300">
+                            <a href="{{ route('products.index') }}" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
                                 Reset
                             </a>
                             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">

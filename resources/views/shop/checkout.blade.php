@@ -381,7 +381,7 @@
             'anteraja_sameday': 10000
         };
 
-        const subtotal = {{ $cart->total }};
+        const subtotal = {{ $buyNow ? ($buyNow['price'] * $buyNow['quantity']) : $cart->total }};
         let currentTotal = subtotal;
 
         // Update shipping cost when courier is selected
