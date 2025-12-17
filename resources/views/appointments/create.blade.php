@@ -77,16 +77,17 @@
                         @endif
 
                         <!-- Doctor Schedule Info -->
-                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                            <h4 class="font-semibold text-gray-900 mb-3">Jadwal Praktik:</h4>
+                        <div
+                            class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Jadwal Praktik:</h4>
                             <div class="flex flex-wrap gap-2 mb-3">
                                 @foreach($doctor->available_days as $day)
-                                    <span class="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
+                                    <span class="px-3 py-1 bg-blue-600 dark:bg-blue-700 text-white text-sm rounded-full">
                                         {{ $day }}
                                     </span>
                                 @endforeach
                             </div>
-                            <p class="text-gray-700">
+                            <p class="text-gray-700 dark:text-gray-300">
                                 <strong>Jam:</strong>
                                 {{ \Carbon\Carbon::parse($doctor->start_time)->format('H:i') }} -
                                 {{ \Carbon\Carbon::parse($doctor->end_time)->format('H:i') }}
@@ -95,8 +96,8 @@
 
                         @if($doctor->bio)
                             <div class="mb-6">
-                                <h4 class="font-semibold text-gray-900 mb-2">Tentang Dokter:</h4>
-                                <p class="text-gray-600">{{ $doctor->bio }}</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Tentang Dokter:</h4>
+                                <p class="text-gray-600 dark:text-gray-400">{{ $doctor->bio }}</p>
                             </div>
                         @endif
 
@@ -104,41 +105,44 @@
                             @csrf
 
                             <div>
-                                <label for="appointment_date" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="appointment_date"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Tanggal Appointment <span class="text-red-500">*</span>
                                 </label>
                                 <input type="date" id="appointment_date" name="appointment_date" min="{{ date('Y-m-d') }}"
                                     required
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('appointment_date') border-red-500 @enderror">
+                                    class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('appointment_date') border-red-500 @enderror">
                                 @error('appointment_date')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div>
-                                <label for="appointment_time" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="appointment_time"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Waktu Appointment <span class="text-red-500">*</span>
                                 </label>
                                 <input type="time" id="appointment_time" name="appointment_time"
                                     min="{{ \Carbon\Carbon::parse($doctor->start_time)->format('H:i') }}"
                                     max="{{ \Carbon\Carbon::parse($doctor->end_time)->format('H:i') }}" required
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('appointment_time') border-red-500 @enderror">
+                                    class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('appointment_time') border-red-500 @enderror">
                                 @error('appointment_time')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
-                                <p class="mt-1 text-sm text-gray-500">
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                                     Pilih waktu antara {{ \Carbon\Carbon::parse($doctor->start_time)->format('H:i') }} -
                                     {{ \Carbon\Carbon::parse($doctor->end_time)->format('H:i') }}
                                 </p>
                             </div>
 
                             <div>
-                                <label for="symptoms" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="symptoms"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Keluhan / Gejala (Opsional)
                                 </label>
                                 <textarea id="symptoms" name="symptoms" rows="4"
                                     placeholder="Ceritakan keluhan atau gejala yang Anda alami..."
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('symptoms') border-red-500 @enderror">{{ old('symptoms') }}</textarea>
+                                    class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('symptoms') border-red-500 @enderror">{{ old('symptoms') }}</textarea>
                                 @error('symptoms')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
