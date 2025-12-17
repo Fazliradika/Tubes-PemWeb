@@ -114,6 +114,7 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'price' => $product->price,
             'image' => $product->image,
+            'stock' => $product->stock,
         ]);
 
         return redirect()->route('checkout.index')->with('success', 'Lanjutkan ke checkout');
