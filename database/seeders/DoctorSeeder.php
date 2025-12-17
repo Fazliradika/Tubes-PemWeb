@@ -26,6 +26,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 'start_time' => '08:00:00',
                 'end_time' => '20:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Ahmad Fadli',
@@ -37,6 +38,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Wednesday', 'Friday'],
                 'start_time' => '09:00:00',
                 'end_time' => '17:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Citra Dewi',
@@ -48,6 +50,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Tuesday', 'Thursday', 'Saturday'],
                 'start_time' => '10:00:00',
                 'end_time' => '18:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Budi Santoso',
@@ -59,6 +62,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
                 'start_time' => '08:00:00',
                 'end_time' => '20:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Sarah Wijaya',
@@ -70,6 +74,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Wednesday', 'Friday', 'Saturday'],
                 'start_time' => '09:00:00',
                 'end_time' => '16:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Rudi Hermawan',
@@ -81,6 +86,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Tuesday', 'Thursday'],
                 'start_time' => '10:00:00',
                 'end_time' => '15:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Linda Kusuma',
@@ -92,6 +98,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 'start_time' => '09:00:00',
                 'end_time' => '17:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Andri Pratama',
@@ -103,6 +110,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Wednesday', 'Friday'],
                 'start_time' => '13:00:00',
                 'end_time' => '20:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1612531386530-97286d97c2d9?w=400&h=400&fit=crop',
             ],
             [
                 'name' => 'Dr. Maya Sari',
@@ -114,6 +122,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Tuesday', 'Thursday', 'Saturday'],
                 'start_time' => '08:00:00',
                 'end_time' => '16:00:00',
+                'photo' => 'https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=400&h=400&fit=crop',
             ],
         ];
 
@@ -141,6 +150,7 @@ class DoctorSeeder extends Seeder
                     'available_days' => $doctorData['available_days'],
                     'start_time' => $doctorData['start_time'],
                     'end_time' => $doctorData['end_time'],
+                    'photo' => $doctorData['photo'] ?? null,
                     'is_active' => true,
                 ]
             );
