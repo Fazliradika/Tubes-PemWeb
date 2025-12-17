@@ -152,10 +152,10 @@
                                                  class="w-64 h-64">
                                         </div>
                                         
-                                        <div class="bg-white border border-blue-300 rounded-lg p-4 max-w-md mx-auto">
-                                            <div class="font-semibold text-blue-800 mb-2">Total Pembayaran:</div>
-                                            <div id="qrisTotal" class="text-3xl font-bold text-blue-900"></div>
-                                            <div class="text-sm text-blue-700 mt-3">
+                                        <div class="bg-white dark:bg-slate-700 border border-blue-300 dark:border-slate-600 rounded-lg p-4 max-w-md mx-auto">
+                                            <div class="font-semibold text-blue-800 dark:text-blue-300 mb-2">Total Pembayaran:</div>
+                                            <div id="qrisTotal" class="text-3xl font-bold text-blue-900 dark:text-blue-200"></div>
+                                            <div class="text-sm text-blue-700 dark:text-blue-300 mt-3">
                                                 <i class="fas fa-mobile-alt mr-1"></i>Gunakan aplikasi e-wallet (GoPay, OVO, Dana, ShopeePay, dll)
                                             </div>
                                         </div>
