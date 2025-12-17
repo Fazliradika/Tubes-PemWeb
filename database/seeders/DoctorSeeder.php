@@ -123,7 +123,7 @@ class DoctorSeeder extends Seeder
                 ['email' => $doctorData['email']], // Find by email
                 [
                     'name' => $doctorData['name'],
-                    'password' => Hash::make('password123'),
+                    'password' => Hash::make('password'),
                     'role' => 'doctor',
                     'phone' => '08' . rand(1000000000, 9999999999),
                     'email_verified_at' => now(),
