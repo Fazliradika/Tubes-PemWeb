@@ -10,7 +10,7 @@
             </div>
 
             <!-- Filter Section -->
-            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-6 mb-6">
                 <form method="GET" action="{{ route('appointments.index') }}" class="flex flex-wrap gap-4 items-end">
                     <div class="flex-1 min-w-[200px]">
                         <label for="specialization" class="block text-sm font-medium text-gray-700 mb-2">
@@ -52,7 +52,8 @@
             @if($doctors->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($doctors as $doctor)
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <div
+                            class="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                             <!-- Doctor Photo -->
                             <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600 relative">
                                 @if($doctor->photo)
@@ -60,7 +61,7 @@
                                         alt="{{ $doctor->user->name }}" class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">
-                                        <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center">
+                                        <div class="w-32 h-32 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center">
                                             <svg class="w-20 h-20 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                                     clip-rule="evenodd" />
@@ -136,7 +137,7 @@
                     @endforeach
                 </div>
             @else
-                <div class="bg-white rounded-lg shadow-sm p-12 text-center">
+                <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-12 text-center">
                     <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />

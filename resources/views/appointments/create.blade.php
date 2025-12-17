@@ -15,7 +15,7 @@
                 </a>
             </div>
 
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
                 <div class="md:flex">
                     <!-- Doctor Info Section -->
                     <div class="md:w-1/3 bg-gradient-to-br from-blue-500 to-blue-600 p-8 text-white">
@@ -25,7 +25,8 @@
                                     alt="{{ $doctor->user->name }}"
                                     class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white object-cover">
                             @else
-                                <div class="w-32 h-32 bg-white rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <div
+                                    class="w-32 h-32 bg-white dark:bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
                                     <svg class="w-20 h-20 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                             clip-rule="evenodd" />
@@ -53,7 +54,8 @@
                             <div class="bg-white/20 rounded-lg p-4 mt-6">
                                 <p class="text-sm text-blue-100 mb-1">Harga per sesi</p>
                                 <p class="text-3xl font-bold">Rp
-                                    {{ number_format($doctor->price_per_session, 0, ',', '.') }}</p>
+                                    {{ number_format($doctor->price_per_session, 0, ',', '.') }}
+                                </p>
                             </div>
                         </div>
                     </div>
