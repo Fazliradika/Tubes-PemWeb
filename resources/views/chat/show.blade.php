@@ -10,19 +10,12 @@
                 @endif
             </h2>
             <div class="flex space-x-2">
-                <button id="voiceCallBtn"
-                        class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                    </svg>
-                    Voice Call
-                </button>
                 <button id="videoCallBtn"
                         class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
-                    Video Call
+                    Video Call (Google Meet)
                 </button>
             </div>
         </div>
@@ -30,81 +23,6 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Call Modal -->
-            <div id="callModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex items-center justify-center">
-                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4">
-                    <div class="relative">
-                        <!-- Video containers -->
-                        <div id="videoContainer" class="hidden">
-                            <div class="relative">
-                                <video id="remoteVideo" class="w-full h-96 bg-gray-900 rounded-xl shadow-lg" autoplay playsinline></video>
-                                <video id="localVideo" class="absolute bottom-4 right-4 w-48 h-36 bg-gray-800 rounded-lg shadow-lg border-2 border-white" autoplay muted playsinline></video>
-                            </div>
-                        </div>
-                        
-                        <!-- Voice call UI -->
-                        <div id="voiceContainer" class="hidden text-center py-16">
-                            <!-- Contact Info -->
-                            <div class="mb-8">
-                                <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-green-400 to-green-600 mb-6 shadow-lg animate-pulse">
-                                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-2xl font-bold text-white mb-2">
-                                    @if(auth()->user()->isPatient())
-                                        Dr. {{ $conversation->doctor->user->name }}
-                                    @else
-                                        {{ $conversation->patient->name }}
-                                    @endif
-                                </h3>
-                                <p id="callStatus" class="text-lg text-green-400 mb-4">Memanggil...</p>
-                                <p id="callDuration" class="text-4xl font-mono text-white">00:00</p>
-                            </div>
-                        </div>
-
-                        <!-- Video call UI overlay -->
-                        <div id="videoCallInfo" class="hidden absolute top-4 left-4 bg-black bg-opacity-60 rounded-lg px-4 py-2">
-                            <h3 class="text-white font-semibold">
-                                @if(auth()->user()->isPatient())
-                                    Dr. {{ $conversation->doctor->user->name }}
-                                @else
-                                    {{ $conversation->patient->name }}
-                                @endif
-                            </h3>
-                            <p id="videoCallDuration" class="text-sm text-green-400">00:00</p>
-                        </div>
-
-                        <!-- Call controls -->
-                        <div class="flex justify-center items-center space-x-6 mt-8">
-                            <!-- Mute button -->
-                            <button id="toggleMicrophone" class="group relative p-5 rounded-full bg-slate-700 hover:bg-slate-600 transition-all shadow-lg">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
-                                </svg>
-                                <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition">Mute</span>
-                            </button>
-                            
-                            <!-- Camera button (video only) -->
-                            <button id="toggleCamera" class="hidden group relative p-5 rounded-full bg-slate-700 hover:bg-slate-600 transition-all shadow-lg">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                                </svg>
-                                <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition">Camera</span>
-                            </button>
-                            
-                            <!-- End call button -->
-                            <button onclick="endCall()" class="group relative p-6 rounded-full bg-red-600 hover:bg-red-700 transition-all shadow-2xl transform hover:scale-110">
-                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 01.97-.23 11.36 11.36 0 003.57.57 1 1 0 011 1v3.49a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.23.97z" transform="rotate(135 12 12)"></path>
-                                </svg>
-                                <span class="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition whitespace-nowrap">Akhiri Panggilan</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Chat Container -->
             <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg flex flex-col" style="height: calc(100vh - 200px);">
                 <!-- Messages Area -->
@@ -116,19 +34,15 @@
                                     <div class="rounded-lg p-3 {{ $message->sender_id === auth()->id() ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-white' }}">
                                         <p class="text-sm">{{ $message->message }}</p>
                                     </div>
-                                @elseif($message->type === 'voice_call' || $message->type === 'video_call')
+                                @elseif($message->type === 'video_call')
                                     <div class="rounded-lg p-3 bg-gray-100 dark:bg-slate-700 border border-gray-300 dark:border-gray-600">
                                         <div class="flex items-center space-x-2 text-sm text-gray-700 dark:text-gray-300">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                @if($message->type === 'voice_call')
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                                @else
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                                                @endif
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                             </svg>
-                                            <span>{{ $message->type === 'voice_call' ? 'Voice Call' : 'Video Call' }}</span>
-                                            @if(isset($message->metadata['duration']))
-                                                <span>• {{ gmdate('i:s', $message->metadata['duration']) }}</span>
+                                            <span>Video Call (Google Meet)</span>
+                                            @if(isset($message->metadata['meet_link']))
+                                                <a href="{{ $message->metadata['meet_link'] }}" target="_blank" class="ml-2 text-blue-600 dark:text-blue-400 hover:underline">Join</a>
                                             @endif
                                         </div>
                                     </div>
@@ -165,20 +79,7 @@
 
     <script>
         const conversationId = {{ $conversation->id }};
-        let localStream = null;
-        let peerConnection = null;
-        let currentCallSession = null;
-        let callDurationInterval = null;
-
         console.log('Chat script loaded, conversation ID:', conversationId);
-
-        // WebRTC Configuration
-        const configuration = {
-            iceServers: [
-                { urls: 'stun:stun.l.google.com:19302' },
-                { urls: 'stun:stun1.l.google.com:19302' }
-            ]
-        };
 
         // Send Message
         document.getElementById('messageForm').addEventListener('submit', async (e) => {
@@ -249,27 +150,9 @@
             return div.innerHTML;
         }
 
-        // Initiate Call with API
-        async function initiateCall(type) {
-            console.log('Initiating call, type:', type);
-            
-            // Show call modal immediately
-            document.getElementById('callModal').classList.remove('hidden');
-            
-            if (type === 'video') {
-                document.getElementById('videoContainer').classList.remove('hidden');
-                document.getElementById('voiceContainer').classList.add('hidden');
-                document.getElementById('videoCallInfo').classList.remove('hidden');
-                document.getElementById('toggleCamera').classList.remove('hidden');
-            } else {
-                document.getElementById('voiceContainer').classList.remove('hidden');
-                document.getElementById('videoContainer').classList.add('hidden');
-                document.getElementById('videoCallInfo').classList.add('hidden');
-                document.getElementById('toggleCamera').classList.add('hidden');
-                document.getElementById('callStatus').textContent = 'Memanggil...';
-            }
+        async function initiateMeetCall() {
+            console.log('Creating Google Meet link...');
 
-            // Call initiate API
             try {
                 const response = await fetch(`/calls/conversations/${conversationId}/initiate`, {
                     method: 'POST',
@@ -278,285 +161,50 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ type: type })
+                    body: JSON.stringify({ type: 'video' })
                 });
-                
+
                 const data = await response.json();
-                console.log('Call initiate response:', data);
-                
-                if (data.success && data.call_session) {
-                    currentCallSession = data.call_session;
-                    
-                    // Get user media
-                    const constraints = type === 'video' 
-                        ? { audio: true, video: true }
-                        : { audio: true, video: false };
-                    
-                    try {
-                        localStream = await navigator.mediaDevices.getUserMedia(constraints);
-                        
-                        if (type === 'video') {
-                            document.getElementById('localVideo').srcObject = localStream;
-                            document.getElementById('remoteVideo').srcObject = localStream;
-                        }
-                        
-                        // Setup WebRTC and start signaling
-                        setupWebRTC(type);
-                        
-                    } catch (mediaError) {
-                        console.log('Media access denied:', mediaError);
-                        // Continue without media - simulated call
-                        startCallTimer(type);
-                    }
-                } else {
-                    console.error('Failed to initiate call:', data);
-                    alert('Gagal memulai panggilan');
-                    endCall();
-                }
-            } catch (error) {
-                console.error('Error initiating call:', error);
-                // Fallback to simulation mode
-                startCallTimer(type);
-            }
-        }
-
-        function startCallTimer(type) {
-            // Simulate connected after 2 seconds
-            setTimeout(() => {
-                if (type === 'voice') {
-                    document.getElementById('callStatus').textContent = 'Terhubung';
-                }
-                
-                let seconds = 0;
-                callDurationInterval = setInterval(() => {
-                    seconds++;
-                    const minutes = Math.floor(seconds / 60);
-                    const secs = seconds % 60;
-                    const timeStr = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                    
-                    if (type === 'video') {
-                        document.getElementById('videoCallDuration').textContent = timeStr;
-                    } else {
-                        document.getElementById('callDuration').textContent = timeStr;
-                    }
-                }, 1000);
-            }, 2000);
-        }
-
-        function setupWebRTC(type) {
-            console.log('Setting up WebRTC...');
-            
-            peerConnection = new RTCPeerConnection(configuration);
-            
-            // Add local tracks
-            if (localStream) {
-                localStream.getTracks().forEach(track => {
-                    peerConnection.addTrack(track, localStream);
-                });
-            }
-            
-            // Handle remote tracks
-            peerConnection.ontrack = (event) => {
-                console.log('Remote track received');
-                if (type === 'video') {
-                    document.getElementById('remoteVideo').srcObject = event.streams[0];
-                }
-            };
-            
-            // Handle ICE candidates
-            peerConnection.onicecandidate = async (event) => {
-                if (event.candidate && currentCallSession) {
-                    await sendSignal('ice-candidate', event.candidate);
-                }
-            };
-            
-            // Create offer
-            createOffer();
-            
-            // Start polling for signals
-            startSignalPolling();
-            
-            // Start call timer
-            startCallTimer(type);
-        }
-
-        async function createOffer() {
-            try {
-                const offer = await peerConnection.createOffer();
-                await peerConnection.setLocalDescription(offer);
-                await sendSignal('offer', offer);
-            } catch (error) {
-                console.error('Error creating offer:', error);
-            }
-        }
-
-        async function sendSignal(type, data) {
-            if (!currentCallSession) return;
-            
-            try {
-                await fetch(`/calls/sessions/${currentCallSession.id}/signal`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ type, data })
-                });
-            } catch (error) {
-                console.error('Error sending signal:', error);
-            }
-        }
-
-        let signalPollInterval = null;
-        let lastSignalId = 0;
-
-        function startSignalPolling() {
-            signalPollInterval = setInterval(async () => {
-                if (!currentCallSession) {
-                    clearInterval(signalPollInterval);
+                if (!data.success || !data.meet_link) {
+                    alert('Gagal membuat link Google Meet');
                     return;
                 }
-                
-                try {
-                    const response = await fetch(
-                        `/calls/sessions/${currentCallSession.id}/signals?after_id=${lastSignalId}`,
-                        {
-                            headers: {
-                                'Accept': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            }
-                        }
-                    );
-                    
-                    const data = await response.json();
-                    
-                    if (data.success && data.signals) {
-                        for (const signal of data.signals) {
-                            await handleSignal(signal);
-                            lastSignalId = Math.max(lastSignalId, signal.id);
-                        }
-                    }
-                    
-                    // Check if call ended
-                    if (data.call_session && data.call_session.status === 'ended') {
-                        endCall();
-                    }
-                } catch (error) {
-                    console.error('Error polling signals:', error);
-                }
-            }, 1000);
-        }
 
-        async function handleSignal(signal) {
-            if (!peerConnection) return;
-            
-            try {
-                if (signal.type === 'offer') {
-                    await peerConnection.setRemoteDescription(new RTCSessionDescription(signal.data));
-                    const answer = await peerConnection.createAnswer();
-                    await peerConnection.setLocalDescription(answer);
-                    await sendSignal('answer', answer);
-                } else if (signal.type === 'answer') {
-                    await peerConnection.setRemoteDescription(new RTCSessionDescription(signal.data));
-                } else if (signal.type === 'ice-candidate') {
-                    await peerConnection.addIceCandidate(new RTCIceCandidate(signal.data));
-                }
+                const meetLink = data.meet_link;
+
+                // Add to UI immediately
+                const messagesArea = document.getElementById('messagesArea');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'flex justify-end';
+                messageDiv.innerHTML = `
+                    <div class="max-w-xs lg:max-w-md">
+                        <div class="rounded-lg p-3 bg-gray-100 dark:bg-slate-700 border border-gray-300 dark:border-gray-600">
+                            <div class="flex items-center space-x-2 text-sm text-gray-700 dark:text-gray-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                <span>Video Call (Google Meet)</span>
+                                <a href="${meetLink}" target="_blank" class="ml-2 text-blue-600 dark:text-blue-400 hover:underline">Join</a>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right">
+                            ${new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit'})}
+                        </p>
+                    </div>
+                `;
+                messagesArea.appendChild(messageDiv);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+
+                window.open(meetLink, '_blank');
             } catch (error) {
-                console.error('Error handling signal:', error);
+                console.error('Error creating meet link:', error);
+                alert('Gagal membuat link Google Meet');
             }
         }
-
-        // End Call
-        async function endCall() {
-            // Call end API if we have an active session
-            if (currentCallSession) {
-                try {
-                    await fetch(`/calls/sessions/${currentCallSession.id}/end`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Accept': 'application/json'
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error ending call:', error);
-                }
-                currentCallSession = null;
-            }
-            
-            // Stop signal polling
-            if (signalPollInterval) {
-                clearInterval(signalPollInterval);
-                signalPollInterval = null;
-            }
-            lastSignalId = 0;
-            
-            // Close peer connection
-            if (peerConnection) {
-                peerConnection.close();
-                peerConnection = null;
-            }
-            
-            // Stop all media tracks
-            if (localStream) {
-                localStream.getTracks().forEach(track => track.stop());
-                localStream = null;
-            }
-
-            // Hide call modal
-            document.getElementById('callModal').classList.add('hidden');
-            document.getElementById('videoContainer').classList.add('hidden');
-            document.getElementById('voiceContainer').classList.add('hidden');
-
-            // Clear interval
-            if (callDurationInterval) {
-                clearInterval(callDurationInterval);
-                callDurationInterval = null;
-            }
-
-            // Reset durations
-            document.getElementById('callDuration').textContent = '00:00';
-            document.getElementById('videoCallDuration').textContent = '00:00';
-            document.getElementById('callStatus').textContent = 'Memanggil...';
-            
-            console.log('Call ended');
-        }
-
-        // Toggle microphone
-        document.getElementById('toggleMicrophone').addEventListener('click', () => {
-            if (localStream) {
-                const audioTrack = localStream.getAudioTracks()[0];
-                if (audioTrack) {
-                    audioTrack.enabled = !audioTrack.enabled;
-                    document.getElementById('toggleMicrophone').classList.toggle('bg-red-600');
-                    document.getElementById('toggleMicrophone').classList.toggle('bg-slate-700');
-                }
-            }
-        });
-
-        // Toggle camera
-        document.getElementById('toggleCamera').addEventListener('click', () => {
-            if (localStream) {
-                const videoTrack = localStream.getVideoTracks()[0];
-                if (videoTrack) {
-                    videoTrack.enabled = !videoTrack.enabled;
-                    document.getElementById('toggleCamera').classList.toggle('bg-red-600');
-                    document.getElementById('toggleCamera').classList.toggle('bg-slate-700');
-                }
-            }
-        });
-
-        // Call button event listeners
-        document.getElementById('voiceCallBtn').addEventListener('click', () => {
-            console.log('Voice call button clicked');
-            initiateCall('voice');
-        });
 
         document.getElementById('videoCallBtn').addEventListener('click', () => {
             console.log('Video call button clicked');
-            initiateCall('video');
+            initiateMeetCall();
         });
 
         // Auto scroll to bottom

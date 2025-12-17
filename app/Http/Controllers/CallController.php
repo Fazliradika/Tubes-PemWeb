@@ -6,17 +6,18 @@ use App\Models\CallSession;
 use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CallController extends Controller
 {
     /**
-     * Initiate a call
+     * Initiate a video call (Google Meet dummy link)
      */
     public function initiate(Request $request, Conversation $conversation)
     {
         try {
             $request->validate([
-                'type' => 'required|in:voice,video',
+                'type' => 'required|in:video',
             ]);
 
             // Check if user is part of the conversation
@@ -29,28 +30,38 @@ class CallController extends Controller
                 ? $conversation->doctor->user_id 
                 : $conversation->patient_id;
 
+            $meetLink = $this->generateDummyMeetLink();
+
             // Create call session
             $callSession = CallSession::create([
                 'conversation_id' => $conversation->id,
                 'caller_id' => auth()->id(),
                 'receiver_id' => $receiverId,
-                'type' => $request->type,
-                'status' => 'ringing',
+                'type' => 'video',
+                'status' => 'ended',
                 'started_at' => now(),
+                'ended_at' => now(),
+                'duration_seconds' => 0,
             ]);
 
             // Create message record
             Message::create([
                 'conversation_id' => $conversation->id,
                 'sender_id' => auth()->id(),
-                'type' => $request->type . '_call',
-                'message' => 'Call initiated',
-                'metadata' => ['call_session_id' => $callSession->id]
+                'type' => 'video_call',
+                'message' => 'Google Meet',
+                'metadata' => [
+                    'call_session_id' => $callSession->id,
+                    'meet_link' => $meetLink,
+                ],
             ]);
+
+            $conversation->update(['last_message_at' => now()]);
 
             return response()->json([
                 'success' => true,
-                'call_session' => $callSession
+                'call_session' => $callSession,
+                'meet_link' => $meetLink,
             ]);
         } catch (\Exception $e) {
             \Log::error('Call initiate error: ' . $e->getMessage());
@@ -59,75 +70,6 @@ class CallController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
-    }
-
-    /**
-     * Answer a call
-     */
-    public function answer(Request $request, CallSession $callSession)
-    {
-        if (!$this->userBelongsToCallSession($callSession)) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $callSession->update([
-            'status' => 'active',
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'call_session' => $callSession
-        ]);
-    }
-
-    /**
-     * End a call
-     */
-    public function end(Request $request, CallSession $callSession)
-    {
-        try {
-            if (!$this->userBelongsToCallSession($callSession)) {
-                return response()->json(['success' => false, 'error' => 'Unauthorized'], 403);
-            }
-
-            $endedAt = now();
-            $duration = $callSession->started_at ? $callSession->started_at->diffInSeconds($endedAt) : 0;
-
-            $callSession->update([
-                'status' => 'ended',
-                'ended_at' => $endedAt,
-                'duration_seconds' => $duration,
-            ]);
-
-            // Update message with duration
-            Message::where('metadata->call_session_id', $callSession->id)
-                ->update([
-                    'metadata' => json_encode(['call_session_id' => $callSession->id, 'duration' => $duration])
-                ]);
-
-            return response()->json([
-                'success' => true,
-                'duration' => $duration
-            ]);
-        } catch (\Exception $e) {
-            \Log::error('Call end error: ' . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
-
-    /**
-     * Get call session
-     */
-    public function show(CallSession $callSession)
-    {
-        if (!$this->userBelongsToCallSession($callSession)) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        return response()->json($callSession);
     }
 
     /**
@@ -148,52 +90,11 @@ class CallController extends Controller
         return $this->userBelongsToConversation($conversation);
     }
 
-    /**
-     * Handle WebRTC signaling
-     */
-    public function signal(Request $request, CallSession $callSession)
+    private function generateDummyMeetLink(): string
     {
-        $request->validate([
-            'type' => 'required|in:offer,answer,ice-candidate',
-            'data' => 'required'
-        ]);
-
-        if (!$this->userBelongsToCallSession($callSession)) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $signal = \App\Models\CallSignal::create([
-            'call_session_id' => $callSession->id,
-            'sender_id' => auth()->id(),
-            'type' => $request->type,
-            'data' => $request->data,
-        ]);
-
-        return response()->json(['success' => true, 'signal_id' => $signal->id]);
-    }
-
-    /**
-     * Poll call signals (simple long-poll replacement)
-     */
-    public function signals(Request $request, CallSession $callSession)
-    {
-        if (!$this->userBelongsToCallSession($callSession)) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $afterId = (int) $request->query('after_id', 0);
-
-        $signals = \App\Models\CallSignal::where('call_session_id', $callSession->id)
-            ->where('sender_id', '!=', auth()->id()) // Only get signals from other party
-            ->when($afterId > 0, fn($q) => $q->where('id', '>', $afterId))
-            ->orderBy('id')
-            ->limit(100)
-            ->get(['id', 'sender_id', 'type', 'data', 'created_at']);
-
-        return response()->json([
-            'success' => true,
-            'signals' => $signals,
-            'call_session' => $callSession->fresh(),
-        ]);
+        $part1 = Str::lower(Str::random(3));
+        $part2 = Str::lower(Str::random(4));
+        $part3 = Str::lower(Str::random(3));
+        return "https://meet.google.com/{$part1}-{$part2}-{$part3}";
     }
 }
