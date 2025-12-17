@@ -84,21 +84,36 @@
                                 </div>
                             </div>
 
-                            <form action="{{ route('cart.add', $product) }}" method="POST" class="mt-4">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                @if($product->stock > 0)
-                                    <button type="submit" 
-                                        class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
-                                        <i class="fas fa-cart-plus mr-2"></i>Tambah ke Keranjang
-                                    </button>
-                                @else
+                            @if($product->stock > 0)
+                                <div class="mt-4 flex gap-2">
+                                    {{-- Add to Cart Button --}}
+                                    <form action="{{ route('cart.add', $product) }}" method="POST" class="flex-1">
+                                        @csrf
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" 
+                                            class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors text-sm">
+                                            <i class="fas fa-cart-plus mr-1"></i>Keranjang
+                                        </button>
+                                    </form>
+                                    
+                                    {{-- Buy Now Button --}}
+                                    <form action="{{ route('cart.buyNow', $product) }}" method="POST" class="flex-1">
+                                        @csrf
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" 
+                                            class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors text-sm">
+                                            <i class="fas fa-bolt mr-1"></i>Beli Langsung
+                                        </button>
+                                    </form>
+                                </div>
+                            @else
+                                <div class="mt-4">
                                     <button type="button" disabled
                                         class="w-full bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 py-2 rounded-md cursor-not-allowed">
                                         Stok Habis
                                     </button>
-                                @endif
-                            </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @empty
