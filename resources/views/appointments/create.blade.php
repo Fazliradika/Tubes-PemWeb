@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="min-h-screen bg-gray-50 py-8">
+    <div class="min-h-screen bg-gray-50 dark:bg-slate-900 py-8">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Back Button -->
             <div class="mb-6">
                 <a href="{{ route('appointments.index') }}"
-                    class="inline-flex items-center text-blue-600 hover:text-blue-700">
+                    class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -18,7 +18,8 @@
             <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
                 <div class="md:flex">
                     <!-- Doctor Info Section -->
-                    <div class="md:w-1/3 bg-gradient-to-br from-blue-500 to-blue-600 p-8 text-white">
+                    <div
+                        class="md:w-1/3 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 p-8 text-white">
                         <div class="text-center">
                             @if($doctor->photo)
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($doctor->name) }}&size=300&background=4F46E5&color=fff&bold=true"
@@ -61,8 +62,8 @@
                     </div>
 
                     <!-- Booking Form Section -->
-                    <div class="md:w-2/3 p-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Buat Appointment</h3>
+                    <div class="md:w-2/3 p-8 dark:bg-slate-800">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Buat Appointment</h3>
 
                         @if(session('success'))
                             <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
