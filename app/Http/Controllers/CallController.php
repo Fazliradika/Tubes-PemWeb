@@ -45,7 +45,7 @@ class CallController extends Controller
             ]);
 
             // Create message record
-            Message::create([
+            $message = Message::create([
                 'conversation_id' => $conversation->id,
                 'sender_id' => auth()->id(),
                 'type' => 'video_call',
@@ -62,6 +62,7 @@ class CallController extends Controller
                 'success' => true,
                 'call_session' => $callSession,
                 'meet_link' => $meetLink,
+                'message' => $message->load('sender'),
             ]);
         } catch (\Exception $e) {
             \Log::error('Call initiate error: ' . $e->getMessage());

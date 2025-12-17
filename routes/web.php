@@ -139,6 +139,7 @@ Route::middleware('auth')->prefix('calls')->group(function () {
 // API Routes for real-time features
 Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/messages/unread-count', [\App\Http\Controllers\ChatController::class, 'unreadCount'])->name('api.messages.unread-count');
+    Route::get('/conversations/{conversation}/messages', [\App\Http\Controllers\ChatController::class, 'fetchMessages'])->name('api.conversations.messages');
 });
 
 // Admin Order Management
