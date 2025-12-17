@@ -9,7 +9,7 @@
                 <p class="mt-2 text-gray-600 dark:text-gray-400">Pilih dokter dan jadwalkan konsultasi Anda</p>
                 <p class="mt-1 text-sm text-blue-600 dark:text-blue-400">
                     <i class="fas fa-map-marker-alt mr-1"></i>
-                    Jl. Ganesha No. 10, Bandung, Jawa Barat 40132
+                    Jl. Soekarno Hatta No. 576, Bandung, Jawa Barat 40286
                 </p>
             </div>
 
@@ -117,7 +117,7 @@
                                 <!-- Hospital Address -->
                                 <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
                                     <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Alamat Rumah Sakit:</p>
-                                    <p class="text-sm font-medium text-gray-800 dark:text-white">RS Bandung Sehat</p>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">HealthFirst Medical</p>
                                     <p class="text-xs text-gray-600 dark:text-gray-400">Jl. Soekarno Hatta No. 576</p>
                                     <p class="text-xs text-gray-600 dark:text-gray-400">Bandung, Jawa Barat 40286</p>
                                 </div>

@@ -47,7 +47,7 @@
 
                             <div class="mb-4">
                                 <p class="text-sm text-blue-100">Alamat Rumah Sakit</p>
-                                <p class="text-base font-medium">RS Bandung Sehat</p>
+                                <p class="text-base font-medium">HealthFirst Medical</p>
                                 <p class="text-sm">Jl. Soekarno Hatta No. 576</p>
                                 <p class="text-sm">Bandung, Jawa Barat 40286</p>
                             </div>
@@ -120,7 +120,7 @@
 
                             <div>
                                 <label for="appointment_time"
-                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    class="block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">
                                     Waktu Appointment <span class="text-red-500">*</span>
                                 </label>
                                 <input type="time" id="appointment_time" name="appointment_time"
@@ -149,10 +149,10 @@
                                 @enderror
                             </div>
 
-                            <div class="border-t pt-6">
+                            <div class="border-t dark:border-gray-700 pt-4 mt-4">
                                 <div class="flex justify-between items-center mb-4">
-                                    <span class="text-lg font-semibold text-gray-900">Total Biaya:</span>
-                                    <span class="text-2xl font-bold text-green-600">
+                                    <span class="text-lg font-semibold text-gray-900 dark:text-white">Total Biaya:</span>
+                                    <span class="text-2xl font-bold text-green-600 dark:text-green-400">
                                         Rp {{ number_format($doctor->price_per_session, 0, ',', '.') }}
                                     </span>
                                 </div>

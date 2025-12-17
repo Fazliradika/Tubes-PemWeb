@@ -312,8 +312,9 @@
                                         d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                <span class="text-slate-600 dark:text-slate-400 text-sm">Jl. Ganesha No. 10, Bandung,
-                                    Jawa Barat 40132</span>
+                                <span class="text-slate-600 dark:text-slate-400 text-sm">Jl. Soekarno Hatta No. 576,
+                                    Bandung,
+                                    Jawa Barat 40286</span>
                             </div>
                         </div>
                     </div>
@@ -379,21 +380,8 @@
 
     <!-- Flash Message Toast Script -->
     @if(session('success') || session('error') || session('warning') || session('info'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                @if(session('success'))
-                    window.showToast(@json(session('success')), 'success');
-                @endif
-                @if(session('error'))
-                    window.showToast(@json(session('error')), 'error');
-                @endif
-                @if(session('warning'))
-                    window.showToast(@json(session('warning')), 'warning');
-                @endif
-                @if(session('info'))
-                    window.showToast(@json(session('info')), 'info');
-                @endif
-                    });
+        <script>         document.addEventListener('DOMContentLoaded', function () {             @if(session('success'))             window.showToast(@json(session('success')), 'success');             @endif             @if(session('error'))             window.showToast(@json(session('error')), 'error');             @endif             @if(session('warning'))             window.showToast(@json(session('warning')), 'warning');             @endif             @if(session('info'))             window.showToast(@json(session('info')), 'info');             @endif
+                        });
         </script>
     @endif
 </body>
