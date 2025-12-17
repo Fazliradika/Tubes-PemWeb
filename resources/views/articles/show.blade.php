@@ -636,7 +636,7 @@
             };
             
             modal.innerHTML = `
-                <div class="bg-white rounded-lg p-6 max-w-md w-full" onclick="event.stopPropagation()">
+                <div class="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full" onclick="event.stopPropagation()">
                     <h3 class="text-lg font-bold text-gray-900 mb-4">Bagikan Artikel</h3>
                     
                     <div class="space-y-2 mb-4">
