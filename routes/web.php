@@ -89,6 +89,8 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
     Route::get('/appointments/create/{doctor}', [AppointmentController::class, 'create'])->name('appointments.create');
     Route::post('/appointments/store/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/appointments/payment', [AppointmentController::class, 'payment'])->name('appointments.payment');
+    Route::post('/appointments/payment/process', [AppointmentController::class, 'processPayment'])->name('appointments.payment.process');
     Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.my-appointments');
     Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');

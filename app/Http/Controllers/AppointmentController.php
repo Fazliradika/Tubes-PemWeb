@@ -94,25 +94,82 @@ class AppointmentController extends Controller
         }
 
         try {
+            // Store booking data in session for payment
+            session()->put('appointment_booking', [
+                'doctor_id' => $doctor->id,
+                'doctor_name' => $doctor->user->name,
+                'specialization' => $doctor->specialization,
+                'appointment_date' => $request->appointment_date,
+                'appointment_time' => $request->appointment_time,
+                'symptoms' => $request->symptoms,
+                'total_price' => $doctor->price_per_session,
+            ]);
+
+            return redirect()->route('appointments.payment')
+                ->with('info', 'Silakan pilih metode pembayaran untuk menyelesaikan booking.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
+        }
+    }
+
+    /**
+     * Show payment page for appointment
+     */
+    public function payment()
+    {
+        if (!session()->has('appointment_booking')) {
+            return redirect()->route('appointments.index')
+                ->with('error', 'Tidak ada booking yang perlu dibayar.');
+        }
+
+        $booking = session()->get('appointment_booking');
+        $doctor = Doctor::with('user')->findOrFail($booking['doctor_id']);
+
+        return view('appointments.payment', compact('booking', 'doctor'));
+    }
+
+    /**
+     * Process appointment payment
+     */
+    public function processPayment(Request $request)
+    {
+        $request->validate([
+            'payment_method' => 'required|in:bank_transfer,credit_card,e_wallet,qris',
+        ]);
+
+        if (!session()->has('appointment_booking')) {
+            return redirect()->route('appointments.index')
+                ->with('error', 'Session expired. Silakan booking ulang.');
+        }
+
+        $booking = session()->get('appointment_booking');
+        $doctor = Doctor::findOrFail($booking['doctor_id']);
+
+        try {
             DB::beginTransaction();
 
             $appointment = Appointment::create([
                 'patient_id' => Auth::id(),
                 'doctor_id' => $doctor->id,
-                'appointment_date' => $request->appointment_date,
-                'appointment_time' => $request->appointment_time,
-                'symptoms' => $request->symptoms,
-                'total_price' => $doctor->price_per_session,
+                'appointment_date' => $booking['appointment_date'],
+                'appointment_time' => $booking['appointment_time'],
+                'symptoms' => $booking['symptoms'],
+                'total_price' => $booking['total_price'],
                 'status' => 'pending',
+                'payment_method' => $request->payment_method,
+                'payment_status' => 'paid',
             ]);
+
+            // Clear session
+            session()->forget('appointment_booking');
 
             DB::commit();
 
             return redirect()->route('appointments.show', $appointment)
-                ->with('success', 'Appointment berhasil dibuat! Silakan tunggu konfirmasi.');
+                ->with('success', 'Pembayaran berhasil! Appointment Anda sudah dikonfirmasi.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
