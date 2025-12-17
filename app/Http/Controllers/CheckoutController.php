@@ -17,13 +17,26 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        // Check if this is a "buy now" checkout
+        if (session()->has('buy_now')) {
+            $buyNowData = session()->get('buy_now');
+            return view('shop.checkout', [
+                'cart' => null,
+                'buyNow' => $buyNowData
+            ]);
+        }
+
+        // Regular cart checkout
         $cart = Cart::where('user_id', Auth::id())->with('cartItems.product')->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
         }
 
-        return view('shop.checkout', compact('cart'));
+        return view('shop.checkout', [
+            'cart' => $cart,
+            'buyNow' => null
+        ]);
     }
 
     /**
@@ -110,7 +123,7 @@ class CheckoutController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        
+
         // Allow owner or admin to view
         if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
@@ -128,7 +141,7 @@ class CheckoutController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        
+
         // Allow owner or admin to confirm payment
         if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);

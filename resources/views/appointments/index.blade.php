@@ -35,14 +35,14 @@
                         <select name="day" id="day"
                             class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                             onchange="this.form.submit()">
-                            <option value="all" {{ $day == 'all' ? 'selected' : '' }}>Semua Hari</option>
-                            <option value="Monday" {{ $day == 'Monday' ? 'selected' : '' }}>Senin</option>
-                            <option value="Tuesday" {{ $day == 'Tuesday' ? 'selected' : '' }}>Selasa</option>
-                            <option value="Wednesday" {{ $day == 'Wednesday' ? 'selected' : '' }}>Rabu</option>
-                            <option value="Thursday" {{ $day == 'Thursday' ? 'selected' : '' }}>Kamis</option>
-                            <option value="Friday" {{ $day == 'Friday' ? 'selected' : '' }}>Jumat</option>
-                            <option value="Saturday" {{ $day == 'Saturday' ? 'selected' : '' }}>Sabtu</option>
-                            <option value="Sunday" {{ $day == 'Sunday' ? 'selected' : '' }}>Minggu</option>
+                            <option value="all" {{ $day == 'all' ? 'selected' : '' }}>All Days</option>
+                            <option value="Monday" {{ $day == 'Monday' ? 'selected' : '' }}>Monday</option>
+                            <option value="Tuesday" {{ $day == 'Tuesday' ? 'selected' : '' }}>Tuesday</option>
+                            <option value="Wednesday" {{ $day == 'Wednesday' ? 'selected' : '' }}>Wednesday</option>
+                            <option value="Thursday" {{ $day == 'Thursday' ? 'selected' : '' }}>Thursday</option>
+                            <option value="Friday" {{ $day == 'Friday' ? 'selected' : '' }}>Friday</option>
+                            <option value="Saturday" {{ $day == 'Saturday' ? 'selected' : '' }}>Saturday</option>
+                            <option value="Sunday" {{ $day == 'Sunday' ? 'selected' : '' }}>Sunday</option>
                         </select>
                     </div>
                 </form>

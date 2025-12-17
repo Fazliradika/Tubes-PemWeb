@@ -115,10 +115,41 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" 
-                                        class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
-                                        <i class="fas fa-cart-plus mr-2"></i>Tambah <span x-text="quantity" class="mx-1"></span> Item ke Keranjang
-                                    </button>
+                                    
+                                    <div class="flex gap-3">
+                                        <button type="submit" 
+                                            class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                                            <i class="fas fa-cart-plus mr-2"></i>Add to Cart
+                                        </button>
+                                        
+                                        <button type="button" @click="buyNow()"
+                                            class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center">
+                                            <i class="fas fa-bolt mr-2"></i>Buy Now
+                                        </button>
+                                    </div>
+                                    
+                                    <script>
+                                        function buyNow() {
+                                            const form = document.createElement('form');
+                                            form.method = 'POST';
+                                            form.action = '{{ route("cart.buyNow", $product) }}';
+                                            
+                                            const csrfToken = document.createElement('input');
+                                            csrfToken.type = 'hidden';
+                                            csrfToken.name = '_token';
+                                            csrfToken.value = '{{ csrf_token() }}';
+                                            form.appendChild(csrfToken);
+                                            
+                                            const quantityInput = document.createElement('input');
+                                            quantityInput.type = 'hidden';
+                                            quantityInput.name = 'quantity';
+                                            quantityInput.value = document.querySelector('input[name="quantity"]').value;
+                                            form.appendChild(quantityInput);
+                                            
+                                            document.body.appendChild(form);
+                                            form.submit();
+                                        }
+                                    </script>
                                 </form>
                             @else
                                 <button disabled

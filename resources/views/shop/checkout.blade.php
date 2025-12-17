@@ -302,27 +302,44 @@
 
                                 <!-- Products -->
                                 <div class="space-y-3 mb-4 max-h-64 overflow-y-auto">
-                                    @foreach($cart->cartItems as $item)
+                                    @if($buyNow)
+                                        {{-- Buy Now Mode - Single Product --}}
                                         <div class="flex items-start space-x-3 text-sm">
-                                            <img src="{{ $item->product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}" 
-                                                alt="{{ $item->product->name }}" 
+                                            <img src="{{ $buyNow['image'] ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}" 
+                                                alt="{{ $buyNow['product_name'] }}" 
                                                 class="w-12 h-12 object-cover rounded">
                                             <div class="flex-1">
-                                                <div class="font-medium text-gray-900 dark:text-white">{{ $item->product->name }}</div>
-                                                <div class="text-gray-600 dark:text-gray-400">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
+                                                <div class="font-medium text-gray-900 dark:text-white">{{ $buyNow['product_name'] }}</div>
+                                                <div class="text-gray-600 dark:text-gray-400">{{ $buyNow['quantity'] }} x Rp {{ number_format($buyNow['price'], 0, ',', '.') }}</div>
                                             </div>
                                             <div class="font-semibold text-gray-900 dark:text-white">
-                                                Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+                                                Rp {{ number_format($buyNow['price'] * $buyNow['quantity'], 0, ',', '.') }}
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @else
+                                        {{-- Cart Mode - Multiple Products --}}
+                                        @foreach($cart->cartItems as $item)
+                                            <div class="flex items-start space-x-3 text-sm">
+                                                <img src="{{ $item->product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=150&h=150&fit=crop' }}" 
+                                                    alt="{{ $item->product->name }}" 
+                                                    class="w-12 h-12 object-cover rounded">
+                                                <div class="flex-1">
+                                                    <div class="font-medium text-gray-900 dark:text-white">{{ $item->product->name }}</div>
+                                                    <div class="text-gray-600 dark:text-gray-400">{{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</div>
+                                                </div>
+                                                <div class="font-semibold text-gray-900 dark:text-white">
+                                                    Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
                                 <!-- Price Breakdown -->
                                 <div class="border-t pt-4 space-y-2">
                                     <div class="flex justify-between text-gray-600 dark:text-gray-400">
-                                        <span>Subtotal ({{ $cart->itemsCount }} item)</span>
-                                        <span>Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
+                                        <span>Subtotal ({{ $buyNow ? $buyNow['quantity'] : $cart->itemsCount }} item)</span>
+                                        <span>Rp {{ number_format($buyNow ? ($buyNow['price'] * $buyNow['quantity']) : $cart->total, 0, ',', '.') }}</span>
                                     </div>
                                     <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Ongkos Kirim</span>
@@ -330,7 +347,7 @@
                                     </div>
                                     <div class="border-t pt-2 flex justify-between text-lg font-bold">
                                         <span>Total Pembayaran</span>
-                                        <span class="text-blue-600" id="total-amount">Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
+                                        <span class="text-blue-600" id="total-amount">Rp {{ number_format($buyNow ? ($buyNow['price'] * $buyNow['quantity']) : $cart->total, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
 
