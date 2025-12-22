@@ -120,6 +120,32 @@
                 grid-column: 4 / span 2;
                 grid-row: 2;
             }
+
+            .w-center-note {
+                grid-column: 3 / span 2;
+                grid-row: 2;
+                align-self: start;
+                justify-self: center;
+                margin-top: 7.75rem;
+                text-align: center;
+            }
+
+            .w-lines {
+                display: block;
+            }
+        }
+
+        .w-lines {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .w-card {
+            position: relative;
+            z-index: 1;
         }
 
         /* Minimal helper for hover easter egg */
@@ -226,8 +252,7 @@
                     </div>
 
                     <div class="mt-10 text-sm text-slate-400">
-                        Halaman ini akan otomatis scroll per bagian (±6 detik per section).
-                        Suara YouTube akan aktif setelah kamu klik/ketuk sekali di mana saja (aturan browser).
+                        
                     </div>
                 </div>
             </div>
@@ -243,9 +268,6 @@
                         <p class="mt-5 text-slate-300 leading-relaxed">
                             Screenshot percakapan saat kita mulai ngerjain proyek ini.
                             Di situ, semuanya masih terasa sederhana… sampai akhirnya jadi cerita panjang.
-                        </p>
-                        <p class="mt-4 text-sm text-slate-400">
-                            Taruh file gambar di <span class="font-mono">public/media/end/serigala-putih-chat.png</span>
                         </p>
                     </div>
 
@@ -272,9 +294,6 @@
                             Di commit pertama, kita belum tahu semua rintangan. Tapi kita mulai.
                             Dan itu yang paling penting.
                         </p>
-                        <p class="mt-4 text-sm text-slate-400">
-                            Taruh file gambar di <span class="font-mono">public/media/end/first-commit.png</span>
-                        </p>
                     </div>
 
                     <div class="img-frame rounded-2xl p-3">
@@ -299,9 +318,6 @@
                         <p class="mt-5 text-slate-300 leading-relaxed">
                             Ini bukan sekadar "selesai". Ini bukti kita bertahan sampai final.
                         </p>
-                        <p class="mt-4 text-sm text-slate-400">
-                            Taruh file gambar di <span class="font-mono">public/media/end/last-commit.png</span>
-                        </p>
                     </div>
 
                     <div class="img-frame rounded-2xl p-3">
@@ -324,27 +340,48 @@
                     <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Tim Pengembang</h2>
                     <p class="mt-3 text-slate-300">Kelompok <span class="font-semibold text-white">Serigala Putih</span></p>
 
-                    <div class="mt-10 w-team">
-                        @foreach ($teamW as $pos => $member)
-                            <div class="w-pos-{{ $pos }} rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6">
-                                <div class="flex items-start gap-4">
-                                    <div class="shrink-0">
-                                        <img src="{{ $member['photo'] }}" alt="Foto {{ $member['name'] }}"
-                                            class="h-16 w-16 rounded-xl object-cover border border-slate-700/60">
-                                    </div>
-                                    <div class="min-w-0">
-                                        <p class="text-lg font-semibold text-white">{{ $member['name'] }}</p>
-                                        <p class="text-sm text-slate-300">NIM: <span class="text-white">{{ $member['nim'] }}</span></p>
-                                        <p class="text-sm text-blue-300">Peran: <span class="text-slate-200">{{ $member['role'] }}</span></p>
+                    <div class="mt-10 relative">
+                        <!-- Connecting lines (W silhouette) -->
+                        <svg class="w-lines" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+                            <polyline
+                                points="170,90 330,320 500,90 670,320 830,90"
+                                fill="none"
+                                stroke="rgba(148, 163, 184, 0.45)"
+                                stroke-width="4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <polyline
+                                points="170,90 500,90 830,90"
+                                fill="none"
+                                stroke="rgba(148, 163, 184, 0.18)"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                        <div class="w-team">
+                            @foreach ($teamW as $pos => $member)
+                                <div class="w-card w-pos-{{ $pos }} rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6">
+                                    <div class="flex items-start gap-4">
+                                        <div class="shrink-0">
+                                            <img src="{{ $member['photo'] }}" alt="Foto {{ $member['name'] }}"
+                                                class="h-16 w-16 rounded-xl object-cover border border-slate-700/60">
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="text-lg font-semibold text-white">{{ $member['name'] }}</p>
+                                            <p class="text-sm text-slate-300">NIM: <span class="text-white">{{ $member['nim'] }}</span></p>
+                                            <p class="text-sm text-blue-300">Peran: <span class="text-slate-200">{{ $member['role'] }}</span></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
 
-                    <p class="mt-8 text-sm text-slate-400">
-                        Proyek ini dibuat untuk <span class="text-slate-200">Tugas Besar Pemrograman Web</span> — Universitas Telkom.
-                    </p>
+                            <div class="w-center-note text-sm text-slate-300">
+                                Proyek ini dibuat untuk <span class="text-white font-semibold">Tugas Besar Pemrograman Web</span><br>
+                                Universitas Telkom
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -352,7 +389,7 @@
         <!-- Section 6: Lecturer + thanks -->
         <section class="end-section min-h-screen flex items-center">
             <div class="mx-auto w-full max-w-6xl px-6 py-16">
-                <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                     <div>
                         <p class="text-sm uppercase tracking-widest text-slate-300">Penghargaan</p>
                         <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Terima Kasih, Dosen</h2>
@@ -360,15 +397,15 @@
                             <span class="font-semibold text-white">Zuki Pristiantoro Putro, S.T., M.M.S.I</span>
                             <span class="text-slate-400">— Dosen Mata Kuliah Pemrograman Website</span>
                         </p>
-                        <p class="mt-5 text-slate-300 leading-relaxed">
+                        <p class="mt-4 text-slate-300 leading-relaxed">
                             Terima kasih atas arahan, koreksi, masukan, dan kesabaran selama satu semester ini.
                             Proyek ini menjadi lebih terarah karena bimbingan dan evaluasi yang diberikan.
                         </p>
-                        <p class="mt-5 text-slate-300 leading-relaxed">
+                        <p class="mt-4 text-slate-300 leading-relaxed">
                             Kami juga memohon maaf sebesar-besarnya apabila selama perkuliahan maupun pengerjaan tugas
                             terdapat tutur kata, sikap, atau hal-hal yang kurang berkenan.
                         </p>
-                        <p class="mt-6 text-slate-300 leading-relaxed">
+                        <p class="mt-4 text-slate-300 leading-relaxed">
                             Dan untuk tim…
                             <span class="text-white font-semibold">kalian bukan cuma teman sekelompok,</span>
                             tapi teman seperjalanan.
@@ -410,7 +447,7 @@
                     </div>
 
                     <p class="mt-10 text-xs text-slate-400">
-                        Musik diputar dari YouTube (autoplay best-effort).
+                        
                     </p>
                 </div>
             </div>
