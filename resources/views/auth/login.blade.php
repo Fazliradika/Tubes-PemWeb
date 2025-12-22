@@ -31,25 +31,25 @@
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
+        <div class="block mt-4 mb-6">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-700 bg-gray-800 text-blue-600 shadow-sm focus:ring-blue-500" name="remember">
                 <span class="ms-2 text-sm text-gray-400">{{ __('Remember me') }}</span>
             </label>
         </div>
 
-        <div class="flex items-center justify-between mt-6">
-            <div class="flex items-center gap-4">
-                @if (Route::has('password.request'))
+        <div class="flex flex-col gap-4">
+            <x-primary-button class="w-full justify-center py-3 bg-blue-600 hover:bg-blue-700 text-white border-transparent text-lg font-semibold rounded-lg">
+                {{ __('Log in') }}
+            </x-primary-button>
+
+            @if (Route::has('password.request'))
+                <div class="text-right">
                     <a class="underline text-sm text-gray-400 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
-                @endif
-            </div>
-
-            <x-primary-button class="ms-3 bg-blue-600 hover:bg-blue-700 text-white border-transparent">
-                {{ __('Log in') }}
-            </x-primary-button>
+                </div>
+            @endif
         </div>
 
         <!-- Register Link -->
