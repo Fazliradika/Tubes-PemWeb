@@ -121,26 +121,33 @@
                 grid-row: 2;
             }
 
-            .w-center-note {
-                grid-column: 3 / span 2;
-                grid-row: 2;
-                align-self: start;
+            .w-bottom-note {
+                grid-column: 2 / span 4;
+                grid-row: 3;
                 justify-self: center;
-                margin-top: 7.75rem;
                 text-align: center;
+                margin-top: 0.5rem;
             }
 
-            .w-lines {
+            .w-lines-wrapper {
                 display: block;
             }
         }
 
-        .w-lines {
+        .w-lines-wrapper {
             display: none;
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
             pointer-events: none;
+        }
+
+        .w-lines-wrapper svg {
+            width: 100%;
+            height: 100%;
         }
 
         .w-card {
@@ -342,22 +349,21 @@
 
                     <div class="mt-10 relative">
                         <!-- Connecting lines (W silhouette) -->
-                        <svg class="w-lines" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
-                            <polyline
-                                points="170,90 330,320 500,90 670,320 830,90"
-                                fill="none"
-                                stroke="rgba(148, 163, 184, 0.45)"
-                                stroke-width="4"
-                                stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <polyline
-                                points="170,90 500,90 830,90"
-                                fill="none"
-                                stroke="rgba(148, 163, 184, 0.18)"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
+                        <div class="w-lines-wrapper" aria-hidden="true">
+                            <svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet">
+                                <!-- W shape: 1-2, 2-3, 3-4, 4-5 -->
+                                <line x1="100" y1="70" x2="200" y2="190" stroke="rgba(96, 165, 250, 0.5)" stroke-width="3" stroke-linecap="round" />
+                                <line x1="200" y1="190" x2="300" y2="70" stroke="rgba(96, 165, 250, 0.5)" stroke-width="3" stroke-linecap="round" />
+                                <line x1="300" y1="70" x2="400" y2="190" stroke="rgba(96, 165, 250, 0.5)" stroke-width="3" stroke-linecap="round" />
+                                <line x1="400" y1="190" x2="500" y2="70" stroke="rgba(96, 165, 250, 0.5)" stroke-width="3" stroke-linecap="round" />
+                                <!-- Dots at card positions -->
+                                <circle cx="100" cy="70" r="6" fill="rgba(96, 165, 250, 0.7)" />
+                                <circle cx="200" cy="190" r="6" fill="rgba(96, 165, 250, 0.7)" />
+                                <circle cx="300" cy="70" r="6" fill="rgba(96, 165, 250, 0.7)" />
+                                <circle cx="400" cy="190" r="6" fill="rgba(96, 165, 250, 0.7)" />
+                                <circle cx="500" cy="70" r="6" fill="rgba(96, 165, 250, 0.7)" />
+                            </svg>
+                        </div>
 
                         <div class="w-team">
                             @foreach ($teamW as $pos => $member)
@@ -376,7 +382,7 @@
                                 </div>
                             @endforeach
 
-                            <div class="w-center-note text-sm text-slate-300">
+                            <div class="w-bottom-note text-sm text-slate-300 lg:mt-4">
                                 Proyek ini dibuat untuk <span class="text-white font-semibold">Tugas Besar Pemrograman Web</span><br>
                                 Universitas Telkom
                             </div>
@@ -405,16 +411,11 @@
                             Kami juga memohon maaf sebesar-besarnya apabila selama perkuliahan maupun pengerjaan tugas
                             terdapat tutur kata, sikap, atau hal-hal yang kurang berkenan.
                         </p>
-                        <p class="mt-4 text-slate-300 leading-relaxed">
-                            Dan untuk tim…
-                            <span class="text-white font-semibold">kalian bukan cuma teman sekelompok,</span>
-                            tapi teman seperjalanan.
-                        </p>
                     </div>
 
-                    <div class="img-frame rounded-2xl p-3">
+                    <div class="img-frame rounded-2xl p-3 overflow-hidden">
                         <img id="img-lecturer" src="{{ $assets['lecturer_photo'] }}" alt="Foto dosen"
-                            class="w-full rounded-xl object-cover" loading="lazy">
+                            class="w-full rounded-xl object-cover object-top" style="max-height: 480px; object-position: center 15%;" loading="lazy">
                         <div id="img-lecturer-fallback" class="hidden p-6 text-slate-300">
                             <p class="font-semibold text-white">Foto dosen belum ditemukan.</p>
                             <p class="mt-1 text-sm">Pastikan file ada di <span class="font-mono">public/media/end/dosen.png</span></p>
