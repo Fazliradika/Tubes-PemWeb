@@ -143,6 +143,10 @@ Route::middleware('auth')->prefix('calls')->group(function () {
 Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/messages/unread-count', [\App\Http\Controllers\ChatController::class, 'unreadCount'])->name('api.messages.unread-count');
     Route::get('/conversations/{conversation}/messages', [\App\Http\Controllers\ChatController::class, 'fetchMessages'])->name('api.conversations.messages');
+    
+    // Prescription API for real-time updates
+    Route::get('/prescriptions/check-new', [\App\Http\Controllers\PrescriptionController::class, 'checkNew'])->name('api.prescriptions.check-new');
+    Route::get('/prescriptions/latest', [\App\Http\Controllers\PrescriptionController::class, 'latest'])->name('api.prescriptions.latest');
 });
 
 // Admin Order Management

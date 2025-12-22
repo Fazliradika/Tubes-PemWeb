@@ -207,4 +207,52 @@ class PrescriptionController extends Controller
 
         return view('doctor.prescriptions.index', compact('prescriptions'));
     }
+
+    /**
+     * API: Check for new prescriptions (for patient real-time updates)
+     */
+    public function checkNew()
+    {
+        $lastCheck = session('last_prescription_check', now()->subSeconds(15));
+        
+        $newCount = Prescription::forPatient(Auth::id())
+            ->where('created_at', '>', $lastCheck)
+            ->count();
+
+        session(['last_prescription_check' => now()]);
+
+        return response()->json([
+            'new_count' => $newCount,
+            'has_new' => $newCount > 0,
+        ]);
+    }
+
+    /**
+     * API: Get latest prescriptions for patient
+     */
+    public function latest()
+    {
+        $prescriptions = Prescription::with(['doctor.user', 'items.product'])
+            ->forPatient(Auth::id())
+            ->latest()
+            ->take(5)
+            ->get()
+            ->map(function ($prescription) {
+                return [
+                    'id' => $prescription->id,
+                    'doctor_name' => 'Dr. ' . ($prescription->doctor->user->name ?? 'N/A'),
+                    'specialization' => $prescription->doctor->specialization ?? '',
+                    'diagnosis' => $prescription->diagnosis,
+                    'prescription_date' => $prescription->prescription_date->format('d M Y'),
+                    'status' => $prescription->status,
+                    'items_count' => $prescription->items->count(),
+                    'url' => route('prescriptions.show', $prescription),
+                ];
+            });
+
+        return response()->json([
+            'prescriptions' => $prescriptions,
+        ]);
+    }
 }
+

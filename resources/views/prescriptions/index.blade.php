@@ -115,4 +115,112 @@
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-4 right-4 z-50 hidden transform transition-all duration-300 translate-y-full opacity-0">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-lg shadow-xl flex items-center space-x-3">
+            <div class="flex-shrink-0">
+                <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+            </div>
+            <div>
+                <p class="font-semibold">Resep Baru!</p>
+                <p class="text-sm opacity-90" id="toast-message">Dokter telah membuat resep untuk Anda</p>
+            </div>
+            <button onclick="hideToast()" class="ml-4 text-white hover:text-gray-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    @push('scripts')
+    <script>
+        // Real-time prescription polling
+        let pollingInterval;
+        let isPolling = true;
+
+        function startPolling() {
+            pollingInterval = setInterval(checkForNewPrescriptions, 10000); // Check every 10 seconds
+        }
+
+        function stopPolling() {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+            }
+        }
+
+        async function checkForNewPrescriptions() {
+            if (!isPolling) return;
+
+            try {
+                const response = await fetch('{{ route("api.prescriptions.check-new") }}', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.has_new) {
+                        showToast(`Ada ${data.new_count} resep baru dari dokter!`);
+                        // Reload page after short delay to show new prescriptions
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                }
+            } catch (error) {
+                console.log('Polling error:', error);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-full', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+            }, 10);
+
+            // Auto-hide after 5 seconds
+            setTimeout(hideToast, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast-notification');
+            toast.classList.add('translate-y-full', 'opacity-0');
+            toast.classList.remove('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300);
+        }
+
+        // Start polling when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startPolling();
+        });
+
+        // Stop polling when page is hidden, resume when visible
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                isPolling = false;
+            } else {
+                isPolling = true;
+                checkForNewPrescriptions(); // Check immediately when coming back
+            }
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', stopPolling);
+    </script>
+    @endpush
 </x-app-layout>
