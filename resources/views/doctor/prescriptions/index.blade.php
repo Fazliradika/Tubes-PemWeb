@@ -1,8 +1,12 @@
-<x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Resep Obat') }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-white leading-tight">
+                {{ __('Resep Obat') }}
+            </h2>
+            <a href="{{ route('doctor.dashboard') }}" class="text-white hover:text-gray-200">
+                ← Kembali ke Dashboard
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">

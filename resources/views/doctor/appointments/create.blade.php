@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Buat Appointment Baru') }}
             </h2>
-            <a href="{{ route('doctor.dashboard') }}" class="text-blue-600 hover:text-blue-800">
+            <a href="{{ route('doctor.dashboard') }}" class="text-white hover:text-gray-200">
                 ← Kembali ke Dashboard
             </a>
         </div>

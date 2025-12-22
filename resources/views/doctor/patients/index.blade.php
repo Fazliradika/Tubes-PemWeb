@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Data Pasien') }}
             </h2>
-            <a href="{{ route('doctor.dashboard') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+            <a href="{{ route('doctor.dashboard') }}" class="text-white hover:text-gray-200">
                 ← Kembali ke Dashboard
             </a>
         </div>
