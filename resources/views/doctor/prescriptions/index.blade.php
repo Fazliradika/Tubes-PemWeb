@@ -13,6 +13,60 @@
                 </div>
             @endif
 
+            <!-- Pending Appointments Section -->
+            @if(isset($pendingAppointments) && $pendingAppointments->count() > 0)
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            <span class="inline-flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Appointment Siap Dibuatkan Resep
+                            </span>
+                        </h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                            {{ $pendingAppointments->count() }} appointment
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach($pendingAppointments as $appointment)
+                        <div class="border rounded-lg p-4 hover:shadow-md transition bg-gradient-to-br from-blue-50 to-white">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                        {{ substr($appointment->patient->name ?? 'N', 0, 1) }}
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="font-medium text-gray-900">{{ $appointment->patient->name ?? 'N/A' }}</p>
+                                        <p class="text-xs text-gray-500">{{ $appointment->appointment_date->format('d M Y') }}</p>
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Confirmed</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <p class="text-sm text-gray-600 line-clamp-2">
+                                    <span class="font-medium">Keluhan:</span> {{ Str::limit($appointment->symptoms, 80) }}
+                                </p>
+                            </div>
+
+                            <a href="{{ route('doctor.prescriptions.create', $appointment) }}" 
+                               class="w-full inline-flex justify-center items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Buat Resep
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h3 class="text-lg font-semibold mb-4">Daftar Resep yang Dibuat</h3>
@@ -87,7 +141,14 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                             <h3 class="text-xl font-semibold text-gray-900 mb-2">Belum Ada Resep</h3>
-                            <p class="text-gray-600">Anda belum membuat resep obat untuk pasien.</p>
+                            <p class="text-gray-600 mb-4">Anda belum membuat resep obat untuk pasien.</p>
+                            @if(!isset($pendingAppointments) || $pendingAppointments->count() == 0)
+                                <p class="text-sm text-gray-500">Konfirmasi appointment terlebih dahulu untuk bisa membuat resep.</p>
+                                <a href="{{ route('doctor.appointments.index') }}" 
+                                   class="inline-flex items-center mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                                    Lihat Daftar Appointment
+                                </a>
+                            @endif
                         </div>
                     @endif
                 </div>
@@ -95,3 +156,4 @@
         </div>
     </div>
 </x-app-layout>
+

@@ -205,7 +205,16 @@ class PrescriptionController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('doctor.prescriptions.index', compact('prescriptions'));
+        // Get confirmed appointments without prescriptions
+        $pendingAppointments = Appointment::with('patient')
+            ->where('doctor_id', $doctor->id)
+            ->where('status', 'confirmed')
+            ->whereDoesntHave('prescription')
+            ->orderBy('appointment_date', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('doctor.prescriptions.index', compact('prescriptions', 'pendingAppointments'));
     }
 
     /**
