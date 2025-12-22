@@ -465,6 +465,10 @@
 
             const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+            // Auto-scroll timing
+            const AUTO_FIRST_DELAY = 6000; // First wait when landing on /end
+            const AUTO_NEXT_DELAY = 5000;  // Subsequent waits between sections
+
             // YouTube Player
             const YT_VIDEO_ID = '13ARO0HDZsQ';
             let ytPlayer = null;
@@ -517,18 +521,25 @@
 
             const stopAuto = () => {
                 if (timer) {
-                    clearInterval(timer);
+                    clearTimeout(timer);
                     timer = null;
                 }
             };
 
-            const startAuto = () => {
+            const startAuto = (firstDelay = AUTO_FIRST_DELAY) => {
                 stopAuto();
-                timer = setInterval(() => {
-                    if (Date.now() < pauseUntil) return;
+                const run = () => {
+                    if (Date.now() < pauseUntil) {
+                        timer = setTimeout(run, AUTO_NEXT_DELAY);
+                        return;
+                    }
+
                     const next = (currentIndex + 1) % sections.length;
                     scrollToIndex(next);
-                }, 6000);
+                    timer = setTimeout(run, AUTO_NEXT_DELAY);
+                };
+
+                timer = setTimeout(run, firstDelay);
             };
 
             // Detect manual interaction -> pause auto-scroll briefly (so it doesn't fight the user)
@@ -578,14 +589,14 @@
                 enableSound();
                 if (!prefersReducedMotion) {
                     pauseUntil = 0;
-                    startAuto();
+                    startAuto(AUTO_FIRST_DELAY);
                 }
                 scrollToIndex(1);
             });
 
             replayBtn?.addEventListener('click', () => {
                 pauseUntil = 0;
-                if (!prefersReducedMotion) startAuto();
+                if (!prefersReducedMotion) startAuto(AUTO_FIRST_DELAY);
                 scrollToIndex(0);
             });
 
@@ -601,10 +612,7 @@
 
                 // Auto-start scrolling (best-effort); pause when user interacts
                 if (!prefersReducedMotion) {
-                    startAuto();
-                    setTimeout(() => {
-                        if (Date.now() >= pauseUntil) scrollToIndex(1);
-                    }, 900);
+                    startAuto(AUTO_FIRST_DELAY);
                 }
 
                 // Try to start audio with sound immediately (may be blocked by browser policy)
