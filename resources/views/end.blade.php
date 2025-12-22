@@ -215,6 +215,10 @@
                     </p>
 
                     <div class="mt-10 flex flex-col sm:flex-row gap-3">
+                        <button id="end-start" type="button"
+                            class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            Mulai Perjalanan (Aktifkan Suara)
+                        </button>
                         <a href="{{ url('/') }}"
                             class="inline-flex items-center justify-center rounded-xl border border-slate-700 px-6 py-3 font-semibold text-slate-200 hover:bg-slate-800/60">
                             Kembali ke Beranda
@@ -399,11 +403,14 @@
                             class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-500">
                             Kembali ke Beranda
                         </a>
+                        <button id="end-replay" type="button"
+                            class="inline-flex items-center justify-center rounded-xl border border-slate-700 px-6 py-3 font-semibold text-slate-200 hover:bg-slate-800/60">
+                            Putar Ulang Auto-Scroll
+                        </button>
                     </div>
 
                     <p class="mt-10 text-xs text-slate-400">
-                        Musik diputar dari YouTube Music (autoplay best-effort). Jika suaranya belum keluar,
-                        lakukan satu klik/ketuk di halaman untuk mengaktifkan suara.
+                        Musik diputar dari YouTube (autoplay best-effort).
                     </p>
                 </div>
             </div>
@@ -415,6 +422,8 @@
         (function () {
             const scrollEl = document.getElementById('end-scroll');
             const sections = Array.from(scrollEl.querySelectorAll('.end-section'));
+            const startBtn = document.getElementById('end-start');
+            const replayBtn = document.getElementById('end-replay');
 
             const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -422,7 +431,7 @@
             const YT_VIDEO_ID = '13ARO0HDZsQ';
             let ytPlayer = null;
             let ytReady = false;
-            let wantsSound = false;
+            let wantsSound = true;
 
             const imgFallback = (imgId, fallbackId) => {
                 const img = document.getElementById(imgId);
@@ -526,13 +535,24 @@
                 }
             };
 
-            // No start button: enable sound on first user interaction anywhere.
-            const enableSoundOnce = () => {
+            // Provide a button to re-trigger sound + continue scrolling
+            startBtn?.addEventListener('click', () => {
                 enableSound();
-                document.removeEventListener('pointerdown', enableSoundOnce);
-                document.removeEventListener('keydown', enableSoundOnce);
-                document.removeEventListener('touchstart', enableSoundOnce);
-            };
+                if (!prefersReducedMotion) {
+                    pauseUntil = 0;
+                    startAuto();
+                }
+                scrollToIndex(1);
+            });
+
+            replayBtn?.addEventListener('click', () => {
+                pauseUntil = 0;
+                if (!prefersReducedMotion) startAuto();
+                scrollToIndex(0);
+            });
+
+            // Also try enabling sound on first interaction anywhere (helps when autoplay is blocked)
+            const enableSoundOnce = () => enableSound();
             document.addEventListener('pointerdown', enableSoundOnce, { once: true, passive: true });
             document.addEventListener('touchstart', enableSoundOnce, { once: true, passive: true });
             document.addEventListener('keydown', enableSoundOnce, { once: true });
@@ -548,6 +568,9 @@
                         if (Date.now() >= pauseUntil) scrollToIndex(1);
                     }, 900);
                 }
+
+                // Try to start audio with sound immediately (may be blocked by browser policy)
+                enableSound();
             });
 
             // YouTube IFrame API hook (must be global)
@@ -570,16 +593,12 @@
                         onReady: function () {
                             ytReady = true;
                             try {
-                                // Autoplay best-effort (muted)
-                                ytPlayer.mute();
-                                ytPlayer.playVideo();
-
-                                // If user already clicked "Mulai", enable sound now.
+                                // Autoplay best-effort (try with sound)
                                 if (wantsSound) {
                                     ytPlayer.unMute();
                                     ytPlayer.setVolume(65);
-                                    ytPlayer.playVideo();
                                 }
+                                ytPlayer.playVideo();
                             } catch (e) {
                                 // Ignore
                             }
