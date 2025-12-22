@@ -538,13 +538,15 @@
                         class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors duration-200 p-1.5 rounded-full hover:bg-blue-50"
                         aria-label="Aktifkan Speech to Text"
                     >
-                        <svg id="micIconIdle" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
-                            <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
+                        <svg id="micIconIdle" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-12 0v1.5a6 6 0 006 6z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-4.5 0v6A2.25 2.25 0 0012 14.25z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 18.75H12m0 0h3.75M12 18.75V21" />
                         </svg>
-                        <svg id="micIconOn" class="w-5 h-5 hidden text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2z"/>
-                            <path fill-rule="evenodd" d="M5 10a5 5 0 0010 0h-2a3 3 0 11-6 0H5zm5 7a7 7 0 007-7h-2a5 5 0 11-10 0H3a7 7 0 007 7zm-1 1h2v-2H9v2z" clip-rule="evenodd"/>
+                        <svg id="micIconOn" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-12 0v1.5a6 6 0 006 6z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-4.5 0v6A2.25 2.25 0 0012 14.25z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 18.75H12m0 0h3.75M12 18.75V21" />
                         </svg>
                     </button>
                 </div>
@@ -680,14 +682,51 @@
         }
 
         // --- Speech To Text (Web Speech API) ---
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
         let isListening = false;
         let holdToTalkActive = false;
         let longPressTimer = null;
         let sendAfterHold = false;
-    let sttFinal = '';
-    let sttInterim = '';
+        let sttFinal = '';
+        let sttInterim = '';
+
+        let sttStopRequested = false;
+        let sttLastErrorAt = 0;
+        let sttNetworkErrorShown = false;
+
+        function isSecureForSTT() {
+            // Web Speech + mic permission generally requires a secure context
+            // (HTTPS or localhost). Some browsers also require https for mic.
+            try {
+                if (window.isSecureContext) return true;
+            } catch (_) {}
+            const host = (location.hostname || '').toLowerCase();
+            return location.protocol === 'https:' || host === 'localhost' || host === '127.0.0.1';
+        }
+
+        function friendlySttErrorMessage(err) {
+            const e = (err || '').toLowerCase();
+            if (e === 'not-allowed' || e === 'service-not-allowed') {
+                return '❌ Microphone diblokir. Izinkan akses mic di browser (Site settings) lalu coba lagi.';
+            }
+            if (e === 'audio-capture') {
+                return '❌ Microphone tidak terdeteksi / sedang dipakai aplikasi lain. Coba colok ulang atau tutup aplikasi lain.';
+            }
+            if (e === 'network') {
+                if (!isSecureForSTT()) {
+                    return '❌ Speech-to-text butuh koneksi HTTPS. Buka aplikasi lewat HTTPS/localhost lalu coba lagi.';
+                }
+                if (navigator && navigator.onLine === false) {
+                    return '❌ Speech-to-text gagal karena offline. Nyalakan internet lalu coba lagi.';
+                }
+                return '❌ Speech-to-text gagal karena masalah jaringan. Coba ulang beberapa saat lagi.';
+            }
+            if (e === 'no-speech') {
+                return 'Tidak ada suara terdeteksi. Coba bicara lebih dekat ke mic.';
+            }
+            return '❌ Gagal menggunakan speech-to-text: ' + (err || 'unknown error');
+        }
 
         function ensureRecognition() {
             if (!SpeechRecognition) return null;
@@ -695,9 +734,12 @@
             recognition = new SpeechRecognition();
             recognition.lang = 'id-ID';
             recognition.interimResults = true;
-            recognition.continuous = true;
+            // More stable across browsers compared to continuous=true
+            recognition.continuous = false;
 
             recognition.onstart = () => {
+                sttStopRequested = false;
+                isListening = true;
                 micButton.classList.remove('bg-gray-100','text-gray-700');
                 micButton.classList.add('bg-red-600','text-white','animate-pulse');
                 micButton.title = 'Mendengarkan... klik untuk berhenti';
@@ -721,8 +763,30 @@
             };
 
             recognition.onerror = (e) => {
-                // Show a friendly error only once
-                addMessage('❌ Gagal menggunakan speech-to-text: ' + (e.error || 'unknown error'), 'ai', true);
+                // Ignore expected abort when user stops
+                if (sttStopRequested && (e && e.error === 'aborted')) {
+                    return;
+                }
+
+                // Throttle to avoid spamming chat
+                const now = Date.now();
+                if (now - sttLastErrorAt < 2500) {
+                    stopListening(false);
+                    return;
+                }
+                sttLastErrorAt = now;
+
+                // Show network error only once per page-load (common + noisy)
+                if (e && e.error === 'network') {
+                    if (!sttNetworkErrorShown) {
+                        sttNetworkErrorShown = true;
+                        addMessage(friendlySttErrorMessage(e.error), 'ai', true);
+                    }
+                    stopListening(false);
+                    return;
+                }
+
+                addMessage(friendlySttErrorMessage(e && e.error), 'ai', true);
                 stopListening(false);
             };
 
@@ -733,6 +797,7 @@
                 document.getElementById('micIconOn').classList.add('hidden');
                 document.getElementById('micIconIdle').classList.remove('hidden');
                 // Do not auto-restart to avoid duplicate transcripts
+                isListening = false;
                 if (sendAfterHold) {
                     sendAfterHold = false;
                     if (chatInput.value.trim()) {
@@ -749,8 +814,13 @@
                 addMessage('Browser Anda tidak mendukung Speech-to-Text. Coba gunakan Chrome/Edge terbaru di Android/Windows.', 'ai', true);
                 return;
             }
+
+            if (!isSecureForSTT()) {
+                addMessage('Speech-to-text butuh HTTPS/localhost untuk akses mic. Buka aplikasi lewat HTTPS lalu coba lagi.', 'ai', true);
+                return;
+            }
+
             sendAfterHold = autoSend;
-            isListening = true;
             chatInput.dataset.baseText = chatInput.value || '';
             sttFinal = '';
             sttInterim = '';
@@ -759,7 +829,7 @@
 
         function stopListening(resetAutoSend = true) {
             if (recognition) {
-                isListening = false;
+                sttStopRequested = true;
                 if (resetAutoSend === false) {
                     // keep sendAfterHold as is
                 } else {
