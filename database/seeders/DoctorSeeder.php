@@ -11,10 +11,11 @@ class DoctorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * Updated: 2025-12-22 - Doctor photos with gender-appropriate images
      */
     public function run(): void
     {
-        // Create doctor users and their doctor profiles
+        // Create doctor users and their doctor profiles with photos
         $doctors = [
             [
                 'name' => 'Dr. Health First',
