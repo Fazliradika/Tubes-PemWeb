@@ -18,21 +18,21 @@
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" class="text-white" />
-            <x-text-input id="name" class="block mt-1 w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block mt-1 w-full bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" class="text-white" />
-            <x-text-input id="email" class="block mt-1 w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Phone -->
         <div class="mt-4">
             <x-input-label for="phone" :value="__('Phone (Optional)')" class="text-white" />
-            <x-text-input id="phone" class="block mt-1 w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500" type="text" name="phone" :value="old('phone')" autocomplete="tel" />
+            <x-text-input id="phone" class="block mt-1 w-full bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500" type="text" name="phone" :value="old('phone')" autocomplete="tel" />
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
@@ -43,7 +43,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" class="text-white" />
 
-            <x-text-input id="password" class="block mt-1 w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            <x-text-input id="password" class="block mt-1 w-full bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
                             type="password"
                             name="password"
                             required autocomplete="new-password" />
@@ -55,7 +55,7 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-white" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            <x-text-input id="password_confirmation" class="block mt-1 w-full bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
