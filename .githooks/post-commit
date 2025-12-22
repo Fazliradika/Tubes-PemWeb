@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+set -eu
+
+# Auto-push after each commit (local only).
+# Disable for a single commit by running: SKIP_AUTO_PUSH=1 git commit ...
+
+if [ "${SKIP_AUTO_PUSH:-}" = "1" ]; then
+  exit 0
+fi
+
+# Ensure we're inside a git repo
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  exit 0
+fi
+
+branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+if [ -z "$branch" ] || [ "$branch" = "HEAD" ]; then
+  exit 0
+fi
+
+# Only push if origin exists
+if ! git remote get-url origin >/dev/null 2>&1; then
+  exit 0
+fi
+
+# Push current branch to origin; don't fail the commit if push fails.
+git push origin "$branch" >/dev/null 2>&1 || true
