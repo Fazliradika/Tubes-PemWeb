@@ -1,12 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Blue Header Section -->
+<div class="bg-blue-600 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex items-center justify-between">
+            <h1 class="text-2xl font-semibold text-white">My Appointments</h1>
+            <a href="{{ route('dashboard') }}" class="text-white hover:text-blue-100 transition-colors duration-200 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kembali ke Dashboard
+            </a>
+        </div>
+        <p class="mt-2 text-blue-100">Kelola dan lihat riwayat appointment Anda</p>
+    </div>
+</div>
+
 <div class="min-h-screen bg-gray-50 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">My Appointments</h1>
-            <p class="mt-2 text-gray-600">Kelola dan lihat riwayat appointment Anda</p>
-        </div>
 
         @if(session('success'))
             <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">

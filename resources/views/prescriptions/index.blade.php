@@ -1,9 +1,19 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Resep Saya') }}
-        </h2>
-    </x-slot>
+    <!-- Blue Header Section -->
+    <div class="bg-blue-600 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-semibold text-white">Resep Saya</h1>
+                <a href="{{ route('dashboard') }}" class="text-white hover:text-blue-100 transition-colors duration-200 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Kembali ke Dashboard
+                </a>
+            </div>
+            <p class="mt-2 text-blue-100">Lihat dan kelola resep obat Anda</p>
+        </div>
+    </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
