@@ -23,19 +23,19 @@
                 </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700">
                     @if($prescriptions->count() > 0)
                         <div class="space-y-4">
                             @foreach($prescriptions as $prescription)
-                                <div class="border rounded-lg p-6 hover:shadow-lg transition">
+                                <div class="border dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition">
                                     <div class="flex justify-between items-start mb-4">
                                         <div>
-                                            <h3 class="text-lg font-semibold text-gray-900">
+                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                                                 Dr. {{ $prescription->doctor->user->name }}
                                             </h3>
-                                            <p class="text-sm text-gray-600">{{ $prescription->doctor->specialization }}</p>
-                                            <p class="text-sm text-gray-500 mt-1">
+                                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ $prescription->doctor->specialization }}</p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
                                                 {{ $prescription->prescription_date->format('d M Y') }}
                                             </p>
                                         </div>
@@ -60,22 +60,22 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <h4 class="font-semibold text-gray-700 mb-2">Diagnosis:</h4>
-                                        <p class="text-gray-600">{{ $prescription->diagnosis }}</p>
+                                        <h4 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">Diagnosis:</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">{{ $prescription->diagnosis }}</p>
                                     </div>
 
                                     <div class="mb-4">
-                                        <h4 class="font-semibold text-gray-700 mb-2">Obat yang Diresepkan:</h4>
+                                        <h4 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">Obat yang Diresepkan:</h4>
                                         <div class="space-y-2">
                                             @foreach($prescription->items as $item)
-                                                <div class="flex items-center justify-between bg-gray-50 p-3 rounded">
+                                                <div class="flex items-center justify-between bg-gray-50 dark:bg-slate-700 p-3 rounded">
                                                     <div class="flex-1">
-                                                        <p class="font-medium text-gray-900">{{ $item->product->name }}</p>
-                                                        <p class="text-sm text-gray-600">
+                                                        <p class="font-medium text-gray-900 dark:text-white">{{ $item->product->name }}</p>
+                                                        <p class="text-sm text-gray-600 dark:text-gray-400">
                                                             {{ $item->dosage }} • {{ $item->quantity }} pcs • {{ $item->duration_days }} hari
                                                         </p>
                                                         @if($item->instructions)
-                                                            <p class="text-sm text-gray-500 mt-1">{{ $item->instructions }}</p>
+                                                            <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">{{ $item->instructions }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -85,8 +85,8 @@
 
                                     @if($prescription->notes)
                                         <div class="mb-4">
-                                            <h4 class="font-semibold text-gray-700 mb-2">Catatan Dokter:</h4>
-                                            <p class="text-gray-600">{{ $prescription->notes }}</p>
+                                            <h4 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">Catatan Dokter:</h4>
+                                            <p class="text-gray-600 dark:text-gray-400">{{ $prescription->notes }}</p>
                                         </div>
                                     @endif
 
@@ -111,8 +111,8 @@
                             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada resep</h3>
-                            <p class="mt-1 text-sm text-gray-500">Anda belum memiliki resep dari dokter.</p>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Belum ada resep</h3>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Anda belum memiliki resep dari dokter.</p>
                             <div class="mt-6">
                                 <a href="{{ route('appointments.index') }}" 
                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">

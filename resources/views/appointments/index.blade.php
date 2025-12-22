@@ -17,18 +17,18 @@
     </div>
 </div>
 
-<div class="min-h-screen bg-gray-50 py-8">
+<div class="min-h-screen bg-gray-50 dark:bg-slate-900 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- Filter Section -->
-        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-6 mb-6">
             <form method="GET" action="{{ route('appointments.index') }}" class="flex flex-wrap gap-4 items-end">
                 <div class="flex-1 min-w-[200px]">
-                    <label for="specialization" class="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="specialization" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Filter by Specialization
                     </label>
                     <select name="specialization" id="specialization" 
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                             onchange="this.form.submit()">
                         <option value="all" {{ $specialization == 'all' ? 'selected' : '' }}>Semua Spesialis</option>
                         @foreach($specializations as $spec)
@@ -45,7 +45,7 @@
         @if($doctors->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($doctors as $doctor)
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <!-- Doctor Photo -->
                         <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600 relative">
                             @if($doctor->photo)
@@ -66,37 +66,37 @@
 
                         <!-- Doctor Info -->
                         <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-1">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">
                                 {{ $doctor->user->name }}
                             </h3>
                             
-                            <p class="text-blue-600 font-semibold mb-3">
+                            <p class="text-blue-600 dark:text-blue-400 font-semibold mb-3">
                                 {{ $doctor->specialization }}
                             </p>
 
                             @if($doctor->years_of_experience > 0)
-                                <p class="text-sm text-gray-600 mb-3">
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
                                     <span class="font-medium">Pengalaman:</span> {{ $doctor->years_of_experience }} tahun
                                 </p>
                             @endif
 
                             @if($doctor->bio)
-                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                                     {{ $doctor->bio }}
                                 </p>
                             @endif
 
                             <!-- Schedule -->
-                            <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                                <p class="text-xs font-semibold text-gray-700 mb-2">Jadwal Praktik:</p>
+                            <div class="mb-4 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
+                                <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Jadwal Praktik:</p>
                                 <div class="flex flex-wrap gap-1 mb-2">
                                     @foreach($doctor->available_days as $day)
-                                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 text-xs rounded">
                                             {{ $day }}
                                         </span>
                                     @endforeach
                                 </div>
-                                <p class="text-xs text-gray-600">
+                                <p class="text-xs text-gray-600 dark:text-gray-400">
                                     {{ \Carbon\Carbon::parse($doctor->start_time)->format('H:i') }} - 
                                     {{ \Carbon\Carbon::parse($doctor->end_time)->format('H:i') }}
                                 </p>
@@ -105,8 +105,8 @@
                             <!-- Price -->
                             <div class="flex items-center justify-between mb-4">
                                 <div>
-                                    <p class="text-xs text-gray-600">Harga per sesi</p>
-                                    <p class="text-2xl font-bold text-green-600">
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">Harga per sesi</p>
+                                    <p class="text-2xl font-bold text-green-600 dark:text-green-400">
                                         Rp {{ number_format($doctor->price_per_session, 0, ',', '.') }}
                                     </p>
                                 </div>
@@ -122,12 +122,12 @@
                 @endforeach
             </div>
         @else
-            <div class="bg-white rounded-lg shadow-sm p-12 text-center">
+            <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-12 text-center">
                 <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                 </svg>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak ada dokter tersedia</h3>
-                <p class="text-gray-600">Silakan coba filter yang berbeda atau cek kembali nanti.</p>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Tidak ada dokter tersedia</h3>
+                <p class="text-gray-600 dark:text-gray-400">Silakan coba filter yang berbeda atau cek kembali nanti.</p>
             </div>
         @endif
     </div>
