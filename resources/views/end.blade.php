@@ -77,23 +77,52 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
+        /* Team W silhouette layout */
+        .w-team {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .w-team {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .w-team {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                align-items: stretch;
+            }
+
+            .w-pos-1 {
+                grid-column: 1 / span 2;
+                grid-row: 1;
+            }
+
+            .w-pos-3 {
+                grid-column: 3 / span 2;
+                grid-row: 1;
+            }
+
+            .w-pos-5 {
+                grid-column: 5 / span 2;
+                grid-row: 1;
+            }
+
+            .w-pos-2 {
+                grid-column: 2 / span 2;
+                grid-row: 2;
+            }
+
+            .w-pos-4 {
+                grid-column: 4 / span 2;
+                grid-row: 2;
+            }
+        }
+
         /* Minimal helper for hover easter egg */
-        .egg {
-            position: relative;
-            cursor: default;
-        }
-
-        .egg .egg-reveal {
-            opacity: 0;
-            transform: translateY(4px);
-            transition: opacity 250ms ease, transform 250ms ease;
-        }
-
-        .egg:hover .egg-reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Respect reduced-motion */
         @media (prefers-reduced-motion: reduce) {
             .end-scroll {
@@ -119,46 +148,51 @@
         ];
 
         $team = [
-            [
+            'rafadi' => [
                 'name' => 'Muhammad Rafadi Kurniawan',
                 'nim' => '103062300089',
-                'role' => '',
+                'role' => 'AI & ML Engineer',
                 'photo' => asset('media/end/team/Rafadi.png'),
-                'quote' => '',
             ],
-            [
+            'yusuf' => [
                 'name' => 'Naufal Saifullah Yusuf',
                 'nim' => '103062300091',
-                'role' => '',
+                'role' => 'UI/UX Designer & Frontend Developer',
                 'photo' => asset('media/end/team/Yusuf.png'),
-                'quote' => '',
             ],
-            [
+            // Fazli harus di posisi (3)
+            'fazli' => [
                 'name' => 'Fazli Radika',
                 'nim' => '103062300092',
-                'role' => '',
+                'role' => 'Project Manager & Backend Developer',
                 'photo' => asset('media/end/team/Fazli.png'),
-                'quote' => '',
             ],
-            [
+            'afriza' => [
                 'name' => 'Muhammad Afriza Hidayat',
                 'nim' => '103062300093',
-                'role' => '',
+                'role' => 'QA Tester & System Integration',
                 'photo' => asset('media/end/team/Afriza.png'),
-                'quote' => '',
             ],
-            [
+            'aldy' => [
                 'name' => 'Aldyansyah Wisnu Saputra',
                 'nim' => '103062300100',
-                'role' => '',
+                'role' => 'Medical Content Specialist & Research',
                 'photo' => asset('media/end/team/Aldy.png'),
-                'quote' => '',
             ],
+        ];
+
+        // W silhouette placement (1,3,5 top row; 2,4 bottom row)
+        $teamW = [
+            1 => $team['rafadi'],
+            2 => $team['yusuf'],
+            3 => $team['fazli'],
+            4 => $team['afriza'],
+            5 => $team['aldy'],
         ];
     @endphp
 
     <!-- YouTube audio (autoplay best-effort; with sound requires user gesture) -->
-    <div id="end-yt" class="sr-only" aria-hidden="true"></div>
+    <div id="end-yt" aria-hidden="true" style="position: fixed; width: 1px; height: 1px; left: -9999px; top: -9999px; opacity: 0; pointer-events: none;"></div>
 
     <div id="end-scroll" class="end-scroll bg-glow">
         <!-- Section 1: Opening -->
@@ -181,10 +215,6 @@
                     </p>
 
                     <div class="mt-10 flex flex-col sm:flex-row gap-3">
-                        <button id="end-start" type="button"
-                            class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            Mulai Perjalanan (Aktifkan Suara)
-                        </button>
                         <a href="{{ url('/') }}"
                             class="inline-flex items-center justify-center rounded-xl border border-slate-700 px-6 py-3 font-semibold text-slate-200 hover:bg-slate-800/60">
                             Kembali ke Beranda
@@ -192,11 +222,8 @@
                     </div>
 
                     <div class="mt-10 text-sm text-slate-400">
-                        Auto-scroll akan berjalan pelan dari section ke section.
-                        <span class="egg ml-2 inline-flex items-center gap-2">
-                            (hover di sini)
-                            <span class="egg-reveal text-slate-200">— pesan rahasia: <span class="font-semibold text-blue-300">kalian hebat.</span></span>
-                        </span>
+                        Halaman ini akan otomatis scroll per bagian (±6 detik per section).
+                        Suara YouTube akan aktif setelah kamu klik/ketuk sekali di mana saja (aturan browser).
                     </div>
                 </div>
             </div>
@@ -293,35 +320,20 @@
                     <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Tim Pengembang</h2>
                     <p class="mt-3 text-slate-300">Kelompok <span class="font-semibold text-white">Serigala Putih</span></p>
 
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach ($team as $member)
-                            <div class="rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6">
+                    <div class="mt-10 w-team">
+                        @foreach ($teamW as $pos => $member)
+                            <div class="w-pos-{{ $pos }} rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6">
                                 <div class="flex items-start gap-4">
                                     <div class="shrink-0">
                                         <img src="{{ $member['photo'] }}" alt="Foto {{ $member['name'] }}"
                                             class="h-16 w-16 rounded-xl object-cover border border-slate-700/60">
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-lg font-semibold text-white truncate">{{ $member['name'] }}</p>
+                                        <p class="text-lg font-semibold text-white">{{ $member['name'] }}</p>
                                         <p class="text-sm text-slate-300">NIM: <span class="text-white">{{ $member['nim'] }}</span></p>
-                                        <p class="text-sm text-blue-300">Peran: <span class="text-slate-200">{{ $member['role'] !== '' ? $member['role'] : '—' }}</span></p>
+                                        <p class="text-sm text-blue-300">Peran: <span class="text-slate-200">{{ $member['role'] }}</span></p>
                                     </div>
                                 </div>
-
-                                <div class="mt-4 flex items-center justify-between">
-                                    <div class="egg text-xs text-slate-400">
-                                        hover
-                                        <div class="egg-reveal mt-1">
-                                            <span class="rounded-lg border border-slate-700 bg-slate-950/40 px-2 py-1 text-slate-200">terima kasih sudah berjuang bareng.</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @if (($member['quote'] ?? '') !== '')
-                                    <div class="mt-4 rounded-xl border border-slate-700/60 bg-slate-950/30 p-4">
-                                        <p class="text-sm text-slate-200">{!! e($member['quote']) !!}</p>
-                                    </div>
-                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -357,20 +369,6 @@
                             <span class="text-white font-semibold">kalian bukan cuma teman sekelompok,</span>
                             tapi teman seperjalanan.
                         </p>
-
-                        <div class="mt-10 rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6">
-                            <p class="text-sm uppercase tracking-widest text-slate-300">Easter Egg</p>
-                            <p class="mt-2 text-slate-200 egg">
-                                Arahkan kursor ke kalimat ini.
-                                <span class="egg-reveal block mt-2 text-blue-300 font-semibold">
-                                    Kalau kamu baca ini: semoga kita ketemu lagi di proyek yang lebih besar.
-                                </span>
-                            </p>
-                        </div>
-
-                        <p class="mt-6 text-sm text-slate-400">
-                            Foto dosen tersimpan di <span class="font-mono">public/media/end/dosen.png</span>
-                        </p>
                     </div>
 
                     <div class="img-frame rounded-2xl p-3">
@@ -378,7 +376,7 @@
                             class="w-full rounded-xl object-cover" loading="lazy">
                         <div id="img-lecturer-fallback" class="hidden p-6 text-slate-300">
                             <p class="font-semibold text-white">Foto dosen belum ditemukan.</p>
-                            <p class="mt-1 text-sm">Pastikan file ada di <span class="font-mono">public/media/end/dosen.jpg</span></p>
+                            <p class="mt-1 text-sm">Pastikan file ada di <span class="font-mono">public/media/end/dosen.png</span></p>
                         </div>
                     </div>
                 </div>
@@ -401,15 +399,11 @@
                             class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-500">
                             Kembali ke Beranda
                         </a>
-                        <button id="end-replay" type="button"
-                            class="inline-flex items-center justify-center rounded-xl border border-slate-700 px-6 py-3 font-semibold text-slate-200 hover:bg-slate-800/60">
-                            Putar Ulang Auto-Scroll
-                        </button>
                     </div>
 
                     <p class="mt-10 text-xs text-slate-400">
-                        Musik diputar dari YouTube (autoplay best-effort). Jika suaranya belum keluar,
-                        klik tombol <span class="text-slate-200">Mulai Perjalanan</span> untuk mengaktifkan suara.
+                        Musik diputar dari YouTube Music (autoplay best-effort). Jika suaranya belum keluar,
+                        lakukan satu klik/ketuk di halaman untuk mengaktifkan suara.
                     </p>
                 </div>
             </div>
@@ -421,8 +415,6 @@
         (function () {
             const scrollEl = document.getElementById('end-scroll');
             const sections = Array.from(scrollEl.querySelectorAll('.end-section'));
-            const startBtn = document.getElementById('end-start');
-            const replayBtn = document.getElementById('end-replay');
 
             const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -430,6 +422,7 @@
             const YT_VIDEO_ID = '13ARO0HDZsQ';
             let ytPlayer = null;
             let ytReady = false;
+            let wantsSound = false;
 
             const imgFallback = (imgId, fallbackId) => {
                 const img = document.getElementById(imgId);
@@ -466,7 +459,12 @@
             const scrollToIndex = (index) => {
                 const target = sections[index];
                 if (!target) return;
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Scroll inside the container explicitly (more reliable than scrollIntoView for nested scroll containers)
+                const containerTop = scrollEl.getBoundingClientRect().top;
+                const targetTop = target.getBoundingClientRect().top;
+                const nextTop = (targetTop - containerTop) + scrollEl.scrollTop;
+                scrollEl.scrollTo({ top: nextTop, behavior: 'smooth' });
                 currentIndex = index;
             };
 
@@ -483,7 +481,7 @@
                     if (Date.now() < pauseUntil) return;
                     const next = (currentIndex + 1) % sections.length;
                     scrollToIndex(next);
-                }, 8500);
+                }, 6000);
             };
 
             // Detect manual interaction -> pause auto-scroll briefly (so it doesn't fight the user)
@@ -517,6 +515,7 @@
 
             // User gesture: enable sound + start scrolling
             const enableSound = () => {
+                wantsSound = true;
                 if (!ytReady || !ytPlayer) return;
                 try {
                     ytPlayer.unMute();
@@ -527,17 +526,16 @@
                 }
             };
 
-            startBtn?.addEventListener('click', () => {
+            // No start button: enable sound on first user interaction anywhere.
+            const enableSoundOnce = () => {
                 enableSound();
-                if (!prefersReducedMotion) startAuto();
-                scrollToIndex(1);
-            });
-
-            replayBtn?.addEventListener('click', () => {
-                pauseUntil = 0;
-                if (!prefersReducedMotion) startAuto();
-                scrollToIndex(0);
-            });
+                document.removeEventListener('pointerdown', enableSoundOnce);
+                document.removeEventListener('keydown', enableSoundOnce);
+                document.removeEventListener('touchstart', enableSoundOnce);
+            };
+            document.addEventListener('pointerdown', enableSoundOnce, { once: true, passive: true });
+            document.addEventListener('touchstart', enableSoundOnce, { once: true, passive: true });
+            document.addEventListener('keydown', enableSoundOnce, { once: true });
 
             // On load: reveal first section + try autoplay quietly
             window.addEventListener('load', async () => {
@@ -548,7 +546,7 @@
                     startAuto();
                     setTimeout(() => {
                         if (Date.now() >= pauseUntil) scrollToIndex(1);
-                    }, 2500);
+                    }, 900);
                 }
             });
 
@@ -566,6 +564,7 @@
                         playsinline: 1,
                         loop: 1,
                         playlist: YT_VIDEO_ID,
+                        origin: window.location.origin,
                     },
                     events: {
                         onReady: function () {
@@ -574,6 +573,13 @@
                                 // Autoplay best-effort (muted)
                                 ytPlayer.mute();
                                 ytPlayer.playVideo();
+
+                                // If user already clicked "Mulai", enable sound now.
+                                if (wantsSound) {
+                                    ytPlayer.unMute();
+                                    ytPlayer.setVolume(65);
+                                    ytPlayer.playVideo();
+                                }
                             } catch (e) {
                                 // Ignore
                             }
