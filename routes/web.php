@@ -23,7 +23,7 @@ Route::get('/health', function () {
 // Role-based Dashboard Redirector
 Route::get('/dashboard', function () {
     $user = auth()->user();
-    
+
     if ($user->role === 'admin') {
         return redirect()->route('admin.dashboard');
     } elseif ($user->role === 'doctor') {
@@ -31,14 +31,14 @@ Route::get('/dashboard', function () {
     } elseif ($user->role === 'patient') {
         return redirect()->route('patient.dashboard');
     }
-    
+
     return redirect('/');
 })->middleware('auth')->name('dashboard');
 
 // Admin Dashboard & Reports Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    
+
     Route::prefix('reports')->group(function () {
         Route::get('/sales', [ReportController::class, 'sales'])->name('reports.sales');
         Route::get('/users', [ReportController::class, 'users'])->name('reports.users');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Doctor Dashboard Routes
 Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () {
     Route::get('/dashboard', [DoctorDashboardController::class, 'index'])->name('doctor.dashboard');
-    
+
     // Prescription Routes (Doctor)
     Route::get('/prescriptions', [\App\Http\Controllers\PrescriptionController::class, 'doctorIndex'])->name('doctor.prescriptions.index');
     Route::get('/appointments/{appointment}/prescription/create', [\App\Http\Controllers\PrescriptionController::class, 'create'])->name('doctor.prescriptions.create');
@@ -56,7 +56,7 @@ Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () 
     Route::get('/prescriptions/{prescription}/edit', [\App\Http\Controllers\PrescriptionController::class, 'edit'])->name('doctor.prescriptions.edit');
     Route::put('/prescriptions/{prescription}', [\App\Http\Controllers\PrescriptionController::class, 'update'])->name('doctor.prescriptions.update');
     Route::get('/prescriptions/{prescription}', [\App\Http\Controllers\PrescriptionController::class, 'show'])->name('doctor.prescriptions.show');
-    
+
     // Appointment Routes (Doctor)
     Route::get('/appointments', [DoctorDashboardController::class, 'appointments'])->name('doctor.appointments.index');
     Route::get('/appointments/create', [DoctorDashboardController::class, 'createAppointment'])->name('doctor.appointments.create');
@@ -64,11 +64,11 @@ Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () 
     Route::get('/appointments/{appointment}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor.appointments.show');
     Route::post('/appointments/{appointment}/confirm', [DoctorDashboardController::class, 'confirmAppointment'])->name('doctor.appointments.confirm');
     Route::post('/appointments/{appointment}/cancel', [DoctorDashboardController::class, 'cancelAppointment'])->name('doctor.appointments.cancel');
-    
+
     // Patient Records & Schedule Routes (Doctor)
     Route::get('/patients', [DoctorDashboardController::class, 'patients'])->name('doctor.patients');
     Route::get('/schedule', [DoctorDashboardController::class, 'schedule'])->name('doctor.schedule');
-    
+
     // Chat Routes (Doctor)
     Route::get('/messages', [\App\Http\Controllers\ChatController::class, 'index'])->name('doctor.chat.index');
     Route::get('/messages/{conversation}', [\App\Http\Controllers\ChatController::class, 'show'])->name('doctor.chat.show');
@@ -78,25 +78,27 @@ Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () 
 // Patient Dashboard Routes
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/patient/dashboard', [PatientDashboardController::class, 'index'])->name('patient.dashboard');
-    
+
     // AI Health Assistant
     Route::post('/health/ai/chat', [\App\Http\Controllers\HealthAIController::class, 'chat'])->name('health.ai.chat');
     Route::get('/health/ai/chats', [\App\Http\Controllers\HealthAIController::class, 'chats'])->name('health.ai.chats');
     Route::get('/health/ai/chats/{chat}', [\App\Http\Controllers\HealthAIController::class, 'messages'])->name('health.ai.chats.messages');
     Route::delete('/health/ai/chats/{chat}', [\App\Http\Controllers\HealthAIController::class, 'destroy'])->name('health.ai.chats.destroy');
-    
+
     // Appointment Routes
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
     Route::get('/appointments/create/{doctor}', [AppointmentController::class, 'create'])->name('appointments.create');
     Route::post('/appointments/store/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/appointments/payment', [AppointmentController::class, 'payment'])->name('appointments.payment');
+    Route::post('/appointments/payment/process', [AppointmentController::class, 'processPayment'])->name('appointments.payment.process');
     Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.my-appointments');
     Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
-    
+
     // Prescription Routes (Patient)
     Route::get('/prescriptions', [\App\Http\Controllers\PrescriptionController::class, 'index'])->name('prescriptions.index');
     Route::get('/prescriptions/{prescription}', [\App\Http\Controllers\PrescriptionController::class, 'show'])->name('prescriptions.show');
-    
+
     // Chat Routes (Patient)
     Route::get('/messages', [\App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
     Route::get('/messages/{conversation}', [\App\Http\Controllers\ChatController::class, 'show'])->name('chat.show');
@@ -108,14 +110,15 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
 Route::prefix('shop')->group(function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{slug}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
-    
+
     // Cart routes (accessible for all users including guests)
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/buy-now/{product}', [\App\Http\Controllers\CartController::class, 'buyNow'])->name('cart.buyNow');
     Route::patch('/cart/update/{cartItem}', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{cartItem}', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
     Route::delete('/cart/clear', [\App\Http\Controllers\CartController::class, 'clear'])->name('cart.clear');
-    
+
     // Checkout routes (require authentication)
     Route::middleware('auth')->group(function () {
         Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
@@ -133,15 +136,17 @@ Route::middleware('auth')->group(function () {
 
 // Call Routes (shared between patient and doctor)
 Route::middleware('auth')->prefix('calls')->group(function () {
-    Route::post('/conversations/{conversation}/initiate', [\App\Http\Controllers\ChatController::class, 'initiateCall'])->name('calls.initiate');
-    Route::post('/sessions/{callSession}/answer', [\App\Http\Controllers\ChatController::class, 'answerCall'])->name('calls.answer');
-    Route::post('/sessions/{callSession}/end', [\App\Http\Controllers\ChatController::class, 'endCall'])->name('calls.end');
-    Route::post('/sessions/{callSession}/reject', [\App\Http\Controllers\ChatController::class, 'rejectCall'])->name('calls.reject');
+    Route::post('/conversations/{conversation}/initiate', [\App\Http\Controllers\CallController::class, 'initiate'])->name('calls.initiate');
 });
 
 // API Routes for real-time features
 Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/messages/unread-count', [\App\Http\Controllers\ChatController::class, 'unreadCount'])->name('api.messages.unread-count');
+    Route::get('/conversations/{conversation}/messages', [\App\Http\Controllers\ChatController::class, 'fetchMessages'])->name('api.conversations.messages');
+    
+    // Prescription API for real-time updates
+    Route::get('/prescriptions/check-new', [\App\Http\Controllers\PrescriptionController::class, 'checkNew'])->name('api.prescriptions.check-new');
+    Route::get('/prescriptions/latest', [\App\Http\Controllers\PrescriptionController::class, 'latest'])->name('api.prescriptions.latest');
 });
 
 // Admin Order Management
@@ -154,11 +159,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
-    
+
     // Comment Routes
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
-    
+
     // Article Like Routes
     Route::post('/articles/like/toggle', [ArticleLikeController::class, 'toggle'])->name('articles.like.toggle');
 });
@@ -171,4 +176,44 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// TEMPORARY: Update product images - REMOVE AFTER USE!
+Route::get('/update-product-images', function () {
+    $products = [
+        'vitamin-c-1000mg' => 'https://images.unsplash.com/photo-1550572017-4814c2ea04fc?w=400&h=400&fit=crop',
+        'multivitamin-complete' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=400&fit=crop',
+        'omega-3-fish-oil' => 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=400&fit=crop',
+        'vitamin-d3-2000-iu' => 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=400&fit=crop',
+        'paracetamol-500mg' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop',
+        'obat-batuk-sirup' => 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=400&fit=crop',
+        'antasida-tablet' => 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop',
+        'termometer-digital' => 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=400&fit=crop',
+        'tensimeter-digital' => 'https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=400&h=400&fit=crop',
+        'masker-medis-3-ply' => 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=400&h=400&fit=crop',
+        'hand-sanitizer-100ml' => 'https://images.unsplash.com/photo-1584744982491-665216d95f8b?w=400&h=400&fit=crop',
+        'sabun-antiseptik' => 'https://images.unsplash.com/photo-1585421514738-01798e348b17?w=400&h=400&fit=crop',
+        'lotion-pelembab' => 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop',
+        'sunscreen-spf-50' => 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop',
+        'madu-murni-500ml' => 'https://images.unsplash.com/photo-1587049352846-4a222e784210?w=400&h=400&fit=crop',
+        'jahe-merah-instan' => 'https://images.unsplash.com/photo-1599894439780-33f56ce5c26a?w=400&h=400&fit=crop',
+        'habbatussauda-oil' => 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop',
+        'curcuma-plus' => 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&h=400&fit=crop',
+    ];
+
+    $updated = 0;
+    foreach ($products as $slug => $imageUrl) {
+        $product = \App\Models\Product::where('slug', $slug)->first();
+        if ($product) {
+            $product->image = $imageUrl;
+            $product->save();
+            $updated++;
+        }
+    }
+
+    return response()->json([
+        'status' => 'success',
+        'message' => "Updated {$updated} products with unique images",
+        'updated' => $updated
+    ]);
+});
+
+require __DIR__ . '/auth.php';

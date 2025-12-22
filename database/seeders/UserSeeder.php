@@ -17,8 +17,9 @@ class UserSeeder extends Seeder
         
         // Create Admin Users
         $admins = [
+            ['name' => 'Admin Health First', 'email' => 'admin@healthfirst.com', 'password' => 'password'],
             ['name' => 'Admin', 'email' => 'admin@example.com', 'password' => 'password123'],
-            ['name' => 'Admin Healthcare', 'email' => 'admin@healthcare.com', 'password' => 'password'],
+            ['name' => 'Admin Health First Medical', 'email' => 'admin@healthfirstmedical.com', 'password' => 'password'],
             ['name' => 'Super Admin', 'email' => 'superadmin@example.com', 'password' => 'password'],
         ];
 
@@ -39,6 +40,7 @@ class UserSeeder extends Seeder
 
         // Create Doctor Users with varied registration dates
         $doctors = [
+            ['name' => 'Dr. Health First', 'email' => 'doctor@healthfirst.com', 'specialty' => 'General Practitioner'],
             ['name' => 'Dr. Ahmad Fadli', 'email' => 'ahmad.fadli@hospital.com', 'specialty' => 'Cardiologist'],
             ['name' => 'Dr. Budi Santoso', 'email' => 'budi.santoso@hospital.com', 'specialty' => 'Pediatrician'],
             ['name' => 'Dr. Citra Dewi', 'email' => 'citra.dewi@hospital.com', 'specialty' => 'Dermatologist'],
@@ -96,6 +98,21 @@ class UserSeeder extends Seeder
         ];
 
         // Create patients with varied registration dates (more recent registrations)
+        
+        // First, create a demo patient account
+        User::updateOrCreate(
+            ['email' => 'patient@healthfirst.com'],
+            [
+                'name' => 'Demo Patient',
+                'password' => Hash::make('password'),
+                'role' => 'patient',
+                'email_verified_at' => now(),
+                'created_at' => now()->subDays(30),
+                'updated_at' => now(),
+            ]
+        );
+        $this->command->info('✅ Created demo patient: patient@healthfirst.com');
+        
         foreach ($patientNames as $index => $name) {
             // More patients registered recently (last 6 months)
             $daysAgo = $this->getRealisticRegistrationDate($index, count($patientNames));

@@ -132,14 +132,46 @@ class ChatController extends Controller
         // Update conversation last message time
         $conversation->update(['last_message_at' => now()]);
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => $message->load('sender'),
-            ]);
+        // Always return JSON for AJAX requests
+        return response()->json([
+            'success' => true,
+            'message' => $message->load('sender'),
+        ]);
+    }
+
+    /**
+     * Fetch new messages after a given message id (simple polling for realtime-like UX)
+     */
+    public function fetchMessages(Request $request, Conversation $conversation)
+    {
+        $user = Auth::user();
+
+        // Authorization check
+        if ($user->isPatient() && $conversation->patient_id !== $user->id) {
+            abort(403);
+        } elseif ($user->isDoctor() && $conversation->doctor->user_id !== $user->id) {
+            abort(403);
         }
 
-        return back();
+        $afterId = (int) $request->query('after_id', 0);
+
+        $messages = $conversation->messages()
+            ->with('sender')
+            ->when($afterId > 0, fn($q) => $q->where('id', '>', $afterId))
+            ->orderBy('id')
+            ->limit(100)
+            ->get();
+
+        // Mark unread messages as read (user is currently viewing this conversation)
+        $conversation->messages()
+            ->where('sender_id', '!=', $user->id)
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
+
+        return response()->json([
+            'success' => true,
+            'messages' => $messages,
+        ]);
     }
 
     /**

@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center">
-            <a href="{{ route('articles.index') }}" class="mr-4 text-gray-600 hover:text-gray-900">
+            <a href="{{ route('articles.index') }}" class="mr-4 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
             </a>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Artikel Kesehatan') }}
             </h2>
         </div>
@@ -15,7 +15,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Article Header -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="relative">
                     <img src="{{ $article['image'] }}" 
                          alt="{{ $article['title'] }}" 
@@ -28,19 +28,19 @@
                 </div>
                 
                 <div class="p-8">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ $article['title'] }}</h1>
+                    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ $article['title'] }}</h1>
                     
-                    <div class="flex items-center justify-between text-sm text-gray-600 mb-6 pb-6 border-b">
+                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-6 pb-6 border-b dark:border-slate-600">
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                                 <span>{{ $article['author'] }}</span>
                             </div>
                             <span>•</span>
                             <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <span>{{ $article['read_time'] }}</span>
@@ -58,7 +58,7 @@
                                     id="likeButton"
                                     type="button"
                                     onclick="handleLikeClick()"
-                                    class="p-2 rounded-full transition duration-200 {{ $userHasLiked ? 'text-red-600 bg-red-50' : 'text-gray-600 hover:text-red-600 hover:bg-red-50' }}"
+                                    class="p-2 rounded-full transition duration-200 {{ $userHasLiked ? 'text-red-600 bg-red-50 dark:bg-red-900/30' : 'text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30' }}"
                                     title="Suka artikel ini"
                                 >
                                     <svg id="likeIcon" class="w-5 h-5 transition-all duration-200" fill="{{ $userHasLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,12 +66,12 @@
                                     </svg>
                                 </button>
                             </form>
-                            <span id="likesCount" class="text-sm text-gray-600 font-medium">{{ $likesCount }}</span>
+                            <span id="likesCount" class="text-sm text-gray-600 dark:text-gray-400 font-medium">{{ $likesCount }}</span>
                             
                             <!-- Share Button -->
                             <button 
                                 onclick="shareArticle()"
-                                class="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-full transition"
+                                class="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-full transition"
                                 title="Bagikan artikel"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,60 +87,124 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Main Article Content -->
                 <div class="lg:col-span-2">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-8">
                             <!-- Article Content -->
-                            <div class="max-w-none" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 17px; line-height: 1.75; color: #374151;">
+                            <div class="max-w-none article-content" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 17px; line-height: 1.75;">
                                 <style scoped>
-                                    div.max-w-none p {
+                                    .article-content p {
                                         margin-bottom: 1.25rem;
                                         line-height: 1.75;
-                                        color: #374151;
                                         font-size: 17px;
                                     }
-                                    div.max-w-none h2 {
+                                    .article-content h2 {
                                         font-size: 24px;
                                         font-weight: 700;
                                         margin-top: 2rem;
                                         margin-bottom: 1rem;
-                                        color: #111827;
                                     }
-                                    div.max-w-none h3 {
+                                    .article-content h3 {
                                         font-size: 18px;
                                         font-weight: 600;
                                         margin-top: 1.5rem;
                                         margin-bottom: 0.75rem;
-                                        color: #1f2937;
                                     }
-                                    div.max-w-none ul,
-                                    div.max-w-none ol {
+                                    .article-content ul,
+                                    .article-content ol {
                                         margin: 1rem 0 2rem 0;
                                         padding: 0;
                                         list-style: none;
                                     }
-                                    div.max-w-none ul li,
-                                    div.max-w-none ol li {
+                                    .article-content ul li,
+                                    .article-content ol li {
                                         margin-bottom: 0.5rem;
                                         line-height: 1.75;
-                                        color: #374151;
                                         font-size: 17px;
                                         list-style: none;
                                     }
-                                    div.max-w-none strong {
+                                    .article-content strong {
                                         font-weight: 700;
-                                        color: #111827;
+                                    }
+                                    /* Light mode colors */
+                                    .article-content p,
+                                    .article-content li { color: #374151; }
+                                    .article-content h2 { color: #111827; }
+                                    .article-content h3 { color: #1f2937; }
+                                    .article-content strong { color: #111827; }
+                                    /* Dark mode colors */
+                                    .dark .article-content,
+                                    .dark .article-content p,
+                                    .dark .article-content li { color: #d1d5db !important; }
+                                    .dark .article-content h2 { color: #f9fafb !important; }
+                                    .dark .article-content h3 { color: #e5e7eb !important; }
+                                    .dark .article-content strong { color: #f9fafb !important; }
+                                    
+                                    /* Quote box styling - Override inline classes */
+                                    .article-content .article-quote,
+                                    .article-content blockquote,
+                                    .article-content [class*="bg-green-50"] {
+                                        background: #ecfdf5 !important;
+                                        border-left: 4px solid #10b981 !important;
+                                        padding: 1.5rem !important;
+                                        margin: 1.5rem 0 !important;
+                                        border-radius: 0.5rem !important;
+                                        font-style: italic;
+                                        color: #374151 !important;
+                                    }
+                                    .dark .article-content .article-quote,
+                                    .dark .article-content blockquote,
+                                    .dark .article-content [class*="bg-green-50"] {
+                                        background: rgba(16, 185, 129, 0.15) !important;
+                                        border-left-color: #34d399 !important;
+                                        color: #d1d5db !important;
+                                    }
+                                    
+                                    /* TOC styling - Override inline classes */
+                                    .article-content .toc,
+                                    .article-content .toc-container,
+                                    .article-content [class*="bg-gray-50"] {
+                                        background: #f9fafb !important;
+                                        border: 1px solid #e5e7eb !important;
+                                        border-radius: 0.5rem !important;
+                                        padding: 1.5rem !important;
+                                        margin-bottom: 2rem !important;
+                                    }
+                                    .dark .article-content .toc,
+                                    .dark .article-content .toc-container,
+                                    .dark .article-content [class*="bg-gray-50"] {
+                                        background: #1e293b !important;
+                                        border-color: #475569 !important;
+                                    }
+                                    
+                                    /* TOC links */
+                                    .article-content .toc a,
+                                    .article-content .toc-container a,
+                                    .article-content [class*="text-blue-600"] {
+                                        color: #059669 !important;
+                                    }
+                                    .dark .article-content .toc a,
+                                    .dark .article-content .toc-container a,
+                                    .dark .article-content [class*="text-blue-600"] {
+                                        color: #34d399 !important;
+                                    }
+                                    
+                                    /* TOC heading */
+                                    .article-content .toc h2,
+                                    .article-content .toc-container h2 {
+                                        font-size: 1.25rem !important;
+                                        margin-bottom: 1rem !important;
                                     }
                                 </style>
                                 {!! $article['content'] !!}
                             </div>
 
                             <!-- Tags -->
-                            <div class="mt-8 pt-6 border-t">
+                            <div class="mt-8 pt-6 border-t dark:border-slate-600">
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="text-sm font-medium text-gray-600 mr-2">Tags:</span>
-                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#kesehatan</span>
-                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#{{ strtolower(str_replace(' ', '', $article['category'])) }}</span>
-                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">#tipskesehatan</span>
+                                    <span class="text-sm font-medium text-gray-600 dark:text-gray-400 mr-2">Tags:</span>
+                                    <span class="px-3 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 text-sm rounded-full">#kesehatan</span>
+                                    <span class="px-3 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 text-sm rounded-full">#{{ strtolower(str_replace(' ', '', $article['category'])) }}</span>
+                                    <span class="px-3 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 text-sm rounded-full">#tipskesehatan</span>
                                 </div>
                             </div>
                         </div>
@@ -150,10 +214,10 @@
                 <!-- Sidebar (Right Side) -->
                 <div class="lg:col-span-1">
                     <!-- Topik Terkini -->
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6 sticky top-6">
+                    <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 sticky top-6">
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-lg font-bold text-gray-900">Topik Terkini</h3>
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Topik Terkini</h3>
                                 <a href="{{ route('articles.index') }}" class="text-sm text-red-600 hover:text-red-700 font-medium">
                                     Lihat Semua
                                 </a>
@@ -190,14 +254,14 @@
                             
                             <div class="flex flex-wrap gap-2 mb-6">
                                 @foreach($relevantTopics as $topic)
-                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                                <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md hover:bg-gray-50 dark:hover:bg-slate-600 transition">
                                     {{ $topic }}
                                 </a>
                                 @endforeach
                             </div>
 
-                            <div class="border-t pt-6">
-                                <h4 class="text-lg font-bold text-gray-900 mb-4">Artikel Terkait</h4>
+                            <div class="border-t dark:border-slate-600 pt-6">
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Artikel Terkait</h4>
                                 <div class="space-y-4">
                                     @php
                                         $sidebarArticles = collect($relatedArticles)->take(5);
@@ -210,19 +274,19 @@
                                     @endphp
                                     
                                     @foreach($sidebarArticles as $sidebar)
-                                    <a href="{{ route('articles.show', $sidebar['slug']) }}" class="block group hover:bg-gray-50 rounded-lg transition p-2 -mx-2">
+                                    <a href="{{ route('articles.show', $sidebar['slug']) }}" class="block group hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg transition p-2 -mx-2">
                                         <div class="flex gap-3">
                                             <img src="{{ $sidebar['image'] }}" 
                                                  alt="{{ $sidebar['title'] }}" 
                                                  class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
                                             <div class="flex-1 min-w-0">
-                                                <h5 class="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2 mb-2 leading-tight">
+                                                <h5 class="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition line-clamp-2 mb-2 leading-tight">
                                                     {{ $sidebar['title'] }}
                                                 </h5>
                                                 <div class="flex items-center gap-2 text-xs">
-                                                    <span class="text-teal-600 font-medium">{{ $sidebar['category'] }}</span>
+                                                    <span class="text-teal-600 dark:text-teal-400 font-medium">{{ $sidebar['category'] }}</span>
                                                     <span class="text-gray-400">•</span>
-                                                    <span class="text-gray-500">{{ $sidebar['read_time'] }}</span>
+                                                    <span class="text-gray-500 dark:text-gray-400">{{ $sidebar['read_time'] }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -236,9 +300,9 @@
             </div>
             
             <!-- Comments Section (Full Width Below) -->
-            <div class="mt-8 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="mt-8 bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Diskusi & Pertanyaan ({{ $comments->count() }})</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Diskusi & Pertanyaan ({{ $comments->count() }})</h3>
                     
                     @if(session('success'))
                         <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg">
@@ -252,7 +316,7 @@
                         <input type="hidden" name="article_slug" value="{{ $article['slug'] }}">
                         
                         <div class="mb-4">
-                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">
+                            <label for="comment" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Tulis komentar atau pertanyaan Anda
                             </label>
                             <textarea 
@@ -261,13 +325,13 @@
                                 rows="4" 
                                 required
                                 maxlength="1000"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
                                 placeholder="Bagikan pemikiran atau pertanyaan Anda tentang artikel ini..."
                             >{{ old('comment') }}</textarea>
                             @error('comment')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
-                            <p class="mt-1 text-xs text-gray-500">Maksimal 1000 karakter</p>
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Maksimal 1000 karakter</p>
                         </div>
                         
                         <button 
@@ -284,7 +348,7 @@
                     <!-- Comments List -->
                     <div class="space-y-6">
                         @forelse($comments as $comment)
-                            <div class="border-b border-gray-200 pb-6 last:border-b-0">
+                            <div class="border-b border-gray-200 dark:border-slate-600 pb-6 last:border-b-0">
                                 <!-- Main Comment -->
                                 <div class="flex gap-4">
                                     <div class="flex-shrink-0">
@@ -296,8 +360,8 @@
                                     <div class="flex-1">
                                         <div class="flex items-center justify-between mb-2">
                                             <div>
-                                                <h4 class="font-semibold text-gray-900">{{ $comment->user->name }}</h4>
-                                                <p class="text-xs text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
+                                                <h4 class="font-semibold text-gray-900 dark:text-white">{{ $comment->user->name }}</h4>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">{{ $comment->created_at->diffForHumans() }}</p>
                                             </div>
                                             
                                             @if($comment->user_id === auth()->id())
@@ -572,7 +636,7 @@
             };
             
             modal.innerHTML = `
-                <div class="bg-white rounded-lg p-6 max-w-md w-full" onclick="event.stopPropagation()">
+                <div class="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full" onclick="event.stopPropagation()">
                     <h3 class="text-lg font-bold text-gray-900 mb-4">Bagikan Artikel</h3>
                     
                     <div class="space-y-2 mb-4">

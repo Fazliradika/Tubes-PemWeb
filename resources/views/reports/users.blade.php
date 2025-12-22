@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('User Report') }}
         </h2>
     </x-slot>
@@ -9,12 +9,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             <!-- Filters -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6">
                     <form method="GET" action="{{ route('reports.users') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label for="role" class="block text-sm font-medium text-gray-700 mb-2">User Role</label>
-                            <select id="role" name="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">User Role</label>
+                            <select id="role" name="role" class="mt-1 block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="all" {{ $role === 'all' ? 'selected' : '' }}>All Roles</option>
                                 <option value="admin" {{ $role === 'admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="doctor" {{ $role === 'doctor' ? 'selected' : '' }}>Doctor</option>
@@ -23,8 +23,8 @@
                         </div>
                         
                         <div>
-                            <label for="period" class="block text-sm font-medium text-gray-700 mb-2">Period</label>
-                            <select id="period" name="period" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="period" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Period</label>
+                            <select id="period" name="period" class="mt-1 block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="month" {{ $period === 'month' ? 'selected' : '' }}>Last 6 Months</option>
                                 <option value="year" {{ $period === 'year' ? 'selected' : '' }}>Last Year</option>
                             </select>
@@ -41,7 +41,7 @@
 
             <!-- User Statistics -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
@@ -50,14 +50,14 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">Total Users</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ number_format($statistics['total']) }}</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Users</p>
+                                <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($statistics['total']) }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
@@ -66,14 +66,14 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">Active Today</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ number_format($statistics['active_today']) }}</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Today</p>
+                                <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($statistics['active_today']) }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-yellow-500 rounded-md p-3">
@@ -82,14 +82,14 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">New This Month</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ number_format($statistics['new_this_month']) }}</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">New This Month</p>
+                                <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($statistics['new_this_month']) }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
@@ -98,8 +98,8 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">Doctors</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ number_format($statistics['doctors']) }}</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Doctors</p>
+                                <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($statistics['doctors']) }}</p>
                             </div>
                         </div>
                     </div>
@@ -109,42 +109,42 @@
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <!-- Registration Trend -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Registration Trend</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Registration Trend</h3>
                         <canvas id="registrationChart"></canvas>
                     </div>
                 </div>
 
                 <!-- User Demographics -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Age Distribution</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Age Distribution</h3>
                         <canvas id="ageChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- Activity Statistics -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">User Activity</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Activity</h3>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="text-center p-4 bg-blue-50 rounded-lg">
-                            <p class="text-3xl font-bold text-blue-600">{{ $activityData['daily_active'] }}</p>
-                            <p class="text-sm text-gray-600 mt-2">Daily Active Users</p>
+                        <div class="text-center p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                            <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ $activityData['daily_active'] }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Daily Active Users</p>
                         </div>
-                        <div class="text-center p-4 bg-green-50 rounded-lg">
-                            <p class="text-3xl font-bold text-green-600">{{ $activityData['weekly_active'] }}</p>
-                            <p class="text-sm text-gray-600 mt-2">Weekly Active Users</p>
+                        <div class="text-center p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                            <p class="text-3xl font-bold text-green-600 dark:text-green-400">{{ $activityData['weekly_active'] }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Weekly Active Users</p>
                         </div>
-                        <div class="text-center p-4 bg-purple-50 rounded-lg">
-                            <p class="text-3xl font-bold text-purple-600">{{ $activityData['monthly_active'] }}</p>
-                            <p class="text-sm text-gray-600 mt-2">Monthly Active Users</p>
+                        <div class="text-center p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
+                            <p class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ $activityData['monthly_active'] }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Monthly Active Users</p>
                         </div>
-                        <div class="text-center p-4 bg-yellow-50 rounded-lg">
-                            <p class="text-3xl font-bold text-yellow-600">{{ $activityData['average_session_duration'] }}</p>
-                            <p class="text-sm text-gray-600 mt-2">Avg Session Duration</p>
+                        <div class="text-center p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg">
+                            <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400">{{ $activityData['average_session_duration'] }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Avg Session Duration</p>
                         </div>
                     </div>
                 </div>
@@ -152,34 +152,34 @@
 
             <!-- Role Distribution -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">User Roles</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Roles</h3>
                         <div class="space-y-4">
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">Admin</span>
-                                    <span class="text-sm font-medium text-gray-700">{{ $statistics['admins'] }}</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Admin</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $statistics['admins'] }}</span>
                                 </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-2.5">
                                     <div class="bg-red-500 h-2.5 rounded-full" style="width: {{ ($statistics['admins'] / $statistics['total']) * 100 }}%"></div>
                                 </div>
                             </div>
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">Doctor</span>
-                                    <span class="text-sm font-medium text-gray-700">{{ $statistics['doctors'] }}</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Doctor</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $statistics['doctors'] }}</span>
                                 </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-2.5">
                                     <div class="bg-green-500 h-2.5 rounded-full" style="width: {{ ($statistics['doctors'] / $statistics['total']) * 100 }}%"></div>
                                 </div>
                             </div>
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">Patient</span>
-                                    <span class="text-sm font-medium text-gray-700">{{ $statistics['patients'] }}</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Patient</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $statistics['patients'] }}</span>
                                 </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-2.5">
                                     <div class="bg-blue-500 h-2.5 rounded-full" style="width: {{ ($statistics['patients'] / $statistics['total']) * 100 }}%"></div>
                                 </div>
                             </div>
@@ -187,19 +187,19 @@
                     </div>
                 </div>
 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Gender Distribution</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Gender Distribution</h3>
                         <canvas id="genderChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- User List -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">User List</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">User List</h3>
                         <button onclick="window.print()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition duration-150">
                             <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
@@ -208,21 +208,21 @@
                         </button>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-600">
+                            <thead class="bg-gray-50 dark:bg-slate-700">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registered</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Activity</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Role</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Registered</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Last Activity</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                            <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-600">
                                 @forelse($users as $user)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                         #{{ $user->id }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -233,11 +233,11 @@
                                                 </div>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
+                                                <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $user->name }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                         {{ $user->email }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -255,16 +255,16 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                         {{ $user->created_at->format('d M Y') }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                         {{ $user->updated_at->diffForHumans() }}
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                                         No users found.
                                     </td>
                                 </tr>

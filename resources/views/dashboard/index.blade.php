@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Admin Dashboard') }}
         </h2>
     </x-slot>
@@ -56,7 +56,7 @@
             <!-- Statistics Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Total Users Card -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
@@ -66,14 +66,14 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                                         Total Users
                                     </dt>
                                     <dd class="flex items-baseline">
-                                        <div class="text-2xl font-semibold text-gray-900">
+                                        <div class="text-2xl font-semibold text-gray-900 dark:text-white">
                                             {{ number_format($totalUsers) }}
                                         </div>
-                                        <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                        <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600 dark:text-green-400">
                                             <svg class="self-center flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                             </svg>
@@ -88,7 +88,7 @@
                 </div>
 
                 <!-- Doctors Card -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
@@ -98,11 +98,11 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                                         Doctors
                                     </dt>
                                     <dd>
-                                        <div class="text-2xl font-semibold text-gray-900">
+                                        <div class="text-2xl font-semibold text-gray-900 dark:text-white">
                                             {{ number_format($doctorUsers) }}
                                         </div>
                                     </dd>
@@ -113,7 +113,7 @@
                 </div>
 
                 <!-- Patients Card -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
@@ -123,11 +123,11 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                                         Patients
                                     </dt>
                                     <dd>
-                                        <div class="text-2xl font-semibold text-gray-900">
+                                        <div class="text-2xl font-semibold text-gray-900 dark:text-white">
                                             {{ number_format($patientUsers) }}
                                         </div>
                                     </dd>
@@ -138,7 +138,7 @@
                 </div>
 
                 <!-- Monthly Sales Card -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
@@ -148,14 +148,14 @@
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
-                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                                         Monthly Sales
                                     </dt>
                                     <dd class="flex items-baseline">
-                                        <div class="text-2xl font-semibold text-gray-900">
+                                        <div class="text-2xl font-semibold text-gray-900 dark:text-white">
                                             Rp {{ number_format($totalSales['month']) }}
                                         </div>
-                                        <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                        <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600 dark:text-green-400">
                                             <svg class="self-center flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                             </svg>
@@ -172,17 +172,17 @@
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <!-- User Registration Chart -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">User Registration Trend</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Registration Trend</h3>
                         <canvas id="userRegistrationChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Sales Chart -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Monthly Sales</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Monthly Sales</h3>
                         <canvas id="salesChart"></canvas>
                     </div>
                 </div>
@@ -191,32 +191,32 @@
             <!-- Charts Row 2 -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <!-- User Role Distribution -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">User Role Distribution</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Role Distribution</h3>
                         <canvas id="userRoleChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Top Products -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Top Selling Products</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Selling Products</h3>
                         <div class="space-y-4">
                             @foreach($topProducts as $index => $product)
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-800 rounded-full font-semibold text-sm">
+                                    <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 rounded-full font-semibold text-sm">
                                         {{ $index + 1 }}
                                     </span>
                                     <div class="ml-3">
-                                        <p class="text-sm font-medium text-gray-900">{{ $product['name'] }}</p>
-                                        <p class="text-xs text-gray-500">{{ $product['category'] }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $product['name'] }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ $product['category'] }}</p>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-sm font-semibold text-gray-900">{{ number_format($product['sold']) }} units</p>
-                                    <p class="text-xs text-gray-500">Rp {{ number_format($product['revenue']) }}</p>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ number_format($product['sold']) }} units</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Rp {{ number_format($product['revenue']) }}</p>
                                 </div>
                             </div>
                             @endforeach
@@ -226,20 +226,20 @@
             </div>
 
             <!-- Recent Activities -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activities</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activities</h3>
                     <div class="flow-root">
                         <ul role="list" class="-mb-8">
                             @foreach($recentActivities as $index => $activity)
                             <li>
                                 <div class="relative pb-8">
                                     @if($index < count($recentActivities) - 1)
-                                    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-slate-600" aria-hidden="true"></span>
                                     @endif
                                     <div class="relative flex space-x-3">
                                         <div>
-                                            <span class="h-8 w-8 rounded-full bg-{{ $activity['color'] }}-500 flex items-center justify-center ring-8 ring-white">
+                                            <span class="h-8 w-8 rounded-full bg-{{ $activity['color'] }}-500 flex items-center justify-center ring-8 ring-white dark:ring-slate-800">
                                                 <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     @if($activity['icon'] === 'shopping-cart')
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -257,9 +257,9 @@
                                         </div>
                                         <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                                             <div>
-                                                <p class="text-sm text-gray-500">{{ $activity['message'] }}</p>
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ $activity['message'] }}</p>
                                             </div>
-                                            <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                            <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-gray-400">
                                                 {{ $activity['time'] }}
                                             </div>
                                         </div>

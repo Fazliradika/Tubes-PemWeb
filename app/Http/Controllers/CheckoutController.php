@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
@@ -16,13 +17,26 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+        // Check if this is a "buy now" checkout
+        if (session()->has('buy_now')) {
+            $buyNowData = session()->get('buy_now');
+            return view('shop.checkout', [
+                'cart' => null,
+                'buyNow' => $buyNowData
+            ]);
+        }
+
+        // Regular cart checkout
+        $cart = Cart::where('user_id', Auth::id())->with('cartItems.product')->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
         }
 
-        return view('shop.checkout', compact('cart'));
+        return view('shop.checkout', [
+            'cart' => $cart,
+            'buyNow' => null
+        ]);
     }
 
     /**
@@ -35,11 +49,19 @@ class CheckoutController extends Controller
             'shipping_city' => 'required|string',
             'shipping_postal_code' => 'required|string',
             'shipping_phone' => 'required|string',
-            'payment_method' => 'required|in:bank_transfer,credit_card,e_wallet',
+            'payment_method' => 'required|in:bank_transfer,credit_card,e_wallet,qris',
+            'courier' => 'required|string',
             'notes' => 'nullable|string',
+            'buy_now_quantity' => 'nullable|integer|min:1',
         ]);
 
-        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+        // Check if this is a Buy Now checkout
+        if (session()->has('buy_now')) {
+            return $this->processBuyNow($request);
+        }
+
+        // Regular cart checkout
+        $cart = Cart::where('user_id', Auth::id())->with('cartItems.product')->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
@@ -56,7 +78,7 @@ class CheckoutController extends Controller
         try {
             // Create order
             $order = Order::create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'order_number' => Order::generateOrderNumber(),
                 'total_amount' => $cart->total,
                 'status' => 'pending',
@@ -84,9 +106,9 @@ class CheckoutController extends Controller
             // Create payment record
             Payment::create([
                 'order_id' => $order->id,
-                'payment_method' => $request->payment_method,
-                'payment_status' => 'pending',
                 'amount' => $cart->total,
+                'payment_method' => $request->payment_method,
+                'status' => 'pending',
             ]);
 
             // Clear cart
@@ -94,10 +116,73 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-            return redirect()->route('checkout.success', $order->id);
+            return redirect()->route('orders.show', $order)->with('success', 'Pesanan berhasil dibuat');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Terjadi kesalahan saat memproses pesanan');
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Process Buy Now checkout
+     */
+    private function processBuyNow(Request $request)
+    {
+        $buyNowData = session()->get('buy_now');
+        $quantity = $request->input('buy_now_quantity', $buyNowData['quantity']);
+
+        // Validate stock
+        $product = \App\Models\Product::findOrFail($buyNowData['product_id']);
+        if ($quantity > $product->stock) {
+            return back()->with('error', "Stok {$product->name} tidak mencukupi. Maksimal {$product->stock} item");
+        }
+
+        DB::beginTransaction();
+        try {
+            $totalAmount = $product->price * $quantity;
+
+            // Create order
+            $order = Order::create([
+                'user_id' => Auth::id(),
+                'order_number' => Order::generateOrderNumber(),
+                'total_amount' => $totalAmount,
+                'status' => 'pending',
+                'shipping_address' => $request->shipping_address,
+                'shipping_city' => $request->shipping_city,
+                'shipping_postal_code' => $request->shipping_postal_code,
+                'shipping_phone' => $request->shipping_phone,
+                'notes' => $request->notes,
+            ]);
+
+            // Create order item
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+                'quantity' => $quantity,
+                'price' => $product->price,
+            ]);
+
+            // Update product stock
+            $product->decrement('stock', $quantity);
+
+            // Create payment record
+            Payment::create([
+                'order_id' => $order->id,
+                'amount' => $totalAmount,
+                'payment_method' => $request->payment_method,
+                'status' => 'pending',
+            ]);
+
+            // Clear buy_now session
+            session()->forget('buy_now');
+
+            DB::commit();
+
+            return redirect()->route('orders.show', $order)->with('success', 'Pesanan berhasil dibuat');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
@@ -106,7 +191,11 @@ class CheckoutController extends Controller
      */
     public function success(Order $order)
     {
-        if ($order->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        // Allow owner or admin to view
+        if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 
@@ -120,7 +209,11 @@ class CheckoutController extends Controller
      */
     public function confirmPayment(Request $request, Order $order)
     {
-        if ($order->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        // Allow owner or admin to confirm payment
+        if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 

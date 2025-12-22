@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Keranjang Belanja') }}
         </h2>
     </x-slot>
@@ -23,38 +23,30 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Cart Items -->
                     <div class="lg:col-span-2">
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     Produk di Keranjang ({{ $cart->cartItems->count() }} item)
                                 </h3>
 
                                 <div class="space-y-4">
                                     @foreach($cart->cartItems as $item)
-                                        <div class="flex items-center space-x-4 p-4 border rounded-lg">
+                                        <div class="flex items-center space-x-4 p-4 border dark:border-slate-600 rounded-lg">
                                             <!-- Product Image -->
                                             <div class="flex-shrink-0">
-                                                @if($item->product->image)
-                                                    <img src="{{ asset('storage/' . $item->product->image) }}" 
+                                                <img src="{{ $item->product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=200&h=200&fit=crop' }}" 
                                                         alt="{{ $item->product->name }}" 
                                                         class="w-24 h-24 object-cover rounded">
-                                                @else
-                                                    <div class="w-24 h-24 bg-gray-200 rounded flex items-center justify-center">
-                                                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                        </svg>
-                                                    </div>
-                                                @endif
                                             </div>
 
                                             <!-- Product Info -->
                                             <div class="flex-1">
-                                                <h4 class="text-lg font-semibold text-gray-900">
+                                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">
                                                     <a href="{{ route('products.show', $item->product->slug) }}" class="hover:text-blue-600">
                                                         {{ $item->product->name }}
                                                     </a>
                                                 </h4>
-                                                <p class="text-sm text-gray-600">{{ $item->product->category->name }}</p>
+                                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $item->product->category->name }}</p>
                                                 <p class="text-lg font-bold text-blue-600 mt-2">
                                                     Rp {{ number_format($item->price, 0, ',', '.') }}
                                                 </p>
@@ -67,15 +59,15 @@
                                                     @method('PATCH')
                                                     <input type="number" name="quantity" value="{{ $item->quantity }}" 
                                                         min="1" max="{{ $item->product->stock }}"
-                                                        class="w-16 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                                        class="w-16 rounded-md border-gray-300 dark:border-gray-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                                     <button type="submit" class="text-blue-600 hover:text-blue-800">
                                                         <i class="fas fa-sync-alt"></i>
                                                     </button>
                                                 </form>
 
                                                 <div class="text-right">
-                                                    <div class="text-sm text-gray-600">Subtotal:</div>
-                                                    <div class="text-lg font-bold text-gray-900">
+                                                    <div class="text-sm text-gray-600 dark:text-gray-400">Subtotal:</div>
+                                                    <div class="text-lg font-bold text-gray-900 dark:text-white">
                                                         Rp {{ number_format($item->subtotal, 0, ',', '.') }}
                                                     </div>
                                                 </div>
@@ -92,7 +84,7 @@
                                     @endforeach
                                 </div>
 
-                                <div class="mt-6 pt-6 border-t flex justify-between items-center">
+                                <div class="mt-6 pt-6 border-t dark:border-slate-600 flex justify-between items-center">
                                     <form action="{{ route('cart.clear') }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -111,20 +103,20 @@
 
                     <!-- Order Summary -->
                     <div class="lg:col-span-1">
-                        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden sticky top-4">
+                        <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden sticky top-4">
                             <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Ringkasan Pesanan</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Ringkasan Pesanan</h3>
 
                                 <div class="space-y-3 mb-6">
-                                    <div class="flex justify-between text-gray-600">
+                                    <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Subtotal ({{ $cart->itemsCount }} item)</span>
                                         <span>Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
                                     </div>
-                                    <div class="flex justify-between text-gray-600">
+                                    <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Ongkos Kirim</span>
                                         <span class="text-green-600 font-semibold">GRATIS</span>
                                     </div>
-                                    <div class="border-t pt-3 flex justify-between text-lg font-bold">
+                                    <div class="border-t dark:border-slate-600 pt-3 flex justify-between text-lg font-bold">
                                         <span>Total</span>
                                         <span class="text-blue-600">Rp {{ number_format($cart->total, 0, ',', '.') }}</span>
                                     </div>
@@ -137,7 +129,7 @@
                                     </a>
                                 @else
                                     <div class="text-center">
-                                        <p class="text-sm text-gray-600 mb-3">Silakan login untuk melanjutkan</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Silakan login untuk melanjutkan</p>
                                         <a href="{{ route('login') }}" 
                                             class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                                             Login
@@ -145,9 +137,9 @@
                                     </div>
                                 @endauth
 
-                                <div class="mt-6 pt-6 border-t">
-                                    <h4 class="font-semibold text-gray-900 mb-3">Keuntungan Belanja di Sini:</h4>
-                                    <ul class="space-y-2 text-sm text-gray-600">
+                                <div class="mt-6 pt-6 border-t dark:border-slate-600">
+                                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Keuntungan Belanja di Sini:</h4>
+                                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                                         <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Produk Original & Terpercaya</li>
                                         <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Gratis Ongkir</li>
                                         <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Konsultasi Gratis</li>
@@ -160,13 +152,13 @@
                 </div>
             @else
                 <!-- Empty Cart -->
-                <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
+                <div class="bg-white dark:bg-slate-800 shadow-sm sm:rounded-lg overflow-hidden">
                     <div class="p-12 text-center">
                         <svg class="mx-auto h-24 w-24 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Keranjang Belanja Kosong</h3>
-                        <p class="text-gray-600 mb-6">Anda belum menambahkan produk ke keranjang</p>
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Keranjang Belanja Kosong</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">Anda belum menambahkan produk ke keranjang</p>
                         <a href="{{ route('products.index') }}" 
                             class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                             <i class="fas fa-shopping-bag mr-2"></i>Mulai Belanja

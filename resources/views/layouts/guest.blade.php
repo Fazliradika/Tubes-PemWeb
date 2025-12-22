@@ -8,7 +8,10 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('images/LogoRs.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,8 +23,8 @@
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div class="flex flex-col items-center">
-                <a href="/" class="flex flex-col items-center gap-2">
-                    <img src="{{ asset('images/LogoRs.png') }}" alt="Hospital Logo" class="w-20 h-20">
+                <a href="/" class="flex flex-col items-center gap-3">
+                    <img src="{{ asset('images/logo-new.jpg') }}" alt="Hospital Logo" class="w-40 h-40 object-contain rounded-lg">
                     <span class="text-2xl font-bold text-gray-800">HealthFirst Medical</span>
                 </a>
             </div>

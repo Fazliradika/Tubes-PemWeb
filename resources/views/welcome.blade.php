@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HealthCare - Layanan Kesehatan Terpercaya</title>
+        <title>Health First Medical - Layanan Kesehatan Terpercaya</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,12 +18,21 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex items-center">
-                        <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">🏥 HealthCare</span>
+                        <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">🏥 Health First Medical</span>
                     </div>
                     @if (Route::has('login'))
                         <div class="flex items-center space-x-4">
                             @auth
                                 <a href="{{ url('/dashboard') }}" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Dashboard</a>
+                                <form method="POST" action="{{ route('logout') }}" class="inline">
+                                    @csrf
+                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        </svg>
+                                        Logout
+                                    </button>
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Log in</a>
                                 @if (Route::has('register'))
@@ -139,7 +148,7 @@
         <div class="bg-white dark:bg-gray-800 py-16 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Mengapa Memilih HealthCare?</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Mengapa Memilih Health First Medical?</h2>
                     <p class="text-xl text-gray-600 dark:text-gray-300">Platform kesehatan digital terlengkap dan terpercaya di Indonesia</p>
                 </div>
 
@@ -180,8 +189,8 @@
         <!-- Footer -->
         <footer class="bg-gray-900 text-white py-8 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p class="text-lg font-semibold mb-2">🏥 HealthCare</p>
-                <p class="text-gray-400">&copy; 2025 HealthCare. Layanan Kesehatan Digital Terpercaya.</p>
+                <p class="text-lg font-semibold mb-2">🏥 Health First Medical</p>
+                <p class="text-gray-400">&copy; 2025 Health First Medical. Layanan Kesehatan Digital Terpercaya.</p>
             </div>
         </footer>
     </body>

@@ -18,6 +18,8 @@ class Appointment extends Model
         'symptoms',
         'notes',
         'total_price',
+        'payment_method',
+        'payment_status',
     ];
 
     protected $casts = [
@@ -38,9 +40,9 @@ class Appointment extends Model
     public function scopeUpcoming($query)
     {
         return $query->where('appointment_date', '>=', now()->toDateString())
-                     ->whereIn('status', ['pending', 'confirmed'])
-                     ->orderBy('appointment_date')
-                     ->orderBy('appointment_time');
+            ->whereIn('status', ['pending', 'confirmed'])
+            ->orderBy('appointment_date')
+            ->orderBy('appointment_time');
     }
 
     public function scopeForPatient($query, $patientId)

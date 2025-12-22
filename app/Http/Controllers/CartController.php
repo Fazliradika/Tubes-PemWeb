@@ -94,6 +94,33 @@ class CartController extends Controller
     }
 
     /**
+     * Buy now - direct checkout without adding to cart.
+     */
+    public function buyNow(Request $request, Product $product)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1|max:' . $product->stock,
+        ]);
+
+        // Check stock availability
+        if ($request->quantity > $product->stock) {
+            return back()->with('error', 'Stok tidak mencukupi');
+        }
+
+        // Store buy now data in session
+        session()->put('buy_now', [
+            'product_id' => $product->id,
+            'product_name' => $product->name,
+            'quantity' => $request->quantity,
+            'price' => $product->price,
+            'image' => $product->image,
+            'stock' => $product->stock,
+        ]);
+
+        return redirect()->route('checkout.index')->with('success', 'Lanjutkan ke checkout');
+    }
+
+    /**
      * Clear the cart.
      */
     public function clear()
