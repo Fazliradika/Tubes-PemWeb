@@ -20,43 +20,76 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-gray-900 bg-gray-100 dark:bg-gray-900">
-        <div class="min-h-screen flex text-gray-900 dark:text-gray-100">
+    <body class="font-sans antialiased text-gray-100 bg-gray-900">
+        <div class="min-h-screen flex bg-[#0B1120]">
             <!-- Left Side - Branding (Hidden on mobile) -->
-            <div class="hidden lg:flex lg:w-1/2 bg-blue-600 dark:bg-slate-800 relative overflow-hidden flex-col justify-center items-center text-center p-12">
-                <!-- Background Gradient/Pattern -->
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700 dark:from-slate-800 dark:to-slate-900"></div>
-                
-                <!-- Decorative Elements -->
-                <div class="absolute -top-24 -left-24 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500 opacity-20 rounded-full blur-3xl"></div>
-
+            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-center px-16 text-white">
                 <!-- Content -->
-                <div class="relative z-10 text-white">
-                    <img src="{{ asset('images/logo-new.jpg') }}" alt="HealthFirst Logo" class="w-32 h-32 mx-auto mb-8 rounded-2xl shadow-2xl object-cover transform hover:scale-105 transition duration-500">
-                    <h1 class="text-4xl font-bold mb-4 tracking-tight">HealthFirst Medical</h1>
-                    <p class="text-lg text-blue-100 max-w-md mx-auto leading-relaxed">
-                        Layanan kesehatan digital terpercaya untuk Anda dan keluarga. Akses konsultasi dokter dan tebus resep obat dengan mudah dan cepat.
-                    </p>
-                </div>
+                <div class="relative z-10 max-w-lg">
+                    <div class="flex items-center gap-3 mb-12">
+                        <img src="{{ asset('images/logo-new.jpg') }}" alt="Logo" class="w-10 h-10 object-contain rounded bg-white p-1">
+                        <span class="text-xl font-bold">Health First Medical</span>
+                    </div>
 
-                <!-- Bottom Copyright -->
-                <div class="absolute bottom-8 text-blue-200 text-sm">
-                    &copy; {{ date('Y') }} HealthFirst Medical. All rights reserved.
+                    <h1 class="text-5xl font-bold mb-6 leading-tight">
+                        Layanan Kesehatan <br />
+                        <span class="text-blue-500">Digital</span> Terpercaya
+                    </h1>
+                    
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed">
+                        Konsultasi dengan dokter professional, booking appointment, dan kelola rekam medis Anda dengan mudah, kapan saja dan dimana saja.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white">Konsultasi Online 24/7</h3>
+                                <p class="text-sm text-gray-400 mt-1">Dapatkan konsultasi dengan dokter berpengalaman kapan pun Anda membutuhkan</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white">Booking Appointment</h3>
+                                <p class="text-sm text-gray-400 mt-1">Jadwalkan pemeriksaan kesehatan Anda dengan mudah dan cepat</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white">Rekam Medis Digital</h3>
+                                <p class="text-sm text-gray-400 mt-1">Akses riwayat kesehatan Anda dengan aman dan terpercaya</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Right Side - Form -->
-            <div class="flex-1 flex flex-col justify-center items-center p-6 sm:p-12 bg-white dark:bg-gray-900">
-                <div class="w-full max-w-md space-y-8">
-                    <!-- Mobile Logo (Visible only on mobile) -->
+            <div class="flex-1 flex flex-col justify-center items-center p-6 sm:p-12 bg-[#111827] border-l border-gray-800">
+                <div class="w-full max-w-md">
+                    <!-- Mobile Logo -->
                     <div class="lg:hidden text-center mb-8">
-                        <img src="{{ asset('images/logo-new.jpg') }}" alt="Logo" class="w-20 h-20 mx-auto rounded-xl shadow-md object-cover">
-                        <h2 class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">HealthFirst</h2>
+                        <img src="{{ asset('images/logo-new.jpg') }}" alt="Logo" class="w-16 h-16 mx-auto rounded-lg bg-white p-1">
+                        <h2 class="mt-4 text-2xl font-bold text-white">HealthFirst</h2>
                     </div>
 
-                    <!-- Slot Content -->
-                    <div class="w-full">
+                    <div class="bg-[#1F2937] p-8 rounded-2xl shadow-xl border border-gray-800">
                         {{ $slot }}
                     </div>
                 </div>
