@@ -1,3 +1,4 @@
+<x-guest-layout>
     <!-- Header -->
     <div class="mb-6">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Selamat Datang 👋</h2>
