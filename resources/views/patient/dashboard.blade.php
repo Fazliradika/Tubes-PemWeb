@@ -705,6 +705,13 @@
             return location.protocol === 'https:' || host === 'localhost' || host === '127.0.0.1';
         }
 
+        function isChromeOrEdge() {
+            const ua = (navigator && navigator.userAgent) ? navigator.userAgent : '';
+            const isEdge = /Edg\//.test(ua);
+            const isChrome = /Chrome\//.test(ua) && !/Edg\//.test(ua) && !/OPR\//.test(ua);
+            return isEdge || isChrome;
+        }
+
         function friendlySttErrorMessage(err) {
             const e = (err || '').toLowerCase();
             if (e === 'not-allowed' || e === 'service-not-allowed') {
@@ -720,7 +727,10 @@
                 if (navigator && navigator.onLine === false) {
                     return '❌ Speech-to-text gagal karena offline. Nyalakan internet lalu coba lagi.';
                 }
-                return '❌ Speech-to-text gagal karena masalah jaringan. Coba ulang beberapa saat lagi.';
+                if (!isChromeOrEdge()) {
+                    return '❌ Speech-to-text butuh Chrome/Edge agar berfungsi. Silakan coba pakai Chrome/Edge lalu ulangi.';
+                }
+                return '❌ Speech-to-text gagal karena masalah jaringan atau layanan STT diblokir (AdBlock/VPN/firewall). Coba matikan AdBlock/VPN atau ganti jaringan lalu ulangi.';
             }
             if (e === 'no-speech') {
                 return 'Tidak ada suara terdeteksi. Coba bicara lebih dekat ke mic.';
@@ -763,6 +773,7 @@
             };
 
             recognition.onerror = (e) => {
+                try { console.warn('[STT] onerror', e); } catch (_) {}
                 // Ignore expected abort when user stops
                 if (sttStopRequested && (e && e.error === 'aborted')) {
                     return;
@@ -808,7 +819,7 @@
             return recognition;
         }
 
-        function startListening(autoSend = false) {
+        async function startListening(autoSend = false) {
             const rec = ensureRecognition();
             if (!rec) {
                 addMessage('Browser Anda tidak mendukung Speech-to-Text. Coba gunakan Chrome/Edge terbaru di Android/Windows.', 'ai', true);
@@ -820,11 +831,29 @@
                 return;
             }
 
+            // Preflight mic permission to distinguish permission vs STT service/network errors
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    stream.getTracks().forEach(t => t.stop());
+                } catch (err) {
+                    try { console.warn('[STT] getUserMedia failed', err); } catch (_) {}
+                    const name = err && (err.name || err.message);
+                    addMessage(friendlySttErrorMessage(name || 'not-allowed'), 'ai', true);
+                    return;
+                }
+            }
+
             sendAfterHold = autoSend;
             chatInput.dataset.baseText = chatInput.value || '';
             sttFinal = '';
             sttInterim = '';
-            try { rec.start(); } catch (_) {}
+            try { rec.start(); }
+            catch (err) {
+                try { console.warn('[STT] start() threw', err); } catch (_) {}
+                const name = err && (err.name || err.message);
+                addMessage(friendlySttErrorMessage(name || 'unknown error'), 'ai', true);
+            }
         }
 
         function stopListening(resetAutoSend = true) {
