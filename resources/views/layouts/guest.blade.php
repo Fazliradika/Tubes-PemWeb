@@ -81,7 +81,7 @@
             </div>
 
             <!-- Right Side - Form -->
-            <div class="flex-1 flex flex-col justify-center items-center p-6 sm:p-12 bg-[#111827] border-l border-gray-800">
+            <div class="flex-1 flex flex-col justify-center items-center p-6 sm:p-12 bg-gradient-to-b from-[#112240] to-[#064e3b] border-l border-gray-800">
                 <div class="w-full max-w-md">
                     <!-- Mobile Logo -->
                     <div class="lg:hidden text-center mb-8">
@@ -89,7 +89,7 @@
                         <h2 class="mt-4 text-2xl font-bold text-white">HealthFirst</h2>
                     </div>
 
-                    <div class="bg-[#1F2937] p-8 rounded-2xl shadow-xl border border-gray-800">
+                    <div class="bg-gray-900/60 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/10">
                         {{ $slot }}
                     </div>
                 </div>
