@@ -366,8 +366,21 @@
 
     <!-- Flash Message Toast Script -->
     @if(session('success') || session('error') || session('warning') || session('info'))
-        <script>         document.addEventListener('DOMContentLoaded', function () {             @if(session('success'))             window.showToast(@json(session('success')), 'success');             @endif             @if(session('error'))             window.showToast(@json(session('error')), 'error');             @endif             @if(session('warning'))             window.showToast(@json(session('warning')), 'warning');             @endif             @if(session('info'))             window.showToast(@json(session('info')), 'info');             @endif
-                        });
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                @if (session('success'))
+                    window.showToast(@json(session('success')), 'success');
+                @endif
+                @if (session('error'))
+                    window.showToast(@json(session('error')), 'error');
+                @endif
+                @if (session('warning'))
+                    window.showToast(@json(session('warning')), 'warning');
+                @endif
+                @if (session('info'))
+                    window.showToast(@json(session('info')), 'info');
+                @endif
+            });
         </script>
     @endif
 </body>
