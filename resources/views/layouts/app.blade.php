@@ -146,7 +146,7 @@
         @include('layouts.navigation')
 
         <!-- Page Heading -->
-        @isset($header)
+        @if(isset($header))
             <header
                 class="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-800 dark:to-blue-700 shadow-lg shadow-blue-500/20 dark:shadow-blue-900/30">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -155,8 +155,7 @@
                     </div>
                 </div>
             </header>
-        @else
-            @if(View::hasSection('header'))
+        @elseif(View::hasSection('header'))
             <header
                 class="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-800 dark:to-blue-700 shadow-lg shadow-blue-500/20 dark:shadow-blue-900/30">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -165,8 +164,7 @@
                     </div>
                 </div>
             </header>
-            @endif
-        @endisset
+        @endif
 
 
         <!-- Page Content -->
