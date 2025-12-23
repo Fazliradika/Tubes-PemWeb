@@ -14,7 +14,21 @@ class AdminArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(10);
+        try {
+            if (!\Illuminate\Support\Facades\Schema::hasTable('articles')) {
+                return view('admin.articles.index', [
+                    'articles' => new \Illuminate\Pagination\LengthAwarePaginator([], 0, 10),
+                    'error' => 'Table "articles" tidak ditemukan di database. Silakan jalankan migrasi database.'
+                ]);
+            }
+            $articles = Article::latest()->paginate(10);
+        } catch (\Exception $e) {
+            return view('admin.articles.index', [
+                'articles' => new \Illuminate\Pagination\LengthAwarePaginator([], 0, 10),
+                'error' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
+        
         return view('admin.articles.index', compact('articles'));
     }
 
