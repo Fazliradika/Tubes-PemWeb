@@ -38,15 +38,8 @@ Route::get('/dashboard', function () {
     return redirect('/');
 })->middleware('auth')->name('dashboard');
 
-// Admin Dashboard & Reports Routes
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+// Admin Dashboard & Reports Routes moved to consolidated admin group at bottom
 
-    Route::prefix('reports')->group(function () {
-        Route::get('/sales', [ReportController::class, 'sales'])->name('reports.sales');
-        Route::get('/users', [ReportController::class, 'users'])->name('reports.users');
-    });
-});
 
 // Doctor Dashboard Routes
 Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () {
@@ -152,21 +145,22 @@ Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/prescriptions/latest', [\App\Http\Controllers\PrescriptionController::class, 'latest'])->name('api.prescriptions.latest');
 });
 
-// Admin Order Management
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'adminIndex'])->name('admin.orders.index');
-    Route::patch('/orders/{order}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus'])->name('admin.orders.update-status');
+// Consolidated Admin Routes
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::prefix('reports')->group(function () {
+        Route::get('/sales', [ReportController::class, 'sales'])->name('reports.sales');
+        Route::get('/users', [ReportController::class, 'users'])->name('reports.users');
+    });
+
+    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'adminIndex'])->name('orders.index');
+    Route::patch('/orders/{order}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus'])->name('orders.update-status');
     
     // Article Management
-    Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class)->names([
-        'index' => 'admin.articles.index',
-        'create' => 'admin.articles.create',
-        'store' => 'admin.articles.store',
-        'edit' => 'admin.articles.edit',
-        'update' => 'admin.articles.update',
-        'destroy' => 'admin.articles.destroy',
-    ])->except(['show']);
+    Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class)->except(['show']);
 });
+
 
 // Articles Routes (accessible to all authenticated users)
 Route::middleware('auth')->group(function () {
