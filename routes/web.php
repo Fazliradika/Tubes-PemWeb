@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Farewell / end page (public)
+Route::view('/end', 'end')->name('end');
+
 // Lightweight health endpoint for platform checks (no DB access)
 Route::get('/health', function () {
     return response()->json(['status' => 'ok']);
