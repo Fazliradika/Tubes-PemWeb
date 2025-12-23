@@ -50,7 +50,7 @@
                         <div
                             class="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                             <!-- Doctor Photo -->
-                            <div class="h-64 bg-gradient-to-br from-blue-500 to-blue-600 relative">
+                            <div class="aspect-square bg-gradient-to-br from-blue-500 to-blue-600 relative overflow-hidden">
                                 @if($doctor->photo)
                                     <img src="{{ str_starts_with($doctor->photo, 'http') ? $doctor->photo : asset('storage/' . $doctor->photo) }}"
                                         alt="{{ $doctor->user->name }}" class="w-full h-full object-cover object-top"
