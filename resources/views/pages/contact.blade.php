@@ -140,54 +140,67 @@
                     class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700">
                     <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Kirim Pesan</h2>
 
-                    <form class="space-y-6">
+                    @if(session('success'))
+                        <div class="mb-6 p-4 bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 rounded-r-xl flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span class="text-green-800 dark:text-green-200 font-medium">{{ session('success') }}</span>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
+                        @csrf
                         <div>
                             <label for="name"
                                 class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Nama
-                                Lengkap</label>
-                            <input type="text" id="name" name="name"
+                                Lengkap <span class="text-red-500">*</span></label>
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" required
                                 class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                                 placeholder="Masukkan nama Anda">
+                            @error('name') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label for="email"
-                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email</label>
-                            <input type="email" id="email" name="email"
+                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                 class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                                 placeholder="email@example.com">
+                            @error('email') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label for="phone"
                                 class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Nomor
                                 Telepon</label>
-                            <input type="tel" id="phone" name="phone"
+                            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}"
                                 class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                                 placeholder="+62 xxx xxxx xxxx">
+                            @error('phone') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label for="subject"
-                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Subjek</label>
-                            <select id="subject" name="subject"
+                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Subjek <span class="text-red-500">*</span></label>
+                            <select id="subject" name="subject" required
                                 class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
                                 <option value="">Pilih subjek...</option>
-                                <option value="general">Pertanyaan Umum</option>
-                                <option value="appointment">Janji Temu</option>
-                                <option value="payment">Pembayaran</option>
-                                <option value="technical">Masalah Teknis</option>
-                                <option value="complaint">Keluhan</option>
-                                <option value="other">Lainnya</option>
+                                <option value="general" {{ old('subject') == 'general' ? 'selected' : '' }}>Pertanyaan Umum</option>
+                                <option value="appointment" {{ old('subject') == 'appointment' ? 'selected' : '' }}>Janji Temu</option>
+                                <option value="payment" {{ old('subject') == 'payment' ? 'selected' : '' }}>Pembayaran</option>
+                                <option value="technical" {{ old('subject') == 'technical' ? 'selected' : '' }}>Masalah Teknis</option>
+                                <option value="complaint" {{ old('subject') == 'complaint' ? 'selected' : '' }}>Keluhan</option>
+                                <option value="other" {{ old('subject') == 'other' ? 'selected' : '' }}>Lainnya</option>
                             </select>
+                            @error('subject') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label for="message"
-                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Pesan</label>
-                            <textarea id="message" name="message" rows="5"
+                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Pesan <span class="text-red-500">*</span></label>
+                            <textarea id="message" name="message" rows="5" required
                                 class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
-                                placeholder="Tulis pesan Anda di sini..."></textarea>
+                                placeholder="Tulis pesan Anda di sini... (minimal 10 karakter)">{{ old('message') }}</textarea>
+                            @error('message') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
                         <button type="submit"

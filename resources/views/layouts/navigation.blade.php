@@ -40,11 +40,25 @@
                     </a>
 
                     <a href="{{ route('admin.products.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.products.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
-                        <i class="fas fa-boxes mr-1"></i>{{ __('Kelola Produk') }}
+                        <i class="fas fa-boxes mr-1"></i>{{ __('Produk') }}
                     </a>
 
                     <a href="{{ route('admin.articles.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.articles.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
-                        <i class="fas fa-newspaper mr-1"></i>{{ __('Kelola Artikel') }}
+                        <i class="fas fa-newspaper mr-1"></i>{{ __('Artikel') }}
+                    </a>
+
+                    <a href="{{ route('admin.faqs.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.faqs.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
+                        <i class="fas fa-question-circle mr-1"></i>{{ __('FAQ') }}
+                    </a>
+
+                    <a href="{{ route('admin.contacts.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.contacts.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
+                        <i class="fas fa-envelope mr-1"></i>{{ __('Pesan') }}
+                        @php
+                            $unreadCount = \App\Models\ContactMessage::unread()->count();
+                        @endphp
+                        @if($unreadCount > 0)
+                            <span class="ml-1 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">{{ $unreadCount }}</span>
+                        @endif
                     </a>
                     @endif
                 </div>

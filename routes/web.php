@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,7 +22,8 @@ Route::view('/end', 'end')->name('end');
 // Static Information Pages (public)
 Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/about', 'pages.about')->name('about');
-Route::view('/contact', 'pages.contact')->name('contact');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::view('/terms', 'pages.terms')->name('terms');
 Route::view('/privacy', 'pages.privacy')->name('privacy');
 
@@ -172,6 +174,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
 
     // Product Management
     Route::resource('products', \App\Http\Controllers\Admin\AdminProductController::class);
+
+    // FAQ Management
+    Route::resource('faqs', \App\Http\Controllers\Admin\AdminFaqController::class);
+    Route::patch('/faqs/{faq}/toggle-status', [\App\Http\Controllers\Admin\AdminFaqController::class, 'toggleStatus'])->name('faqs.toggle-status');
+
+    // Contact Messages Management
+    Route::get('/contacts', [\App\Http\Controllers\Admin\AdminContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/{contact}', [\App\Http\Controllers\Admin\AdminContactController::class, 'show'])->name('contacts.show');
+    Route::put('/contacts/{contact}', [\App\Http\Controllers\Admin\AdminContactController::class, 'update'])->name('contacts.update');
+    Route::delete('/contacts/{contact}', [\App\Http\Controllers\Admin\AdminContactController::class, 'destroy'])->name('contacts.destroy');
+    Route::post('/contacts/bulk-action', [\App\Http\Controllers\Admin\AdminContactController::class, 'bulkAction'])->name('contacts.bulk-action');
 });
 
 

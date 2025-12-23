@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             DoctorSeeder::class,
             PatientTestSeeder::class,
+            ArticleSeeder::class,
+            FaqSeeder::class,
+            ContactMessageSeeder::class,
         ]);
     }
 }
