@@ -186,7 +186,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- Footers -->
         <footer class="bg-gray-900 text-white py-8 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <p class="text-lg font-semibold mb-2">🏥 Health First Medical</p>
