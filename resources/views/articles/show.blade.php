@@ -299,6 +299,77 @@
                 </div>
             </div>
             
+            <!-- Related Doctors Section (Full Width) -->
+            @if($relatedDoctors->count() > 0)
+            <div class="mt-8 bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Dokter Terkait</h3>
+                        <a href="{{ route('doctors.index') }}" class="text-sm text-green-600 hover:text-green-700 font-medium flex items-center gap-1">
+                            Lihat Semua Dokter
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        @foreach($relatedDoctors as $doctor)
+                        <div class="bg-white dark:bg-slate-700 rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden border border-gray-200 dark:border-slate-600">
+                            <div class="p-6">
+                                <div class="flex flex-col items-center text-center">
+                                    <!-- Doctor Photo -->
+                                    <div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-green-500">
+                                        <img src="{{ $doctor->photo }}" 
+                                             alt="{{ $doctor->user->name }}" 
+                                             class="w-full h-full object-cover">
+                                    </div>
+                                    
+                                    <!-- Doctor Name -->
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                                        {{ $doctor->user->name }}
+                                    </h4>
+                                    
+                                    <!-- Specialization -->
+                                    <p class="text-sm font-medium text-green-600 dark:text-green-400 mb-3">
+                                        {{ $doctor->specialization }}
+                                    </p>
+                                    
+                                    <!-- Bio -->
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                                        {{ $doctor->bio }}
+                                    </p>
+                                    
+                                    <!-- Experience and Price -->
+                                    <div class="w-full space-y-2 mb-4">
+                                        <div class="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                            <span>{{ $doctor->years_of_experience }} tahun pengalaman</span>
+                                        </div>
+                                        <div class="flex items-center justify-center gap-2 text-sm">
+                                            <span class="text-gray-600 dark:text-gray-400">Mulai dari</span>
+                                            <span class="text-lg font-bold text-green-600 dark:text-green-400">
+                                                Rp {{ number_format($doctor->price_per_session, 0, ',', '.') }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Button -->
+                                    <a href="{{ route('doctors.show', $doctor->id) }}" 
+                                       class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-200 text-center">
+                                        Lihat Profil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endif
+            
             <!-- Comments Section (Full Width Below) -->
             <div class="mt-8 bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8">

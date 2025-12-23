@@ -39,13 +39,45 @@ class ArticleController extends Controller
                 ->exists()
             : false;
         
+        // Get related doctors based on article category
+        $relatedDoctors = $this->getRelatedDoctors($article['category']);
+        
         return view('articles.show', [
             'article' => $article,
             'relatedArticles' => $relatedArticles,
             'comments' => $comments,
             'likesCount' => $likesCount,
             'userHasLiked' => $userHasLiked,
+            'relatedDoctors' => $relatedDoctors,
         ]);
+    }
+    
+    private function getRelatedDoctors($category)
+    {
+        // Mapping kategori artikel ke spesialisasi dokter
+        $categoryToSpecialization = [
+            'Hidup Sehat' => ['Dokter Umum', 'Kardiologi'],
+            'Olahraga' => ['Orthopedi', 'Kardiologi', 'Dokter Umum'],
+            'Diabetes' => ['Dokter Umum', 'Kardiologi'],
+            'Nutrisi' => ['Dokter Umum', 'Kardiologi'],
+            'Kesehatan Mental' => ['Psikiater', 'Dokter Umum'],
+            'Kecantikan' => ['Dermatologi', 'Dokter Umum'],
+            'Hipertensi' => ['Kardiologi', 'Dokter Umum'],
+            'Kolesterol' => ['Kardiologi', 'Dokter Umum'],
+            'Jantung' => ['Kardiologi', 'Dokter Umum'],
+            'Kesehatan Wanita' => ['Obstetri & Ginekologi', 'Dokter Umum'],
+            'Pediatri' => ['Pediatri', 'Dokter Umum'],
+            'Gigi' => ['Dokter Gigi', 'Dokter Umum'],
+        ];
+        
+        $specializations = $categoryToSpecialization[$category] ?? ['Dokter Umum'];
+        
+        return \App\Models\Doctor::with('user')
+            ->where('is_active', true)
+            ->whereIn('specialization', $specializations)
+            ->orderBy('years_of_experience', 'desc')
+            ->take(3)
+            ->get();
     }
 
     public function getArticles()
