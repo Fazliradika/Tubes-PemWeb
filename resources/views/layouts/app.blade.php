@@ -365,24 +365,21 @@
     @stack('scripts')
 
     <!-- Flash Message Toast Script -->
-    @if(session('success') || session('error') || session('warning') || session('info'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                @if (session('success'))
-                    window.showToast(@json(session('success')), 'success');
-                @endif
-                @if (session('error'))
-                    window.showToast(@json(session('error')), 'error');
-                @endif
-                @if (session('warning'))
-                    window.showToast(@json(session('warning')), 'warning');
-                @endif
-                @if (session('info'))
-                    window.showToast(@json(session('info')), 'info');
-                @endif
-            });
-        </script>
-    @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toasts = @json([
+                'success' => session('success'),
+                'error' => session('error'),
+                'warning' => session('warning'),
+                'info' => session('info'),
+            ]);
+
+            if (toasts.success) window.showToast(toasts.success, 'success');
+            if (toasts.error) window.showToast(toasts.error, 'error');
+            if (toasts.warning) window.showToast(toasts.warning, 'warning');
+            if (toasts.info) window.showToast(toasts.info, 'info');
+        });
+    </script>
 </body>
 
 </html>
