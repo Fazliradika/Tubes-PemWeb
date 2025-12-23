@@ -51,6 +51,7 @@ class CheckoutController extends Controller
             'shipping_phone' => 'required|string',
             'payment_method' => 'required|in:bank_transfer,credit_card,e_wallet,qris',
             'courier' => 'required|string',
+            'shipping_cost' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
             'buy_now_quantity' => 'nullable|integer|min:1',
         ]);
@@ -76,16 +77,22 @@ class CheckoutController extends Controller
 
         DB::beginTransaction();
         try {
+            // Get shipping cost from request
+            $shippingCost = $request->input('shipping_cost', 0);
+            $totalWithShipping = $cart->total + $shippingCost;
+
             // Create order
             $order = Order::create([
                 'user_id' => Auth::id(),
                 'order_number' => Order::generateOrderNumber(),
-                'total_amount' => $cart->total,
+                'total_amount' => $totalWithShipping,
                 'status' => 'pending',
                 'shipping_address' => $request->shipping_address,
                 'shipping_city' => $request->shipping_city,
                 'shipping_postal_code' => $request->shipping_postal_code,
                 'shipping_phone' => $request->shipping_phone,
+                'courier' => $request->courier,
+                'shipping_cost' => $shippingCost,
                 'notes' => $request->notes,
             ]);
 
@@ -106,7 +113,7 @@ class CheckoutController extends Controller
             // Create payment record
             Payment::create([
                 'order_id' => $order->id,
-                'amount' => $cart->total,
+                'amount' => $totalWithShipping,
                 'payment_method' => $request->payment_method,
                 'status' => 'pending',
             ]);
@@ -139,7 +146,9 @@ class CheckoutController extends Controller
 
         DB::beginTransaction();
         try {
-            $totalAmount = $product->price * $quantity;
+            $subtotal = $product->price * $quantity;
+            $shippingCost = $request->input('shipping_cost', 0);
+            $totalAmount = $subtotal + $shippingCost;
 
             // Create order
             $order = Order::create([
@@ -151,6 +160,8 @@ class CheckoutController extends Controller
                 'shipping_city' => $request->shipping_city,
                 'shipping_postal_code' => $request->shipping_postal_code,
                 'shipping_phone' => $request->shipping_phone,
+                'courier' => $request->courier,
+                'shipping_cost' => $shippingCost,
                 'notes' => $request->notes,
             ]);
 

@@ -18,6 +18,8 @@ class Order extends Model
         'shipping_city',
         'shipping_postal_code',
         'shipping_phone',
+        'courier',
+        'shipping_cost',
         'notes',
     ];
 

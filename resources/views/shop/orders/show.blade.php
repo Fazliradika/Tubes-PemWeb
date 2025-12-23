@@ -115,11 +115,15 @@
                                 <div class="space-y-2">
                                     <div class="flex justify-between text-gray-600 dark:text-gray-400">
                                         <span>Subtotal</span>
-                                        <span>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
+                                        <span>Rp {{ number_format($order->total_amount - ($order->shipping_cost ?? 0), 0, ',', '.') }}</span>
                                     </div>
                                     <div class="flex justify-between text-gray-600 dark:text-gray-400">
-                                        <span>Ongkos Kirim</span>
-                                        <span class="text-green-600 font-semibold">GRATIS</span>
+                                        <span>Ongkos Kirim ({{ $order->courier ?? 'Standard' }})</span>
+                                        @if(($order->shipping_cost ?? 0) > 0)
+                                            <span class="font-semibold">Rp {{ number_format($order->shipping_cost, 0, ',', '.') }}</span>
+                                        @else
+                                            <span class="text-green-600 font-semibold">GRATIS</span>
+                                        @endif
                                     </div>
                                     <div class="border-t dark:border-slate-600 pt-2 flex justify-between text-xl font-bold">
                                         <span>Total</span>
