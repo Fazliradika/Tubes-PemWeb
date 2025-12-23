@@ -8,6 +8,25 @@ use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
+    protected function prepareForValidation(): void
+    {
+        $gender = $this->input('gender');
+
+        if (!is_string($gender)) {
+            return;
+        }
+
+        $normalized = match ($gender) {
+            'laki-laki' => 'male',
+            'perempuan' => 'female',
+            default => $gender,
+        };
+
+        if ($normalized !== $gender) {
+            $this->merge(['gender' => $normalized]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,7 +47,7 @@ class ProfileUpdateRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:500'],
             'date_of_birth' => ['nullable', 'date'],
-            'gender' => ['nullable', 'in:laki-laki,perempuan'],
+            'gender' => ['nullable', 'in:male,female,other'],
         ];
     }
 }
