@@ -113,12 +113,14 @@ class CallController extends Controller
      */
     private function userBelongsToConversation(Conversation $conversation)
     {
-        // Safe check with optional chaining behavior logic
-        $isPatient = $conversation->patient_id === auth()->id();
+        $userId = (int) auth()->id();
+
+        // Safe check with type casting
+        $isPatient = (int) $conversation->patient_id === $userId;
 
         // Check doctor side safely
         $conversation->loadMissing('doctor');
-        $isDoctor = $conversation->doctor && $conversation->doctor->user_id === auth()->id();
+        $isDoctor = $conversation->doctor && (int) $conversation->doctor->user_id === $userId;
 
         return $isPatient || $isDoctor;
     }
