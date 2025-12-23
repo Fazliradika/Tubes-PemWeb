@@ -95,7 +95,7 @@
                     @yield('header')
                 </div>
             </header>
-        @endhasSection
+        @endif
 
         <!-- Page Content -->
         <main class="flex-grow">
@@ -148,8 +148,38 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:row items-center justify-between gap-4">
+
+                <!-- Security & Certification -->
+                <div class="border-t border-slate-200 dark:border-slate-800 pt-8 mt-12">
+                    <h4 class="font-bold text-blue-600 dark:text-blue-400 text-xs mb-4 uppercase tracking-wide">
+                        Keamanan & Privasi</h4>
+
+                    <div class="flex items-center justify-between flex-wrap gap-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                                <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO 27001</span>
+                            </div>
+                            <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                                <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Privacy</span>
+                            </div>
+                            <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                                <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p class="text-sm text-slate-500 dark:text-slate-500">
                         &copy; {{ date('Y') }} HealthFirst Medical. All rights reserved.
                     </p>
@@ -158,36 +188,6 @@
                         <a href="#" class="text-slate-400 hover:text-pink-600 dark:hover:text-pink-400 transition text-lg"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="text-slate-400 hover:text-blue-400 dark:hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition text-lg"><i class="fab fa-youtube"></i></a>
-=======
-
-                <!-- Security & Certification -->
-                <div class="border-t border-blue-200/50 dark:border-blue-800/50 pt-8">
-                    <h4 class="font-bold text-blue-600 dark:text-blue-400 text-xs mb-4 uppercase tracking-wide">
-                        Keamanan & Privasi</h4>
-
-                    <div class="flex items-center justify-between flex-wrap gap-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
-                                <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001" class="h-10 w-auto object-contain" />
-                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO 27001</span>
-                            </div>
-                            <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
-                                <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy" class="h-10 w-auto object-contain" />
-                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Privacy</span>
-                            </div>
-                            <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
-                                <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified" class="h-10 w-auto object-contain" />
-                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
-                            </div>
-                        </div>
-
-                        <div class="glass-card rounded-xl px-4 py-3 flex items-center">
-                            <div class="flex items-center gap-2">
-                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI" class="h-10 w-auto object-contain" />
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
-                            </div>
-                        </div>
->>>>>>> ea29bc99639dd67721f132d42a535f40d730c40c
                     </div>
                 </div>
             </div>
@@ -199,6 +199,8 @@
         // Toast Implementation
         window.showToast = function(message, type = 'success') {
             const container = document.getElementById('toast-container');
+            if (!container) return;
+
             const toast = document.createElement('div');
             
             const colors = {
