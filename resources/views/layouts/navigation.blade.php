@@ -39,6 +39,10 @@
                         <i class="fas fa-tasks mr-1"></i>{{ __('Kelola Pesanan') }}
                     </a>
 
+                    <a href="{{ route('admin.products.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.products.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
+                        <i class="fas fa-boxes mr-1"></i>{{ __('Kelola Produk') }}
+                    </a>
+
                     <a href="{{ route('admin.articles.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.articles.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
                         <i class="fas fa-newspaper mr-1"></i>{{ __('Kelola Artikel') }}
                     </a>
@@ -149,6 +153,10 @@
             @if(auth()->check() && auth()->user()->isAdmin())
             <a href="{{ route('admin.orders.index') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('admin.orders.*') ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 hover:border-blue-300' }} text-start text-base font-medium transition duration-150 ease-in-out">
                 <i class="fas fa-tasks mr-2"></i>{{ __('Kelola Pesanan') }}
+            </a>
+
+            <a href="{{ route('admin.products.index') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('admin.products.*') ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 hover:border-blue-300' }} text-start text-base font-medium transition duration-150 ease-in-out">
+                <i class="fas fa-boxes mr-2"></i>{{ __('Kelola Produk') }}
             </a>
             
             <a href="{{ route('admin.articles.index') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('admin.articles.*') ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 hover:border-blue-300' }} text-start text-base font-medium transition duration-150 ease-in-out">

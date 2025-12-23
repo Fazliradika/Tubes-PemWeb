@@ -159,6 +159,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
     
     // Article Management
     Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class);
+
+    // Product Management
+    Route::resource('products', \App\Http\Controllers\Admin\AdminProductController::class);
 });
 
 
