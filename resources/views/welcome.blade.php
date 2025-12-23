@@ -18,7 +18,10 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex items-center">
-                        <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">🏥 Health First Medical</span>
+                        <div class="flex items-center gap-2">
+                            <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical Logo" class="h-10 w-auto object-contain">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">Health First Medical</span>
+                        </div>
                     </div>
                     @if (Route::has('login'))
                         <div class="flex items-center space-x-4">
@@ -189,7 +192,10 @@
         <!-- Footers -->
         <footer class="bg-gray-900 text-white py-8 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p class="text-lg font-semibold mb-2">🏥 Health First Medical</p>
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical Logo" class="h-12 w-auto object-contain">
+                    <p class="text-lg font-semibold">Health First Medical</p>
+                </div>
                 <p class="text-gray-400">&copy; 2025 Health First Medical. Layanan Kesehatan Digital Terpercaya.</p>
             </div>
         </footer>

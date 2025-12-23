@@ -27,7 +27,7 @@
                 <!-- Content -->
                 <div class="relative z-10 max-w-lg">
                     <div class="flex items-center gap-3 mb-12">
-                        <img src="{{ asset('images/logo-new.jpg') }}" alt="Logo" class="w-10 h-10 object-contain rounded bg-white p-1">
+                        <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical Logo" class="w-10 h-10 object-contain rounded bg-white p-1">
                         <span class="text-xl font-bold">Health First Medical</span>
                     </div>
 
@@ -85,7 +85,7 @@
                 <div class="w-full max-w-md">
                     <!-- Mobile Logo -->
                     <div class="lg:hidden text-center mb-8">
-                        <img src="{{ asset('images/logo-new.jpg') }}" alt="Logo" class="w-16 h-16 mx-auto rounded-lg bg-white p-1">
+                        <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical Logo" class="w-16 h-16 mx-auto rounded-lg bg-white p-1">
                         <h2 class="mt-4 text-2xl font-bold text-white">HealthFirst</h2>
                     </div>
 

@@ -183,9 +183,9 @@
             <div class="container mx-auto px-4">
                 <!-- Top Section with Logo -->
                 <div class="mb-8">
-                    <div class="flex items-center mb-6">
-                        <img src="{{ asset('images/logo-new.jpg') }}" alt="HealthFirst Medical"
-                            class="h-20 w-auto object-contain mr-4">
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical"
+                            class="h-24 w-auto object-contain">
                         <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">HealthFirst Medical</span>
                     </div>
 
