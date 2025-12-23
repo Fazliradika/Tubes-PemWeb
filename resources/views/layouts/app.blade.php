@@ -166,7 +166,7 @@
                     </div>
                 </div>
             </header>
-        @endif
+        @endhasSection
 
 
         <!-- Page Content -->
@@ -324,25 +324,25 @@
 
                 <!-- Security & Certification -->
                 <div class="border-t border-blue-200/50 dark:border-blue-800/50 pt-8">
+                    <h4 class="font-bold text-blue-600 dark:text-blue-400 text-xs mb-4 uppercase tracking-wide">
+                        Keamanan & Privasi</h4>
+
                     <div class="flex items-center justify-between flex-wrap gap-4">
-                        <div>
-                            <h4 class="font-bold text-blue-600 dark:text-blue-400 text-xs mb-4 uppercase tracking-wide">
-                                Keamanan & Privasi</h4>
-                            <div class="flex items-center space-x-4">
-                                <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
-                                    <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001" class="h-10 w-auto object-contain" />
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO 27001</span>
-                                </div>
-                                <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
-                                    <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy" class="h-10 w-auto object-contain" />
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Privacy</span>
-                                </div>
-                                <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
-                                    <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified" class="h-10 w-auto object-contain" />
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
-                                </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
+                                <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO 27001</span>
+                            </div>
+                            <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
+                                <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Privacy</span>
+                            </div>
+                            <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
+                                <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified" class="h-10 w-auto object-contain" />
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
                             </div>
                         </div>
+
                         <div class="glass-card rounded-xl px-4 py-3 flex items-center space-x-3">
                             <span class="text-slate-600 dark:text-slate-400 text-sm">Dibina oleh</span>
                             <div class="flex items-center gap-2">
