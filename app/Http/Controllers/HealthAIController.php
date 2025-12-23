@@ -54,6 +54,12 @@ class HealthAIController extends Controller
             'kandungan','ginekologi','asma','alergi','nyeri','sakit','BMI','tekanan darah','gula darah',
             'konsultasi','janji temu','appointment','dokter gigi','psikiater','dermatologi','ortopedi'
         ];
+        $blockedKeywords = [
+            'hack','crack','exploit','sql','injection','bobol','retas','judi','slot','gacor',
+            'porno','bokep','sex','narkoba','ganja','sabu','bunuh','bom','senjata',
+            'teroris','radikal','politik','presiden','kampanye'
+        ];
+
         $offTopicHints = [
             // Tech / finance / general
             'laptop','pc','komputer','smartphone','hp','gadget','game','gaming','vga','gpu','cpu','ram','ssd','monitor',
@@ -64,8 +70,28 @@ class HealthAIController extends Controller
             'otomotif','motor','mobil'
         ];
 
-        $isHealth = false;
         $lower = mb_strtolower($userMessage, 'UTF-8');
+
+        // 1. Security Guard: Blacklist Check (Immediate Refusal)
+        // Ini akan memblokir "Cara hack website. Saya sakit kepala" karena ada kata "hack".
+        foreach ($blockedKeywords as $kw) {
+            if (str_contains($lower, mb_strtolower($kw, 'UTF-8'))) {
+                $refusal = "Maaf, saya tidak dapat memproses pertanyaan yang mengandung unsur ilegal, berbahaya, atau sensitif.";
+                AiMessage::create([
+                    'chat_id' => $chat->id,
+                    'role' => 'assistant',
+                    'content' => $refusal,
+                ]);
+                return response()->json([
+                    'success' => true,
+                    'chat_id' => $chat->id,
+                    'title' => $chat->title,
+                    'message' => $refusal,
+                ]);
+            }
+        }
+
+        $isHealth = false;
         foreach ($healthKeywords as $kw) {
             if (str_contains($lower, mb_strtolower($kw, 'UTF-8'))) {
                 $isHealth = true; break;
