@@ -127,77 +127,59 @@
             Cerita nyata dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman di HealthFirst Medical.
         </p>
 
-        <div class="grid md:grid-cols-3 gap-10">
+        <div class="grid md:grid-cols-3 gap-8">
             <!-- Testimonial 1 -->
-            <div class="flex flex-col space-y-6">
+            <div class="bg-gray-50 p-6 rounded-lg">
                 <div class="flex items-start space-x-4">
-                    <img src="https://i.pravatar.cc/80?img=68" alt="Sainem Wiyono" class="w-16 h-16 rounded-full object-cover border border-gray-200" />
-                    <div>
-                        <p class="italic text-gray-800 leading-relaxed">
-                            "Pelayanan di HealthFirst Medical sangat memuaskan. Dokternya ramah dan profesional, fasilitasnya modern dan bersih."
+                    <img src="https://i.pravatar.cc/80?img=68" alt="Sainem Wiyono" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200 flex-shrink-0" />
+                    <div class="flex-1">
+                        <p class="italic text-gray-700 leading-relaxed mb-3">
+                            "Sangat membantu.. malam2 butuh obat, gak perlu keluar rumah"
                         </p>
-                        <p class="uppercase tracking-wide text-xs text-gray-500 mt-3">SARAH WIJAYA</p>
+                        <p class="uppercase tracking-wide text-xs text-gray-500 font-medium">SAINEM WIYONO</p>
                     </div>
                 </div>
-                <button class="w-fit px-6 py-2 border border-purple-500 text-purple-500 rounded-full text-sm font-semibold hover:bg-purple-50 transition">
-                    Lihat Layanan
-                </button>
             </div>
 
             <!-- Testimonial 2 -->
-            <div class="flex flex-col space-y-6">
+            <div class="bg-gray-50 p-6 rounded-lg">
                 <div class="flex items-start space-x-4">
-                    <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center">
-                        <span class="text-pink-500 font-semibold text-xl">L</span>
-                    </div>
-                    <div>
-                        <p class="italic text-gray-800 leading-relaxed">
-                            "Sangat terbantu dengan layanan konsultasi dokter di HealthFirst Medical. Dokternya responsif dan penjelasannya sangat jelas. Proses pendaftaran mudah dan tidak perlu menunggu lama."
+                    <img src="https://i.pravatar.cc/80?img=45" alt="Lintang Anindhitya Indraswari" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200 flex-shrink-0" />
+                    <div class="flex-1">
+                        <p class="italic text-gray-700 leading-relaxed mb-3">
+                            "Sangat Helpful!! Terima kasih yaa, sangat menghemat waktu dan respon dokternya juga baik. resep obatnya juga manjur sekali, thank u ya semoga kedepannya tambah keren lagi."
                         </p>
-                        <p class="uppercase tracking-wide text-xs text-gray-500 mt-3">LINDA ANINDITA</p>
+                        <p class="uppercase tracking-wide text-xs text-gray-500 font-medium">LINTANG ANINDHITYA INDRASWARI</p>
                     </div>
                 </div>
-                <button class="w-fit px-6 py-2 border border-purple-500 text-purple-500 rounded-full text-sm font-semibold hover:bg-purple-50 transition">
-                    Buat Janji Temu
-                </button>
             </div>
 
             <!-- Testimonial 3 -->
-            <div class="flex flex-col space-y-6">
+            <div class="bg-gray-50 p-6 rounded-lg">
                 <div class="flex items-start space-x-4">
-                    <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center">
-                        <span class="text-pink-500 font-semibold text-xl">A</span>
-                    </div>
-                    <div>
-                        <p class="italic text-gray-800 leading-relaxed">
+                    <img src="https://i.pravatar.cc/80?img=12" alt="Ahkbar Felyayti" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200 flex-shrink-0" />
+                    <div class="flex-1">
+                        <p class="italic text-gray-700 leading-relaxed mb-3">
                             "Pengalaman rawat inap di HealthFirst Medical sangat berkesan. Perawatnya sangat care, kamarnya nyaman, dan makanannya enak. Terima kasih atas pelayanan terbaiknya!"
                         </p>
-                        <p class="uppercase tracking-wide text-xs text-gray-500 mt-3">AHMAD FAUZI</p>
+                        <p class="uppercase tracking-wide text-xs text-gray-500 font-medium">AHKBAR FELYAYTI</p>
                     </div>
                 </div>
-                <button class="w-fit px-6 py-2 border border-purple-500 text-purple-500 rounded-full text-sm font-semibold hover:bg-purple-50 transition">
-                    Info Rawat Inap
-                </button>
             </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-10 mt-12">
+        <div class="grid md:grid-cols-1 gap-8 mt-8 max-w-2xl">
             <!-- Testimonial 4 -->
-            <div class="flex flex-col space-y-6">
+            <div class="bg-gray-50 p-6 rounded-lg">
                 <div class="flex items-start space-x-4">
-                    <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center">
-                        <span class="text-pink-500 font-semibold text-xl">I</span>
-                    </div>
-                    <div>
-                        <p class="italic text-gray-800 leading-relaxed">
-                            "Pemeriksaan kesehatan di HealthFirst Medical sangat lengkap dan mendetail. Hasil lab cepat keluar, dan dokter menjelaskan dengan sangat baik. Harga juga terjangkau dengan fasilitas yang sangat bagus."
+                    <img src="https://i.pravatar.cc/80?img=27" alt="Izza Afkarina Mudmainah" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200 flex-shrink-0" />
+                    <div class="flex-1">
+                        <p class="italic text-gray-700 leading-relaxed mb-3">
+                            "Hallo, terimakasih HealthFirst Medical sejak pertama konsultasi hingga saat ini kulitku sudah banyak mengalami perubahan. Jerawat dan bekasnya semakin membaik berkat saran dokter-dokter HealthFirst Medical. Jujur baru kali ini bisa konsultasi dengan dokter kulit secara leluasa dan terbuka, semua pertanyaan tentang jerawatku dijawab secara gamblang."
                         </p>
-                        <p class="uppercase tracking-wide text-xs text-gray-500 mt-3">ISMA FITRIANA</p>
+                        <p class="uppercase tracking-wide text-xs text-gray-500 font-medium">IZZA AFKARINA MUDMAINAH</p>
                     </div>
                 </div>
-                <button class="w-fit px-6 py-2 border border-purple-500 text-purple-500 rounded-full text-sm font-semibold hover:bg-purple-50 transition">
-                    Cek Layanan Kami
-                </button>
             </div>
         </div>
     </div>

@@ -339,7 +339,7 @@
                         Cerita dari pasien yang merasakan layanan kesehatan cepat, aman, dan nyaman di HealthFirst Medical.
                     </p>
 
-                    <div class="grid md:grid-cols-3 gap-8">
+                    <div class="grid md:grid-cols-3 gap-6">
                         <!-- Testimonial 1 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
