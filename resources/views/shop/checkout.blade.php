@@ -139,10 +139,10 @@
                                 </div>
 
                                 <!-- QRIS QR Code Display (Hidden by default) -->
-                                <div id="qrisCodeSection" class="hidden mt-6 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
+                                <div id="qrisCodeSection" class="hidden mt-6 p-6 bg-blue-50 dark:bg-slate-700 border-2 border-blue-200 dark:border-slate-600 rounded-lg">
                                     <div class="text-center">
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                                            <i class="fas fa-qrcode mr-2 text-blue-600"></i>Scan QRIS untuk Bayar
+                                            <i class="fas fa-qrcode mr-2 text-blue-600 dark:text-blue-400"></i>Scan QRIS untuk Bayar
                                         </h4>
                                         
                                         <div class="inline-block bg-white border-4 border-gray-800 p-4 rounded-lg shadow-lg mb-4">
@@ -160,11 +160,11 @@
                                             </div>
                                         </div>
                                         
-                                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                                        <p class="text-sm text-gray-600 dark:text-gray-300 mt-4">
                                             <i class="fas fa-shield-alt mr-1"></i>Pembayaran aman dengan QRIS Indonesia
                                         </p>
                                         
-                                        <p class="text-xs text-gray-500 mt-2">
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
                                             Setelah scan, lanjutkan checkout untuk menyelesaikan pesanan
                                         </p>
                                     </div>
@@ -376,6 +376,7 @@
                                         <span>Ongkos Kirim</span>
                                         <span id="shipping-cost">Rp 0</span>
                                     </div>
+                                    <input type="hidden" name="shipping_cost" id="shipping-cost-input" value="0">
                                     <div class="border-t pt-2 flex justify-between text-lg font-bold">
                                         <span>Total Pembayaran</span>
                                         <span class="text-blue-600" id="total-amount">Rp {{ number_format($buyNow ? ($buyNow['price'] * $buyNow['quantity']) : $cart->total, 0, ',', '.') }}</span>
@@ -423,6 +424,7 @@
 
                 // Update display
                 document.getElementById('shipping-cost').textContent = 'Rp ' + shippingCost.toLocaleString('id-ID');
+                document.getElementById('shipping-cost-input').value = shippingCost;
                 document.getElementById('total-amount').textContent = 'Rp ' + currentTotal.toLocaleString('id-ID');
                 
                 // Update QRIS total if visible

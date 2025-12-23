@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }" x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }"
+    x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,15 +18,27 @@
     <!-- CSS/JS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Prevent dark mode flicker -->
+    <script>
+        // Apply dark mode immediately to prevent flicker
+        (function () {
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
     <style>
-        [x-cloak] { display: none !important; }
-        
+        [x-cloak] {
+            display: none !important;
+        }
+
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
-        
+
         .dark .glass-nav {
             background: rgba(15, 23, 42, 0.9);
         }
@@ -78,19 +93,23 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+<body
+    class="font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
     <div class="min-h-screen flex flex-col">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-24 z-40 transition-colors duration-300">
+            <header
+                class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-24 z-40 transition-colors duration-300">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
         @elseif(View::hasSection('header'))
-            <header class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-24 z-40 transition-colors duration-300">
+            <header
+                class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-24 z-40 transition-colors duration-300">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     @yield('header')
                 </div>
@@ -107,43 +126,67 @@
         <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
         <!-- Footer -->
-        <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <footer
+            class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div class="col-span-1 md:col-span-1">
                         <div class="flex items-center gap-2 mb-4">
                             <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="Logo" class="h-10 w-auto" />
-                            <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">HealthFirst</span>
+                            <span
+                                class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">HealthFirst</span>
                         </div>
                         <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                            Solusi kesehatan digital terpadu untuk pelayanan medis yang lebih cepat, akurat, dan terpercaya. Karena kesehatan Anda adalah prioritas utama kami.
+                            Solusi kesehatan digital terpadu untuk pelayanan medis yang lebih cepat, akurat, dan
+                            terpercaya. Karena kesehatan Anda adalah prioritas utama kami.
                         </p>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 dark:text-white mb-4">Layanan Kami</h4>
                         <ul class="space-y-2 text-sm">
-                            <li><a href="{{ route('appointments.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Konsultasi Dokter</a></li>
-                            <li><a href="{{ route('appointments.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Check Up Kesehatan</a></li>
-                            <li><a href="{{ route('products.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Apotek Online</a></li>
-                            <li><a href="{{ route('prescriptions.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Rekam Medis Digital</a></li>
+                            <li><a href="{{ route('appointments.index') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Konsultasi
+                                    Dokter</a></li>
+                            <li><a href="{{ route('appointments.index') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Check
+                                    Up Kesehatan</a></li>
+                            <li><a href="{{ route('products.index') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Apotek
+                                    Online</a></li>
+                            <li><a href="{{ route('prescriptions.index') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Rekam
+                                    Medis Digital</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 dark:text-white mb-4">Quick Links</h4>
                         <ul class="space-y-2 text-sm">
-                            <li><a href="{{ route('about') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Tentang Kami</a></li>
-                            <li><a href="{{ route('contact') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Hubungi Kami</a></li>
-                            <li><a href="{{ route('faq') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">FAQ</a></li>
-                            <li><a href="{{ route('terms') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Syarat & Ketentuan</a></li>
-                            <li><a href="{{ route('privacy') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Kebijakan Privasi</a></li>
+                            <li><a href="{{ route('about') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Tentang
+                                    Kami</a></li>
+                            <li><a href="{{ route('contact') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Hubungi
+                                    Kami</a></li>
+                            <li><a href="{{ route('faq') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">FAQ</a>
+                            </li>
+                            <li><a href="{{ route('terms') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Syarat
+                                    & Ketentuan</a></li>
+                            <li><a href="{{ route('privacy') }}"
+                                    class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Kebijakan
+                                    Privasi</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 dark:text-white mb-4">Newsletter</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Dapatkan info kesehatan dan promo menarik langsung di email Anda.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Dapatkan info kesehatan dan promo
+                            menarik langsung di email Anda.</p>
                         <form class="flex gap-2">
-                            <input type="email" placeholder="Email Anda" class="flex-grow px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border-transparent focus:border-blue-500 focus:ring-0 text-sm transition" />
-                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-md shadow-blue-500/20">
+                            <input type="email" placeholder="Email Anda"
+                                class="flex-grow px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border-transparent focus:border-blue-500 focus:ring-0 text-sm transition" />
+                            <button
+                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-md shadow-blue-500/20">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </form>
@@ -157,23 +200,31 @@
 
                     <div class="flex items-center justify-between flex-wrap gap-4">
                         <div class="flex items-center space-x-4">
-                            <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
-                                <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001" class="h-10 w-auto object-contain" />
+                            <div
+                                class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                                <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001"
+                                    class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO 27001</span>
                             </div>
-                            <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
-                                <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy" class="h-10 w-auto object-contain" />
+                            <div
+                                class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                                <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy"
+                                    class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Privacy</span>
                             </div>
-                            <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
-                                <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified" class="h-10 w-auto object-contain" />
+                            <div
+                                class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                                <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified"
+                                    class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
                             </div>
                         </div>
 
-                        <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center shadow-sm">
+                        <div
+                            class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center shadow-sm">
                             <div class="flex items-center gap-2">
-                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI" class="h-10 w-auto object-contain" />
+                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI"
+                                    class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
                             </div>
                         </div>
@@ -186,12 +237,12 @@
     <!-- Scripts -->
     <script>
         // Toast Implementation
-        window.showToast = function(message, type = 'success') {
+        window.showToast = function (message, type = 'success') {
             const container = document.getElementById('toast-container');
             if (!container) return;
 
             const toast = document.createElement('div');
-            
+
             const colors = {
                 success: 'bg-emerald-500',
                 error: 'bg-rose-500',
@@ -240,13 +291,14 @@
                 ];
             @endphp
 
-            @foreach($notifications as $type => $message)
-                @if($message)
-                    window.showToast(@json($message), @json($type));
-                @endif
-            @endforeach
+        @foreach($notifications as $type => $message)
+            @if($message)
+                window.showToast(@json($message), @json($type));
+            @endif
+        @endforeach
         });
     </script>
-    @stack('scripts')
+    @st
+ack('scripts')
 </body>
 </html>
