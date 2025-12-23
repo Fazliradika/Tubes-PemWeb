@@ -157,7 +157,7 @@
             </header>
         @endisset
 
-        @hasSection('header')
+        @if (trim($__env->yieldContent('header')))
             <header
                 class="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-800 dark:to-blue-700 shadow-lg shadow-blue-500/20 dark:shadow-blue-900/30">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -367,8 +367,21 @@
 
     <!-- Flash Message Toast Script -->
     @if(session('success') || session('error') || session('warning') || session('info'))
-        <script>         document.addEventListener('DOMContentLoaded', function () {             @if(session('success'))             window.showToast(@json(session('success')), 'success');             @endif             @if(session('error'))             window.showToast(@json(session('error')), 'error');             @endif             @if(session('warning'))             window.showToast(@json(session('warning')), 'warning');             @endif             @if(session('info'))             window.showToast(@json(session('info')), 'info');             @endif
-                        });
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                @if(session('success'))
+                    window.showToast(@json(session('success')), 'success');
+                @endif
+                @if(session('error'))
+                    window.showToast(@json(session('error')), 'error');
+                @endif
+                @if(session('warning'))
+                    window.showToast(@json(session('warning')), 'warning');
+                @endif
+                @if(session('info'))
+                    window.showToast(@json(session('info')), 'info');
+                @endif
+            });
         </script>
     @endif
 </body>
