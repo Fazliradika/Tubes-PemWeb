@@ -363,7 +363,5 @@
 
     <!-- Stacked Scripts from Views -->
     @stack('scripts')
-
 </body>
-
 </html>
