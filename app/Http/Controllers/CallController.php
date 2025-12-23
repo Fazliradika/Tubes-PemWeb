@@ -20,9 +20,17 @@ class CallController extends Controller
                 'type' => 'required|in:video,voice',
             ]);
 
+            // Eager load doctor to avoid N+1 and ensure data is available
+            $conversation->load('doctor');
+
             // Check if user is part of the conversation
             if (!$this->userBelongsToConversation($conversation)) {
-                return response()->json(['success' => false, 'error' => 'Unauthorized'], 403);
+                return response()->json(['success' => false, 'error' => 'Unauthorized Access'], 403);
+            }
+
+            // Safety check for doctor relationship
+            if (!$conversation->doctor) {
+                return response()->json(['success' => false, 'error' => 'Doctor data not found'], 404);
             }
 
             // Determine receiver
@@ -105,8 +113,14 @@ class CallController extends Controller
      */
     private function userBelongsToConversation(Conversation $conversation)
     {
-        return $conversation->patient_id === auth()->id()
-            || $conversation->doctor->user_id === auth()->id();
+        // Safe check with optional chaining behavior logic
+        $isPatient = $conversation->patient_id === auth()->id();
+
+        // Check doctor side safely
+        $conversation->loadMissing('doctor');
+        $isDoctor = $conversation->doctor && $conversation->doctor->user_id === auth()->id();
+
+        return $isPatient || $isDoctor;
     }
 
     /**
@@ -115,6 +129,9 @@ class CallController extends Controller
     private function userBelongsToCallSession(CallSession $callSession)
     {
         $conversation = $callSession->conversation;
+        if (!$conversation)
+            return false;
+
         return $this->userBelongsToConversation($conversation);
     }
 

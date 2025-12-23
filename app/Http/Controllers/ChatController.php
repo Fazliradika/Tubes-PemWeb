@@ -130,9 +130,15 @@ class ChatController extends Controller
         if ($request->hasFile('image')) {
             $type = 'image';
             $image = $request->file('image');
-            $path = $image->store('chat-images', 'public');
+            $path = $image->store('chat-images', 'local'); // Use local disk for security
+            $filename = basename($path);
+
+            // Generate URL validation route instead of direct storage link
+            $imageUrl = route('chat.image', ['filename' => $filename]);
+
             $metadata = [
-                'image_url' => asset('storage/' . $path),
+                'image_url' => $imageUrl,
+                'path' => $path,
                 'original_name' => $image->getClientOriginalName(),
                 'size' => $image->getSize(),
             ];
@@ -162,6 +168,24 @@ class ChatController extends Controller
             'success' => true,
             'message' => $message->load('sender'),
         ]);
+    }
+
+    /**
+     * Serve chat image securely
+     */
+    public function getImage($filename)
+    {
+        $path = 'chat-images/' . $filename;
+
+        if (!\Storage::disk('local')->exists($path)) {
+            // Try public disk as fallback for old images
+            if (\Storage::disk('public')->exists($path)) {
+                return response()->file(\Storage::disk('public')->path($path));
+            }
+            abort(404);
+        }
+
+        return response()->file(\Storage::disk('local')->path($path));
     }
 
     /**
