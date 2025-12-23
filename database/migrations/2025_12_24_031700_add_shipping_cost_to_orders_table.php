@@ -11,8 +11,12 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('courier')->nullable()->after('shipping_phone');
-            $table->decimal('shipping_cost', 12, 2)->default(0)->after('courier');
+            if (!Schema::hasColumn('orders', 'courier')) {
+                $table->string('courier')->nullable()->after('shipping_phone');
+            }
+            if (!Schema::hasColumn('orders', 'shipping_cost')) {
+                $table->decimal('shipping_cost', 12, 2)->default(0)->after('courier');
+            }
         });
     }
 
