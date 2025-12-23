@@ -18,6 +18,13 @@ Route::get('/', function () {
 // Farewell / end page (public)
 Route::view('/end', 'end')->name('end');
 
+// Static Information Pages (public)
+Route::view('/faq', 'pages.faq')->name('faq');
+Route::view('/about', 'pages.about')->name('about');
+Route::view('/contact', 'pages.contact')->name('contact');
+Route::view('/terms', 'pages.terms')->name('terms');
+Route::view('/privacy', 'pages.privacy')->name('privacy');
+
 // Lightweight health endpoint for platform checks (no DB access)
 Route::get('/health', function () {
     return response()->json(['status' => 'ok']);
@@ -139,7 +146,7 @@ Route::middleware('auth')->prefix('calls')->group(function () {
 Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/messages/unread-count', [\App\Http\Controllers\ChatController::class, 'unreadCount'])->name('api.messages.unread-count');
     Route::get('/conversations/{conversation}/messages', [\App\Http\Controllers\ChatController::class, 'fetchMessages'])->name('api.conversations.messages');
-    
+
     // Prescription API for real-time updates
     Route::get('/prescriptions/check-new', [\App\Http\Controllers\PrescriptionController::class, 'checkNew'])->name('api.prescriptions.check-new');
     Route::get('/prescriptions/latest', [\App\Http\Controllers\PrescriptionController::class, 'latest'])->name('api.prescriptions.latest');
@@ -148,7 +155,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
 // Consolidated Admin Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     Route::prefix('reports')->group(function () {
         Route::get('/sales', [ReportController::class, 'sales'])->name('reports.sales');
         Route::get('/users', [ReportController::class, 'users'])->name('reports.users');
@@ -156,7 +163,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
 
     Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'adminIndex'])->name('orders.index');
     Route::patch('/orders/{order}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus'])->name('orders.update-status');
-    
+
     // Article Management
     Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class);
 

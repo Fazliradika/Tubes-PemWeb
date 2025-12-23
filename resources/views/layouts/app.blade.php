@@ -122,19 +122,20 @@
                     <div>
                         <h4 class="font-bold text-slate-900 dark:text-white mb-4">Layanan Kami</h4>
                         <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Konsultasi Dokter</a></li>
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Check Up Kesehatan</a></li>
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Apotek Online</a></li>
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Rekam Medis Digital</a></li>
+                            <li><a href="{{ route('appointments.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Konsultasi Dokter</a></li>
+                            <li><a href="{{ route('appointments.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Check Up Kesehatan</a></li>
+                            <li><a href="{{ route('products.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Apotek Online</a></li>
+                            <li><a href="{{ route('prescriptions.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Rekam Medis Digital</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 dark:text-white mb-4">Quick Links</h4>
                         <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Tentang Kami</a></li>
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Hubungi Kami</a></li>
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Syarat & Ketentuan</a></li>
-                            <li><a href="#" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Kebijakan Privasi</a></li>
+                            <li><a href="{{ route('about') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Tentang Kami</a></li>
+                            <li><a href="{{ route('contact') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Hubungi Kami</a></li>
+                            <li><a href="{{ route('faq') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">FAQ</a></li>
+                            <li><a href="{{ route('terms') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Syarat & Ketentuan</a></li>
+                            <li><a href="{{ route('privacy') }}" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Kebijakan Privasi</a></li>
                         </ul>
                     </div>
                     <div>
@@ -176,7 +177,6 @@
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
                             </div>
                         </div>
->>>>>>> ea29bc99639dd67721f132d42a535f40d730c40c
                     </div>
                 </div>
             </div>
