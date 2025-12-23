@@ -18,7 +18,7 @@ class ChatController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
+
         if ($user->isPatient()) {
             $conversations = Conversation::with(['doctor.user', 'latestMessage'])
                 ->where('patient_id', $user->id)
@@ -45,7 +45,7 @@ class ChatController extends Controller
     public function show(Conversation $conversation)
     {
         $user = Auth::user();
-        
+
         // Authorization check
         if ($user->isPatient() && $conversation->patient_id !== $user->id) {
             abort(403);
@@ -71,7 +71,7 @@ class ChatController extends Controller
     public function createFromAppointment(Appointment $appointment)
     {
         $user = Auth::user();
-        
+
         // Check authorization
         if (!$user->isPatient() || $appointment->patient_id !== $user->id) {
             abort(403);
@@ -94,7 +94,7 @@ class ChatController extends Controller
                 'last_message_at' => now(),
             ]
         );
-        
+
         // Update last_message_at if conversation already exists but is null
         if (!$conversation->last_message_at) {
             $conversation->update(['last_message_at' => now()]);
@@ -109,7 +109,7 @@ class ChatController extends Controller
     public function sendMessage(Request $request, Conversation $conversation)
     {
         $user = Auth::user();
-        
+
         // Authorization check
         if ($user->isPatient() && $conversation->patient_id !== $user->id) {
             abort(403);
@@ -118,15 +118,40 @@ class ChatController extends Controller
         }
 
         $validated = $request->validate([
-            'message' => 'required_without:type|string',
+            'message' => 'nullable|string|max:5000',
             'type' => 'nullable|in:text,image,file',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max
         ]);
+
+        $type = $validated['type'] ?? 'text';
+        $metadata = null;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $type = 'image';
+            $image = $request->file('image');
+            $path = $image->store('chat-images', 'public');
+            $metadata = [
+                'image_url' => asset('storage/' . $path),
+                'original_name' => $image->getClientOriginalName(),
+                'size' => $image->getSize(),
+            ];
+        }
+
+        // Require either message or image
+        if (empty($validated['message']) && !$request->hasFile('image')) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Pesan atau gambar diperlukan'
+            ], 422);
+        }
 
         $message = Message::create([
             'conversation_id' => $conversation->id,
             'sender_id' => $user->id,
             'message' => $validated['message'] ?? null,
-            'type' => $validated['type'] ?? 'text',
+            'type' => $type,
+            'metadata' => $metadata,
         ]);
 
         // Update conversation last message time
@@ -180,7 +205,7 @@ class ChatController extends Controller
     public function initiateCall(Request $request, Conversation $conversation)
     {
         $user = Auth::user();
-        
+
         // Authorization check
         if ($user->isPatient() && $conversation->patient_id !== $user->id) {
             abort(403);
@@ -193,8 +218,8 @@ class ChatController extends Controller
         ]);
 
         // Determine receiver
-        $receiverId = $user->isPatient() 
-            ? $conversation->doctor->user_id 
+        $receiverId = $user->isPatient()
+            ? $conversation->doctor->user_id
             : $conversation->patient_id;
 
         $callSession = CallSession::create([
@@ -228,7 +253,7 @@ class ChatController extends Controller
     public function answerCall(CallSession $callSession)
     {
         $user = Auth::user();
-        
+
         if ($callSession->receiver_id !== $user->id) {
             abort(403);
         }
@@ -259,13 +284,13 @@ class ChatController extends Controller
     public function endCall(CallSession $callSession)
     {
         $user = Auth::user();
-        
+
         if ($callSession->caller_id !== $user->id && $callSession->receiver_id !== $user->id) {
             abort(403);
         }
 
-        $duration = $callSession->started_at 
-            ? now()->diffInSeconds($callSession->started_at) 
+        $duration = $callSession->started_at
+            ? now()->diffInSeconds($callSession->started_at)
             : 0;
 
         $callSession->update([
@@ -296,7 +321,7 @@ class ChatController extends Controller
     public function rejectCall(CallSession $callSession)
     {
         $user = Auth::user();
-        
+
         if ($callSession->receiver_id !== $user->id) {
             abort(403);
         }
@@ -315,22 +340,22 @@ class ChatController extends Controller
     public function unreadCount()
     {
         $user = Auth::user();
-        
+
         if ($user->isPatient()) {
             $count = Message::whereHas('conversation', function ($query) use ($user) {
                 $query->where('patient_id', $user->id);
             })
-            ->where('sender_id', '!=', $user->id)
-            ->whereNull('read_at')
-            ->count();
+                ->where('sender_id', '!=', $user->id)
+                ->whereNull('read_at')
+                ->count();
         } elseif ($user->isDoctor()) {
             $doctor = $user->doctorProfile;
             $count = Message::whereHas('conversation', function ($query) use ($doctor) {
                 $query->where('doctor_id', $doctor->id);
             })
-            ->where('sender_id', '!=', $user->id)
-            ->whereNull('read_at')
-            ->count();
+                ->where('sender_id', '!=', $user->id)
+                ->whereNull('read_at')
+                ->count();
         } else {
             $count = 0;
         }
