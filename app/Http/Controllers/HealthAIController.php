@@ -76,7 +76,7 @@ class HealthAIController extends Controller
         // Ini akan memblokir "Cara hack website. Saya sakit kepala" karena ada kata "hack".
         foreach ($blockedKeywords as $kw) {
             if (str_contains($lower, mb_strtolower($kw, 'UTF-8'))) {
-                $refusal = "Maaf, saya tidak dapat memproses pertanyaan yang mengandung unsur ilegal, berbahaya, atau sensitif.";
+                $refusal = "Maaf, saya adalah asisten AI khusus kesehatan. Saya tidak bisa membantu permintaan tersebut. Saya bisa membantu pertanyaan seputar kesehatan seperti gejala, pencegahan, gaya hidup sehat, nutrisi, olahraga, kesehatan mental, serta kapan sebaiknya konsultasi ke dokter.";
                 AiMessage::create([
                     'chat_id' => $chat->id,
                     'role' => 'assistant',
