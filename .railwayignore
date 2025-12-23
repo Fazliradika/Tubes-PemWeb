@@ -1,0 +1,16 @@
+node_modules/
+.git/
+.github/
+tests/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+.env
+.env.example
+.gitignore
+.editorconfig
+.styleci.yml
+phpunit.xml
+README.md
+SECURITY.md
