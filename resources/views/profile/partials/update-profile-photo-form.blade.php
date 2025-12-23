@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Photo') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your profile photo.") }}
         </p>
     </header>
@@ -37,11 +37,11 @@
                 <input id="profile_photo" 
                        name="profile_photo" 
                        type="file" 
-                       class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" 
+                       class="mt-1 block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-900 focus:outline-none" 
                        accept="image/*"
                        required />
                 <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
-                <p class="mt-1 text-sm text-gray-500">JPG, PNG (Max: 2MB)</p>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">JPG, PNG (Max: 2MB)</p>
             </div>
 
             <div class="flex items-center gap-4 mt-4">
