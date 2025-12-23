@@ -27,7 +27,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 'start_time' => '08:00:00',
                 'end_time' => '20:00:00',
-                'photo' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop',
+                'photo' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4',
             ],
             [
                 'name' => 'Dr. Ahmad Fadli',
@@ -51,7 +51,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Tuesday', 'Thursday', 'Saturday'],
                 'start_time' => '10:00:00',
                 'end_time' => '18:00:00',
-                'photo' => 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop',
+                'photo' => 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4',
             ],
             [
                 'name' => 'Dr. Budi Santoso',
@@ -75,7 +75,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Wednesday', 'Friday', 'Saturday'],
                 'start_time' => '09:00:00',
                 'end_time' => '16:00:00',
-                'photo' => 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop',
+                'photo' => 'https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4',
             ],
             [
                 'name' => 'Dr. Rudi Hermawan',

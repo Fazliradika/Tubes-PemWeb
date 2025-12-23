@@ -9,8 +9,23 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // Update photos for 3 doctors with incorrect images
+        // Update photos for ALL doctors to ensure no duplicates
         $doctorPhotoUpdates = [
+            // Row 1
+            [
+                'email' => 'doctor@healthfirst.com',
+                'photo' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4'
+            ],
+            [
+                'email' => 'citra.dewi@hospital.com',
+                'photo' => 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4'
+            ],
+            // Row 2
+            [
+                'email' => 'sarah.wijaya@hospital.com',
+                'photo' => 'https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4'
+            ],
+            // Row 3
             [
                 'email' => 'linda.kusuma@hospital.com',
                 'photo' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=focalpoint&fp-y=0.4'
