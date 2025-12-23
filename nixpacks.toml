@@ -1,0 +1,27 @@
+# Nixpacks configuration for Laravel with Vite/TailwindCSS
+
+[phases.setup]
+nixPkgs = ['php83', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.mbstring', 'php83Extensions.xml', 'php83Extensions.curl', 'php83Extensions.zip', 'php83Extensions.gd', 'php83Extensions.fileinfo', 'php83Extensions.tokenizer', 'php83Extensions.ctype', 'php83Extensions.bcmath', 'nodejs_20', 'npm']
+
+[phases.install]
+cmds = [
+    'composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev',
+    'npm ci --include=dev'
+]
+
+[phases.build]
+cmds = [
+    'npm run build',
+    'php artisan storage:link || true',
+    'php artisan config:cache',
+    'php artisan route:cache',
+    'php artisan view:cache'
+]
+
+[start]
+cmd = 'php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}'
+
+[variables]
+APP_ENV = 'production'
+APP_DEBUG = 'false'
+ASSET_URL = '${RAILWAY_PUBLIC_DOMAIN:+https://$RAILWAY_PUBLIC_DOMAIN}'
