@@ -130,17 +130,31 @@ class ChatController extends Controller
         if ($request->hasFile('image')) {
             $type = 'image';
             $image = $request->file('image');
-            $path = $image->store('chat-images', 'local'); // Use local disk for security
-            $filename = basename($path);
 
-            // Generate URL validation route instead of direct storage link
+            // Store image in Database
+            $content = file_get_contents($image->getRealPath());
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $mimeType = $image->getMimeType();
+
+            $chatFileId = DB::table('chat_files')->insertGetId([
+                'user_id' => $user->id,
+                'filename' => $filename,
+                'mime_type' => $mimeType,
+                'data' => base64_encode($content),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Generate URL validation route
+            // We use filename parameter in route, but we will redirect logic to query by filename
             $imageUrl = route('chat.image', ['filename' => $filename]);
 
             $metadata = [
                 'image_url' => $imageUrl,
-                'path' => $path,
                 'original_name' => $image->getClientOriginalName(),
                 'size' => $image->getSize(),
+                'mime_type' => $mimeType,
+                'file_id' => $chatFileId
             ];
         }
 
@@ -171,21 +185,31 @@ class ChatController extends Controller
     }
 
     /**
-     * Serve chat image securely
+     * Serve chat image securely from Database
      */
     public function getImage($filename)
     {
-        $path = 'chat-images/' . $filename;
+        $file = DB::table('chat_files')->where('filename', $filename)->first();
 
-        if (!\Storage::disk('local')->exists($path)) {
-            // Try public disk as fallback for old images
-            if (\Storage::disk('public')->exists($path)) {
-                return response()->file(\Storage::disk('public')->path($path));
-            }
-            abort(404);
+        if ($file) {
+            $content = base64_decode($file->data);
+            return response($content)
+                ->header('Content-Type', $file->mime_type)
+                ->header('Cache-Control', 'public, max-age=31536000');
         }
 
-        return response()->file(\Storage::disk('local')->path($path));
+        // Fallback to local storage for old images if needed
+        $path = 'chat-images/' . $filename;
+        if (\Storage::disk('local')->exists($path)) {
+            return response()->file(\Storage::disk('local')->path($path));
+        }
+
+        // Fallback to public storage
+        if (\Storage::disk('public')->exists($path)) {
+            return response()->file(\Storage::disk('public')->path($path));
+        }
+
+        abort(404);
     }
 
     /**
