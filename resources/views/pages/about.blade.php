@@ -128,39 +128,53 @@
             <!-- Team Section -->
             <div class="mb-16">
                 <h2 class="text-3xl font-bold text-slate-900 dark:text-white text-center mb-12">Tim Kami</h2>
-                <div class="grid md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div
-                            class="w-32 h-32 mx-auto bg-slate-200 dark:bg-slate-700 rounded-full mb-4 flex items-center justify-center">
-                            <i class="fas fa-user text-4xl text-slate-400"></i>
+
+                @php
+                    $team = [
+                        [
+                            'name' => 'Muhammad Rafadi Kurniawan',
+                            'role' => 'AI & ML Engineer',
+                            'photo' => asset('media/end/team/Rafadi.png')
+                        ],
+                        [
+                            'name' => 'Naufal Saifullah Yusuf',
+                            'role' => 'UI/UX Designer & Frontend Developer',
+                            'photo' => asset('media/end/team/Yusuf.png')
+                        ],
+                        [
+                            'name' => 'Fazli Radika',
+                            'role' => 'Project Manager & Backend Developer',
+                            'photo' => asset('media/end/team/Fazli.png')
+                        ],
+                        [
+                            'name' => 'Muhammad Afriza Hidayat',
+                            'role' => 'QA Tester & System Integration',
+                            'photo' => asset('media/end/team/Afriza.png')
+                        ],
+                        [
+                            'name' => 'Aldyansyah Wisnu Saputra',
+                            'role' => 'Medical Content Specialist & Research',
+                            'photo' => asset('media/end/team/Aldy.png')
+                        ],
+                    ];
+                @endphp
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    @foreach($team as $member)
+                        <div class="text-center group">
+                            <div class="relative w-32 h-32 mx-auto mb-4">
+                                <div
+                                    class="absolute inset-0 bg-blue-100 dark:bg-blue-900/30 rounded-full scale-110 group-hover:scale-125 transition-transform duration-300">
+                                </div>
+                                <img src="{{ $member['photo'] }}" alt="{{ $member['name'] }}"
+                                    class="relative w-full h-full object-cover rounded-full border-2 border-white dark:border-slate-800 shadow-md group-hover:shadow-lg transition-shadow duration-300">
+                            </div>
+                            <h3
+                                class="font-semibold text-slate-900 dark:text-white mb-1 px-2 h-12 flex items-center justify-center text-sm md:text-base leading-tight">
+                                {{ $member['name'] }}</h3>
+                            <p class="text-xs text-blue-600 dark:text-blue-400 font-medium px-2">{{ $member['role'] }}</p>
                         </div>
-                        <h3 class="font-semibold text-slate-900 dark:text-white">Dr. Budi Santoso</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">CEO & Founder</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="w-32 h-32 mx-auto bg-slate-200 dark:bg-slate-700 rounded-full mb-4 flex items-center justify-center">
-                            <i class="fas fa-user text-4xl text-slate-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-slate-900 dark:text-white">Siti Rahayu</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Chief Medical Officer</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="w-32 h-32 mx-auto bg-slate-200 dark:bg-slate-700 rounded-full mb-4 flex items-center justify-center">
-                            <i class="fas fa-user text-4xl text-slate-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-slate-900 dark:text-white">Ahmad Wijaya</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Chief Technology Officer</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="w-32 h-32 mx-auto bg-slate-200 dark:bg-slate-700 rounded-full mb-4 flex items-center justify-center">
-                            <i class="fas fa-user text-4xl text-slate-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-slate-900 dark:text-white">Lisa Hartono</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Head of Operations</p>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
