@@ -5,8 +5,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-                        <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical Logo" class="h-24 w-auto object-contain">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-1">
+                        <span class="h-20 w-14 overflow-hidden shrink-0">
+                            <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical Logo" class="h-20 w-auto max-w-none object-left" />
+                        </span>
                         <span class="text-xl font-bold text-blue-600 dark:text-blue-400">HealthFirst Medical</span>
                     </a>
                 </div>

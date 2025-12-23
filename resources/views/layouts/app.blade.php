@@ -142,7 +142,7 @@
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-[9999] flex flex-col gap-2"></div>
 
-    <div class="min-h-screen bg-gray-100 dark:bg-slate-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col bg-gray-100 dark:bg-slate-900 transition-colors duration-300">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -170,7 +170,7 @@
 
 
         <!-- Page Content -->
-        <main class="dark:text-slate-200">
+        <main class="flex-1 dark:text-slate-200">
             @isset($slot)
                 {{ $slot }}
             @else
@@ -179,13 +179,15 @@
         </main>
 
         <!-- Footer - Liquid Glass with Blue Theme -->
-        <footer class="glass-footer py-12 mt-16">
+        <footer class="glass-footer py-12 mt-auto">
             <div class="container mx-auto px-4">
                 <!-- Top Section with Logo -->
                 <div class="mb-8">
-                    <div class="flex items-center gap-2 mb-6">
-                        <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical"
-                            class="h-24 w-auto object-contain">
+                    <div class="flex items-center gap-1 mb-6">
+                        <span class="h-20 w-14 overflow-hidden shrink-0">
+                            <img src="{{ asset('images/LOGO_HealthFirst.png') }}" alt="HealthFirst Medical"
+                                class="h-20 w-auto max-w-none object-left" />
+                        </span>
                         <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">HealthFirst Medical</span>
                     </div>
 
@@ -327,42 +329,24 @@
                             <h4 class="font-bold text-blue-600 dark:text-blue-400 text-xs mb-4 uppercase tracking-wide">
                                 Keamanan & Privasi</h4>
                             <div class="flex items-center space-x-4">
-                                <div class="glass-card rounded-xl p-3 flex items-center gap-2">
-                                    <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
-                                    </svg>
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO
-                                        27001</span>
+                                <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
+                                    <img src="{{ asset('images/bsi-logo-security.webp') }}" alt="BSI ISO 27001" class="h-10 w-auto object-contain" />
+                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ISO 27001</span>
                                 </div>
-                                <div class="glass-card rounded-xl p-3 flex items-center gap-2">
-                                    <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
-                                    </svg>
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">SSL
-                                        Secure</span>
+                                <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
+                                    <img src="{{ asset('images/bsi-logo-privacy.webp') }}" alt="BSI Privacy" class="h-10 w-auto object-contain" />
+                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Privacy</span>
                                 </div>
-                                <div class="glass-card rounded-xl p-3 flex items-center gap-2">
-                                    <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
-                                    </svg>
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Data
-                                        Protected</span>
+                                <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3">
+                                    <img src="{{ asset('images/legit-script-cert.webp') }}" alt="LegitScript Certified" class="h-10 w-auto object-contain" />
+                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
                                 </div>
                             </div>
                         </div>
                         <div class="glass-card rounded-xl px-4 py-3 flex items-center space-x-3">
                             <span class="text-slate-600 dark:text-slate-400 text-sm">Dibina oleh</span>
                             <div class="flex items-center gap-2">
-                                <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
+                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI" class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
                             </div>
                         </div>
