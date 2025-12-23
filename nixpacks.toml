@@ -1,7 +1,7 @@
 # Nixpacks configuration for Laravel with Vite/TailwindCSS
 
 [phases.setup]
-nixPkgs = ['php83', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.mbstring', 'php83Extensions.xml', 'php83Extensions.curl', 'php83Extensions.zip', 'php83Extensions.gd', 'php83Extensions.fileinfo', 'php83Extensions.tokenizer', 'php83Extensions.ctype', 'php83Extensions.bcmath', 'nodejs_20', 'npm']
+nixPkgs = ['nodejs_20', 'php83', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.mbstring', 'php83Extensions.xml', 'php83Extensions.curl', 'php83Extensions.zip', 'php83Extensions.gd', 'php83Extensions.fileinfo', 'php83Extensions.tokenizer', 'php83Extensions.ctype', 'php83Extensions.bcmath']
 
 [phases.install]
 cmds = [
