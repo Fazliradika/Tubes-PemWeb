@@ -2808,6 +2808,487 @@ class ArticleController extends Controller
                 'published_at' => '2 minggu lalu',
                 'author' => 'Dr. Fitri Olahraga & Diabetes',
             ],
+            
+            // Additional Beauty Articles
+            [
+                'id' => 24,
+                'slug' => 'perawatan-jerawat-yang-efektif-dan-aman',
+                'title' => 'Perawatan Jerawat yang Efektif dan Aman untuk Semua Jenis Kulit',
+                'excerpt' => 'Jerawat adalah masalah kulit yang umum namun bisa diatasi. Pelajari cara merawat kulit berjerawat dengan tepat dan hindari kesalahan yang memperburuk kondisi.',
+                'quote' => 'Kulit sehat dimulai dari pemahaman dan perawatan yang tepat. Sabar dan konsisten adalah kunci.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-pink-50 border-l-4 border-pink-500 italic text-gray-700">"Kulit sehat dimulai dari pemahaman dan perawatan yang tepat. Sabar dan konsisten adalah kunci."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#penyebab" class="text-blue-600 hover:underline">Penyebab Jerawat</a></li>
+    <li><a href="#jenis" class="text-blue-600 hover:underline">Jenis-Jenis Jerawat</a></li>
+    <li><a href="#pembersihan" class="text-blue-600 hover:underline">Cara Membersihkan Wajah</a></li>
+    <li><a href="#treatment" class="text-blue-600 hover:underline">Treatment Jerawat</a></li>
+    <li><a href="#kesalahan" class="text-blue-600 hover:underline">Kesalahan yang Harus Dihindari</a></li>
+    <li><a href="#diet" class="text-blue-600 hover:underline">Diet untuk Kulit Berjerawat</a></li>
+</ul>
+
+<h2 id="penyebab">Penyebab Jerawat</h2>
+<p>Jerawat terjadi ketika pori-pori kulit tersumbat oleh minyak, sel kulit mati, dan bakteri. Beberapa faktor penyebab:</p>
+
+<p><strong>Faktor Internal:</strong></p>
+<ul>
+    <li><strong>Hormon:</strong> Fluktuasi hormon saat pubertas, menstruasi, kehamilan</li>
+    <li><strong>Genetik:</strong> Riwayat keluarga dengan jerawat</li>
+    <li><strong>Stress:</strong> Meningkatkan produksi hormon kortisol</li>
+    <li><strong>Obat-obatan:</strong> Kortikosteroid, lithium, kontrasepsi tertentu</li>
+</ul>
+
+<p><strong>Faktor Eksternal:</strong></p>
+<ul>
+    <li>Produk kosmetik yang comedogenic</li>
+    <li>Polusi dan debu</li>
+    <li>Kelembaban tinggi</li>
+    <li>Gesekan dari helm, topi, atau masker</li>
+    <li>Menyentuh wajah terlalu sering</li>
+</ul>
+
+<h2 id="jenis">Jenis-Jenis Jerawat</h2>
+
+<p><strong>1. Non-Inflammatory (Komedo):</strong></p>
+<ul>
+    <li><strong>Whitehead:</strong> Komedo tertutup, bintik putih kecil</li>
+    <li><strong>Blackhead:</strong> Komedo terbuka, teroksidasi jadi hitam</li>
+</ul>
+
+<p><strong>2. Inflammatory (Meradang):</strong></p>
+<ul>
+    <li><strong>Papula:</strong> Benjolan merah kecil, sensitif</li>
+    <li><strong>Pustula:</strong> Papula dengan nanah putih/kuning di puncak</li>
+    <li><strong>Nodula:</strong> Jerawat besar, keras, di bawah kulit</li>
+    <li><strong>Cyst:</strong> Kantung berisi nanah, sangat nyeri, berisiko scar</li>
+</ul>
+
+<h2 id="pembersihan">Cara Membersihkan Wajah yang Benar</h2>
+
+<p><strong>Rutinitas Pagi:</strong></p>
+<ol>
+    <li><strong>Cleanser:</strong> Gunakan gentle cleanser, hindari sabun keras
+        <ul>
+            <li>Kulit berminyak: gel/foam cleanser</li>
+            <li>Kulit kering: cream cleanser</li>
+            <li>Kulit sensitif: micellar water</li>
+        </ul>
+    </li>
+    <li><strong>Toner:</strong> Seimbangkan pH kulit (optional)</li>
+    <li><strong>Treatment:</strong> Serum atau spot treatment</li>
+    <li><strong>Moisturizer:</strong> Oil-free, non-comedogenic</li>
+    <li><strong>Sunscreen:</strong> SPF 30+, wajib!</li>
+</ol>
+
+<p><strong>Rutinitas Malam:</strong></p>
+<ol>
+    <li><strong>Makeup Remover/Cleansing Oil:</strong> Jika pakai makeup</li>
+    <li><strong>Cleanser:</strong> Double cleansing untuk kulit berminyak</li>
+    <li><strong>Exfoliant:</strong> 2-3x seminggu (AHA/BHA)</li>
+    <li><strong>Toner:</strong> Sesuai kebutuhan</li>
+    <li><strong>Treatment:</strong> Retinoid atau benzoyl peroxide</li>
+    <li><strong>Moisturizer:</strong> Lebih rich dari pagi</li>
+</ol>
+
+<h2 id="treatment">Treatment Aktif untuk Jerawat</h2>
+
+<p><strong>1. Benzoyl Peroxide (2.5-10%):</strong></p>
+<ul>
+    <li>Membunuh bakteri penyebab jerawat</li>
+    <li>Efektif untuk papula dan pustula</li>
+    <li>Mulai dari konsentrasi rendah</li>
+    <li>Bisa membuat kulit kering, gunakan moisturizer</li>
+</ul>
+
+<p><strong>2. Salicylic Acid (0.5-2%):</strong></p>
+<ul>
+    <li>BHA yang menembus pori</li>
+    <li>Eksfoliasi dan mengurangi komedo</li>
+    <li>Cocok untuk kulit berminyak</li>
+    <li>Gunakan 2-3x seminggu</li>
+</ul>
+
+<p><strong>3. Retinoid (Retinol, Adapalene, Tretinoin):</strong></p>
+<ul>
+    <li>Mempercepat cell turnover</li>
+    <li>Mencegah penyumbatan pori</li>
+    <li>Efektif untuk komedo dan jerawat meradang</li>
+    <li>Mulai 2-3x seminggu, tingkatkan bertahap</li>
+    <li>Wajib pakai sunscreen di pagi hari</li>
+</ul>
+
+<p><strong>4. Niacinamide (5-10%):</strong></p>
+<ul>
+    <li>Anti-inflammatory</li>
+    <li>Kontrol produksi sebum</li>
+    <li>Mencerahkan bekas jerawat</li>
+    <li>Aman untuk semua jenis kulit</li>
+</ul>
+
+<p><strong>5. Azelaic Acid (10-20%):</strong></p>
+<ul>
+    <li>Anti bakteri dan anti-inflammatory</li>
+    <li>Mencerahkan PIH (post-inflammatory hyperpigmentation)</li>
+    <li>Gentle, cocok untuk kulit sensitif</li>
+</ul>
+
+<h2 id="kesalahan">Kesalahan yang Harus Dihindari</h2>
+
+<p><strong>1. Memencet Jerawat:</strong></p>
+<ul>
+    <li>Menyebarkan bakteri</li>
+    <li>Meningkatkan risiko scar dan PIH</li>
+    <li>Jika terpaksa, sterilkan alat dan tangan</li>
+</ul>
+
+<p><strong>2. Over-Cleansing:</strong></p>
+<ul>
+    <li>Cuci muka >2x sehari menghilangkan minyak natural</li>
+    <li>Kulit jadi kering dan produksi sebum meningkat</li>
+    <li>Cukup 2x sehari: pagi dan malam</li>
+</ul>
+
+<p><strong>3. Skip Moisturizer:</strong></p>
+<ul>
+    <li>Kulit berjerawat tetap butuh hidrasi</li>
+    <li>Pilih yang oil-free dan non-comedogenic</li>
+    <li>Kulit kering memicu produksi minyak berlebih</li>
+</ul>
+
+<p><strong>4. Tidak Pakai Sunscreen:</strong></p>
+<ul>
+    <li>UV memperburuk bekas jerawat</li>
+    <li>Treatment jerawat membuat kulit sensitif</li>
+    <li>Pakai sunscreen SPF 30+ setiap hari</li>
+</ul>
+
+<p><strong>5. Ganti Produk Terlalu Cepat:</strong></p>
+<ul>
+    <li>Beri waktu minimal 6-8 minggu</li>
+    <li>Purging (jerawat awal) adalah normal</li>
+    <li>Konsisten adalah kunci</li>
+</ul>
+
+<p><strong>6. Terlalu Banyak Aktif Sekaligus:</strong></p>
+<ul>
+    <li>Bisa iritasi dan overload kulit</li>
+    <li>Mulai 1 aktif, tunggu 2-4 minggu sebelum tambah</li>
+    <li>Jangan combine retinoid + AHA/BHA di malam yang sama</li>
+</ul>
+
+<h2 id="diet">Diet untuk Kulit Berjerawat</h2>
+
+<p><strong>Makanan yang Harus Dihindari:</strong></p>
+<ul>
+    <li><strong>High glycemic foods:</strong> Nasi putih, roti putih, makanan manis</li>
+    <li><strong>Dairy:</strong> Susu, keju (terutama yang tinggi lemak)</li>
+    <li><strong>Makanan berminyak dan gorengan</strong></li>
+    <li><strong>Makanan olahan tinggi gula</strong></li>
+</ul>
+
+<p><strong>Makanan yang Baik untuk Kulit:</strong></p>
+<ul>
+    <li><strong>Omega-3:</strong> Ikan salmon, walnut, flaxseed</li>
+    <li><strong>Antioksidan:</strong> Buah berry, sayuran hijau</li>
+    <li><strong>Zinc:</strong> Kacang-kacangan, biji labu</li>
+    <li><strong>Vitamin A:</strong> Wortel, ubi, bayam</li>
+    <li><strong>Vitamin E:</strong> Alpukat, almond</li>
+    <li><strong>Probiotik:</strong> Yogurt plain, kimchi, tempe</li>
+</ul>
+
+<h2>Kapan Harus ke Dokter?</h2>
+<p>Konsultasi dermatologist jika:</p>
+<ul>
+    <li>Jerawat parah (nodular/cystic)</li>
+    <li>OTC treatment tidak efektif setelah 3 bulan</li>
+    <li>Jerawat meninggalkan scar yang dalam</li>
+    <li>Jerawat mempengaruhi kepercayaan diri</li>
+    <li>Jerawat muncul tiba-tiba di usia dewasa</li>
+</ul>
+
+<p><strong>Treatment Medis:</strong></p>
+<ul>
+    <li>Antibiotik oral (untuk jerawat meradang parah)</li>
+    <li>Isotretinoin (Accutane) untuk jerawat severe</li>
+    <li>Kontrasepsi hormonal (untuk wanita)</li>
+    <li>Chemical peeling</li>
+    <li>Laser therapy</li>
+    <li>Injection kortikosteroid untuk nodula/cyst</li>
+</ul>
+
+<h2>Kesimpulan</h2>
+<p>Perawatan jerawat membutuhkan kesabaran dan konsistensi. Tidak ada solusi instant, tapi dengan rutinitas yang tepat dan gaya hidup sehat, kulit Anda akan membaik. Ingat, setiap kulit berbeda - apa yang bekerja untuk orang lain belum tentu cocok untuk Anda. Jangan ragu konsultasi ke dermatologist untuk treatment yang personalized!</p>',
+                'category' => 'Kecantikan',
+                'category_color' => 'pink',
+                'image' => 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&h=500&fit=crop',
+                'read_time' => '11 min read',
+                'published_at' => '4 hari lalu',
+                'author' => 'Dr. Lisa Dermatologi',
+            ],
+            [
+                'id' => 25,
+                'slug' => 'anti-aging-alami-tampil-awet-muda-tanpa-operasi',
+                'title' => 'Anti-Aging Alami: Tampil Awet Muda Tanpa Operasi Plastik',
+                'excerpt' => 'Rahasia awet muda tidak selalu memerlukan prosedur mahal. Temukan cara alami untuk memperlambat penuaan kulit dan tampil lebih muda.',
+                'quote' => 'Penuaan adalah proses alami, tetapi kita bisa memperlambatnya dengan gaya hidup sehat dan perawatan yang tepat.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-pink-50 border-l-4 border-pink-500 italic text-gray-700">"Penuaan adalah proses alami, tetapi kita bisa memperlambatnya dengan gaya hidup sehat dan perawatan yang tepat."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#proses-penuaan" class="text-blue-600 hover:underline">Proses Penuaan Kulit</a></li>
+    <li><a href="#skincare" class="text-blue-600 hover:underline">Skincare Anti-Aging</a></li>
+    <li><a href="#gaya-hidup" class="text-blue-600 hover:underline">Gaya Hidup Anti-Aging</a></li>
+    <li><a href="#diet" class="text-blue-600 hover:underline">Diet Anti-Aging</a></li>
+    <li><a href="#treatment" class="text-blue-600 hover:underline">Treatment Profesional</a></li>
+</ul>
+
+<h2 id="proses-penuaan">Memahami Proses Penuaan Kulit</h2>
+
+<p><strong>Penuaan Intrinsik (Internal):</strong></p>
+<ul>
+    <li>Genetik dan hormon</li>
+    <li>Penurunan produksi kolagen (1% per tahun setelah usia 20)</li>
+    <li>Penurunan elastin</li>
+    <li>Regenerasi sel melambat</li>
+    <li>Tidak bisa dicegah, tapi bisa diperlambat</li>
+</ul>
+
+<p><strong>Penuaan Ekstrinsik (External):</strong></p>
+<ul>
+    <li><strong>Photoaging (80% penuaan kulit):</strong> Paparan UV</li>
+    <li><strong>Polusi:</strong> Radikal bebas</li>
+    <li><strong>Merokok:</strong> Merusak kolagen dan elastin</li>
+    <li><strong>Stress:</strong> Meningkatkan kortisol</li>
+    <li><strong>Pola makan buruk</strong></li>
+    <li><strong>Kurang tidur</strong></li>
+</ul>
+
+<p><strong>Tanda-tanda Penuaan:</strong></p>
+<ul>
+    <li>Fine lines dan wrinkles</li>
+    <li>Kulit kendur (sagging)</li>
+    <li>Volume wajah berkurang</li>
+    <li>Dark spots dan hiperpigmentasi</li>
+    <li>Tekstur kulit kasar</li>
+    <li>Pori-pori membesar</li>
+    <li>Kulit kering</li>
+</ul>
+
+<h2 id="skincare">Skincare Anti-Aging yang Efektif</h2>
+
+<p><strong>1. Sunscreen (WAJIB #1!):</strong></p>
+<ul>
+    <li>SPF 30-50, broad spectrum (UVA + UVB)</li>
+    <li>Pakai setiap hari, rain or shine</li>
+    <li>Reapply setiap 2 jam jika outdoor</li>
+    <li>Ini investasi anti-aging terbaik!</li>
+</ul>
+
+<p><strong>2. Retinoid (Gold Standard):</strong></p>
+<ul>
+    <li>Retinol (OTC): 0.25-1%</li>
+    <li>Tretinoin/Retin-A (prescription): lebih kuat</li>
+    <li><strong>Manfaat:</strong> Boost kolagen, kurangi wrinkles, even skin tone</li>
+    <li><strong>Cara pakai:</strong> Mulai 2x seminggu malam, tingkatkan bertahap</li>
+    <li><strong>Side effect:</strong> Purging, kering, iritasi di awal (normal)</li>
+    <li>Butuh 3-6 bulan untuk hasil optimal</li>
+</ul>
+
+<p><strong>3. Vitamin C (Antioksidan Kuat):</strong></p>
+<ul>
+    <li>Konsentrasi: 10-20% L-Ascorbic Acid</li>
+    <li><strong>Manfaat:</strong> Cerahkan, lindungi dari radikal bebas, boost kolagen</li>
+    <li>Pakai di pagi hari sebelum sunscreen</li>
+    <li>Simpan di tempat gelap dan sejuk</li>
+</ul>
+
+<p><strong>4. Hyaluronic Acid (Hidrasi Intensif):</strong></p>
+<ul>
+    <li>Menarik 1000x beratnya dalam air</li>
+    <li>Plumping effect, kurangi fine lines</li>
+    <li>Aman untuk semua jenis kulit</li>
+    <li>Pakai di kulit lembab, tutup dengan moisturizer</li>
+</ul>
+
+<p><strong>5. Peptides:</strong></p>
+<ul>
+    <li>Merangsang produksi kolagen</li>
+    <li>Repair skin barrier</li>
+    <li>Combine dengan retinoid untuk hasil maksimal</li>
+</ul>
+
+<p><strong>6. Niacinamide (Vitamin B3):</strong></p>
+<ul>
+    <li>Multi-fungsi: brighten, minimize pores, strengthen barrier</li>
+    <li>Anti-inflammatory</li>
+    <li>Cocok dikombinasikan dengan hampir semua aktif</li>
+</ul>
+
+<p><strong>7. AHA/BHA (Eksfoliasi Kimia):</strong></p>
+<ul>
+    <li><strong>AHA (Glycolic, Lactic):</strong> Eksfoliasi permukaan, brighten</li>
+    <li><strong>BHA (Salicylic):</strong> Eksfoliasi dalam pori</li>
+    <li>Gunakan 2-3x seminggu</li>
+    <li>Jangan pakai bersamaan dengan retinoid</li>
+</ul>
+
+<h2>Urutan Skincare Anti-Aging</h2>
+
+<p><strong>Pagi:</strong></p>
+<ol>
+    <li>Cleanser</li>
+    <li>Toner (optional)</li>
+    <li>Vitamin C serum</li>
+    <li>Hyaluronic acid</li>
+    <li>Eye cream</li>
+    <li>Moisturizer</li>
+    <li>Sunscreen SPF 50</li>
+</ol>
+
+<p><strong>Malam:</strong></p>
+<ol>
+    <li>Cleansing oil/balm</li>
+    <li>Cleanser</li>
+    <li>Exfoliant (AHA/BHA) - 2-3x seminggu</li>
+    <li>Toner</li>
+    <li>Retinoid (tunggu 20 menit setelah cleansing)</li>
+    <li>Peptide serum (jika tidak pakai retinoid)</li>
+    <li>Eye cream</li>
+    <li>Moisturizer rich</li>
+    <li>Face oil (optional)</li>
+</ol>
+
+<h2 id="gaya-hidup">Gaya Hidup Anti-Aging</h2>
+
+<p><strong>1. Tidur Berkualitas (Beauty Sleep Real!):</strong></p>
+<ul>
+    <li>7-9 jam per malam</li>
+    <li>Peak regenerasi kulit: 11 PM - 3 AM</li>
+    <li>Gunakan sarung bantal sutra</li>
+    <li>Tidur telentang untuk cegah sleep lines</li>
+</ul>
+
+<p><strong>2. Kelola Stress:</strong></p>
+<ul>
+    <li>Stress tinggi = kortisol tinggi = kolagen rusak</li>
+    <li>Meditasi, yoga, hobi menyenangkan</li>
+    <li>Quality time dengan orang tersayang</li>
+</ul>
+
+<p><strong>3. Olahraga Teratur:</strong></p>
+<ul>
+    <li>Meningkatkan sirkulasi darah ke kulit</li>
+    <li>Detoks lewat keringat</li>
+    <li>Target: 150 menit per minggu</li>
+    <li>Mix cardio + strength training</li>
+</ul>
+
+<p><strong>4. Hindari Merokok & Alkohol:</strong></p>
+<ul>
+    <li>Rokok merusak kolagen dan elastin</li>
+    <li>Alkohol dehidrasi kulit</li>
+    <li>Keduanya mempercepat penuaan drastis</li>
+</ul>
+
+<p><strong>5. Hidrasi Cukup:</strong></p>
+<ul>
+    <li>2-3 liter air per hari</li>
+    <li>Kulit terhidrasi = plump dan glowing</li>
+</ul>
+
+<h2 id="diet">Diet Anti-Aging</h2>
+
+<p><strong>Makanan Anti-Aging Superfood:</strong></p>
+<ul>
+    <li><strong>Berries:</strong> Antioksidan tinggi, lawan radikal bebas</li>
+    <li><strong>Fatty fish (Salmon, Mackerel):</strong> Omega-3, anti-inflammatory</li>
+    <li><strong>Avocado:</strong> Vitamin E, lemak sehat</li>
+    <li><strong>Nuts & Seeds:</strong> Vitamin E, zinc</li>
+    <li><strong>Dark chocolate (70%+):</strong> Flavonoid antioksidan</li>
+    <li><strong>Sayuran hijau:</strong> Vitamin A, C, K</li>
+    <li><strong>Sweet potato:</strong> Beta carotene</li>
+    <li><strong>Tomat:</strong> Lycopene, proteksi UV</li>
+    <li><strong>Green tea:</strong> EGCG antioksidan kuat</li>
+</ul>
+
+<p><strong>Hindari:</strong></p>
+<ul>
+    <li>Gula berlebih (AGEs = Advanced Glycation End products)</li>
+    <li>Makanan olahan</li>
+    <li>Trans fat</li>
+    <li>Karbohidrat putih berlebih</li>
+</ul>
+
+<p><strong>Suplemen Pendukung:</strong></p>
+<ul>
+    <li>Vitamin C: 500-1000mg</li>
+    <li>Vitamin E: 400 IU</li>
+    <li>Omega-3: 1000-2000mg</li>
+    <li>Collagen peptides: 5-10g</li>
+    <li>CoQ10: 100-200mg</li>
+</ul>
+
+<h2 id="treatment">Treatment Profesional Anti-Aging</h2>
+
+<p><strong>Non-Invasive (Tanpa Jarum/Pisau):</strong></p>
+<ul>
+    <li><strong>Laser Resurfacing:</strong> Stimulasi kolagen, kurangi wrinkles</li>
+    <li><strong>RF (Radiofrequency):</strong> Skin tightening</li>
+    <li><strong>Ultherapy:</strong> Ultrasound lift</li>
+    <li><strong>Chemical Peel:</strong> Eksfoliasi deep, regenerasi</li>
+    <li><strong>Microneedling + PRP:</strong> Boost kolagen alami</li>
+    <li><strong>LED Light Therapy:</strong> Red light untuk kolagen</li>
+</ul>
+
+<p><strong>Minimally Invasive:</strong></p>
+<ul>
+    <li><strong>Botox:</strong> Relax otot, kurangi dynamic wrinkles</li>
+    <li><strong>Filler (HA):</strong> Restore volume, kontur wajah</li>
+    <li><strong>Thread Lift:</strong> Lift tanpa operasi</li>
+</ul>
+
+<h2>Zona Penting yang Sering Diabaikan</h2>
+
+<p><strong>1. Area Mata:</strong></p>
+<ul>
+    <li>Kulit paling tipis, rentan wrinkles</li>
+    <li>Pakai eye cream dengan retinol, peptides, caffeine</li>
+    <li>Aplikasi gentle dengan ring finger</li>
+</ul>
+
+<p><strong>2. Leher & Décolletage:</strong></p>
+<ul>
+    <li>Sering dilupakan!</li>
+    <li>Apply semua skincare sampai area ini</li>
+    <li>Sunscreen wajib!</li>
+</ul>
+
+<p><strong>3. Tangan:</strong></p>
+<ul>
+    <li>Tangan mengkhianati usia</li>
+    <li>Hand cream dengan SPF setiap hari</li>
+    <li>Gunakan sarung tangan saat aktivitas outdoor</li>
+</ul>
+
+<h2>Tips Pro Anti-Aging</h2>
+<ul>
+    <li><strong>Konsisten > Produk mahal:</strong> Routine sederhana tapi konsisten lebih efektif</li>
+    <li><strong>Start early:</strong> Prevention lebih mudah dari reversal</li>
+    <li><strong>Patience:</strong> Anti-aging butuh waktu, minimal 3-6 bulan</li>
+    <li><strong>Less is more:</strong> Jangan overload aktif, bisa irritasi</li>
+    <li><strong>Professional consultation:</strong> Untuk hasil optimal</li>
+</ul>
+
+<h2>Kesimpulan</h2>
+<p>Anti-aging alami adalah kombinasi skincare cerdas, gaya hidup sehat, dan perlindungan konsisten dari faktor eksternal. Tidak ada magic pill, tetapi dengan komitmen dan kesabaran, Anda bisa memperlambat penuaan dan tampil lebih muda lebih lama. Ingat: yang terpenting adalah menjadi versi terbaik dari diri Anda sendiri di setiap usia!</p>',
+                'category' => 'Kecantikan',
+                'category_color' => 'pink',
+                'image' => 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=500&fit=crop',
+                'read_time' => '13 min read',
+                'published_at' => '1 minggu lalu',
+                'author' => 'Dr. Diana Anti-Aging Specialist',
+            ],
         ];
     }
 }
