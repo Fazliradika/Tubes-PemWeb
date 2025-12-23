@@ -61,7 +61,7 @@
                                     id="likeButton"
                                     type="button"
                                     onclick="handleLikeClick()"
-                                    class="p-2 rounded-full transition duration-200 {{ $userHasLiked ? 'text-red-600 bg-red-50 dark:bg-red-900/30' : 'text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30' }}"
+                                    class="p-2 rounded-full transition duration-200 {{ $userHasLiked ? 'text-red-600 dark:text-red-500 bg-red-50 dark:bg-red-900/30' : 'text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30' }}"
                                     title="Suka artikel ini"
                                 >
                                     <svg id="likeIcon" class="w-5 h-5 transition-all duration-200" fill="{{ $userHasLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
@@ -626,14 +626,14 @@
                         // Update button appearance
                         if (data.liked) {
                             console.log('Setting LIKED state (RED)');
-                            button.classList.remove('text-gray-600', 'hover:text-red-600');
-                            button.classList.add('text-red-600', 'bg-red-50');
+                            button.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:text-red-600', 'dark:hover:text-red-500');
+                            button.classList.add('text-red-600', 'dark:text-red-500', 'bg-red-50', 'dark:bg-red-900/30');
                             icon.setAttribute('fill', 'currentColor');
                             showMessage('❤️ Artikel disukai!', 'success');
                         } else {
                             console.log('Setting UNLIKED state (GRAY)');
-                            button.classList.remove('text-red-600', 'bg-red-50');
-                            button.classList.add('text-gray-600', 'hover:text-red-600');
+                            button.classList.remove('text-red-600', 'dark:text-red-500', 'bg-red-50', 'dark:bg-red-900/30');
+                            button.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:text-red-600', 'dark:hover:text-red-500');
                             icon.setAttribute('fill', 'none');
                             showMessage('Batal menyukai artikel', 'info');
                         }
