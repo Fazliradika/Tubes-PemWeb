@@ -343,8 +343,7 @@
                             </div>
                         </div>
 
-                        <div class="glass-card rounded-xl px-4 py-3 flex items-center space-x-3">
-                            <span class="text-slate-600 dark:text-slate-400 text-sm">Dibina oleh</span>
+                        <div class="glass-card rounded-xl px-4 py-3 flex items-center">
                             <div class="flex items-center gap-2">
                                 <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI" class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
