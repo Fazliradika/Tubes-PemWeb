@@ -1,4 +1,7 @@
 <x-app-layout>
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress-bar" class="fixed top-0 left-0 h-1 bg-green-600 z-50 transition-all duration-150" style="width: 0%"></div>
+
     <x-slot name="header">
         <div class="flex items-center">
             <a href="{{ route('articles.index') }}" class="mr-4 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
@@ -1030,5 +1033,31 @@
                 page-break-after: avoid;
             }
         }
+
+        /* Reading Progress Bar */
+        #reading-progress-bar {
+            box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);
+        }
     </style>
+
+    <script>
+        // Reading Progress Bar
+        window.addEventListener('scroll', function() {
+            const progressBar = document.getElementById('reading-progress-bar');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate scroll percentage
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+            // Update progress bar width
+            progressBar.style.width = Math.min(scrollPercentage, 100) + '%';
+        });
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
 </x-app-layout>
