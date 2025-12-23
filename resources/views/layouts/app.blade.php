@@ -140,6 +140,18 @@
                             Solusi kesehatan digital terpadu untuk pelayanan medis yang lebih cepat, akurat, dan
                             terpercaya. Karena kesehatan Anda adalah prioritas utama kami.
                         </p>
+
+                        <!-- Hospital Address -->
+                        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2 text-sm">Alamat Rumah Sakit
+                            </h5>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                                <i class="fas fa-hospital text-blue-600 dark:text-blue-400 mr-2"></i>
+                                RS HealthFirst Medical<br>
+                                <span class="ml-6">Jl. Sudirman No. 123, Jakarta Pusat</span><br>
+                                <span class="ml-6">Jakarta 10220</span>
+                            </p>
+                        </div>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 dark:text-white mb-4">Layanan Kami</h4>
@@ -291,11 +303,11 @@
                 ];
             @endphp
 
-            @foreach($notifications as $type => $message)
-                @if($message)
-                    window.showToast(@json($message), @json($type));
-                @endif
-            @endforeach
+        @foreach($notifications as $type => $message)
+            @if($message)
+                window.showToast(@json($message), @json($type));
+            @endif
+        @endforeach
         });
     </script>
     @stack('scripts')

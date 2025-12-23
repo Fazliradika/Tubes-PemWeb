@@ -89,6 +89,19 @@
                                     </p>
                                 @endif
 
+                                <!-- Hospital Address -->
+                                <div class="mb-4 p-3 bg-blue-50 dark:bg-slate-700 rounded-lg flex items-start gap-2">
+                                    <i class="fas fa-hospital text-blue-600 dark:text-blue-400 mt-1"></i>
+                                    <div>
+                                        <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Rumah Sakit:</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                                            RS HealthFirst Medical<br>
+                                            Jl. Sudirman No. 123, Jakarta Pusat<br>
+                                            Jakarta 10220
+                                        </p>
+                                    </div>
+                                </div>
+
                                 <!-- Schedule -->
                                 <div class="mb-4 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
                                     <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Jadwal Praktik:</p>
