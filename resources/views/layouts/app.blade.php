@@ -364,22 +364,6 @@
     <!-- Stacked Scripts from Views -->
     @stack('scripts')
 
-    <!-- Flash Message Toast Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toasts = {
-                success: @json(session('success')),
-                error: @json(session('error')),
-                warning: @json(session('warning')),
-                info: @json(session('info')),
-            };
-
-            if (toasts.success) window.showToast(toasts.success, 'success');
-            if (toasts.error) window.showToast(toasts.error, 'error');
-            if (toasts.warning) window.showToast(toasts.warning, 'warning');
-            if (toasts.info) window.showToast(toasts.info, 'info');
-        });
-    </script>
 </body>
 
 </html>
