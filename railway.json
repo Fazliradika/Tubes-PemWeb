@@ -1,9 +1,9 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
-    "buildCommand": "npm install && npm run build"
+    "buildCommand": "composer install --no-interaction --prefer-dist --optimize-autoloader && npm ci && npm run build"
   },
   "deploy": {
-    "startCommand": "php artisan config:cache && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=${PORT}"
+    "startCommand": "php artisan config:cache && php artisan serve --host=0.0.0.0 --port=$PORT"
   }
 }
