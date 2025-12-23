@@ -99,7 +99,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 'start_time' => '09:00:00',
                 'end_time' => '17:00:00',
-                'photo' => 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=400&fit=crop',
+                'photo' => 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=faces',
             ],
             [
                 'name' => 'Dr. Andri Pratama',
@@ -111,7 +111,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Monday', 'Wednesday', 'Friday'],
                 'start_time' => '13:00:00',
                 'end_time' => '20:00:00',
-                'photo' => 'https://images.unsplash.com/photo-1612531386530-97286d97c2d9?w=400&h=400&fit=crop',
+                'photo' => 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&fit=crop&crop=faces',
             ],
             [
                 'name' => 'Dr. Maya Sari',
@@ -123,7 +123,7 @@ class DoctorSeeder extends Seeder
                 'available_days' => ['Tuesday', 'Thursday', 'Saturday'],
                 'start_time' => '08:00:00',
                 'end_time' => '16:00:00',
-                'photo' => 'https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=400&h=400&fit=crop',
+                'photo' => 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=faces',
             ],
         ];
 
