@@ -11,13 +11,13 @@ use Illuminate\Support\Str;
 class CallController extends Controller
 {
     /**
-     * Initiate a video call (Google Meet dummy link)
+     * Initiate a video call using Jitsi Meet
      */
     public function initiate(Request $request, Conversation $conversation)
     {
         try {
             $request->validate([
-                'type' => 'required|in:video',
+                'type' => 'required|in:video,voice',
             ]);
 
             // Check if user is part of the conversation
@@ -26,22 +26,22 @@ class CallController extends Controller
             }
 
             // Determine receiver
-            $receiverId = $conversation->patient_id === auth()->id() 
-                ? $conversation->doctor->user_id 
+            $receiverId = $conversation->patient_id === auth()->id()
+                ? $conversation->doctor->user_id
                 : $conversation->patient_id;
 
-            $meetLink = $this->generateDummyMeetLink();
+            // Generate unique Jitsi room name
+            $roomName = $this->generateJitsiRoomName($conversation);
+            $jitsiLink = "https://meet.jit.si/{$roomName}";
 
             // Create call session
             $callSession = CallSession::create([
                 'conversation_id' => $conversation->id,
                 'caller_id' => auth()->id(),
                 'receiver_id' => $receiverId,
-                'type' => 'video',
-                'status' => 'ended',
+                'type' => $request->type,
+                'status' => 'calling',
                 'started_at' => now(),
-                'ended_at' => now(),
-                'duration_seconds' => 0,
             ]);
 
             // Create message record
@@ -49,10 +49,11 @@ class CallController extends Controller
                 'conversation_id' => $conversation->id,
                 'sender_id' => auth()->id(),
                 'type' => 'video_call',
-                'message' => 'Google Meet',
+                'message' => 'Video Call via Jitsi Meet',
                 'metadata' => [
                     'call_session_id' => $callSession->id,
-                    'meet_link' => $meetLink,
+                    'jitsi_link' => $jitsiLink,
+                    'room_name' => $roomName,
                 ],
             ]);
 
@@ -61,7 +62,8 @@ class CallController extends Controller
             return response()->json([
                 'success' => true,
                 'call_session' => $callSession,
-                'meet_link' => $meetLink,
+                'jitsi_link' => $jitsiLink,
+                'room_name' => $roomName,
                 'message' => $message->load('sender'),
             ]);
         } catch (\Exception $e) {
@@ -74,11 +76,36 @@ class CallController extends Controller
     }
 
     /**
+     * End a call session
+     */
+    public function end(CallSession $callSession)
+    {
+        if (!$this->userBelongsToCallSession($callSession)) {
+            return response()->json(['success' => false, 'error' => 'Unauthorized'], 403);
+        }
+
+        $duration = $callSession->started_at
+            ? now()->diffInSeconds($callSession->started_at)
+            : 0;
+
+        $callSession->update([
+            'status' => 'ended',
+            'ended_at' => now(),
+            'duration_seconds' => $duration,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'duration' => $duration,
+        ]);
+    }
+
+    /**
      * Check if user belongs to conversation
      */
     private function userBelongsToConversation(Conversation $conversation)
     {
-        return $conversation->patient_id === auth()->id() 
+        return $conversation->patient_id === auth()->id()
             || $conversation->doctor->user_id === auth()->id();
     }
 
@@ -91,11 +118,16 @@ class CallController extends Controller
         return $this->userBelongsToConversation($conversation);
     }
 
-    private function generateDummyMeetLink(): string
+    /**
+     * Generate unique Jitsi room name
+     */
+    private function generateJitsiRoomName(Conversation $conversation): string
     {
-        $part1 = Str::lower(Str::random(3));
-        $part2 = Str::lower(Str::random(4));
-        $part3 = Str::lower(Str::random(3));
-        return "https://meet.google.com/{$part1}-{$part2}-{$part3}";
+        $prefix = 'HealthFirst';
+        $conversationId = $conversation->id;
+        $timestamp = now()->format('YmdHis');
+        $random = Str::lower(Str::random(6));
+
+        return "{$prefix}-Consultation-{$conversationId}-{$timestamp}-{$random}";
     }
 }
