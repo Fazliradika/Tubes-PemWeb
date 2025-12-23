@@ -367,12 +367,12 @@
     <!-- Flash Message Toast Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const toasts = @json([
-                'success' => session('success'),
-                'error' => session('error'),
-                'warning' => session('warning'),
-                'info' => session('info'),
-            ]);
+            const toasts = {
+                success: @json(session('success')),
+                error: @json(session('error')),
+                warning: @json(session('warning')),
+                info: @json(session('info')),
+            };
 
             if (toasts.success) window.showToast(toasts.success, 'success');
             if (toasts.error) window.showToast(toasts.error, 'error');
