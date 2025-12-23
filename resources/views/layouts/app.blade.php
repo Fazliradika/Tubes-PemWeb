@@ -95,7 +95,7 @@
                     @yield('header')
                 </div>
             </header>
-        @endhasSection
+        @endif
 
         <!-- Page Content -->
         <main class="flex-grow">
@@ -148,17 +148,6 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:row items-center justify-between gap-4">
-                    <p class="text-sm text-slate-500 dark:text-slate-500">
-                        &copy; {{ date('Y') }} HealthFirst Medical. All rights reserved.
-                    </p>
-                    <div class="flex gap-6">
-                        <a href="#" class="text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition text-lg"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-slate-400 hover:text-pink-600 dark:hover:text-pink-400 transition text-lg"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-slate-400 hover:text-blue-400 dark:hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition text-lg"><i class="fab fa-youtube"></i></a>
-=======
 
                 <!-- Security & Certification -->
                 <div class="border-t border-blue-200/50 dark:border-blue-800/50 pt-8">
@@ -187,7 +176,19 @@
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
                             </div>
                         </div>
->>>>>>> ea29bc99639dd67721f132d42a535f40d730c40c
+                    </div>
+                </div>
+
+                <!-- Copyright & Social -->
+                <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p class="text-sm text-slate-500 dark:text-slate-500">
+                        &copy; {{ date('Y') }} HealthFirst Medical. All rights reserved.
+                    </p>
+                    <div class="flex gap-6">
+                        <a href="#" class="text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition text-lg"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-pink-600 dark:hover:text-pink-400 transition text-lg"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 dark:hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition text-lg"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
