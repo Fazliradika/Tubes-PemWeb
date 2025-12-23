@@ -127,10 +127,10 @@
                                         {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A') }}
                                     </p>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-2
-                                                @if($appointment->status === 'confirmed') bg-emerald-100 dark:bg-emerald-800/50 text-emerald-700 dark:text-emerald-300
-                                                @elseif($appointment->status === 'pending') bg-yellow-100 dark:bg-yellow-800/50 text-yellow-700 dark:text-yellow-300
-                                                @else bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300
-                                                @endif">
+                                                    @if($appointment->status === 'confirmed') bg-emerald-100 dark:bg-emerald-800/50 text-emerald-700 dark:text-emerald-300
+                                                    @elseif($appointment->status === 'pending') bg-yellow-100 dark:bg-yellow-800/50 text-yellow-700 dark:text-yellow-300
+                                                    @else bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300
+                                                    @endif">
                                         {{ ucfirst($appointment->status) }}
                                     </span>
                                 </div>
@@ -432,7 +432,8 @@
                         <!-- Testimonial 1 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <img src="https://i.pravatar.cc/80?img=68" alt="Sainem Wiyono"
+                                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=150&h=150&fit=crop"
+                                    alt="Sainem Wiyono"
                                     class="w-14 h-14 rounded-full object-cover border border-gray-200" />
                                 <div>
                                     <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
@@ -452,10 +453,9 @@
                         <!-- Testimonial 2 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                                    <span class="text-blue-500 dark:text-blue-400 font-semibold text-lg">L</span>
-                                </div>
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop"
+                                    alt="Lintang Anindhitya Indraswari"
+                                    class="w-14 h-14 rounded-full object-cover border border-gray-200" />
                                 <div>
                                     <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Sangat Helpful!!! Terima kasih yaa, sangat menghemat waktu dan respon dokternya
@@ -476,10 +476,9 @@
                         <!-- Testimonial 3 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                                    <span class="text-blue-500 dark:text-blue-400 font-semibold text-lg">A</span>
-                                </div>
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop"
+                                    alt="Ahkbar Felyayti"
+                                    class="w-14 h-14 rounded-full object-cover border border-gray-200" />
                                 <div>
                                     <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Pengalaman rawat inap di HealthFirst Medical sangat berkesan. Perawatnya sangat
@@ -502,10 +501,9 @@
                         <!-- Testimonial 4 -->
                         <div class="flex flex-col space-y-5">
                             <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                                    <span class="text-blue-500 dark:text-blue-400 font-semibold text-lg">I</span>
-                                </div>
+                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop"
+                                    alt="Izza Afkarina Mudmainah"
+                                    class="w-14 h-14 rounded-full object-cover border border-gray-200" />
                                 <div>
                                     <p class="italic text-gray-800 dark:text-gray-200 leading-relaxed">
                                         “Hallo, terimakasih HealthFirst Medical sejak pertama konsultasi hingga saat ini
