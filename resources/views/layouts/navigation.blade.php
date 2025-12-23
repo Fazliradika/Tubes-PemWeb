@@ -32,6 +32,7 @@
                     </a>
                     @endif
                     
+                    @if(auth()->check() && auth()->user()->isAdmin())
                     <a href="{{ route('admin.orders.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.orders.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
                         <i class="fas fa-tasks mr-1"></i>{{ __('Kelola Pesanan') }}
                     </a>
