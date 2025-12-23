@@ -418,7 +418,7 @@
                 <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Status Janji Temu</h3>
-                        <a href="{{ route('admin.appointments.index') }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Kelola →</a>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">Ringkasan</span>
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-lg">
