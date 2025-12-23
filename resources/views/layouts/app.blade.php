@@ -366,21 +366,21 @@
     @stack('scripts')
 
     <!-- Flash Message Toast Script -->
-    @if(session('success') || session('error') || session('warning') || session('info'))
+    @php
+        $toasts = [];
+        foreach(['success', 'error', 'warning', 'info'] as $type) {
+            if(session()->has($type)) {
+                $toasts[] = ['message' => session($type), 'type' => $type];
+            }
+        }
+    @endphp
+
+    @if(!empty($toasts))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                @if(session('success'))
-                    window.showToast(@json(session('success')), 'success');
-                @endif
-                @if(session('error'))
-                    window.showToast(@json(session('error')), 'error');
-                @endif
-                @if(session('warning'))
-                    window.showToast(@json(session('warning')), 'warning');
-                @endif
-                @if(session('info'))
-                    window.showToast(@json(session('info')), 'info');
-                @endif
+                @foreach($toasts as $toast)
+                    window.showToast({!! json_encode($toast['message']) !!}, '{{ $toast['type'] }}');
+                @endforeach
             });
         </script>
     @endif
