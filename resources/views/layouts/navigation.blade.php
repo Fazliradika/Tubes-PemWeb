@@ -17,8 +17,8 @@
                         {{ __('Dashboard') }}
                     </a>
                     
-                    <!-- E-Commerce Links - Only for Patient and Admin -->
-                    @if(auth()->check() && !auth()->user()->isDoctor())
+                    <!-- E-Commerce Links - Only for Patient -->
+                    @if(auth()->check() && auth()->user()->isPatient())
                     <a href="{{ route('products.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('products.*') ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
                         <i class="fas fa-shopping-bag mr-1"></i>{{ __('Belanja') }}
                     </a>
@@ -129,8 +129,8 @@
                 {{ __('Dashboard') }}
             </a>
             
-            <!-- E-Commerce Links Mobile - Only for Patient and Admin -->
-            @if(auth()->check() && !auth()->user()->isDoctor())
+            <!-- E-Commerce Links Mobile - Only for Patient -->
+            @if(auth()->check() && auth()->user()->isPatient())
             <a href="{{ route('products.index') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('products.*') ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'border-transparent text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 hover:border-blue-300' }} text-start text-base font-medium transition duration-150 ease-in-out">
                 <i class="fas fa-shopping-bag mr-2"></i>{{ __('Belanja') }}
             </a>
