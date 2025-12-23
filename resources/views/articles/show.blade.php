@@ -201,6 +201,24 @@
                                 {!! $article['content'] !!}
                             </div>
 
+                            <!-- Interactive Calculators -->
+                            @if(!empty($calculators))
+                            <div class="mt-8 pt-6 border-t dark:border-slate-600">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">🧮 Kalkulator Interaktif</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-6">Gunakan kalkulator di bawah untuk mendapatkan rekomendasi yang dipersonalisasi sesuai kondisi Anda:</p>
+                                
+                                @foreach($calculators as $calculator)
+                                    @if($calculator === 'bmi')
+                                        @include('components.calculators.bmi-calculator')
+                                    @elseif($calculator === 'calorie')
+                                        @include('components.calculators.calorie-calculator')
+                                    @elseif($calculator === 'water')
+                                        @include('components.calculators.water-calculator')
+                                    @endif
+                                @endforeach
+                            </div>
+                            @endif
+
                             <!-- Tags -->
                             <div class="mt-8 pt-6 border-t dark:border-slate-600">
                                 <div class="flex flex-wrap gap-2">

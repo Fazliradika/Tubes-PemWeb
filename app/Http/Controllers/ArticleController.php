@@ -42,6 +42,9 @@ class ArticleController extends Controller
         // Get related doctors based on article category
         $relatedDoctors = $this->getRelatedDoctors($article['category']);
         
+        // Determine which calculators to show based on article
+        $calculators = $this->getCalculatorsForArticle($article['slug']);
+        
         return view('articles.show', [
             'article' => $article,
             'relatedArticles' => $relatedArticles,
@@ -49,7 +52,26 @@ class ArticleController extends Controller
             'likesCount' => $likesCount,
             'userHasLiked' => $userHasLiked,
             'relatedDoctors' => $relatedDoctors,
+            'calculators' => $calculators,
         ]);
+    }
+    
+    private function getCalculatorsForArticle($slug)
+    {
+        // Mapping artikel ke kalkulator yang relevan
+        $articleCalculators = [
+            '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian' => ['bmi', 'calorie'],
+            'tips-olahraga-efektif-untuk-kesehatan-jantung' => ['bmi', 'water'],
+            'mengelola-diabetes-dengan-pola-makan-sehat' => ['bmi', 'calorie'],
+            'panduan-lengkap-diet-mediterania-untuk-jantung-sehat' => ['bmi', 'calorie'],
+            'manfaat-puasa-intermittent-untuk-kesehatan-dan-berat-badan' => ['bmi', 'calorie'],
+            'olahraga-hiit-untuk-membakar-lemak-maksimal' => ['bmi', 'calorie', 'water'],
+            'makanan-penurun-kolesterol-tinggi-secara-alami' => ['bmi', 'calorie'],
+            'makanan-super-untuk-meningkatkan-imun-tubuh' => ['bmi', 'water'],
+            'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya' => ['water'],
+        ];
+        
+        return $articleCalculators[$slug] ?? [];
     }
     
     private function getRelatedDoctors($category)
