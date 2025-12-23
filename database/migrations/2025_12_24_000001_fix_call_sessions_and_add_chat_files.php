@@ -10,31 +10,26 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // Fix call_sessions table status column
-        Schema::table('call_sessions', function (Blueprint $table) {
-            // Drop the old enum column via raw SQL to avoid DBAL requirement for enum modification
-            // Or simpler: MODIFY column if supported. But safest is to just use string modification logic if DB supports it.
-            // On SQLite/MySQL without DBAL, changing type is hard.
-            // Best approach: Drop and recreate or Raw statement.
-        });
+        // Fix call_sessions table status column - only if table exists
+        if (Schema::hasTable('call_sessions') && Schema::hasColumn('call_sessions', 'status')) {
+            try {
+                \DB::statement("ALTER TABLE call_sessions MODIFY COLUMN status VARCHAR(50) NOT NULL DEFAULT 'ringing'");
+            } catch (\Exception $e) {
+                // Column might already be varchar, ignore error
+            }
+        }
 
-        // Use raw statement to modify column type to string/varchar to support any status
-        // DB::statement("ALTER TABLE call_sessions MODIFY COLUMN status VARCHAR(50) DEFAULT 'ringing'");
-        // Since we want to be safe across drivers, let's try standard Schema if possible, but separate from creation.
-
-        // Actually, easiest way given limitations: 
-        // Just Use RAW SQL for MySQL which is the target environment
-        \DB::statement("ALTER TABLE call_sessions MODIFY COLUMN status VARCHAR(50) NOT NULL DEFAULT 'ringing'");
-
-        // Create chat_files table
-        Schema::create('chat_files', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('filename');
-            $table->string('mime_type');
-            $table->longText('data'); // Base64 encoded content
-            $table->timestamps();
-        });
+        // Create chat_files table only if it doesn't exist
+        if (!Schema::hasTable('chat_files')) {
+            Schema::create('chat_files', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+                $table->string('filename');
+                $table->string('mime_type');
+                $table->longText('data'); // Base64 encoded content
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -43,6 +38,5 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('chat_files');
-        // Reverting enum is complex, usually we just leave it as varchar or ignore
     }
 };

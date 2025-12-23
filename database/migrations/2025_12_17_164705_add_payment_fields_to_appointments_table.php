@@ -11,8 +11,12 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->string('payment_method')->nullable()->after('total_price');
-            $table->string('payment_status')->default('unpaid')->after('payment_method');
+            if (!Schema::hasColumn('appointments', 'payment_method')) {
+                $table->string('payment_method')->nullable()->after('total_price');
+            }
+            if (!Schema::hasColumn('appointments', 'payment_status')) {
+                $table->string('payment_status')->default('unpaid')->after('payment_method');
+            }
         });
     }
 
@@ -22,7 +26,12 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->dropColumn(['payment_method', 'payment_status']);
+            if (Schema::hasColumn('appointments', 'payment_method')) {
+                $table->dropColumn('payment_method');
+            }
+            if (Schema::hasColumn('appointments', 'payment_status')) {
+                $table->dropColumn('payment_status');
+            }
         });
     }
 };
