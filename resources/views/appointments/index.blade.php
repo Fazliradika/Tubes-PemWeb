@@ -53,7 +53,8 @@
                             <div class="h-64 bg-gradient-to-br from-blue-500 to-blue-600 relative">
                                 @if($doctor->photo)
                                     <img src="{{ str_starts_with($doctor->photo, 'http') ? $doctor->photo : asset('storage/' . $doctor->photo) }}"
-                                        alt="{{ $doctor->user->name }}" class="w-full h-full object-cover object-[center_30%]"
+                                        alt="{{ $doctor->user->name }}"
+                                        class="w-full h-full object-contain bg-gradient-to-br from-blue-500 to-blue-600"
                                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center\'><div class=\'w-32 h-32 bg-white rounded-full flex items-center justify-center\'><svg class=\'w-20 h-20 text-blue-600\' fill=\'currentColor\' viewBox=\'0 0 20 20\'><path fill-rule=\'evenodd\' d=\'M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z\' clip-rule=\'evenodd\'/></svg></div></div>';">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">
