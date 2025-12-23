@@ -75,6 +75,9 @@ class ArticleController extends Controller
             'makanan-penurun-kolesterol-tinggi-secara-alami' => ['bmi', 'calorie'],
             'makanan-super-untuk-meningkatkan-imun-tubuh' => ['bmi', 'water'],
             'tips-tidur-berkualitas-untuk-kulit-sehat-dan-bercahaya' => ['water'],
+            'cara-mencegah-diabetes-tipe-2-dengan-gaya-hidup-sehat' => ['bmi', 'calorie'],
+            'komplikasi-diabetes-yang-harus-diwaspadai-dan-cara-mencegahnya' => ['bmi'],
+            'olahraga-aman-untuk-penderita-diabetes-panduan-lengkap' => ['bmi', 'calorie', 'water'],
         ];
         
         return $articleCalculators[$slug] ?? [];
@@ -2212,6 +2215,598 @@ class ArticleController extends Controller
                 'read_time' => '11 min read',
                 'published_at' => '3 minggu lalu',
                 'author' => 'Dr. Budi Pulmonologi',
+            ],
+            
+            // Additional Diabetes Articles
+            [
+                'id' => 21,
+                'slug' => 'cara-mencegah-diabetes-tipe-2-dengan-gaya-hidup-sehat',
+                'title' => 'Cara Mencegah Diabetes Tipe 2 dengan Gaya Hidup Sehat',
+                'excerpt' => 'Diabetes tipe 2 dapat dicegah dengan perubahan gaya hidup sederhana. Pelajari langkah-langkah efektif untuk menurunkan risiko diabetes hingga 58%.',
+                'quote' => 'Pencegahan adalah investasi kesehatan terbaik. Mulai hari ini, selamatkan masa depan Anda dari diabetes.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-red-50 border-l-4 border-red-500 italic text-gray-700">"Pencegahan adalah investasi kesehatan terbaik. Mulai hari ini, selamatkan masa depan Anda dari diabetes."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#pengantar" class="text-blue-600 hover:underline">Pengantar</a></li>
+    <li><a href="#faktor-risiko" class="text-blue-600 hover:underline">Faktor Risiko Diabetes</a></li>
+    <li><a href="#turunkan-berat-badan" class="text-blue-600 hover:underline">Turunkan Berat Badan</a></li>
+    <li><a href="#pola-makan" class="text-blue-600 hover:underline">Pola Makan Sehat</a></li>
+    <li><a href="#aktivitas-fisik" class="text-blue-600 hover:underline">Aktivitas Fisik Teratur</a></li>
+    <li><a href="#tidur-cukup" class="text-blue-600 hover:underline">Tidur Cukup</a></li>
+    <li><a href="#kelola-stress" class="text-blue-600 hover:underline">Kelola Stress</a></li>
+</ul>
+
+<p id="pengantar">Diabetes tipe 2 adalah kondisi kronis yang mempengaruhi cara tubuh memproses gula darah. Kabar baiknya, penelitian menunjukkan bahwa diabetes tipe 2 dapat dicegah atau ditunda dengan perubahan gaya hidup sederhana.</p>
+
+<h2 id="faktor-risiko">Faktor Risiko Diabetes Tipe 2</h2>
+<p><strong>Faktor yang tidak dapat diubah:</strong></p>
+<ul>
+    <li>Usia di atas 45 tahun</li>
+    <li>Riwayat keluarga dengan diabetes</li>
+    <li>Riwayat diabetes gestasional</li>
+    <li>Sindrom polikistik ovarium (PCOS)</li>
+</ul>
+
+<p><strong>Faktor yang dapat diubah:</strong></p>
+<ul>
+    <li>Kelebihan berat badan dan obesitas</li>
+    <li>Gaya hidup tidak aktif</li>
+    <li>Pola makan tidak sehat</li>
+    <li>Merokok</li>
+    <li>Kurang tidur</li>
+    <li>Stress kronis</li>
+</ul>
+
+<h2 id="turunkan-berat-badan">1. Turunkan Berat Badan Berlebih</h2>
+<p>Menurunkan berat badan hanya 5-7% dari berat badan awal dapat mengurangi risiko diabetes hingga 58%. Jika berat Anda 90 kg, kehilangan 4.5-6.3 kg sudah memberikan manfaat signifikan.</p>
+
+<p><strong>Tips menurunkan berat badan:</strong></p>
+<ul>
+    <li>Buat target realistis (0.5-1 kg per minggu)</li>
+    <li>Catat asupan makanan harian</li>
+    <li>Kurangi porsi makan secara bertahap</li>
+    <li>Hindari diet ekstrem yang sulit dipertahankan</li>
+    <li>Fokus pada perubahan permanen, bukan solusi cepat</li>
+</ul>
+
+<h2 id="pola-makan">2. Terapkan Pola Makan Sehat</h2>
+<p><strong>Makanan yang harus diperbanyak:</strong></p>
+<ul>
+    <li><strong>Serat tinggi:</strong> Sayuran, buah-buahan, kacang-kacangan, biji-bijian utuh</li>
+    <li><strong>Protein sehat:</strong> Ikan, ayam tanpa kulit, tahu, tempe</li>
+    <li><strong>Lemak sehat:</strong> Alpukat, kacang-kacangan, minyak zaitun</li>
+    <li><strong>Karbohidrat kompleks:</strong> Oatmeal, beras merah, quinoa</li>
+</ul>
+
+<p><strong>Makanan yang harus dibatasi:</strong></p>
+<ul>
+    <li>Gula tambahan dan minuman manis</li>
+    <li>Makanan olahan dan fast food</li>
+    <li>Karbohidrat putih (nasi putih, roti putih)</li>
+    <li>Daging merah dan daging olahan</li>
+    <li>Gorengan dan makanan tinggi lemak jenuh</li>
+</ul>
+
+<h2 id="aktivitas-fisik">3. Aktif Bergerak Setiap Hari</h2>
+<p>Aktivitas fisik teratur meningkatkan sensitivitas insulin dan membantu mengontrol gula darah. Target minimal: 150 menit aktivitas sedang per minggu.</p>
+
+<p><strong>Jenis aktivitas yang direkomendasikan:</strong></p>
+<ul>
+    <li><strong>Aerobik:</strong> Jalan cepat, jogging, bersepeda, berenang</li>
+    <li><strong>Latihan kekuatan:</strong> Angkat beban 2-3x per minggu</li>
+    <li><strong>Aktivitas sehari-hari:</strong> Naik tangga, berkebun, bersih-bersih rumah</li>
+</ul>
+
+<p><strong>Tips memulai:</strong></p>
+<ul>
+    <li>Mulai dengan 10 menit per hari, tingkatkan bertahap</li>
+    <li>Pilih aktivitas yang Anda nikmati</li>
+    <li>Ajak teman atau keluarga untuk motivasi</li>
+    <li>Gunakan pedometer atau fitness tracker</li>
+    <li>Kurangi waktu duduk, berdiri atau jalan setiap 30 menit</li>
+</ul>
+
+<h2 id="tidur-cukup">4. Tidur Cukup dan Berkualitas</h2>
+<p>Kurang tidur meningkatkan resistensi insulin dan hormon stress. Usahakan tidur 7-9 jam per malam dengan kualitas baik.</p>
+
+<p><strong>Tips tidur berkualitas:</strong></p>
+<ul>
+    <li>Buat jadwal tidur konsisten</li>
+    <li>Hindari kafein 6 jam sebelum tidur</li>
+    <li>Matikan layar elektronik 1 jam sebelum tidur</li>
+    <li>Ciptakan kamar tidur gelap, sejuk, dan tenang</li>
+    <li>Hindari makan berat 2-3 jam sebelum tidur</li>
+</ul>
+
+<h2 id="kelola-stress">5. Kelola Stress dengan Baik</h2>
+<p>Stress kronis meningkatkan kadar gula darah dan mendorong perilaku tidak sehat. Temukan cara efektif untuk mengelola stress.</p>
+
+<p><strong>Teknik manajemen stress:</strong></p>
+<ul>
+    <li>Meditasi dan mindfulness 10-15 menit per hari</li>
+    <li>Yoga atau tai chi</li>
+    <li>Napas dalam dan relaksasi progresif</li>
+    <li>Hobi yang menyenangkan</li>
+    <li>Berbicara dengan teman atau konselor</li>
+    <li>Batasi paparan berita negatif</li>
+</ul>
+
+<h2>Pemeriksaan Rutin</h2>
+<p><strong>Siapa yang perlu screening diabetes?</strong></p>
+<ul>
+    <li>Semua orang berusia 45+ tahun</li>
+    <li>Orang dengan BMI ≥23 dan faktor risiko tambahan</li>
+    <li>Wanita dengan riwayat diabetes gestasional</li>
+</ul>
+
+<p><strong>Jenis pemeriksaan:</strong></p>
+<ul>
+    <li>Gula darah puasa (normal: <100 mg/dL)</li>
+    <li>HbA1c (normal: <5.7%)</li>
+    <li>Tes toleransi glukosa oral</li>
+</ul>
+
+<h2>Program Pencegahan Diabetes</h2>
+<p>Pertimbangkan bergabung dengan program pencegahan diabetes jika Anda memiliki prediabetes. Program ini biasanya mencakup:</p>
+<ul>
+    <li>Konseling nutrisi individual</li>
+    <li>Program aktivitas fisik terstruktur</li>
+    <li>Dukungan kelompok dan motivasi</li>
+    <li>Monitoring dan follow-up berkala</li>
+</ul>
+
+<p><strong>Kesimpulan:</strong> Mencegah diabetes tipe 2 sepenuhnya berada dalam kendali Anda. Mulai dengan satu perubahan kecil hari ini, dan bangun kebiasaan sehat secara bertahap. Investasi kecil sekarang akan menghasilkan manfaat kesehatan besar di masa depan!</p>',
+                'category' => 'Diabetes',
+                'category_color' => 'red',
+                'image' => 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&h=500&fit=crop',
+                'read_time' => '10 min read',
+                'published_at' => '5 hari lalu',
+                'author' => 'Dr. Maya Endokrinologi',
+            ],
+            [
+                'id' => 22,
+                'slug' => 'komplikasi-diabetes-yang-harus-diwaspadai-dan-cara-mencegahnya',
+                'title' => 'Komplikasi Diabetes yang Harus Diwaspadai dan Cara Mencegahnya',
+                'excerpt' => 'Diabetes yang tidak terkontrol dapat menyebabkan komplikasi serius. Kenali risiko dan langkah pencegahan untuk menjaga kualitas hidup Anda.',
+                'quote' => 'Kontrol gula darah hari ini adalah investasi kesehatan jangka panjang Anda.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-red-50 border-l-4 border-red-500 italic text-gray-700">"Kontrol gula darah hari ini adalah investasi kesehatan jangka panjang Anda."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#pengantar" class="text-blue-600 hover:underline">Pengantar</a></li>
+    <li><a href="#penyakit-jantung" class="text-blue-600 hover:underline">Penyakit Jantung dan Stroke</a></li>
+    <li><a href="#neuropati" class="text-blue-600 hover:underline">Kerusakan Saraf (Neuropati)</a></li>
+    <li><a href="#nefropati" class="text-blue-600 hover:underline">Kerusakan Ginjal (Nefropati)</a></li>
+    <li><a href="#retinopati" class="text-blue-600 hover:underline">Kerusakan Mata (Retinopati)</a></li>
+    <li><a href="#kaki-diabetik" class="text-blue-600 hover:underline">Masalah Kaki</a></li>
+    <li><a href="#pencegahan" class="text-blue-600 hover:underline">Cara Mencegah Komplikasi</a></li>
+</ul>
+
+<p id="pengantar">Diabetes yang tidak terkontrol dengan baik dapat menyebabkan komplikasi serius yang mempengaruhi berbagai organ tubuh. Namun kabar baiknya, sebagian besar komplikasi dapat dicegah atau diperlambat dengan kontrol gula darah yang baik.</p>
+
+<h2 id="penyakit-jantung">1. Penyakit Jantung dan Stroke</h2>
+<p>Orang dengan diabetes memiliki risiko 2-4 kali lebih tinggi mengalami penyakit jantung dan stroke.</p>
+
+<p><strong>Mengapa terjadi?</strong></p>
+<ul>
+    <li>Gula darah tinggi merusak pembuluh darah</li>
+    <li>Sering disertai hipertensi dan kolesterol tinggi</li>
+    <li>Penumpukan plak di arteri lebih cepat</li>
+</ul>
+
+<p><strong>Gejala yang perlu diwaspadai:</strong></p>
+<ul>
+    <li>Nyeri dada atau sesak napas</li>
+    <li>Kelelahan ekstrem</li>
+    <li>Pusing atau pingsan</li>
+    <li>Nyeri di lengan, rahang, atau punggung</li>
+</ul>
+
+<p><strong>Pencegahan:</strong></p>
+<ul>
+    <li>Kontrol HbA1c <7%</li>
+    <li>Jaga tekanan darah <140/90 mmHg</li>
+    <li>Pertahankan kolesterol LDL <100 mg/dL</li>
+    <li>Tidak merokok</li>
+    <li>Olahraga teratur minimal 150 menit/minggu</li>
+    <li>Konsumsi obat sesuai anjuran dokter (aspirin, statin jika diperlukan)</li>
+</ul>
+
+<h2 id="neuropati">2. Kerusakan Saraf (Neuropati Diabetik)</h2>
+<p>Hingga 50% penderita diabetes mengalami neuropati, terutama di kaki dan tangan.</p>
+
+<p><strong>Gejala neuropati:</strong></p>
+<ul>
+    <li>Kesemutan, mati rasa, atau sensasi terbakar</li>
+    <li>Nyeri tajam atau kram, terutama malam hari</li>
+    <li>Sensitivitas berlebihan terhadap sentuhan</li>
+    <li>Kelemahan otot</li>
+    <li>Kehilangan keseimbangan</li>
+</ul>
+
+<p><strong>Jenis neuropati:</strong></p>
+<ul>
+    <li><strong>Perifer:</strong> Mempengaruhi kaki dan tangan</li>
+    <li><strong>Otonom:</strong> Mempengaruhi sistem pencernaan, kandung kemih, jantung</li>
+    <li><strong>Proksimal:</strong> Nyeri di paha, pinggul, atau bokong</li>
+    <li><strong>Fokal:</strong> Kerusakan saraf tunggal (mata, wajah, kaki)</li>
+</ul>
+
+<p><strong>Pencegahan dan pengelolaan:</strong></p>
+<ul>
+    <li>Jaga gula darah dalam target</li>
+    <li>Periksa kaki setiap hari</li>
+    <li>Gunakan alas kaki yang nyaman</li>
+    <li>Hindari berjalan tanpa alas kaki</li>
+    <li>Obat untuk mengurangi nyeri neuropatik (gabapentin, pregabalin)</li>
+</ul>
+
+<h2 id="nefropati">3. Kerusakan Ginjal (Nefropati Diabetik)</h2>
+<p>Diabetes adalah penyebab utama gagal ginjal. Sekitar 1 dari 3 penderita diabetes mengalami penyakit ginjal.</p>
+
+<p><strong>Tahapan penyakit ginjal:</strong></p>
+<ul>
+    <li><strong>Stadium 1-2:</strong> Kerusakan minimal, tanpa gejala</li>
+    <li><strong>Stadium 3:</strong> Penurunan fungsi ginjal sedang</li>
+    <li><strong>Stadium 4:</strong> Penurunan fungsi ginjal berat</li>
+    <li><strong>Stadium 5:</strong> Gagal ginjal, perlu dialisis/transplantasi</li>
+</ul>
+
+<p><strong>Tanda-tanda masalah ginjal:</strong></p>
+<ul>
+    <li>Bengkak di kaki, pergelangan kaki, atau wajah</li>
+    <li>Urin berbusa</li>
+    <li>Sering buang air kecil, terutama malam hari</li>
+    <li>Kelelahan dan kelemahan</li>
+    <li>Mual dan muntah</li>
+    <li>Hilang nafsu makan</li>
+</ul>
+
+<p><strong>Pencegahan:</strong></p>
+<ul>
+    <li>Kontrol gula darah dan tekanan darah ketat</li>
+    <li>Tes urin albumin dan kreatinin setiap tahun</li>
+    <li>Batasi konsumsi protein (0.8-1 g/kg berat badan)</li>
+    <li>Hindari NSAID (ibuprofen, aspirin dosis tinggi)</li>
+    <li>Obat ACE inhibitor atau ARB untuk proteksi ginjal</li>
+</ul>
+
+<h2 id="retinopati">4. Kerusakan Mata (Retinopati Diabetik)</h2>
+<p>Diabetes dapat menyebabkan kebutaan jika tidak ditangani. Retinopati diabetik adalah penyebab utama kebutaan pada usia kerja.</p>
+
+<p><strong>Tahapan retinopati:</strong></p>
+<ul>
+    <li><strong>Non-proliferatif ringan:</strong> Pembengkakan pembuluh darah kecil</li>
+    <li><strong>Non-proliferatif sedang-berat:</strong> Pembuluh darah tersumbat</li>
+    <li><strong>Proliferatif:</strong> Pembuluh darah baru yang rapuh terbentuk</li>
+</ul>
+
+<p><strong>Gejala yang perlu diwaspadai:</strong></p>
+<ul>
+    <li>Penglihatan kabur atau terdistorsi</li>
+    <li>Floaters (bintik-bintik mengambang)</li>
+    <li>Kesulitan melihat di malam hari</li>
+    <li>Kehilangan penglihatan mendadak</li>
+    <li>Area gelap atau kosong di penglihatan</li>
+</ul>
+
+<p><strong>Pencegahan:</strong></p>
+<ul>
+    <li>Pemeriksaan mata lengkap setiap tahun</li>
+    <li>Kontrol gula darah, tekanan darah, dan kolesterol</li>
+    <li>Laser treatment jika diperlukan</li>
+    <li>Injeksi anti-VEGF untuk retinopati proliferatif</li>
+</ul>
+
+<h2 id="kaki-diabetik">5. Masalah Kaki Diabetik</h2>
+<p>Kombinasi neuropati dan sirkulasi buruk membuat kaki rentan terhadap luka yang sulit sembuh.</p>
+
+<p><strong>Risiko kaki diabetik:</strong></p>
+<ul>
+    <li>Luka kecil berkembang menjadi ulkus</li>
+    <li>Infeksi sulit dikontrol</li>
+    <li>Dapat berakhir dengan amputasi jika tidak ditangani</li>
+</ul>
+
+<p><strong>Perawatan kaki harian:</strong></p>
+<ul>
+    <li>Periksa kaki setiap hari untuk luka, lecet, kemerahan</li>
+    <li>Cuci kaki dengan air hangat, keringkan dengan lembut</li>
+    <li>Gunakan pelembab, hindari area antar jari</li>
+    <li>Potong kuku lurus, tidak terlalu pendek</li>
+    <li>Gunakan sepatu yang pas dan nyaman</li>
+    <li>Jangan pernah berjalan tanpa alas kaki</li>
+</ul>
+
+<p><strong>Kapan harus ke dokter:</strong></p>
+<ul>
+    <li>Luka atau lecet yang tidak sembuh dalam 2 hari</li>
+    <li>Kemerahan, bengkak, atau hangat di kaki</li>
+    <li>Nanah atau bau tidak sedap</li>
+    <li>Demam dengan luka di kaki</li>
+    <li>Kuku tumbuh ke dalam atau infeksi jamur</li>
+</ul>
+
+<h2 id="pencegahan">Strategi Pencegahan Komplikasi</h2>
+<p><strong>1. Target Kontrol Gula Darah:</strong></p>
+<ul>
+    <li>HbA1c: <7% (individual sesuai kondisi)</li>
+    <li>Gula darah puasa: 80-130 mg/dL</li>
+    <li>Gula darah 2 jam setelah makan: <180 mg/dL</li>
+</ul>
+
+<p><strong>2. Pemeriksaan Rutin:</strong></p>
+<ul>
+    <li>HbA1c setiap 3-6 bulan</li>
+    <li>Pemeriksaan mata tahunan</li>
+    <li>Tes fungsi ginjal dan albumin urin tahunan</li>
+    <li>Pemeriksaan kaki setiap kunjungan dokter</li>
+    <li>Profil lipid tahunan</li>
+</ul>
+
+<p><strong>3. Gaya Hidup Sehat:</strong></p>
+<ul>
+    <li>Diet seimbang, rendah gula dan lemak jenuh</li>
+    <li>Aktivitas fisik 150 menit per minggu</li>
+    <li>Berhenti merokok</li>
+    <li>Kelola stress</li>
+    <li>Tidur cukup 7-9 jam</li>
+</ul>
+
+<p><strong>4. Kepatuhan Pengobatan:</strong></p>
+<ul>
+    <li>Minum obat diabetes sesuai jadwal</li>
+    <li>Gunakan insulin dengan teknik yang benar</li>
+    <li>Jangan skip dosis tanpa konsultasi dokter</li>
+    <li>Laporkan efek samping ke dokter</li>
+</ul>
+
+<h2>Kesimpulan</h2>
+<p>Komplikasi diabetes serius, namun sebagian besar dapat dicegah atau diperlambat. Kunci utamanya adalah kontrol gula darah yang konsisten, pemeriksaan rutin, dan gaya hidup sehat. Bekerja sama dengan tim medis Anda untuk membuat rencana pengelolaan diabetes yang komprehensif.</p>
+
+<p><strong>Ingat:</strong> Setiap hari dengan kontrol gula darah yang baik adalah hari yang Anda investasikan untuk kesehatan jangka panjang Anda!</p>',
+                'category' => 'Diabetes',
+                'category_color' => 'red',
+                'image' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop',
+                'read_time' => '12 min read',
+                'published_at' => '1 minggu lalu',
+                'author' => 'Dr. Andi Wijaya',
+            ],
+            [
+                'id' => 23,
+                'slug' => 'olahraga-aman-untuk-penderita-diabetes-panduan-lengkap',
+                'title' => 'Olahraga Aman untuk Penderita Diabetes: Panduan Lengkap',
+                'excerpt' => 'Olahraga adalah kunci penting dalam mengelola diabetes. Pelajari jenis olahraga yang aman, tips memulai, dan cara menghindari hipoglikemia.',
+                'quote' => 'Olahraga adalah obat alami terbaik untuk diabetes. Bergerak hari ini, hidup lebih sehat besok.',
+                'content' => '<div class="article-quote mb-6 p-4 bg-red-50 border-l-4 border-red-500 italic text-gray-700">"Olahraga adalah obat alami terbaik untuk diabetes. Bergerak hari ini, hidup lebih sehat besok."</div>
+
+<h2>Daftar Isi</h2>
+<ul class="toc mb-6 bg-gray-50 p-4 rounded-lg">
+    <li><a href="#manfaat" class="text-blue-600 hover:underline">Manfaat Olahraga</a></li>
+    <li><a href="#jenis-olahraga" class="text-blue-600 hover:underline">Jenis Olahraga yang Direkomendasikan</a></li>
+    <li><a href="#memulai" class="text-blue-600 hover:underline">Cara Memulai dengan Aman</a></li>
+    <li><a href="#hipoglikemia" class="text-blue-600 hover:underline">Mencegah Hipoglikemia</a></li>
+    <li><a href="#tips-praktis" class="text-blue-600 hover:underline">Tips Praktis</a></li>
+</ul>
+
+<h2 id="manfaat">Manfaat Olahraga untuk Diabetes</h2>
+<p>Olahraga teratur memberikan manfaat luar biasa bagi penderita diabetes:</p>
+
+<p><strong>Manfaat Jangka Pendek:</strong></p>
+<ul>
+    <li>Menurunkan gula darah segera (efek bertahan 24-72 jam)</li>
+    <li>Meningkatkan sensitivitas insulin</li>
+    <li>Membantu kontrol berat badan</li>
+    <li>Meningkatkan energi dan mood</li>
+    <li>Mengurangi stress</li>
+</ul>
+
+<p><strong>Manfaat Jangka Panjang:</strong></p>
+<ul>
+    <li>Menurunkan HbA1c hingga 0.6-1%</li>
+    <li>Mengurangi risiko penyakit jantung</li>
+    <li>Menurunkan tekanan darah</li>
+    <li>Meningkatkan kolesterol HDL (baik)</li>
+    <li>Memperbaiki kualitas tidur</li>
+    <li>Mencegah komplikasi diabetes</li>
+</ul>
+
+<h2 id="jenis-olahraga">Jenis Olahraga yang Direkomendasikan</h2>
+
+<h3>1. Latihan Aerobik (Kardio)</h3>
+<p><strong>Target:</strong> 150 menit per minggu (30 menit, 5 hari)</p>
+
+<p><strong>Pilihan olahraga aerobik:</strong></p>
+<ul>
+    <li><strong>Jalan cepat:</strong> Mulai 10 menit, tingkatkan bertahap. Ideal untuk pemula.</li>
+    <li><strong>Jogging/Lari:</strong> Bakar kalori lebih banyak, tingkatkan stamina.</li>
+    <li><strong>Bersepeda:</strong> Rendah benturan, bagus untuk sendi.</li>
+    <li><strong>Berenang:</strong> Full body workout, nyaman untuk sendi.</li>
+    <li><strong>Senam aerobik:</strong> Menyenangkan, bisa bersama kelompok.</li>
+    <li><strong>Menari:</strong> Kombinasi fun dan fitness.</li>
+</ul>
+
+<h3>2. Latihan Kekuatan (Resistance Training)</h3>
+<p><strong>Target:</strong> 2-3 kali per minggu, minimal 8 jenis latihan</p>
+
+<p><strong>Manfaat latihan kekuatan:</strong></p>
+<ul>
+    <li>Membangun massa otot</li>
+    <li>Meningkatkan metabolisme</li>
+    <li>Memperbaiki kontrol gula darah jangka panjang</li>
+    <li>Meningkatkan kekuatan tulang</li>
+</ul>
+
+<p><strong>Pilihan latihan:</strong></p>
+<ul>
+    <li>Angkat beban (dumbbell, barbell)</li>
+    <li>Resistance band</li>
+    <li>Latihan berat badan (push-up, squat, plank)</li>
+    <li>Mesin gym</li>
+</ul>
+
+<h3>3. Latihan Fleksibilitas</h3>
+<p><strong>Target:</strong> 2-3 kali per minggu, 10-30 detik per gerakan</p>
+
+<p><strong>Pilihan:</strong></p>
+<ul>
+    <li>Yoga - meningkatkan fleksibilitas dan relaksasi</li>
+    <li>Stretching - cegah cedera, tingkatkan ROM</li>
+    <li>Tai chi - low impact, bagus untuk keseimbangan</li>
+</ul>
+
+<h3>4. Latihan Keseimbangan</h3>
+<p>Penting untuk mencegah jatuh, terutama jika ada neuropati:</p>
+<ul>
+    <li>Berdiri satu kaki</li>
+    <li>Heel-to-toe walk</li>
+    <li>Tai chi</li>
+    <li>Balance board exercises</li>
+</ul>
+
+<h2 id="memulai">Cara Memulai dengan Aman</h2>
+
+<p><strong>Langkah 1: Konsultasi Dokter</strong></p>
+<p>Sebelum memulai program olahraga, diskusikan dengan dokter terutama jika:</p>
+<ul>
+    <li>Berusia >40 tahun</li>
+    <li>Memiliki penyakit jantung atau faktor risikonya</li>
+    <li>Ada komplikasi diabetes (neuropati, retinopati)</li>
+    <li>Tidak aktif dalam waktu lama</li>
+</ul>
+
+<p><strong>Langkah 2: Cek Gula Darah</strong></p>
+<p>Selalu cek gula darah sebelum olahraga:</p>
+<ul>
+    <li><strong><100 mg/dL:</strong> Makan snack 15g karbohidrat dulu</li>
+    <li><strong>100-250 mg/dL:</strong> Aman untuk olahraga</li>
+    <li><strong>>250 mg/dL + keton:</strong> Tunda olahraga, atasi hiperglikemia dulu</li>
+</ul>
+
+<p><strong>Langkah 3: Mulai Perlahan</strong></p>
+<ul>
+    <li>Minggu 1-2: 10 menit per hari</li>
+    <li>Minggu 3-4: 15 menit per hari</li>
+    <li>Minggu 5-6: 20 menit per hari</li>
+    <li>Tingkatkan 5 menit setiap 1-2 minggu hingga target</li>
+</ul>
+
+<p><strong>Langkah 4: Dengarkan Tubuh</strong></p>
+<p>Hentikan olahraga jika mengalami:</p>
+<ul>
+    <li>Nyeri dada atau sesak napas berat</li>
+    <li>Pusing atau mau pingsan</li>
+    <li>Gejala hipoglikemia</li>
+    <li>Nyeri sendi atau otot yang tidak normal</li>
+</ul>
+
+<h2 id="hipoglikemia">Mencegah Hipoglikemia Saat Olahraga</h2>
+
+<p><strong>Tanda-tanda hipoglikemia:</strong></p>
+<ul>
+    <li>Gemetar, berkeringat</li>
+    <li>Lapar tiba-tiba</li>
+    <li>Pusing, bingung</li>
+    <li>Jantung berdebar</li>
+    <li>Lemah, kelelahan</li>
+</ul>
+
+<p><strong>Pencegahan hipoglikemia:</strong></p>
+<ul>
+    <li>Cek gula darah sebelum, selama (jika >60 menit), dan setelah olahraga</li>
+    <li>Bawa snack cepat serap: permen, jus, tablet glukosa</li>
+    <li>Sesuaikan dosis insulin/obat dengan dokter</li>
+    <li>Olahraga 1-2 jam setelah makan</li>
+    <li>Hindari olahraga saat insulin pada puncak kerja</li>
+    <li>Pakai ID medis atau beri tahu teman olahraga</li>
+</ul>
+
+<p><strong>Jika terjadi hipoglikemia:</strong></p>
+<ol>
+    <li>Hentikan olahraga segera</li>
+    <li>Konsumsi 15g karbohidrat cepat serap</li>
+    <li>Tunggu 15 menit, cek gula darah lagi</li>
+    <li>Jika masih <70 mg/dL, ulangi step 2-3</li>
+    <li>Setelah normal, makan snack protein+karbohidrat</li>
+</ol>
+
+<h2 id="tips-praktis">Tips Praktis Olahraga untuk Diabetesi</h2>
+
+<p><strong>1. Peralatan Penting:</strong></p>
+<ul>
+    <li>Glukometer dan strip test</li>
+    <li>Snack darurat (glukosa, permen)</li>
+    <li>Botol air minum</li>
+    <li>Sepatu olahraga yang pas dan nyaman</li>
+    <li>Kaos kaki yang menyerap keringat</li>
+    <li>Handuk</li>
+</ul>
+
+<p><strong>2. Waktu Terbaik:</strong></p>
+<ul>
+    <li><strong>Pagi:</strong> Energi fresh, tapi cek gula darah dulu</li>
+    <li><strong>Setelah makan:</strong> 1-2 jam, saat gula darah naik</li>
+    <li><strong>Konsisten:</strong> Sama waktu setiap hari lebih baik</li>
+</ul>
+
+<p><strong>3. Perawatan Kaki:</strong></p>
+<ul>
+    <li>Periksa kaki sebelum dan setelah olahraga</li>
+    <li>Gunakan sepatu tertutup, jangan barefoot</li>
+    <li>Ganti kaos kaki jika basah</li>
+    <li>Rawat lecet/luka segera</li>
+</ul>
+
+<p><strong>4. Hidrasi:</strong></p>
+<ul>
+    <li>Minum sebelum, selama, dan setelah olahraga</li>
+    <li>Target: 250ml setiap 15-20 menit</li>
+    <li>Pilih air putih, hindari minuman manis</li>
+</ul>
+
+<p><strong>5. Catat Progress:</strong></p>
+<ul>
+    <li>Log gula darah pre & post exercise</li>
+    <li>Catat jenis, durasi, intensitas olahraga</li>
+    <li>Perhatikan pola: olahraga mana yang paling efektif?</li>
+    <li>Share dengan dokter untuk sesuaikan terapi</li>
+</ul>
+
+<h2>Program Olahraga Mingguan Sample</h2>
+
+<p><strong>Untuk Pemula:</strong></p>
+<ul>
+    <li><strong>Senin:</strong> Jalan cepat 20 menit</li>
+    <li><strong>Selasa:</strong> Latihan kekuatan ringan 20 menit</li>
+    <li><strong>Rabu:</strong> Jalan cepat 20 menit</li>
+    <li><strong>Kamis:</strong> Istirahat atau yoga 15 menit</li>
+    <li><strong>Jumat:</strong> Jalan cepat 20 menit</li>
+    <li><strong>Sabtu:</strong> Latihan kekuatan ringan 20 menit</li>
+    <li><strong>Minggu:</strong> Aktivitas santai (jalan-jalan, berkebun)</li>
+</ul>
+
+<p><strong>Untuk Intermediate:</strong></p>
+<ul>
+    <li><strong>Senin:</strong> Jogging 30 menit</li>
+    <li><strong>Selasa:</strong> Latihan kekuatan 30 menit</li>
+    <li><strong>Rabu:</strong> Bersepeda 45 menit</li>
+    <li><strong>Kamis:</strong> Latihan kekuatan 30 menit</li>
+    <li><strong>Jumat:</strong> Berenang atau jogging 30 menit</li>
+    <li><strong>Sabtu:</strong> Hiking atau yoga 45 menit</li>
+    <li><strong>Minggu:</strong> Istirahat aktif (stretching ringan)</li>
+</ul>
+
+<h2>Kesimpulan</h2>
+<p>Olahraga adalah komponen vital dalam pengelolaan diabetes. Mulai dengan perlahan, konsisten, dan selalu perhatikan respons tubuh Anda. Dengan olahraga teratur, Anda tidak hanya mengontrol gula darah, tetapi juga meningkatkan kualitas hidup secara keseluruhan.</p>
+
+<p><strong>Ingat:</strong> Setiap langkah yang Anda ambil hari ini adalah investasi untuk kesehatan Anda besok. Ayo mulai bergerak!</p>',
+                'category' => 'Diabetes',
+                'category_color' => 'red',
+                'image' => 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=500&fit=crop',
+                'read_time' => '11 min read',
+                'published_at' => '2 minggu lalu',
+                'author' => 'Dr. Fitri Olahraga & Diabetes',
             ],
         ];
     }
