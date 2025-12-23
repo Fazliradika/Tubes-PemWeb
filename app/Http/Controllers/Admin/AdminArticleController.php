@@ -33,6 +33,14 @@ class AdminArticleController extends Controller
     }
 
     /**
+     * Redirect to the public show page.
+     */
+    public function show($slug)
+    {
+        return redirect()->route('articles.show', $slug);
+    }
+
+    /**
      * Show the form for creating a new article.
      */
     public function create()

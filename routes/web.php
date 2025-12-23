@@ -158,7 +158,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
     Route::patch('/orders/{order}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus'])->name('orders.update-status');
     
     // Article Management
-    Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class)->except(['show']);
+    Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class);
 });
 
 
