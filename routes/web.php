@@ -165,7 +165,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         'edit' => 'admin.articles.edit',
         'update' => 'admin.articles.update',
         'destroy' => 'admin.articles.destroy',
-    ]);
+    ])->except(['show']);
 });
 
 // Articles Routes (accessible to all authenticated users)
