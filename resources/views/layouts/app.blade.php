@@ -291,14 +291,14 @@
                 ];
             @endphp
 
-        @foreach($notifications as $type => $message)
-            @if($message)
-                window.showToast(@json($message), @json($type));
-            @endif
-        @endforeach
+            @foreach($notifications as $type => $message)
+                @if($message)
+                    window.showToast(@json($message), @json($type));
+                @endif
+            @endforeach
         });
     </script>
-    @st
-ack('scripts')
+    @stack('scripts')
 </body>
+
 </html>
