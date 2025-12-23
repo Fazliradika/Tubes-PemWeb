@@ -383,7 +383,7 @@ class ArticleController extends Controller
 <p>Ingat, konsistensi lebih penting dari intensitas. Lebih baik olahraga ringan secara teratur daripada olahraga berat sekali-sekali. Jadikan olahraga sebagai bagian dari gaya hidup, bukan kewajiban!</p>',
                 'category' => 'Olahraga',
                 'category_color' => 'blue',
-                'image' => 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&h=500&fit=crop',
+                'image' => 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&h=500&fit=crop',
                 'read_time' => '10 min read',
                 'published_at' => '3 hari lalu',
                 'author' => 'Dr. Ahmad Kardiologi',
