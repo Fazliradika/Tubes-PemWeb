@@ -336,11 +336,11 @@ class DashboardController extends Controller
         }
         
         // Recent appointments
-        $recentAppointments = Appointment::with('user')->latest()->limit(2)->get();
+        $recentAppointments = Appointment::with('patient')->latest()->limit(2)->get();
         foreach ($recentAppointments as $appointment) {
             $activities[] = [
                 'type' => 'appointment',
-                'message' => 'Janji temu baru dari ' . ($appointment->user->name ?? 'Pasien'),
+                'message' => 'Janji temu baru dari ' . ($appointment->patient->name ?? 'Pasien'),
                 'time' => $appointment->created_at->diffForHumans(),
                 'icon' => 'calendar',
                 'color' => 'purple'
