@@ -15,14 +15,19 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $articles = $this->getArticles();
+        
+        // Convert array to object-like behavior if it's from the array fallback
         $article = collect($articles)->firstWhere('slug', $slug);
         
         if (!$article) {
             abort(404);
         }
         
+        // Convert array to collection for consistent access
+        $articleData = is_array($article) ? (object)$article : $article;
+        
         $relatedArticles = collect($articles)
-            ->where('category', $article['category'])
+            ->where('category', $articleData->category)
             ->where('slug', '!=', $slug)
             ->take(3);
         
@@ -40,7 +45,8 @@ class ArticleController extends Controller
             : false;
         
         // Get related doctors based on article category
-        $relatedDoctors = $this->getRelatedDoctors($article['category']);
+        $relatedDoctors = $this->getRelatedDoctors($articleData->category);
+
         
         // Determine which calculators to show based on article
         $calculators = $this->getCalculatorsForArticle($article['slug']);
@@ -104,6 +110,17 @@ class ArticleController extends Controller
 
     public function getArticles()
     {
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
+                $dbArticles = \App\Models\Article::latest()->get();
+                if ($dbArticles->count() > 0) {
+                    return $dbArticles;
+                }
+            }
+        } catch (\Exception $e) {
+            // Log error or ignore and fallback
+        }
+
         return [
             // Article 1
             [
