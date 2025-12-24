@@ -10,6 +10,7 @@ use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,7 +21,7 @@ Route::get('/', function () {
 Route::view('/end', 'end')->name('end');
 
 // Static Information Pages (public)
-Route::view('/faq', 'pages.faq')->name('faq');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::view('/about', 'pages.about')->name('about');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

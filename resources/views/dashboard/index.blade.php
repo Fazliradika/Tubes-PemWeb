@@ -93,60 +93,60 @@
                 </div>
                 
                 <!-- Products -->
-                <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div style="background: linear-gradient(to bottom right, #f59e0b, #ea580c);" class="rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-amber-100 text-xs font-medium">Total Produk</p>
-                            <p class="text-lg font-bold">{{ number_format($totalProducts) }}</p>
+                            <p class="text-white/80 text-xs font-medium">Total Produk</p>
+                            <p class="text-lg font-bold text-white">{{ number_format($totalProducts) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-amber-100">
+                    <div class="mt-2 text-xs text-white/80">
                         {{ $activeProducts }} aktif
                     </div>
                 </div>
                 
                 <!-- Appointments -->
-                <div class="bg-gradient-to-br from-rose-500 to-pink-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div style="background: linear-gradient(to bottom right, #ec4899, #db2777);" class="rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-rose-100 text-xs font-medium">Janji Temu</p>
-                            <p class="text-lg font-bold">{{ number_format($appointmentStats['total']) }}</p>
+                            <p class="text-white/80 text-xs font-medium">Janji Temu</p>
+                            <p class="text-lg font-bold text-white">{{ number_format($appointmentStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-rose-100">
+                    <div class="mt-2 text-xs text-white/80">
                         {{ $appointmentStats['today'] }} hari ini
                     </div>
                 </div>
                 
                 <!-- Messages -->
-                <div class="bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div style="background: linear-gradient(to bottom right, #8b5cf6, #6366f1);" class="rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-violet-100 text-xs font-medium">Pesan Masuk</p>
-                            <p class="text-lg font-bold">{{ number_format($contactStats['total']) }}</p>
+                            <p class="text-white/80 text-xs font-medium">Pesan Masuk</p>
+                            <p class="text-lg font-bold text-white">{{ number_format($contactStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
                         </div>
                     </div>
                     @if($contactStats['unread'] > 0)
                     <div class="mt-2 text-xs">
-                        <span class="px-2 py-0.5 bg-white/20 rounded-full">{{ $contactStats['unread'] }} belum dibaca</span>
+                        <span class="px-2 py-0.5 bg-white/20 rounded-full text-white">{{ $contactStats['unread'] }} belum dibaca</span>
                     </div>
                     @else
-                    <div class="mt-2 text-xs text-violet-100">
+                    <div class="mt-2 text-xs text-white/80">
                         Semua terbaca
                     </div>
                     @endif
