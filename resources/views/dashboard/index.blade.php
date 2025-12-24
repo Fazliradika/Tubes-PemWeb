@@ -93,10 +93,10 @@
                 </div>
                 
                 <!-- Products -->
-                <div class="bg-orange-500 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-orange-100 text-xs font-medium">Total Produk</p>
+                            <p class="text-amber-100 text-xs font-medium">Total Produk</p>
                             <p class="text-lg font-bold">{{ number_format($totalProducts) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -105,16 +105,16 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-orange-100">
+                    <div class="mt-2 text-xs text-amber-100">
                         {{ $activeProducts }} aktif
                     </div>
                 </div>
                 
                 <!-- Appointments -->
-                <div class="bg-pink-500 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-rose-500 to-pink-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-pink-100 text-xs font-medium">Janji Temu</p>
+                            <p class="text-rose-100 text-xs font-medium">Janji Temu</p>
                             <p class="text-lg font-bold">{{ number_format($appointmentStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -123,16 +123,16 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-pink-100">
+                    <div class="mt-2 text-xs text-rose-100">
                         {{ $appointmentStats['today'] }} hari ini
                     </div>
                 </div>
                 
                 <!-- Messages -->
-                <div class="bg-indigo-500 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-indigo-100 text-xs font-medium">Pesan Masuk</p>
+                            <p class="text-violet-100 text-xs font-medium">Pesan Masuk</p>
                             <p class="text-lg font-bold">{{ number_format($contactStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -146,7 +146,7 @@
                         <span class="px-2 py-0.5 bg-white/20 rounded-full">{{ $contactStats['unread'] }} belum dibaca</span>
                     </div>
                     @else
-                    <div class="mt-2 text-xs text-indigo-100">
+                    <div class="mt-2 text-xs text-violet-100">
                         Semua terbaca
                     </div>
                     @endif
