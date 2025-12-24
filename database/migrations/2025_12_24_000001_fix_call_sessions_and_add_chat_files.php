@@ -12,10 +12,13 @@ return new class extends Migration {
     {
         // Fix call_sessions table status column - only if table exists
         if (Schema::hasTable('call_sessions') && Schema::hasColumn('call_sessions', 'status')) {
-            try {
-                \DB::statement("ALTER TABLE call_sessions MODIFY COLUMN status VARCHAR(50) NOT NULL DEFAULT 'ringing'");
-            } catch (\Exception $e) {
-                // Column might already be varchar, ignore error
+            // Only for MySQL, SQLite doesn't support MODIFY COLUMN
+            if (Schema::getConnection()->getDriverName() === 'mysql') {
+                try {
+                    \DB::statement("ALTER TABLE call_sessions MODIFY COLUMN status VARCHAR(50) NOT NULL DEFAULT 'ringing'");
+                } catch (\Exception $e) {
+                    // Column might already be varchar, ignore error
+                }
             }
         }
 

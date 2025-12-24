@@ -228,10 +228,30 @@ class CheckoutController extends Controller
             abort(403);
         }
 
+        // Validate payment proof upload
+        $request->validate([
+            'payment_proof' => 'required|image|mimes:jpeg,jpg,png,gif|max:2048', // max 2MB
+        ], [
+            'payment_proof.required' => 'Bukti pembayaran harus diupload',
+            'payment_proof.image' => 'File harus berupa gambar',
+            'payment_proof.mimes' => 'Format gambar harus jpeg, jpg, png, atau gif',
+            'payment_proof.max' => 'Ukuran file maksimal 2MB',
+        ]);
+
         $payment = $order->payment;
+
+        // Handle file upload
+        $paymentProofPath = null;
+        if ($request->hasFile('payment_proof')) {
+            $file = $request->file('payment_proof');
+            $filename = 'payment_' . $order->order_number . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $paymentProofPath = $file->storeAs('payment_proofs', $filename, 'public');
+        }
+
         $payment->update([
             'payment_status' => 'paid',
             'transaction_id' => 'TRX-' . strtoupper(uniqid()),
+            'payment_proof' => $paymentProofPath,
             'paid_at' => now(),
         ]);
 
