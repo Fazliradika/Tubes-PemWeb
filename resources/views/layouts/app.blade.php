@@ -232,14 +232,7 @@
                             </div>
                         </div>
 
-                        <div
-                            class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center shadow-sm">
-                            <div class="flex items-center gap-2">
-                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI"
-                                    class="h-10 w-auto object-contain" />
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Kemenkes RI</span>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -303,11 +296,11 @@
                 ];
             @endphp
 
-        @foreach($notifications as $type => $message)
-            @if($message)
-                window.showToast(@json($message), @json($type));
-            @endif
-        @endforeach
+            @foreach($notifications as $type => $message)
+                @if($message)
+                    window.showToast(@json($message), @json($type));
+                @endif
+            @endforeach
         });
     </script>
     @stack('scripts')
