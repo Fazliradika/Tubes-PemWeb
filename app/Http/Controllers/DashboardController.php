@@ -459,230 +459,58 @@ class DashboardController extends Controller
     
     /**
      * Get recent FAQs for dashboard
+     * Returns actual database records only - no dummy data
      */
     private function getRecentFaqs()
     {
         try {
             $faqClass = 'App\\Models\\Faq';
             if (class_exists($faqClass) && \Illuminate\Support\Facades\Schema::hasTable('faqs')) {
-                $faqs = $faqClass::where('is_active', true)->latest()->take(5)->get();
-                if ($faqs->count() > 0) {
-                    return $faqs;
-                }
+                return $faqClass::where('is_active', true)->latest()->take(5)->get();
             }
         } catch (\Exception $e) {
             // Table doesn't exist yet
         }
         
-        // Always return dummy data if no database records
-        return collect([
-            (object)[
-                'id' => 'dummy-1',
-                'question' => 'Bagaimana cara membuat janji temu dengan dokter?',
-                'answer' => 'Untuk membuat janji temu, login ke akun Anda, pilih menu "Dashboard", lalu klik "Book Appointment". Pilih dokter yang diinginkan, tanggal dan waktu yang tersedia, kemudian konfirmasi pembayaran.',
-                'category' => 'appointment',
-                'is_active' => true,
-                'created_at' => now()->subDays(1),
-            ],
-            (object)[
-                'id' => 'dummy-2',
-                'question' => 'Metode pembayaran apa saja yang diterima?',
-                'answer' => 'Kami menerima pembayaran via Transfer Bank (BCA, Mandiri, BNI, BRI), e-wallet (GoPay, OVO, DANA, ShopeePay), kartu kredit/debit, dan virtual account.',
-                'category' => 'payment',
-                'is_active' => true,
-                'created_at' => now()->subDays(2),
-            ],
-            (object)[
-                'id' => 'dummy-3',
-                'question' => 'Bagaimana cara membatalkan janji temu?',
-                'answer' => 'Anda dapat membatalkan janji temu melalui menu "My Appointments" di dashboard. Pembatalan gratis jika dilakukan minimal 24 jam sebelum jadwal.',
-                'category' => 'appointment',
-                'is_active' => true,
-                'created_at' => now()->subDays(3),
-            ],
-            (object)[
-                'id' => 'dummy-4',
-                'question' => 'Apakah resep obat bisa ditebus secara online?',
-                'answer' => 'Ya, resep obat dari dokter dapat langsung ditebus melalui apotek online kami di menu "Shop". Obat akan dikirim ke alamat Anda.',
-                'category' => 'technical',
-                'is_active' => true,
-                'created_at' => now()->subDays(4),
-            ],
-            (object)[
-                'id' => 'dummy-5',
-                'question' => 'Bagaimana keamanan data medis saya?',
-                'answer' => 'Semua data medis Anda dienkripsi dengan standar keamanan tinggi. Hanya Anda dan dokter yang menangani yang dapat mengakses rekam medis.',
-                'category' => 'account',
-                'is_active' => true,
-                'created_at' => now()->subDays(5),
-            ],
-        ]);
+        // Return empty collection if no data
+        return collect([]);
     }
     
     /**
      * Get recent articles for dashboard
+     * Returns actual database records only - no dummy data
      */
     private function getRecentArticles()
     {
-        $defaultArticles = collect([
-            (object)[
-                'id' => 'default-1',
-                'title' => '7 Makanan yang Bikin Kurus, Cocok untuk Menu Diet Harian',
-                'slug' => '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian',
-                'category' => 'Hidup Sehat',
-                'category_color' => 'green',
-                'author' => 'Dr. Sarah Nutritionist',
-                'read_time' => '8 min read',
-                'published_at' => '2 hari lalu',
-                'created_at' => now()->subDays(2),
-            ],
-            (object)[
-                'id' => 'default-2',
-                'title' => 'Tips Olahraga yang Efektif untuk Kesehatan Jantung',
-                'slug' => 'tips-olahraga-efektif-untuk-kesehatan-jantung',
-                'category' => 'Olahraga',
-                'category_color' => 'blue',
-                'author' => 'Dr. Ahmad Cardiologist',
-                'read_time' => '7 min read',
-                'published_at' => '3 hari lalu',
-                'created_at' => now()->subDays(3),
-            ],
-            (object)[
-                'id' => 'default-3',
-                'title' => 'Mengelola Diabetes dengan Pola Makan Sehat',
-                'slug' => 'mengelola-diabetes-dengan-pola-makan-sehat',
-                'category' => 'Diabetes',
-                'category_color' => 'red',
-                'author' => 'Dr. Budi Internist',
-                'read_time' => '6 min read',
-                'published_at' => '4 hari lalu',
-                'created_at' => now()->subDays(4),
-            ],
-            (object)[
-                'id' => 'default-4',
-                'title' => 'Pentingnya Vitamin dan Mineral untuk Tubuh',
-                'slug' => 'pentingnya-vitamin-dan-mineral-untuk-tubuh',
-                'category' => 'Nutrisi',
-                'category_color' => 'orange',
-                'author' => 'Dr. Citra Nutritionist',
-                'read_time' => '8 min read',
-                'published_at' => '5 hari lalu',
-                'created_at' => now()->subDays(5),
-            ],
-            (object)[
-                'id' => 'default-5',
-                'title' => 'Cara Mengatasi Stres dan Menjaga Kesehatan Mental',
-                'slug' => 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental',
-                'category' => 'Kesehatan Mental',
-                'category_color' => 'purple',
-                'author' => 'Dr. Dewi Psychiatrist',
-                'read_time' => '10 min read',
-                'published_at' => '1 minggu lalu',
-                'created_at' => now()->subWeek(),
-            ],
-        ]);
-        
         try {
             if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
-                $dbArticles = Article::latest()->take(5)->get();
-                if ($dbArticles->count() > 0) {
-                    // Convert DB articles to stdClass and merge with defaults
-                    $dbArray = $dbArticles->map(function($article) {
-                        return (object)[
-                            'id' => $article->id,
-                            'title' => $article->title,
-                            'slug' => $article->slug ?? \Illuminate\Support\Str::slug($article->title),
-                            'category' => $article->category ?? 'Umum',
-                            'category_color' => $article->category_color ?? 'blue',
-                            'author' => $article->author ?? 'Admin',
-                            'read_time' => $article->read_time ?? '5 min read',
-                            'published_at' => $article->created_at->diffForHumans(),
-                            'created_at' => $article->created_at,
-                        ];
-                    })->toArray();
-                    
-                    // Merge and take first 5
-                    return collect(array_merge($dbArray, $defaultArticles->toArray()))->take(5);
-                }
+                return Article::latest()->take(5)->get();
             }
         } catch (\Exception $e) {
             // Table doesn't exist yet
         }
         
-        // Return default articles if no database records
-        return $defaultArticles;
+        // Return empty collection if no data
+        return collect([]);
     }
     
     /**
      * Get recent contact messages for dashboard
+     * Returns actual database records only - no dummy data
      */
     private function getRecentMessages()
     {
         try {
             $contactClass = 'App\\Models\\ContactMessage';
             if (class_exists($contactClass) && \Illuminate\Support\Facades\Schema::hasTable('contact_messages')) {
-                $messages = $contactClass::latest()->take(5)->get();
-                if ($messages->count() > 0) {
-                    return $messages;
-                }
+                return $contactClass::latest()->take(5)->get();
             }
         } catch (\Exception $e) {
             // Table doesn't exist yet
         }
         
-        // Return dummy data
-        return collect([
-            (object)[
-                'id' => 1,
-                'name' => 'Andi Wijaya',
-                'email' => 'andi.wijaya@email.com',
-                'phone' => '081234567890',
-                'subject' => 'appointment',
-                'message' => 'Saya ingin bertanya apakah bisa reschedule janji temu dengan Dr. Ahmad untuk minggu depan?',
-                'status' => 'unread',
-                'created_at' => now()->subHours(2),
-            ],
-            (object)[
-                'id' => 2,
-                'name' => 'Siti Nurhaliza',
-                'email' => 'siti.nurhaliza@email.com',
-                'phone' => '082345678901',
-                'subject' => 'payment',
-                'message' => 'Pembayaran saya sudah berhasil tapi status masih pending, mohon dicek.',
-                'status' => 'unread',
-                'created_at' => now()->subHours(5),
-            ],
-            (object)[
-                'id' => 3,
-                'name' => 'Budi Hartono',
-                'email' => 'budi.hartono@email.com',
-                'phone' => '083456789012',
-                'subject' => 'technical',
-                'message' => 'Video call dengan dokter sering terputus, apakah ada masalah dengan server?',
-                'status' => 'read',
-                'created_at' => now()->subDay(),
-            ],
-            (object)[
-                'id' => 4,
-                'name' => 'Dewi Lestari',
-                'email' => 'dewi.lestari@email.com',
-                'phone' => '084567890123',
-                'subject' => 'general',
-                'message' => 'Terima kasih atas pelayanannya, sangat membantu! Dokternya sangat ramah.',
-                'status' => 'replied',
-                'created_at' => now()->subDays(2),
-            ],
-            (object)[
-                'id' => 5,
-                'name' => 'Eko Prasetyo',
-                'email' => 'eko.prasetyo@email.com',
-                'phone' => '085678901234',
-                'subject' => 'complaint',
-                'message' => 'Resep obat yang dikirim dokter tidak bisa dibaca dengan jelas di aplikasi.',
-                'status' => 'unread',
-                'created_at' => now()->subDays(3),
-            ],
-        ]);
+        // Return empty collection if no data
+        return collect([]);
     }
     
     /**

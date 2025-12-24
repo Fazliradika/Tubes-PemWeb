@@ -93,10 +93,10 @@
                 </div>
                 
                 <!-- Products -->
-                <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-orange-500 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-yellow-100 text-xs font-medium">Total Produk</p>
+                            <p class="text-orange-100 text-xs font-medium">Total Produk</p>
                             <p class="text-lg font-bold">{{ number_format($totalProducts) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -105,16 +105,16 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-yellow-200/70">
+                    <div class="mt-2 text-xs text-orange-100">
                         {{ $activeProducts }} aktif
                     </div>
                 </div>
                 
                 <!-- Appointments -->
-                <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-pink-500 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-red-100 text-xs font-medium">Janji Temu</p>
+                            <p class="text-pink-100 text-xs font-medium">Janji Temu</p>
                             <p class="text-lg font-bold">{{ number_format($appointmentStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -123,16 +123,16 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-red-200/70">
+                    <div class="mt-2 text-xs text-pink-100">
                         {{ $appointmentStats['today'] }} hari ini
                     </div>
                 </div>
                 
                 <!-- Messages -->
-                <div class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-indigo-500 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-teal-100 text-xs font-medium">Pesan Masuk</p>
+                            <p class="text-indigo-100 text-xs font-medium">Pesan Masuk</p>
                             <p class="text-lg font-bold">{{ number_format($contactStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -146,7 +146,7 @@
                         <span class="px-2 py-0.5 bg-white/20 rounded-full">{{ $contactStats['unread'] }} belum dibaca</span>
                     </div>
                     @else
-                    <div class="mt-2 text-xs text-teal-200/70">
+                    <div class="mt-2 text-xs text-indigo-100">
                         Semua terbaca
                     </div>
                     @endif
@@ -562,14 +562,6 @@
 
             <!-- FAQ, Articles, and Messages Section -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-                <!-- DEBUG INFO -->
-                <div class="col-span-3 bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg mb-4">
-                    <h4 class="font-bold text-gray-900 dark:text-white mb-2">DEBUG INFO:</h4>
-                    <p class="text-sm text-gray-700 dark:text-gray-300">FAQ Count: {{ $recentFaqs->count() }}</p>
-                    <p class="text-sm text-gray-700 dark:text-gray-300">Articles Count: {{ $recentArticles->count() }}</p>
-                    <p class="text-sm text-gray-700 dark:text-gray-300">Messages Count: {{ $recentMessages->count() }}</p>
-                </div>
-                
                 <!-- Recent FAQs -->
                 <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
                     <div class="p-4 bg-gradient-to-r from-indigo-500 to-indigo-600 flex items-center justify-between">
@@ -578,9 +570,6 @@
                     </div>
                     <div class="p-4 max-h-96 overflow-y-auto">
                         @forelse($recentFaqs as $faq)
-                        @php
-                            $isDbFaq = isset($faq->id) && is_numeric($faq->id) && $faq->id > 0;
-                        @endphp
                         <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
@@ -595,7 +584,6 @@
                                         {{ ucfirst($faq->category) }}
                                     </span>
                                 </div>
-                                @if($isDbFaq)
                                 <div class="flex space-x-1 ml-2">
                                     <a href="{{ route('admin.faqs.edit', $faq->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -612,13 +600,16 @@
                                         </button>
                                     </form>
                                 </div>
-                                @else
-                                <span class="text-xs text-gray-400 dark:text-gray-500 italic ml-2">Demo</span>
-                                @endif
                             </div>
                         </div>
                         @empty
-                        <p class="text-gray-500 dark:text-gray-400 text-sm text-center py-4">Belum ada FAQ</p>
+                        <div class="text-center py-8">
+                            <svg class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada FAQ</p>
+                            <a href="{{ route('admin.faqs.create') }}" class="inline-block mt-2 text-sm text-indigo-600 dark:text-indigo-400 hover:underline">+ Tambah FAQ pertama</a>
+                        </div>
                         @endforelse
                     </div>
                     <div class="p-3 bg-gray-50 dark:bg-slate-700/50 border-t dark:border-slate-600">
@@ -655,7 +646,6 @@
                                                 'yellow' => 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300',
                                                 default => 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
                                             };
-                                            $isDbArticle = isset($article->id) && is_numeric($article->id) && $article->id > 0 && !str_starts_with((string)$article->id, 'default-');
                                         @endphp
                                         <span class="inline-block px-2 py-0.5 text-xs rounded-full {{ $colorClasses }}">
                                             {{ $article->category }}
@@ -663,7 +653,6 @@
                                         <span class="text-xs text-gray-500 dark:text-gray-400">{{ $article->read_time ?? '5 min read' }}</span>
                                     </div>
                                 </div>
-                                @if($isDbArticle)
                                 <div class="flex space-x-1 ml-2">
                                     <a href="{{ route('admin.articles.edit', $article->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -680,13 +669,18 @@
                                         </button>
                                     </form>
                                 </div>
-                                @else
-                                <span class="text-xs text-gray-400 dark:text-gray-500 italic ml-2">Default</span>
-                                @endif
                             </div>
                         </div>
                         @empty
-                        <p class="text-gray-500 dark:text-gray-400 text-sm text-center py-4">Belum ada artikel</p>
+                        <div class="text-center py-8">
+                            <svg class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                            </svg>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Belum ada artikel</p>
+                            <a href="{{ route('admin.articles.create') }}" class="text-sm text-green-600 dark:text-green-400 hover:underline">
+                                + Tambah artikel pertama
+                            </a>
+                        </div>
                         @endforelse
                     </div>
                     <div class="p-3 bg-gray-50 dark:bg-slate-700/50 border-t dark:border-slate-600">
@@ -708,7 +702,6 @@
                     <div class="p-4 max-h-96 overflow-y-auto">
                         @forelse($recentMessages as $message)
                         @php
-                            $isDbMessage = isset($message->id) && is_numeric($message->id) && $message->id > 0;
                             $createdAt = is_object($message->created_at) ? $message->created_at->diffForHumans() : \Carbon\Carbon::parse($message->created_at)->diffForHumans();
                         @endphp
                         <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors {{ $message->status == 'unread' ? 'border-l-4 border-red-500' : '' }}">
@@ -735,7 +728,6 @@
                                         <span class="text-xs text-gray-500 dark:text-gray-400">{{ $createdAt }}</span>
                                     </div>
                                 </div>
-                                @if($isDbMessage)
                                 <div class="flex space-x-1 ml-2">
                                     <a href="{{ route('admin.contacts.show', $message->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Lihat">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -753,13 +745,16 @@
                                         </button>
                                     </form>
                                 </div>
-                                @else
-                                <span class="text-xs text-gray-400 dark:text-gray-500 italic ml-2">Demo</span>
-                                @endif
                             </div>
                         </div>
                         @empty
-                        <p class="text-gray-500 dark:text-gray-400 text-sm text-center py-4">Belum ada pesan</p>
+                        <div class="text-center py-8">
+                            <svg class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada pesan masuk</p>
+                            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Pesan dari pengunjung akan muncul di sini</p>
+                        </div>
                         @endforelse
                     </div>
                 </div>
