@@ -11,6 +11,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        // Update product images with exact product names from database
         $products = [
             'Curcuma Plus' => 'https://curcumaplus.co.id/files/media/2024/06/product-appetite.png',
             'Habbatussauda Oil' => 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1759710631/attached_image/blackmores-ultra-refined-habbatussauda-oil.jpg',
@@ -22,17 +23,17 @@ return new class extends Migration {
             'Vitamin C 1000mg' => 'https://blackmores-bucket.s3.ap-southeast-1.amazonaws.com/blackmores/product/images615ee9c853050.png',
             'Tensimeter Digital' => 'https://img.lazcdn.com/g/p/8beccddc20fb2bd0951275b7f1e55f01.jpg_720x720q80.jpg',
             'Termometer Digital' => 'https://img.lazcdn.com/g/p/437966cabc63ea467a1bb1e8189eb11c.jpg_720x720q80.jpg',
-            'Antasida' => 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1710426204/attached_image/antasida-doen.jpg',
+            'Antasida Tablet' => 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1710426204/attached_image/antasida-doen.jpg',
             'Obat Batuk Sirup' => 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1745806354/attached_image/obat-batuk-dewasa-paling-ampuh-3-alodokter.jpg',
             'Paracetamol 500mg' => 'https://www.mandjur.co.id/cdn/shop/files/ParacetamolNewVECTORSHOPEMALL_512x512.png?v=1735963229',
-            'Vitamin D3' => 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/now/now00367/l/57.jpg',
+            'Vitamin D3 2000 IU' => 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/now/now00367/l/57.jpg',
             'Omega 3 Fish Oil' => 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/now/now01652/l/68.jpg',
-            'Multivitamin' => 'https://pyfahealth.com/wp-content/uploads/2021/12/PDP-Nutrimax-Complete-Multivitamin-_-Minerals-30-tab.jpg',
+            'Multivitamin Complete' => 'https://pyfahealth.com/wp-content/uploads/2021/12/PDP-Nutrimax-Complete-Multivitamin-_-Minerals-30-tab.jpg',
         ];
 
         foreach ($products as $name => $imageUrl) {
             DB::table('products')
-                ->where('name', 'LIKE', '%' . $name . '%')
+                ->where('name', $name)
                 ->update(['image' => $imageUrl]);
         }
     }
@@ -42,6 +43,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // No need to reverse - images can stay
+        // No need to reverse
     }
 };
