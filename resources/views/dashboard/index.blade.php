@@ -21,10 +21,10 @@
             <!-- Quick Stats Overview -->
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
                 <!-- Total Revenue -->
-                <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-emerald-100 text-xs font-medium">Total Revenue</p>
+                            <p class="text-green-100 text-xs font-medium">Total Revenue</p>
                             <p class="text-lg font-bold">Rp {{ number_format($totalSales['month'] / 1000000, 1) }}M</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -34,13 +34,13 @@
                         </div>
                     </div>
                     <div class="mt-2 flex items-center text-xs">
-                        <span class="flex items-center text-emerald-100">
+                        <span class="flex items-center text-green-100">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
                             +{{ $salesGrowth }}%
                         </span>
-                        <span class="ml-2 text-emerald-200/70">vs bulan lalu</span>
+                        <span class="ml-2 text-green-200/70">vs bulan lalu</span>
                     </div>
                 </div>
                 
@@ -93,10 +93,10 @@
                 </div>
                 
                 <!-- Products -->
-                <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-amber-100 text-xs font-medium">Total Produk</p>
+                            <p class="text-yellow-100 text-xs font-medium">Total Produk</p>
                             <p class="text-lg font-bold">{{ number_format($totalProducts) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -105,16 +105,16 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-amber-200/70">
+                    <div class="mt-2 text-xs text-yellow-200/70">
                         {{ $activeProducts }} aktif
                     </div>
                 </div>
                 
                 <!-- Appointments -->
-                <div class="bg-gradient-to-br from-rose-500 to-rose-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-rose-100 text-xs font-medium">Janji Temu</p>
+                            <p class="text-red-100 text-xs font-medium">Janji Temu</p>
                             <p class="text-lg font-bold">{{ number_format($appointmentStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -123,16 +123,16 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2 text-xs text-rose-200/70">
+                    <div class="mt-2 text-xs text-red-200/70">
                         {{ $appointmentStats['today'] }} hari ini
                     </div>
                 </div>
                 
                 <!-- Messages -->
-                <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl p-4 text-white shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-cyan-100 text-xs font-medium">Pesan Masuk</p>
+                            <p class="text-teal-100 text-xs font-medium">Pesan Masuk</p>
                             <p class="text-lg font-bold">{{ number_format($contactStats['total']) }}</p>
                         </div>
                         <div class="p-2 bg-white/20 rounded-lg">
@@ -146,7 +146,7 @@
                         <span class="px-2 py-0.5 bg-white/20 rounded-full">{{ $contactStats['unread'] }} belum dibaca</span>
                     </div>
                     @else
-                    <div class="mt-2 text-xs text-cyan-200/70">
+                    <div class="mt-2 text-xs text-teal-200/70">
                         Semua terbaca
                     </div>
                     @endif
@@ -625,9 +625,9 @@
 
                 <!-- Recent Articles -->
                 <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-between">
+                    <div class="p-4 bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-between">
                         <h3 class="text-lg font-semibold text-white">Artikel Terbaru</h3>
-                        <a href="{{ route('admin.articles.index') }}" class="text-xs text-emerald-100 hover:text-white">Lihat Semua →</a>
+                        <a href="{{ route('admin.articles.index') }}" class="text-xs text-green-100 hover:text-white">Lihat Semua →</a>
                     </div>
                     <div class="p-4 max-h-96 overflow-y-auto">
                         @forelse($recentArticles as $article)
@@ -647,7 +647,7 @@
                                                 'yellow' => 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300',
                                                 default => 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
                                             };
-                                            $isDbArticle = isset($article->id) && is_numeric($article->id) && $article->id > 0;
+                                            $isDbArticle = isset($article->id) && is_numeric($article->id) && $article->id > 0 && !str_starts_with((string)$article->id, 'default-');
                                         @endphp
                                         <span class="inline-block px-2 py-0.5 text-xs rounded-full {{ $colorClasses }}">
                                             {{ $article->category }}
@@ -682,7 +682,7 @@
                         @endforelse
                     </div>
                     <div class="p-3 bg-gray-50 dark:bg-slate-700/50 border-t dark:border-slate-600">
-                        <a href="{{ route('admin.articles.create') }}" class="flex items-center justify-center text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
+                        <a href="{{ route('admin.articles.create') }}" class="flex items-center justify-center text-sm text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
@@ -693,9 +693,9 @@
 
                 <!-- Recent Messages -->
                 <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 bg-gradient-to-r from-rose-500 to-rose-600 flex items-center justify-between">
+                    <div class="p-4 bg-gradient-to-r from-red-500 to-red-600 flex items-center justify-between">
                         <h3 class="text-lg font-semibold text-white">Pesan Masuk</h3>
-                        <a href="{{ route('admin.contacts.index') }}" class="text-xs text-rose-100 hover:text-white">Lihat Semua →</a>
+                        <a href="{{ route('admin.contacts.index') }}" class="text-xs text-red-100 hover:text-white">Lihat Semua →</a>
                     </div>
                     <div class="p-4 max-h-96 overflow-y-auto">
                         @forelse($recentMessages as $message)
@@ -703,13 +703,13 @@
                             $isDbMessage = isset($message->id) && is_numeric($message->id) && $message->id > 0;
                             $createdAt = is_object($message->created_at) ? $message->created_at->diffForHumans() : \Carbon\Carbon::parse($message->created_at)->diffForHumans();
                         @endphp
-                        <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors {{ $message->status == 'unread' ? 'border-l-4 border-rose-500' : '' }}">
+                        <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors {{ $message->status == 'unread' ? 'border-l-4 border-red-500' : '' }}">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <div class="flex items-center space-x-2">
                                         <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $message->name }}</p>
                                         @if($message->status == 'unread')
-                                        <span class="w-2 h-2 bg-rose-500 rounded-full"></span>
+                                        <span class="w-2 h-2 bg-red-500 rounded-full"></span>
                                         @endif
                                     </div>
                                     <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 mt-1">{{ $message->message }}</p>
