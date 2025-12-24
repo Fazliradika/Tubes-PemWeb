@@ -586,8 +586,23 @@ class DashboardController extends Controller
             if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
                 $dbArticles = Article::latest()->take(5)->get();
                 if ($dbArticles->count() > 0) {
-                    // Merge DB articles with default articles and take first 5
-                    return $dbArticles->merge($defaultArticles)->take(5);
+                    // Convert DB articles to stdClass and merge with defaults
+                    $dbArray = $dbArticles->map(function($article) {
+                        return (object)[
+                            'id' => $article->id,
+                            'title' => $article->title,
+                            'slug' => $article->slug ?? \Illuminate\Support\Str::slug($article->title),
+                            'category' => $article->category ?? 'Umum',
+                            'category_color' => $article->category_color ?? 'blue',
+                            'author' => $article->author ?? 'Admin',
+                            'read_time' => $article->read_time ?? '5 min read',
+                            'published_at' => $article->created_at->diffForHumans(),
+                            'created_at' => $article->created_at,
+                        ];
+                    })->toArray();
+                    
+                    // Merge and take first 5
+                    return collect(array_merge($dbArray, $defaultArticles->toArray()))->take(5);
                 }
             }
         } catch (\Exception $e) {
