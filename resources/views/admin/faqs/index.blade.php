@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-white leading-tight">
+                <h2 class="font-bold text-2xl text-gray-800 dark:text-white leading-tight">
                     {{ __('Kelola FAQ') }}
                 </h2>
-                <p class="text-blue-100 text-sm mt-1">Kelola pertanyaan yang sering diajukan oleh pengguna.</p>
+                <p class="text-gray-600 dark:text-blue-100 text-sm mt-1">Kelola pertanyaan yang sering diajukan oleh pengguna.</p>
             </div>
             <div>
                 <a href="{{ route('admin.faqs.create') }}" 

@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-white leading-tight">
+                <h2 class="font-bold text-2xl text-gray-800 dark:text-white leading-tight">
                     {{ __('Kelola Artikel Kesehatan') }}
                 </h2>
-                <p class="text-blue-100 text-sm mt-1">Kelola publikasi artikel kesehatan untuk pasien.</p>
+                <p class="text-gray-600 dark:text-blue-100 text-sm mt-1">Kelola publikasi artikel kesehatan untuk pasien.</p>
             </div>
             <div>
                 <a href="{{ route('admin.articles.create') }}" 
@@ -75,7 +75,19 @@
                                             </div>
                                         </td>
                                         <td class="py-4 px-4 text-sm font-medium">
-                                            <span class="px-3 py-1 bg-{{ $article->category_color }}-100 text-{{ $article->category_color }}-700 dark:bg-{{ $article->category_color }}-900/40 dark:text-{{ $article->category_color }}-400 rounded-full text-xs">
+                                            @php
+                                                $catColor = $article->category_color ?? 'blue';
+                                                $colorClasses = match($catColor) {
+                                                    'green' => 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400',
+                                                    'red' => 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400',
+                                                    'orange' => 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-400',
+                                                    'purple' => 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-400',
+                                                    'pink' => 'bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-400',
+                                                    'yellow' => 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-400',
+                                                    default => 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400',
+                                                };
+                                            @endphp
+                                            <span class="px-3 py-1 {{ $colorClasses }} rounded-full text-xs">
                                                 {{ $article->category }}
                                             </span>
                                         </td>

@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-white leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
                 {{ __('Admin Dashboard') }}
             </h2>
             <div class="flex items-center space-x-3">
-                <span class="text-sm text-gray-300">
+                <span class="text-sm text-gray-600 dark:text-gray-300">
                     {{ now()->format('l, d F Y') }}
                 </span>
-                <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded-full">
+                <span class="px-3 py-1 bg-green-500/20 text-green-600 dark:text-green-400 text-xs font-medium rounded-full border border-green-500/30">
                     Live Data
                 </span>
             </div>
