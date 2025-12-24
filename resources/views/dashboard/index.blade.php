@@ -640,6 +640,7 @@
                                                 'yellow' => 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300',
                                                 default => 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
                                             };
+                                            $isDbArticle = isset($article->id) && is_numeric($article->id) && $article->id > 0;
                                         @endphp
                                         <span class="inline-block px-2 py-0.5 text-xs rounded-full {{ $colorClasses }}">
                                             {{ $article->category }}
@@ -647,13 +648,14 @@
                                         <span class="text-xs text-gray-500 dark:text-gray-400">{{ $article->read_time ?? '5 min read' }}</span>
                                     </div>
                                 </div>
+                                @if($isDbArticle)
                                 <div class="flex space-x-1 ml-2">
-                                    <a href="{{ route('admin.articles.edit', $article->id ?? $article->slug) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
+                                    <a href="{{ route('admin.articles.edit', $article->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>
                                     </a>
-                                    <form action="{{ route('admin.articles.destroy', $article->id ?? $article->slug) }}" method="POST" class="inline" onsubmit="return confirm('Hapus artikel ini?')">
+                                    <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus artikel ini?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/50 rounded" title="Hapus">
@@ -663,6 +665,9 @@
                                         </button>
                                     </form>
                                 </div>
+                                @else
+                                <span class="text-xs text-gray-400 dark:text-gray-500 italic ml-2">Default</span>
+                                @endif
                             </div>
                         </div>
                         @empty
