@@ -12,11 +12,6 @@ class ContactMessageSeeder extends Seeder
      */
     public function run(): void
     {
-        // Skip if data already exists
-        if (ContactMessage::count() > 0) {
-            return;
-        }
-
         $messages = [
             [
                 'name' => 'Budi Santoso',
@@ -120,7 +115,10 @@ class ContactMessageSeeder extends Seeder
         ];
 
         foreach ($messages as $message) {
-            ContactMessage::create($message);
+            ContactMessage::updateOrCreate(
+                ['email' => $message['email'], 'subject' => $message['subject']],
+                $message
+            );
         }
     }
 }

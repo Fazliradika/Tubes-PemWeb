@@ -12,11 +12,6 @@ class FaqSeeder extends Seeder
      */
     public function run(): void
     {
-        // Skip if data already exists
-        if (Faq::count() > 0) {
-            return;
-        }
-
         $faqs = [
             // General
             [
@@ -128,7 +123,10 @@ class FaqSeeder extends Seeder
         ];
 
         foreach ($faqs as $faq) {
-            Faq::create($faq);
+            Faq::updateOrCreate(
+                ['question' => $faq['question']],
+                $faq
+            );
         }
     }
 }
