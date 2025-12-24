@@ -12,6 +12,11 @@ class FaqSeeder extends Seeder
      */
     public function run(): void
     {
+        // Skip if data already exists
+        if (Faq::count() > 0) {
+            return;
+        }
+
         $faqs = [
             // General
             [

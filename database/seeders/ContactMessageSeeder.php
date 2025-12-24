@@ -12,6 +12,11 @@ class ContactMessageSeeder extends Seeder
      */
     public function run(): void
     {
+        // Skip if data already exists
+        if (ContactMessage::count() > 0) {
+            return;
+        }
+
         $messages = [
             [
                 'name' => 'Budi Santoso',
