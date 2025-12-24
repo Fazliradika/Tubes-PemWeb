@@ -56,6 +56,15 @@ class DashboardController extends Controller
         // Recent activities
         $recentActivities = $this->getRecentActivities();
         
+        // Get recent FAQs for dashboard
+        $recentFaqs = $this->getRecentFaqs();
+        
+        // Get recent articles for dashboard
+        $recentArticles = $this->getRecentArticles();
+        
+        // Get recent contact messages for dashboard
+        $recentMessages = $this->getRecentMessages();
+        
         // Quick Stats for Cards
         $quickStats = [
             'total_revenue' => $totalSales['month'],
@@ -94,6 +103,9 @@ class DashboardController extends Controller
             'appointmentStats',
             'contactStats',
             'recentActivities',
+            'recentFaqs',
+            'recentArticles',
+            'recentMessages',
             'quickStats',
             'userGrowth',
             'salesGrowth',
@@ -443,6 +455,213 @@ class DashboardController extends Controller
             'orders' => $orders,
             'revenue' => $revenue,
         ];
+    }
+    
+    /**
+     * Get recent FAQs for dashboard
+     */
+    private function getRecentFaqs()
+    {
+        try {
+            $faqClass = 'App\\Models\\Faq';
+            if (class_exists($faqClass) && \Illuminate\Support\Facades\Schema::hasTable('faqs')) {
+                return $faqClass::latest()->take(5)->get();
+            }
+        } catch (\Exception $e) {
+            // Table doesn't exist yet
+        }
+        
+        // Return dummy data
+        return collect([
+            (object)[
+                'id' => 1,
+                'question' => 'Bagaimana cara membuat janji temu dengan dokter?',
+                'answer' => 'Anda dapat membuat janji temu melalui menu "Book Appointment" dan pilih dokter yang tersedia.',
+                'category' => 'appointment',
+                'is_active' => true,
+                'created_at' => now()->subDays(1),
+            ],
+            (object)[
+                'id' => 2,
+                'question' => 'Apa saja metode pembayaran yang tersedia?',
+                'answer' => 'Kami menerima pembayaran via Transfer Bank, QRIS, GoPay, OVO, dan DANA.',
+                'category' => 'payment',
+                'is_active' => true,
+                'created_at' => now()->subDays(2),
+            ],
+            (object)[
+                'id' => 3,
+                'question' => 'Apakah konsultasi online tersedia 24 jam?',
+                'answer' => 'Konsultasi online tersedia sesuai jadwal praktik dokter yang bisa dilihat di profil masing-masing.',
+                'category' => 'general',
+                'is_active' => true,
+                'created_at' => now()->subDays(3),
+            ],
+            (object)[
+                'id' => 4,
+                'question' => 'Bagaimana cara melihat resep obat saya?',
+                'answer' => 'Resep obat dapat dilihat di menu "Resep Saya" setelah dokter mengirimkan resep.',
+                'category' => 'technical',
+                'is_active' => true,
+                'created_at' => now()->subDays(4),
+            ],
+            (object)[
+                'id' => 5,
+                'question' => 'Apakah data medis saya aman?',
+                'answer' => 'Ya, kami menggunakan enkripsi tingkat tinggi untuk melindungi semua data pasien.',
+                'category' => 'account',
+                'is_active' => true,
+                'created_at' => now()->subDays(5),
+            ],
+        ]);
+    }
+    
+    /**
+     * Get recent articles for dashboard
+     */
+    private function getRecentArticles()
+    {
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
+                $articles = Article::latest()->take(5)->get();
+                if ($articles->count() > 0) {
+                    return $articles;
+                }
+            }
+        } catch (\Exception $e) {
+            // Table doesn't exist yet
+        }
+        
+        // Return dummy data
+        return collect([
+            (object)[
+                'id' => 1,
+                'title' => '7 Makanan yang Bikin Kurus, Cocok untuk Menu Diet Harian',
+                'slug' => '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian',
+                'category' => 'Hidup Sehat',
+                'category_color' => 'green',
+                'author' => 'Dr. Sarah Nutritionist',
+                'read_time' => '8 min read',
+                'published_at' => '2 hari lalu',
+                'created_at' => now()->subDays(2),
+            ],
+            (object)[
+                'id' => 2,
+                'title' => 'Tips Olahraga yang Efektif untuk Kesehatan Jantung',
+                'slug' => 'tips-olahraga-efektif-untuk-kesehatan-jantung',
+                'category' => 'Olahraga',
+                'category_color' => 'blue',
+                'author' => 'Dr. Ahmad Cardiologist',
+                'read_time' => '7 min read',
+                'published_at' => '3 hari lalu',
+                'created_at' => now()->subDays(3),
+            ],
+            (object)[
+                'id' => 3,
+                'title' => 'Mengelola Diabetes dengan Pola Makan Sehat',
+                'slug' => 'mengelola-diabetes-dengan-pola-makan-sehat',
+                'category' => 'Diabetes',
+                'category_color' => 'red',
+                'author' => 'Dr. Budi Internist',
+                'read_time' => '6 min read',
+                'published_at' => '4 hari lalu',
+                'created_at' => now()->subDays(4),
+            ],
+            (object)[
+                'id' => 4,
+                'title' => 'Pentingnya Vitamin dan Mineral untuk Tubuh',
+                'slug' => 'pentingnya-vitamin-dan-mineral-untuk-tubuh',
+                'category' => 'Nutrisi',
+                'category_color' => 'orange',
+                'author' => 'Dr. Citra Nutritionist',
+                'read_time' => '8 min read',
+                'published_at' => '5 hari lalu',
+                'created_at' => now()->subDays(5),
+            ],
+            (object)[
+                'id' => 5,
+                'title' => 'Cara Mengatasi Stres dan Menjaga Kesehatan Mental',
+                'slug' => 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental',
+                'category' => 'Kesehatan Mental',
+                'category_color' => 'purple',
+                'author' => 'Dr. Dewi Psychiatrist',
+                'read_time' => '10 min read',
+                'published_at' => '1 minggu lalu',
+                'created_at' => now()->subWeek(),
+            ],
+        ]);
+    }
+    
+    /**
+     * Get recent contact messages for dashboard
+     */
+    private function getRecentMessages()
+    {
+        try {
+            $contactClass = 'App\\Models\\ContactMessage';
+            if (class_exists($contactClass) && \Illuminate\Support\Facades\Schema::hasTable('contact_messages')) {
+                $messages = $contactClass::latest()->take(5)->get();
+                if ($messages->count() > 0) {
+                    return $messages;
+                }
+            }
+        } catch (\Exception $e) {
+            // Table doesn't exist yet
+        }
+        
+        // Return dummy data
+        return collect([
+            (object)[
+                'id' => 1,
+                'name' => 'Andi Wijaya',
+                'email' => 'andi.wijaya@email.com',
+                'phone' => '081234567890',
+                'subject' => 'appointment',
+                'message' => 'Saya ingin bertanya apakah bisa reschedule janji temu dengan Dr. Ahmad untuk minggu depan?',
+                'status' => 'unread',
+                'created_at' => now()->subHours(2),
+            ],
+            (object)[
+                'id' => 2,
+                'name' => 'Siti Nurhaliza',
+                'email' => 'siti.nurhaliza@email.com',
+                'phone' => '082345678901',
+                'subject' => 'payment',
+                'message' => 'Pembayaran saya sudah berhasil tapi status masih pending, mohon dicek.',
+                'status' => 'unread',
+                'created_at' => now()->subHours(5),
+            ],
+            (object)[
+                'id' => 3,
+                'name' => 'Budi Hartono',
+                'email' => 'budi.hartono@email.com',
+                'phone' => '083456789012',
+                'subject' => 'technical',
+                'message' => 'Video call dengan dokter sering terputus, apakah ada masalah dengan server?',
+                'status' => 'read',
+                'created_at' => now()->subDay(),
+            ],
+            (object)[
+                'id' => 4,
+                'name' => 'Dewi Lestari',
+                'email' => 'dewi.lestari@email.com',
+                'phone' => '084567890123',
+                'subject' => 'general',
+                'message' => 'Terima kasih atas pelayanannya, sangat membantu! Dokternya sangat ramah.',
+                'status' => 'replied',
+                'created_at' => now()->subDays(2),
+            ],
+            (object)[
+                'id' => 5,
+                'name' => 'Eko Prasetyo',
+                'email' => 'eko.prasetyo@email.com',
+                'phone' => '085678901234',
+                'subject' => 'complaint',
+                'message' => 'Resep obat yang dikirim dokter tidak bisa dibaca dengan jelas di aplikasi.',
+                'status' => 'unread',
+                'created_at' => now()->subDays(3),
+            ],
+        ]);
     }
     
     /**

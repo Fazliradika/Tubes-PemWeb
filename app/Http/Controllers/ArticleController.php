@@ -113,17 +113,27 @@ class ArticleController extends Controller
 
     public function getArticles()
     {
+        // Start with hardcoded articles
+        $hardcodedArticles = collect($this->getHardcodedArticles());
+        
         try {
             if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
                 $dbArticles = \App\Models\Article::latest()->get();
                 if ($dbArticles->count() > 0) {
-                    return $dbArticles;
+                    // Merge database articles with hardcoded ones
+                    // Database articles come first, then hardcoded
+                    return $dbArticles->concat($hardcodedArticles);
                 }
             }
         } catch (\Exception $e) {
             // Log error or ignore and fallback
         }
 
+        return $hardcodedArticles;
+    }
+    
+    private function getHardcodedArticles()
+    {
         return [
             // Article 1
             [

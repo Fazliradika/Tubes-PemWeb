@@ -560,6 +560,183 @@
                 </div>
             </div>
 
+            <!-- FAQ, Articles, and Messages Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+                <!-- Recent FAQs -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 bg-gradient-to-r from-indigo-500 to-indigo-600 flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-white">FAQ Terbaru</h3>
+                        <a href="{{ route('admin.faqs.index') }}" class="text-xs text-indigo-100 hover:text-white">Lihat Semua →</a>
+                    </div>
+                    <div class="p-4 max-h-96 overflow-y-auto">
+                        @forelse($recentFaqs as $faq)
+                        <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{{ $faq->question }}</p>
+                                    <span class="inline-block mt-1 px-2 py-0.5 text-xs rounded-full 
+                                        @if($faq->category == 'general') bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300
+                                        @elseif($faq->category == 'appointment') bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300
+                                        @elseif($faq->category == 'payment') bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300
+                                        @elseif($faq->category == 'technical') bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300
+                                        @else bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300
+                                        @endif">
+                                        {{ ucfirst($faq->category) }}
+                                    </span>
+                                </div>
+                                <div class="flex space-x-1 ml-2">
+                                    <a href="{{ route('admin.faqs.edit', $faq->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('admin.faqs.destroy', $faq->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus FAQ ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/50 rounded" title="Hapus">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <p class="text-gray-500 dark:text-gray-400 text-sm text-center py-4">Belum ada FAQ</p>
+                        @endforelse
+                    </div>
+                    <div class="p-3 bg-gray-50 dark:bg-slate-700/50 border-t dark:border-slate-600">
+                        <a href="{{ route('admin.faqs.create') }}" class="flex items-center justify-center text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Tambah FAQ Baru
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Articles -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-white">Artikel Terbaru</h3>
+                        <a href="{{ route('admin.articles.index') }}" class="text-xs text-emerald-100 hover:text-white">Lihat Semua →</a>
+                    </div>
+                    <div class="p-4 max-h-96 overflow-y-auto">
+                        @forelse($recentArticles as $article)
+                        <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{{ $article->title }}</p>
+                                    <div class="flex items-center mt-1 space-x-2">
+                                        @php
+                                            $catColor = $article->category_color ?? 'blue';
+                                            $colorClasses = match($catColor) {
+                                                'green' => 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300',
+                                                'red' => 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300',
+                                                'orange' => 'bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300',
+                                                'purple' => 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
+                                                'pink' => 'bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-300',
+                                                'yellow' => 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300',
+                                                default => 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+                                            };
+                                        @endphp
+                                        <span class="inline-block px-2 py-0.5 text-xs rounded-full {{ $colorClasses }}">
+                                            {{ $article->category }}
+                                        </span>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">{{ $article->read_time ?? '5 min read' }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-1 ml-2">
+                                    <a href="{{ route('admin.articles.edit', $article->id ?? $article->slug) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('admin.articles.destroy', $article->id ?? $article->slug) }}" method="POST" class="inline" onsubmit="return confirm('Hapus artikel ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/50 rounded" title="Hapus">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <p class="text-gray-500 dark:text-gray-400 text-sm text-center py-4">Belum ada artikel</p>
+                        @endforelse
+                    </div>
+                    <div class="p-3 bg-gray-50 dark:bg-slate-700/50 border-t dark:border-slate-600">
+                        <a href="{{ route('admin.articles.create') }}" class="flex items-center justify-center text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Tambah Artikel Baru
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Messages -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 bg-gradient-to-r from-rose-500 to-rose-600 flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-white">Pesan Masuk</h3>
+                        <a href="{{ route('admin.contacts.index') }}" class="text-xs text-rose-100 hover:text-white">Lihat Semua →</a>
+                    </div>
+                    <div class="p-4 max-h-96 overflow-y-auto">
+                        @forelse($recentMessages as $message)
+                        <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors {{ $message->status == 'unread' ? 'border-l-4 border-rose-500' : '' }}">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2">
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $message->name }}</p>
+                                        @if($message->status == 'unread')
+                                        <span class="w-2 h-2 bg-rose-500 rounded-full"></span>
+                                        @endif
+                                    </div>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 mt-1">{{ $message->message }}</p>
+                                    <div class="flex items-center mt-1 space-x-2">
+                                        <span class="inline-block px-2 py-0.5 text-xs rounded-full 
+                                            @if($message->subject == 'general') bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300
+                                            @elseif($message->subject == 'appointment') bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300
+                                            @elseif($message->subject == 'payment') bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300
+                                            @elseif($message->subject == 'technical') bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300
+                                            @elseif($message->subject == 'complaint') bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300
+                                            @else bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300
+                                            @endif">
+                                            {{ ucfirst($message->subject) }}
+                                        </span>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">{{ $message->created_at->diffForHumans() }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-1 ml-2">
+                                    <a href="{{ route('admin.contacts.show', $message->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Lihat">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('admin.contacts.destroy', $message->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus pesan ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/50 rounded" title="Hapus">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <p class="text-gray-500 dark:text-gray-400 text-sm text-center py-4">Belum ada pesan</p>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
