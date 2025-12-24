@@ -465,50 +465,53 @@ class DashboardController extends Controller
         try {
             $faqClass = 'App\\Models\\Faq';
             if (class_exists($faqClass) && \Illuminate\Support\Facades\Schema::hasTable('faqs')) {
-                return $faqClass::latest()->take(5)->get();
+                $faqs = $faqClass::where('is_active', true)->latest()->take(5)->get();
+                if ($faqs->count() > 0) {
+                    return $faqs;
+                }
             }
         } catch (\Exception $e) {
             // Table doesn't exist yet
         }
         
-        // Return dummy data
+        // Always return dummy data if no database records
         return collect([
             (object)[
-                'id' => 1,
+                'id' => 'dummy-1',
                 'question' => 'Bagaimana cara membuat janji temu dengan dokter?',
-                'answer' => 'Anda dapat membuat janji temu melalui menu "Book Appointment" dan pilih dokter yang tersedia.',
+                'answer' => 'Untuk membuat janji temu, login ke akun Anda, pilih menu "Dashboard", lalu klik "Book Appointment". Pilih dokter yang diinginkan, tanggal dan waktu yang tersedia, kemudian konfirmasi pembayaran.',
                 'category' => 'appointment',
                 'is_active' => true,
                 'created_at' => now()->subDays(1),
             ],
             (object)[
-                'id' => 2,
-                'question' => 'Apa saja metode pembayaran yang tersedia?',
-                'answer' => 'Kami menerima pembayaran via Transfer Bank, QRIS, GoPay, OVO, dan DANA.',
+                'id' => 'dummy-2',
+                'question' => 'Metode pembayaran apa saja yang diterima?',
+                'answer' => 'Kami menerima pembayaran via Transfer Bank (BCA, Mandiri, BNI, BRI), e-wallet (GoPay, OVO, DANA, ShopeePay), kartu kredit/debit, dan virtual account.',
                 'category' => 'payment',
                 'is_active' => true,
                 'created_at' => now()->subDays(2),
             ],
             (object)[
-                'id' => 3,
-                'question' => 'Apakah konsultasi online tersedia 24 jam?',
-                'answer' => 'Konsultasi online tersedia sesuai jadwal praktik dokter yang bisa dilihat di profil masing-masing.',
-                'category' => 'general',
+                'id' => 'dummy-3',
+                'question' => 'Bagaimana cara membatalkan janji temu?',
+                'answer' => 'Anda dapat membatalkan janji temu melalui menu "My Appointments" di dashboard. Pembatalan gratis jika dilakukan minimal 24 jam sebelum jadwal.',
+                'category' => 'appointment',
                 'is_active' => true,
                 'created_at' => now()->subDays(3),
             ],
             (object)[
-                'id' => 4,
-                'question' => 'Bagaimana cara melihat resep obat saya?',
-                'answer' => 'Resep obat dapat dilihat di menu "Resep Saya" setelah dokter mengirimkan resep.',
+                'id' => 'dummy-4',
+                'question' => 'Apakah resep obat bisa ditebus secara online?',
+                'answer' => 'Ya, resep obat dari dokter dapat langsung ditebus melalui apotek online kami di menu "Shop". Obat akan dikirim ke alamat Anda.',
                 'category' => 'technical',
                 'is_active' => true,
                 'created_at' => now()->subDays(4),
             ],
             (object)[
-                'id' => 5,
-                'question' => 'Apakah data medis saya aman?',
-                'answer' => 'Ya, kami menggunakan enkripsi tingkat tinggi untuk melindungi semua data pasien.',
+                'id' => 'dummy-5',
+                'question' => 'Bagaimana keamanan data medis saya?',
+                'answer' => 'Semua data medis Anda dienkripsi dengan standar keamanan tinggi. Hanya Anda dan dokter yang menangani yang dapat mengakses rekam medis.',
                 'category' => 'account',
                 'is_active' => true,
                 'created_at' => now()->subDays(5),
@@ -521,21 +524,9 @@ class DashboardController extends Controller
      */
     private function getRecentArticles()
     {
-        try {
-            if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
-                $articles = Article::latest()->take(5)->get();
-                if ($articles->count() > 0) {
-                    return $articles;
-                }
-            }
-        } catch (\Exception $e) {
-            // Table doesn't exist yet
-        }
-        
-        // Return dummy data
-        return collect([
+        $defaultArticles = collect([
             (object)[
-                'id' => 1,
+                'id' => 'default-1',
                 'title' => '7 Makanan yang Bikin Kurus, Cocok untuk Menu Diet Harian',
                 'slug' => '7-makanan-yang-bikin-kurus-cocok-untuk-menu-diet-harian',
                 'category' => 'Hidup Sehat',
@@ -546,7 +537,7 @@ class DashboardController extends Controller
                 'created_at' => now()->subDays(2),
             ],
             (object)[
-                'id' => 2,
+                'id' => 'default-2',
                 'title' => 'Tips Olahraga yang Efektif untuk Kesehatan Jantung',
                 'slug' => 'tips-olahraga-efektif-untuk-kesehatan-jantung',
                 'category' => 'Olahraga',
@@ -557,7 +548,7 @@ class DashboardController extends Controller
                 'created_at' => now()->subDays(3),
             ],
             (object)[
-                'id' => 3,
+                'id' => 'default-3',
                 'title' => 'Mengelola Diabetes dengan Pola Makan Sehat',
                 'slug' => 'mengelola-diabetes-dengan-pola-makan-sehat',
                 'category' => 'Diabetes',
@@ -568,7 +559,7 @@ class DashboardController extends Controller
                 'created_at' => now()->subDays(4),
             ],
             (object)[
-                'id' => 4,
+                'id' => 'default-4',
                 'title' => 'Pentingnya Vitamin dan Mineral untuk Tubuh',
                 'slug' => 'pentingnya-vitamin-dan-mineral-untuk-tubuh',
                 'category' => 'Nutrisi',
@@ -579,7 +570,7 @@ class DashboardController extends Controller
                 'created_at' => now()->subDays(5),
             ],
             (object)[
-                'id' => 5,
+                'id' => 'default-5',
                 'title' => 'Cara Mengatasi Stres dan Menjaga Kesehatan Mental',
                 'slug' => 'cara-mengatasi-stres-dan-menjaga-kesehatan-mental',
                 'category' => 'Kesehatan Mental',
@@ -590,6 +581,21 @@ class DashboardController extends Controller
                 'created_at' => now()->subWeek(),
             ],
         ]);
+        
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('articles')) {
+                $dbArticles = Article::latest()->take(5)->get();
+                if ($dbArticles->count() > 0) {
+                    // Merge DB articles with default articles and take first 5
+                    return $dbArticles->merge($defaultArticles)->take(5);
+                }
+            }
+        } catch (\Exception $e) {
+            // Table doesn't exist yet
+        }
+        
+        // Return default articles if no database records
+        return $defaultArticles;
     }
     
     /**

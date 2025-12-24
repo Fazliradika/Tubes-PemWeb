@@ -570,6 +570,9 @@
                     </div>
                     <div class="p-4 max-h-96 overflow-y-auto">
                         @forelse($recentFaqs as $faq)
+                        @php
+                            $isDbFaq = isset($faq->id) && is_numeric($faq->id) && $faq->id > 0;
+                        @endphp
                         <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
@@ -584,6 +587,7 @@
                                         {{ ucfirst($faq->category) }}
                                     </span>
                                 </div>
+                                @if($isDbFaq)
                                 <div class="flex space-x-1 ml-2">
                                     <a href="{{ route('admin.faqs.edit', $faq->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -600,6 +604,9 @@
                                         </button>
                                     </form>
                                 </div>
+                                @else
+                                <span class="text-xs text-gray-400 dark:text-gray-500 italic ml-2">Demo</span>
+                                @endif
                             </div>
                         </div>
                         @empty
@@ -692,6 +699,10 @@
                     </div>
                     <div class="p-4 max-h-96 overflow-y-auto">
                         @forelse($recentMessages as $message)
+                        @php
+                            $isDbMessage = isset($message->id) && is_numeric($message->id) && $message->id > 0;
+                            $createdAt = is_object($message->created_at) ? $message->created_at->diffForHumans() : \Carbon\Carbon::parse($message->created_at)->diffForHumans();
+                        @endphp
                         <div class="mb-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors {{ $message->status == 'unread' ? 'border-l-4 border-rose-500' : '' }}">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
@@ -713,9 +724,10 @@
                                             @endif">
                                             {{ ucfirst($message->subject) }}
                                         </span>
-                                        <span class="text-xs text-gray-500 dark:text-gray-400">{{ $message->created_at->diffForHumans() }}</span>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">{{ $createdAt }}</span>
                                     </div>
                                 </div>
+                                @if($isDbMessage)
                                 <div class="flex space-x-1 ml-2">
                                     <a href="{{ route('admin.contacts.show', $message->id) }}" class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded" title="Lihat">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -733,6 +745,9 @@
                                         </button>
                                     </form>
                                 </div>
+                                @else
+                                <span class="text-xs text-gray-400 dark:text-gray-500 italic ml-2">Demo</span>
+                                @endif
                             </div>
                         </div>
                         @empty
