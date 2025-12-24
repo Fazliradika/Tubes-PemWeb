@@ -232,16 +232,76 @@
                                                 {{ $order->payment->paid_at->format('d F Y, H:i') }}</div>
                                         </div>
                                     @endif
+                                    @if($order->payment->payment_proof)
+                                        <div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Bukti Pembayaran</div>
+                                            <div class="border dark:border-slate-600 rounded-lg p-3 bg-gray-50 dark:bg-slate-700">
+                                                <img src="{{ asset('storage/' . $order->payment->payment_proof) }}" 
+                                                     alt="Bukti Pembayaran" 
+                                                     class="w-full h-auto rounded-lg mb-2">
+                                                <a href="{{ asset('storage/' . $order->payment->payment_proof) }}" 
+                                                   target="_blank"
+                                                   class="text-blue-600 hover:text-blue-700 text-sm flex items-center">
+                                                    <i class="fas fa-download mr-2"></i>Download Bukti Pembayaran
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 @if($order->payment->payment_status == 'pending')
-                                    <form action="{{ route('checkout.confirm-payment', $order) }}" method="POST" class="mt-6">
+                                    <form action="{{ route('checkout.confirm-payment', $order) }}" method="POST" enctype="multipart/form-data" class="mt-6" id="paymentForm">
                                         @csrf
+                                        
+                                        <div class="mb-4">
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                                Upload Bukti Pembayaran <span class="text-red-500">*</span>
+                                            </label>
+                                            <div class="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg p-4 text-center hover:border-blue-500 dark:hover:border-blue-400 transition-colors">
+                                                <input type="file" 
+                                                       name="payment_proof" 
+                                                       id="payment_proof" 
+                                                       accept="image/*"
+                                                       class="hidden"
+                                                       onchange="previewImage(event)"
+                                                       required>
+                                                <label for="payment_proof" class="cursor-pointer">
+                                                    <div id="upload-placeholder">
+                                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                                                        <p class="text-sm text-gray-600 dark:text-gray-400">Klik untuk upload bukti transfer</p>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">JPG, PNG, GIF (Max. 2MB)</p>
+                                                    </div>
+                                                    <div id="image-preview" class="hidden">
+                                                        <img id="preview-img" src="" alt="Preview" class="max-h-48 mx-auto rounded-lg mb-2">
+                                                        <p class="text-sm text-blue-600 dark:text-blue-400">Klik untuk mengganti gambar</p>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            @error('payment_proof')
+                                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
                                         <button type="submit"
                                             class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors">
                                             <i class="fas fa-check-circle mr-2"></i>Konfirmasi Pembayaran
                                         </button>
                                     </form>
+
+                                    <script>
+                                        function previewImage(event) {
+                                            const file = event.target.files[0];
+                                            if (file) {
+                                                const reader = new FileReader();
+                                                reader.onload = function(e) {
+                                                    document.getElementById('preview-img').src = e.target.result;
+                                                    document.getElementById('upload-placeholder').classList.add('hidden');
+                                                    document.getElementById('image-preview').classList.remove('hidden');
+                                                }
+                                                reader.readAsDataURL(file);
+                                            }
+                                        }
+                                    </script>
                                 @endif
                             @endif
                         </div>
