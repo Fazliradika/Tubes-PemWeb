@@ -230,6 +230,11 @@
                                     class="h-10 w-auto object-contain" />
                                 <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Certified</span>
                             </div>
+                            <div
+                                class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 flex items-center shadow-sm">
+                                <img src="{{ asset('images/logo_ministry_of_health_large.webp') }}" alt="Kemenkes RI"
+                                    class="h-10 w-auto object-contain" />
+                            </div>
                         </div>
 
 

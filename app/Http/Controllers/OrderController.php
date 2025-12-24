@@ -28,7 +28,7 @@ class OrderController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        
+
         if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
@@ -66,5 +66,40 @@ class OrderController extends Controller
         $order->update(['status' => $request->status]);
 
         return back()->with('success', 'Status pesanan berhasil diupdate');
+    }
+
+    /**
+     * Serve payment proof image securely.
+     * This is needed for Railway/cloud hosting where storage symlinks don't work.
+     */
+    public function getPaymentProof(Order $order)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        // Allow owner or admin to view
+        if ($order->user_id !== Auth::id() && !$user->isAdmin()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $payment = $order->payment;
+
+        if (!$payment || !$payment->payment_proof) {
+            abort(404, 'Payment proof not found');
+        }
+
+        $path = storage_path('app/public/' . $payment->payment_proof);
+
+        if (!file_exists($path)) {
+            abort(404, 'File not found');
+        }
+
+        // Get mime type
+        $mimeType = mime_content_type($path);
+
+        return response()->file($path, [
+            'Content-Type' => $mimeType,
+            'Cache-Control' => 'private, max-age=3600',
+        ]);
     }
 }

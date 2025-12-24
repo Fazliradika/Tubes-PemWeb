@@ -236,10 +236,10 @@
                                         <div>
                                             <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Bukti Pembayaran</div>
                                             <div class="border dark:border-slate-600 rounded-lg p-3 bg-gray-50 dark:bg-slate-700">
-                                                <img src="{{ asset('storage/' . $order->payment->payment_proof) }}" 
+                                                <img src="{{ route('orders.payment-proof', $order) }}" 
                                                      alt="Bukti Pembayaran" 
                                                      class="w-full h-auto rounded-lg mb-2">
-                                                <a href="{{ asset('storage/' . $order->payment->payment_proof) }}" 
+                                                <a href="{{ route('orders.payment-proof', $order) }}" 
                                                    target="_blank"
                                                    class="text-blue-600 hover:text-blue-700 text-sm flex items-center">
                                                     <i class="fas fa-download mr-2"></i>Download Bukti Pembayaran
