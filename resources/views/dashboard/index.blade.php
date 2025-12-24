@@ -562,6 +562,14 @@
 
             <!-- FAQ, Articles, and Messages Section -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+                <!-- DEBUG INFO -->
+                <div class="col-span-3 bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg mb-4">
+                    <h4 class="font-bold text-gray-900 dark:text-white mb-2">DEBUG INFO:</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-300">FAQ Count: {{ $recentFaqs->count() }}</p>
+                    <p class="text-sm text-gray-700 dark:text-gray-300">Articles Count: {{ $recentArticles->count() }}</p>
+                    <p class="text-sm text-gray-700 dark:text-gray-300">Messages Count: {{ $recentMessages->count() }}</p>
+                </div>
+                
                 <!-- Recent FAQs -->
                 <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
                     <div class="p-4 bg-gradient-to-r from-indigo-500 to-indigo-600 flex items-center justify-between">
